@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 18:22:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/16 12:18:54 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/16 15:07:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_parser
 {
 	char	*str;
 	char	sep[3];
+	int		doc_h;
 	char	*del;
 }				t_parser;
 
