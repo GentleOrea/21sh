@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/16 16:17:32 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/16 18:01:09 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "21sh.h"
 
 #define QUOTES "\"\'"
-#define DEL ";&\n"
+#define H_SEP ";&\n"
 #define HERE ";|\n"
 
 #define ALL (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" }
@@ -23,6 +23,7 @@
 
 /*
 ** strnstr pour un tableau passé en param
+** renvoie la taille de la chaine si trouvée dans le tab sinon 0
 */
 
 char		is_sep(char *str, t_parser *par, char **tab)
@@ -38,9 +39,10 @@ char		is_sep(char *str, t_parser *par, char **tab)
 }
 
 /*
-** permet de comter le nombre de here_doc
+** les deux fonctions en dessous permettent de comter le nombre de here_doc
 ** split les commandes en fonction de tout les type de separateur.
 ** Pas super clean mais évite d'allouer de la mem
+** Gere les erreurs de parsing, ne gere (surement) pas toutes les erreurs
 */
 
 int		sizeof_comm(char *str, t_parser *par)
@@ -68,8 +70,6 @@ int		sizeof_comm(char *str, t_parser *par)
 	}
 	if (str[i] == ';' || ft_strnstr(&str[i], ";;", 2))
 		return (!ft_strnstr(&str[i], ";;", 2) ? i |1 : -1);
-	ft_printf("sizeof : [%d][%d]%s\n", i,sep, str);
-
 	return (i || !str[i] ? i + sep : -1);
 }
 
@@ -79,7 +79,6 @@ int		count_comm(t_parser *par, char *str)
 	int		sep;
 
 	i = 0;
-	par->nco = 0;
 	while (str[i])
 	{
 		while (str[i] && str[i] == ' ')
@@ -88,45 +87,16 @@ int		count_comm(t_parser *par, char *str)
 		if (sep < 0)
 			return (-ft_printf("yosh: parse error near %s", par->sep));
 		i += sep;
-		par->nco++;
 	}
+		ft_printf("ici\n");
 	return (par->doc_h);
-}
-
-char	**split_cli(char *str, t_parser *par)
-{
-	int		i;
-	int		nrow;
-	int		csize;
-	char	**ret;
-
-	if (count_comm(par, str) < 0)
-		return (NULL);
-	if (!(ret = (char**)ft_memalloc(par->nco * sizeof(char*))))
-		return (NULL);
-	i = 0;
-	nrow = 0;
-	while (str[i])
-	{
-		csize = sizeof_comm(&str[i], par);
-		ft_printf("{boldcyan}%d{reset}\n", csize);
-		if (!(ret[++nrow] = (char*)ft_memalloc(csize * sizeof(char))))
-			return (NULL);
-		ft_memcpy(ret[nrow], &str[i], csize);
-		i += csize;
-	}
-	int o = -1;
-	while (ret[++o])
-		ft_printf("%s\n", ret[o]);
-	return (ret);
 }
 
 
 int main(int ac, char **av)
 {
 	t_parser	par;
-	(void)ac, (void)av;
-	
-;	//ft_printf("%d\n", count_comm(&par, av[1]));
-	split_cli(av[1], &par);
+	(void)ac, (void)av;(void)par;
+	t_comm co;
+	hard_split(&co, av[1]);
 }

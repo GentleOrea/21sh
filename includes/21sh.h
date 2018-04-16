@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 18:22:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/16 16:02:54 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/16 17:42:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,15 @@
 # define UNESC "abfnrtvc0x"
 # define ESC "\a\b\f\n\r\t\v"
 
+#define QUOTES "\"\'"
+#define H_SEP ";&\n"
+
+#define ALL (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" }
+#define SEP (char *[6]){"||", "&&", "|", "&", ";"}
+#define REDI (char *[5]){">>", "<<", "<", ">"}
+
+
+
 typedef struct s_parser
 {
 	char	*str;
@@ -28,8 +37,6 @@ typedef struct s_parser
 	bool	split;
 	char	*del;
 }				t_parser;
-
-
 
 typedef struct	s_env
 {
@@ -43,6 +50,7 @@ typedef struct	s_env
 typedef struct s_comm
 {
 	char	*comm;
+	char	stype;
 	struct	s_comm	*g;
 	struct	s_comm	*next;
 }				t_comm;
@@ -50,17 +58,37 @@ typedef struct s_comm
 typedef struct	s_shell
 {
 	void	(*f_built[5])(struct s_shell *sh, char *argv[]);
-	char	**my_built;
 	char	**env;
 	t_env	*env_t;
 	int		env_size;
 	char	*oldpwd;
-	pid_t	father;
 	char	*pwd;
 }				t_shell;
 
+
+
+
+char		is_sep(char *str, t_parser *par, char **tab);
+int		sizeof_comm(char *str, t_parser *par);
+char	**split_cli(char *str, t_parser *par);
+int		count_comm(t_parser *par, char *str);
+void	mallcheck(void *foo);
+void	hard_split(t_comm *c, char *str);
+
+
+
+
+
+
+
+
+
+
+/*
+** minishell ygarrot
+*/
 void			init(t_shell *sh, char **env);
-void			mallcheck(t_shell *sh, void *to_check);
+//void			mallcheck(t_shell *sh, void *to_check);
 t_env			*search_var(t_shell *sh, t_env *list, char *to_find);
 int				search_exec(t_shell *sh, char *comm, char *argv[]);
 void			fill_env(t_shell *sh);

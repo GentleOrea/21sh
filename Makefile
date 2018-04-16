@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/16 10:04:46 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/16 16:52:58 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ FLAGS =  -Wall -Werror -Wextra
 SRC_FOLDER = ./
 
 SRC_FP = lexer.c \
+		 lexer_2.c \
+		 error_handling.c
 
 #Colors
 _RED=\x1b[31m
