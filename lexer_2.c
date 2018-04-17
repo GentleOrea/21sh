@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:22:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/17 11:54:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/17 18:48:05 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		size_hard_split(char *str)
 	char	q;
 
 	i = 0;
-	
+
 	while (str[i] && !ft_isin(str[i], H_SEP))
 	{
 		if (ft_isin(str[++i], QUOTES) && (q = str[i] == '"' ? '"' : '\''))
@@ -34,40 +34,77 @@ int		size_hard_split(char *str)
 	return (i || !str[i] ? i : -1);
 }
 
+int		search_op(char *str, char *op)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+	{
+		i += skip_comm(&str[i]);
+		if (ft_strnstr(&str[i], op, ft_strlen(op)))
+			return (i);
+	}
+	return (0);
+}
+
 /*
 ** Split la chaine avec comme splitchar ';' && '&'
 */
+
+void	medium_split(t_comm *c, char *str, char *op)
+{
+	int		ind;
+
+	ft_printf("begin->\n");
+	while ((ind = search_op(str, op)))
+	{
+		c = push_front(c, ft_strndup(str, ++ind));
+		str = &str[ind];
+	}
+	c = push_front(c, str);
+	c->comm = str;
+	ft_printf("end\n");
+}
 
 void	hard_split(t_comm *c, char *str)
 {
 	char	**tab;
 	t_parser par;
-
+	int		i;
+	t_comm	*temp[2];
+	
+	i = -1;
 	if (count_comm(&par, str) < 0)
-		exit(ft_printf("yoo fool\n"));
-	mallcheck(tab = ft_strsplit_comm(str, H_SEP));
-	while (*tab)
-	{
-		mallcheck(c->next = (t_comm*)ft_memalloc(sizeof(t_comm)));
-		c->comm = *tab;
-		c = c->next;
-		tab++;
+		exit(ft_printf("you fool\n"));
+	mallcheck(tab = ft_strsplit_comm(str, ";"));
+	while (tab[++i])
+		medium_split(c, tab[i], "&");
+	temp[0] = c;
+	while (temp[0])
+	{ 
+		medium_split(temp[0]->et, temp[0]->comm,"&&");
+		temp[1] = temp[0]->et;
+		while (temp[1])
+		{
+			medium_split(temp[0]->ou, temp[1]->comm, "||");
+			temp[1] = temp[1]->next;
+		}
+		temp[0] =temp[0]->next;
 	}
 }
 
-void	medium_split(t_comm *c, char *str)
+int main(int ac, char **av)
 {
-	char	**tab;
-	t_parser par;
+	t_comm *co = (t_comm*)ft_memalloc(sizeof(t_comm));
 
-	if (count_comm(&par, str) < 0)
-		exit(ft_printf("yoo fool\n"));
-	mallcheck(tab = ft_strsplit_comm(str, H_SEP));
-	while (*tab)
+	(void)av;(void)ac;
+	hard_split(co, av[1]);
+	while (co)
 	{
-		mallcheck(c->next = (t_comm*)ft_memalloc(sizeof(t_comm)));
-		c->comm = *tab;
-		c = c->next;
-		tab++;
+		ft_printf("%s\n", co->comm);
+		co = co->next;
 	}
 }
+
+

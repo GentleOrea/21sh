@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/17 10:59:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/17 16:27:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ int		sizeof_comm(char *str, t_parser *par)
 	sep = 0;
 	while (str[i] && !(sep = is_sep(&str[i], par, SEP)))
 	{
-		if ((hdoc = is_sep(&str[i], par, REDI)) )
+		if ((hdoc = is_sep(&str[i], par, REDI)))
 		{
-			par->doc_h += ((ft_strnstr(&str[i], ">>", 2) && (i += hdoc)) ? 1 : 0);
+			par->doc_h += (ft_strnstr(&str[i], ">>", 2) ? 1 : 0);
+			i += hdoc;
 			while (str[i] == ' ')
 				i++;
 			if (!(hdoc = 0) && is_sep(&str[i], par, ALL))
@@ -90,13 +91,4 @@ int		count_comm(t_parser *par, char *str)
 	}
 		ft_printf("ici\n");
 	return (par->doc_h);
-}
-
-
-int main(int ac, char **av)
-{
-	t_parser	par;
-	(void)ac, (void)av;(void)par;
-	t_comm co;
-	hard_split(&co, av[1]);
 }

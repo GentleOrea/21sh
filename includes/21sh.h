@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 18:22:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/17 13:21:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/17 18:47:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 #define QUOTES "\"\'"
 #define H_SEP ";&\n"
 
+//						 256   128   64   32   16    8     4    2     1
 #define ALL (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" }
 #define SEP (char *[6]){"||", "&&", "|", "&", ";"}
+#define M_SEP (char *[6]){"||", "&&", "|"}
 #define REDI (char *[5]){">>", "<<", "<", ">"}
 
 typedef struct s_parser
@@ -48,8 +50,10 @@ typedef struct	s_env
 typedef struct s_comm
 {
 	char	*comm;
-	char	stype;
-	struct	s_comm	*g;
+	char	type;
+	struct	s_comm	*ou;
+	struct	s_comm	*et;
+	struct	s_comm	*prev;
 	struct	s_comm	*next;
 }				t_comm;
 
@@ -66,7 +70,7 @@ typedef struct	s_shell
 
 
 
-char		is_sep(char *str, t_parser *par, char **tab);
+char	is_sep(char *str, t_parser *par, char **tab);
 int		sizeof_comm(char *str, t_parser *par);
 char	**split_cli(char *str, t_parser *par);
 int		count_comm(t_parser *par, char *str);
@@ -75,6 +79,7 @@ void	hard_split(t_comm *c, char *str);
 char	**ft_strsplit_comm(char *str, char *split);
 int		skip_comm(char *str);
 char	*ft_find_and_replace(char *str, char *rep, int op);
+t_comm	*push_front(t_comm *com, char *str);
 
 
 
