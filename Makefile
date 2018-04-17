@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/16 16:52:58 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/17 13:06:28 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,10 @@ SRC_FOLDER = ./
 
 SRC_FP = lexer.c \
 		 lexer_2.c \
-		 error_handling.c
+		 error_handling.c \
+		 ft_strsplit_comm.c \
+		 ft_find_and_replace.c
+
 
 #Colors
 _RED=\x1b[31m

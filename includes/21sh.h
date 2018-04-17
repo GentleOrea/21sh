@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 18:22:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/16 17:42:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/17 13:21:59 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 #define ALL (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" }
 #define SEP (char *[6]){"||", "&&", "|", "&", ";"}
 #define REDI (char *[5]){">>", "<<", "<", ">"}
-
-
 
 typedef struct s_parser
 {
@@ -74,9 +72,9 @@ char	**split_cli(char *str, t_parser *par);
 int		count_comm(t_parser *par, char *str);
 void	mallcheck(void *foo);
 void	hard_split(t_comm *c, char *str);
-
-
-
+char	**ft_strsplit_comm(char *str, char *split);
+int		skip_comm(char *str);
+char	*ft_find_and_replace(char *str, char *rep, int op);
 
 
 

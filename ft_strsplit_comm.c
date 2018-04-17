@@ -6,19 +6,19 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:27:38 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/17 11:28:31 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/17 13:21:58 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-static int		countletters(char const *s, char c)
+static int		countletters(char const *s, char *c)
 {
 	int		cl;
 	char	q;
 
 	cl = 0;
-	while (s[cl] != c && s[cl])
+	while (!ft_isin(s[cl], c) && s[cl])
 	{
 		if (ft_isin(s[cl], QUOTES) && (q = s[cl++] == '"' ? '"' : '\''))
 			while (s[cl] && s[cl++] != q)
@@ -29,7 +29,7 @@ static int		countletters(char const *s, char c)
 	return (cl);
 }
 
-static int		countwords(char const *s, char c)
+static int		countwords(char const *s, char *c)
 {
 	int i;
 	int i2;
@@ -38,15 +38,15 @@ static int		countwords(char const *s, char c)
 	i2 = 0;
 	while (s[i])
 	{
-		while (s[i] == c && s[i])
+		while (ft_isin(s[i], c) && s[i])
 			i++;
-		if (s[i] && s[i] != c && ++i2)
+		if (s[i] && ft_isin(s[i], c) && ++i2)
 			i += countletters(&s[i], c);
 	}
 	return (i2);
 }
 
-static char		**cpy(char const *s, char c, char **fresh, int words)
+static char		**cpy(char const *s, char *c, char **fresh, int words)
 {
 	int		i;
 	int		i3;
@@ -56,7 +56,7 @@ static char		**cpy(char const *s, char c, char **fresh, int words)
 	while (++i < words)
 	{
 		i3 = 0;
-		while (*s && *s == c)
+		while (*s && ft_isin(*s, c))
 			s++;
 		if (!(fresh[i] = ft_strnew(i3 = countletters(s, c))))
 		{
@@ -71,7 +71,7 @@ static char		**cpy(char const *s, char c, char **fresh, int words)
 	return (fresh);
 }
 
-char			**ft_strsplit_comm(char const *s, char c)
+char			**ft_strsnplit_comm(char const *s, char *c)
 {
 	char	**fresh;
 	int		words;

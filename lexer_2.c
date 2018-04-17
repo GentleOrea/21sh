@@ -6,11 +6,15 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:22:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/16 17:59:39 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/17 11:54:44 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
+
+/*
+** Useless, odd try
+*/
 
 int		size_hard_split(char *str)
 {
@@ -36,23 +40,34 @@ int		size_hard_split(char *str)
 
 void	hard_split(t_comm *c, char *str)
 {
-	int		i;
-	int		nrow;
-	int		csize;
+	char	**tab;
 	t_parser par;
 
-	i = 0;
-	nrow = 0;
 	if (count_comm(&par, str) < 0)
 		exit(ft_printf("yoo fool\n"));
-	while (str[i])
+	mallcheck(tab = ft_strsplit_comm(str, H_SEP));
+	while (*tab)
 	{
-		csize = size_hard_split(&str[i]); 
-		mallcheck(c->comm = (char*)ft_memalloc((csize + str[csize] ? 0 : 1) * sizeof(char)));
-		ft_memcpy(c->comm, &str[i], csize - 1);
-		ft_printf("%d]%d]%s\n", i, csize, c->comm);
-		i += csize;
 		mallcheck(c->next = (t_comm*)ft_memalloc(sizeof(t_comm)));
+		c->comm = *tab;
 		c = c->next;
+		tab++;
+	}
+}
+
+void	medium_split(t_comm *c, char *str)
+{
+	char	**tab;
+	t_parser par;
+
+	if (count_comm(&par, str) < 0)
+		exit(ft_printf("yoo fool\n"));
+	mallcheck(tab = ft_strsplit_comm(str, H_SEP));
+	while (*tab)
+	{
+		mallcheck(c->next = (t_comm*)ft_memalloc(sizeof(t_comm)));
+		c->comm = *tab;
+		c = c->next;
+		tab++;
 	}
 }
