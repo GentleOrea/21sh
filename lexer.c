@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/16 18:01:09 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/17 10:59:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		is_sep(char *str, t_parser *par, char **tab)
 }
 
 /*
-** les deux fonctions en dessous permettent de comter le nombre de here_doc
+** les deux fonctions en dessous permettent de compter le nombre de here_doc
 ** split les commandes en fonction de tout les type de separateur.
 ** Pas super clean mais évite d'allouer de la mem
 ** Gere les erreurs de parsing, ne gere (surement) pas toutes les erreurs
@@ -68,7 +68,7 @@ int		sizeof_comm(char *str, t_parser *par)
 			while (str[i] && str[++i] != q)
 				;
 	}
-	if (str[i] == ';' || ft_strnstr(&str[i], ";;", 2))
+	if (str[i] && (str[i] == ';' || ft_strnstr(&str[i], ";;", 2)))
 		return (!ft_strnstr(&str[i], ";;", 2) ? i |1 : -1);
 	return (i || !str[i] ? i + sep : -1);
 }

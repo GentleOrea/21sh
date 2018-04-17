@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_strsplit_comm.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/10 09:21:06 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/16 18:39:21 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/04/17 11:27:38 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/04/17 11:28:31 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,17 @@
 
 static int		countletters(char const *s, char c)
 {
-	int cl;
-	int		q[2];
+	int		cl;
+	char	q;
 
 	cl = 0;
-	while (s[cl] != c && s[cl] && !q[0] && !q[1])
+	while (s[cl] != c && s[cl])
 	{
-		if (q[0])
-		cl++;
+		if (ft_isin(s[cl], QUOTES) && (q = s[cl++] == '"' ? '"' : '\''))
+			while (s[cl] && s[cl++] != q)
+				;
+		else
+			cl++;
 	}
 	return (cl);
 }
@@ -38,7 +41,7 @@ static int		countwords(char const *s, char c)
 		while (s[i] == c && s[i])
 			i++;
 		if (s[i] && s[i] != c && ++i2)
-			i += countletters(s, c);
+			i += countletters(&s[i], c);
 	}
 	return (i2);
 }
@@ -47,6 +50,7 @@ static char		**cpy(char const *s, char c, char **fresh, int words)
 {
 	int		i;
 	int		i3;
+	int		i2;
 
 	i = -1;
 	while (++i < words)
@@ -59,13 +63,15 @@ static char		**cpy(char const *s, char c, char **fresh, int words)
 			ft_free_dblechar_tab(fresh);
 			return (NULL);
 		}
-		while (i3)
-			fresh[i][i3--] = *s++;
+		i2 = i3;
+		while (--i3 + 1)
+			fresh[i][i3] = s[i3];
+		s = &s[i2];
 	}
 	return (fresh);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char			**ft_strsplit_comm(char const *s, char c)
 {
 	char	**fresh;
 	int		words;
