@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 18:22:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/18 17:09:56 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/18 18:21:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ typedef struct	s_env
 typedef struct s_comm
 {
 	char	*comm;
+	char	*r_name[2];
 	char	op[3];
 	char	type;
+	int		redir;
 	struct	s_comm	*prev;
 	struct	s_comm	*next;
 }				t_comm;
