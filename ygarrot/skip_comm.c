@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 12:23:54 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/17 12:26:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/18 11:19:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "21sh.h" 
@@ -20,5 +20,7 @@ int		skip_comm(char *str)
 	if (ft_isin(str[i], QUOTES) && (q = str[i++] == '"' ? '"' : '\''))
 		while (str[i] && str[i++] != q)
 			;
+	while (str[i] == '\\')
+		i += str[i + 1] ? 2 : 1;
 	return (i);
 }

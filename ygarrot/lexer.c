@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/17 16:27:00 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/18 11:19:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ int		sizeof_comm(char *str, t_parser *par)
 	int		i;
 	char	sep;
 	char	hdoc;
-	char	q;
+	char	q_s;
 
 	i = 0;
 	sep = 0;
 	while (str[i] && !(sep = is_sep(&str[i], par, SEP)))
 	{
+		i += skip_comm(&str[i]);
 		if ((hdoc = is_sep(&str[i], par, REDI)))
 		{
 			par->doc_h += (ft_strnstr(&str[i], ">>", 2) ? 1 : 0);
@@ -65,9 +66,6 @@ int		sizeof_comm(char *str, t_parser *par)
 			if (!(hdoc = 0) && is_sep(&str[i], par, ALL))
 				return (-1);
 		}
-		if (ft_isin(str[++i], QUOTES) && (q = str[i] == '"' ? '"' : '\''))
-			while (str[i] && str[++i] != q)
-				;
 	}
 	if (str[i] && (str[i] == ';' || ft_strnstr(&str[i], ";;", 2)))
 		return (!ft_strnstr(&str[i], ";;", 2) ? i |1 : -1);
