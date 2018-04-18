@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/18 11:19:45 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/18 17:29:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 ** renvoie la taille de la chaine si trouvée dans le tab sinon 0
 */
 
-char		is_sep(char *str, t_parser *par, char **tab)
+char		is_sep(char *str, t_comm *par, char **tab)
 {
 	int		i;
-	char	len;
+	int		len;
 
 	i = -1;
 	while (tab[++i] && !ft_strnstr(str, tab[i], len = ft_strlen(tab[i])))
 		;
-	tab[i] ? ft_strcpy(par->sep, tab[i]) : 0;
+	tab[i] ? ft_strcpy(par->op, tab[i]) : 0;
 	return (tab[i] ? len : 0);
 }
 
@@ -45,34 +45,50 @@ char		is_sep(char *str, t_parser *par, char **tab)
 ** Gere les erreurs de parsing, ne gere (surement) pas toutes les erreurs
 */
 
-int		sizeof_comm(char *str, t_parser *par)
+
+int		get_hdoc(char *str, int i, t_comm *par)
+{
+	int	hdoc;
+
+	if ((hdoc = is_sep(&str[i], par, REDI)))
+	{
+		if ((ft_strnstr(&str[i], "<<", 2) && (i += hdoc)) || (i += hdoc))
+		{
+			while (str[i] == ' ')
+				i++;
+			par = push_front(par, ft_strndup(&str[i], (hdoc = search_op(&str[i],
+			HD) ? hdoc + 1: ft_strlen(&str[i]))));
+		}
+		while (str[i] == ' ')
+			i++;
+		if (!(hdoc = 0) && is_sep(&str[i], par, ALL))
+			return (-1);
+	}
+	else
+		i++;
+	return (i);
+}
+
+int		sizeof_comm(char *str, t_comm *par)
 {
 	int		i;
 	char	sep;
-	char	hdoc;
-	char	q_s;
 
 	i = 0;
 	sep = 0;
 	while (str[i] && !(sep = is_sep(&str[i], par, SEP)))
 	{
 		i += skip_comm(&str[i]);
-		if ((hdoc = is_sep(&str[i], par, REDI)))
-		{
-			par->doc_h += (ft_strnstr(&str[i], ">>", 2) ? 1 : 0);
-			i += hdoc;
-			while (str[i] == ' ')
-				i++;
-			if (!(hdoc = 0) && is_sep(&str[i], par, ALL))
-				return (-1);
-		}
+		i = get_hdoc(str, i, par);
+		if (i < 0)
+			return (-1);
 	}
 	if (str[i] && (str[i] == ';' || ft_strnstr(&str[i], ";;", 2)))
-		return (!ft_strnstr(&str[i], ";;", 2) ? i |1 : -1);
+		return (!ft_strnstr(&str[i], ";;", 2) ? i | 1 : -1);
 	return (i || !str[i] ? i + sep : -1);
 }
 
-int		count_comm(t_parser *par, char *str)
+void	count_comm(t_comm *par, char *str)
 {
 	int		i;
 	int		sep;
@@ -84,9 +100,15 @@ int		count_comm(t_parser *par, char *str)
 			i++;
 		sep = sizeof_comm(&str[i], par);
 		if (sep < 0)
-			return (-ft_printf("yosh: parse error near %s", par->sep));
+		{
+			ft_printf("yosh: parse error near `%s'\n", par->op);
+			exit(EXIT_FAILURE) ;
+		}
 		i += sep;
 	}
-		ft_printf("ici\n");
-	return (par->doc_h);
+	while (par)
+	{
+		ft_printf("%s\n", par->comm);
+		par = par->next;
+	}
 }

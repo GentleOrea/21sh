@@ -6,94 +6,104 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:22:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/18 11:32:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/18 17:29:51 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
 /*
-** Useless, odd try
+** recherche la premiere occurence d'une chaine du tableau donné en param
+** dans la chaine donné en second param
 */
 
-int		size_hard_split(char *str)
-{
-	int		i;
-	char	q;
-
-	i = 0;
-
-	while (str[i] && !ft_isin(str[i], H_SEP))
-	{
-		if (ft_isin(str[++i], QUOTES) && (q = str[i] == '"' ? '"' : '\''))
-			while (str[i] && str[++i] != q)
-				;
-	}
-	if (str[i] == ';' || ft_strnstr(&str[i], ";;", 2))
-		return (!ft_strnstr(&str[i], ";;", 2) ? 0 : -1);
-	return (i || !str[i] ? i : -1);
-}
-
-int		search_op(char *str, char *op)
+int		search_op(char *str, char **op)
 {
 	int	i;
+	int	ind;
 
 	i = -1;
 	while (str[++i])
 	{
 		i += skip_comm(&str[i]);
-		if (ft_strnstr(&str[i], op, ft_strlen(op)))
-			return (i);
+		ind = -1;
+		while (op[++ind])
+			if (ft_strnstr(&str[i], op[ind] , ft_strlen(op[ind])))
+				if (op[0][0] != '&' || !str[i]
+						|| (str[i + 1] != '&' && (i <= 0 || str[i - 1] != '&')))
+					return (i);
 	}
 	return (0);
 }
 
 /*
-** Split la chaine avec comme splitchar ';' && '&'
+** Split la chaine de caractere en fonction de ';' && '&'
 */
 
-void	medium_split(t_comm *c, char *str, char *op)
+void	medium_split(t_comm *c, char **ammoc)
 {
 	int		ind;
+	char	*tab[3] = {"&"};
+	t_comm	*tmp;
+	char	*del;
+	char	*str;
 
-	while ((ind = search_op(str, op)))
+	tmp = c;
+	del = NULL;
+	while (*ammoc)
 	{
-		c = push_front(c, ft_strndup(str, ++ind));
-		str = &str[ind];
+		str = *ammoc;
+		while ((ind = search_op(str, tab)))
+		{
+			c = easy_split(c, del = ft_strndup(str, ind), 32);
+			str = &str[ind + 1];
+		}
+		ft_memdel((void**)&del);
+		c = easy_split(c, str, 0);
+		ammoc++;
 	}
-	c = push_front(c, str);
-	c->comm = str;
 }
 
-void	easy_split(t_comm *c, char *str, char *op)
+/*
+** Split la chaine de caractere en fonction de '||' && '|' && '&&'
+** les places dans une listes et set leur value
+*/
+
+
+t_comm	*easy_split(t_comm *c, char *str, char isamp)
 {
 	int		ind;
+	int		i[2];
+	int		len;
 
-	while ((ind = search_op(str, op)))
+	while ((ind = search_op(str, M_SEP)))
 	{
-		c = push_front(c, ft_strndup(str, ++ind));
-		str = &str[ind];
+		i[0] = -1;
+		while (M_SEP[++i[0]] &&
+				!ft_strnstr(&str[ind], M_SEP[i[0]], len = ft_strlen(M_SEP[i[0]])))
+			;
+		c = push_front(c, ft_strndup(str, ind));
+		c->type = i[1];
+		c = c->next;
+		i[1] = i[0];
+		str = &str[ind + len];
 	}
-	c = push_front(c, str);
-	c->comm = str;
+	c = push_front(c, ft_strdup(str));
+	c->type = i[1] | isamp;
+	return (c);
 }
 
 void	hard_split(t_comm *c, char *str)
 {
 	char	**tab;
-	t_parser par;
+	t_comm	par;
 	int		i;
-	
+
 	i = -1;
-	if (count_comm(&par, str) < 0)
-		exit(ft_printf("you fool\n"));
+	count_comm(&par, str);
 	mallcheck(tab = ft_strsplit_comm(str, ";"));
-	while (tab[++i])
-		medium_split(c, tab[i], "&");
-	temp[0] = c;
-	while (temp[0])
-	{ 
-	}
+	medium_split(c, tab);
+	ft_free_dblechar_tab(tab);
 }
 
 int main(int ac, char **av)
@@ -108,5 +118,3 @@ int main(int ac, char **av)
 		co = co->next;
 	}
 }
-
-

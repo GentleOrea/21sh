@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 18:22:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/17 18:47:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/18 17:09:56 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,10 @@
 
 //						 256   128   64   32   16    8     4    2     1
 #define ALL (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" }
+#define HD (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" , " "}
 #define SEP (char *[6]){"||", "&&", "|", "&", ";"}
 #define M_SEP (char *[6]){"||", "&&", "|"}
 #define REDI (char *[5]){">>", "<<", "<", ">"}
-
-typedef struct s_parser
-{
-	char	*str;
-	char	sep[3];
-	int		doc_h;
-	int		nco;
-	bool	split;
-	char	*del;
-}				t_parser;
 
 typedef struct	s_env
 {
@@ -50,9 +41,8 @@ typedef struct	s_env
 typedef struct s_comm
 {
 	char	*comm;
+	char	op[3];
 	char	type;
-	struct	s_comm	*ou;
-	struct	s_comm	*et;
 	struct	s_comm	*prev;
 	struct	s_comm	*next;
 }				t_comm;
@@ -67,19 +57,18 @@ typedef struct	s_shell
 	char	*pwd;
 }				t_shell;
 
-
-
-
-char	is_sep(char *str, t_parser *par, char **tab);
-int		sizeof_comm(char *str, t_parser *par);
-char	**split_cli(char *str, t_parser *par);
-int		count_comm(t_parser *par, char *str);
+char	is_sep(char *str, t_comm *par, char **tab);
+int		sizeof_comm(char *str, t_comm *par);
+char	**split_cli(char *str, t_comm *par);
+void	count_comm(t_comm *par, char *str);
 void	mallcheck(void *foo);
 void	hard_split(t_comm *c, char *str);
 char	**ft_strsplit_comm(char *str, char *split);
 int		skip_comm(char *str);
 char	*ft_find_and_replace(char *str, char *rep, int op);
 t_comm	*push_front(t_comm *com, char *str);
+t_comm	*easy_split(t_comm *c, char *str, char isamp);
+int		search_op(char *str, char **op);
 
 
 
@@ -99,7 +88,6 @@ void			xe(t_shell *sh, char *comm, char **argv);
 void			comm(t_shell *sh, char **comma);
 void			signin_handler(int sig);
 void			sigquit_handler(int sig);
-void			pop(t_env *env);
 void			tabchr(t_shell *sh, char *str, char is_old);
 void			ft_echo(t_shell *sh, char *argv[]);
 void			ft_cd(t_shell *sh, char *argv[]);
