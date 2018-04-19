@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/18 17:20:27 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/19 15:13:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_comm	*push_front(t_comm *com, char *str)
 	com->next = ret;
 	return (begin);
 }
-
+/*
 void	pop(t_comm *co)
 {
 	(co->next) ? co->next->prev = co->prev : 0;
@@ -48,4 +48,4 @@ void	insert_co(t_comm *co, char *str, int type)
 	ins->comm = str;
 	ins->type = type;
 	co->next = ins;
-}
+}*/

@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/18 16:37:50 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/19 16:29:27 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,14 +17,15 @@ FLAGS =  -Wall -Werror -Wextra -g3 -fsanitize=address
 SRC_FOLDER = ./
 
 SRC_FP = lexer.c \
-		 lexer_2.c \
+		 parser.c \
 		 error_handling.c \
 		 ft_strsplit_comm.c \
 		 ft_find_and_replace.c \
-		 error_handling.c \
-		 skip_comm.c \
-		 list_tools.c
-
+		 list_tools.c \
+		 parse_utils.c \
+		 main.c \
+		 interpreter.c \
+		 redirect
 #Colors
 _RED=\x1b[31m
 _GREEN=\x1b[32m

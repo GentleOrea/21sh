@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   21sh.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/06 18:22:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/18 18:21:45 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/04/19 14:17:19 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/04/19 16:28:39 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef _21SH_H
+# define _21SH_H
 # include "../libft/includes/libft.h"
 # include <stdio.h>
 # include <signal.h>
@@ -26,8 +26,41 @@
 #define ALL (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" }
 #define HD (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" , " "}
 #define SEP (char *[6]){"||", "&&", "|", "&", ";"}
-#define M_SEP (char *[6]){"||", "&&", "|"}
-#define REDI (char *[5]){">>", "<<", "<", ">"}
+#define M_SEP (char *[6])								{"||", "&&", "|"}
+#define REDI (char *[5])							{">>", "<<", "<", ">"}
+
+typedef struct	s_tab
+{
+	char	*str;
+	struct s_tab *next;
+}				t_tab;
+
+
+typedef struct	s_redi
+{
+	char	*path;
+	int		type;
+	int		n;
+	struct s_redi *next;
+}				t_redi;
+
+//Utilisée pour split les commandes et les redir
+typedef struct	s_inter
+{
+	int		size;
+	char	**cli;
+	t_tab	*tab;
+	t_redi	*redi;
+}				t_inter;
+
+//Utilisée pour le parser
+typedef struct s_comm
+{
+	char	*comm;
+	char	op[3];
+	char	type;
+	struct	s_comm	*next;
+}				t_comm;
 
 typedef struct	s_env
 {
@@ -37,17 +70,6 @@ typedef struct	s_env
 	struct s_env	*next;
 	struct s_env	*prev;
 }				t_env;
-
-typedef struct s_comm
-{
-	char	*comm;
-	char	*r_name[2];
-	char	op[3];
-	char	type;
-	int		redir;
-	struct	s_comm	*prev;
-	struct	s_comm	*next;
-}				t_comm;
 
 typedef struct	s_shell
 {
@@ -71,10 +93,8 @@ char	*ft_find_and_replace(char *str, char *rep, int op);
 t_comm	*push_front(t_comm *com, char *str);
 t_comm	*easy_split(t_comm *c, char *str, char isamp);
 int		search_op(char *str, char **op);
-
-
-
-
+int		get_sep(char *str, char **tab);
+void	split_co(t_comm *c);
 
 
 
