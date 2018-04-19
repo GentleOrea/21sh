@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/19 14:07:04 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/19 17:25:12 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,12 @@
 int		get_hdoc(char *str, int i, t_comm *par)
 {
 	int	hdoc;
+	int		red;
 
 	if ((hdoc = is_sep(&str[i], par, REDI)))
 	{
-		if ((ft_strnstr(&str[i], "<<", 2) && (i += hdoc)) || (i += hdoc))
+		red = get_sep(&str[i], REDI);
+		if (red == 4 && (i += hdoc))
 		{
 			while (str[i] == ' ')
 				i++;
@@ -34,7 +36,8 @@ int		get_hdoc(char *str, int i, t_comm *par)
 		}
 		while (str[i] == ' ')
 			i++;
-		if (!(hdoc = 0) && is_sep(&str[i], par, ALL))
+		if (((red == 2 || red == 3) && !ft_isdigit(str[i]))
+			|| (!(hdoc = 0) && is_sep(&str[i], par, ALL)))
 			return (-1);
 	}
 	else

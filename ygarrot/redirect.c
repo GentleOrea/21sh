@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 18:08:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/19 17:09:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/19 17:13:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ int		redi(t_redi redi)
 	{
 		if (!ft_strcmp(redi.path, "&-"))
 			return (close(redi.n));
+		else
+
 	}
 	flag = O_WRONLY | O_CREAT | (redi.type | 8 ? O_APPEND : 0);
-	if ((fd = open(redi.path, flag)) <= 0)
+	if (!fd && (fd = open(redi.path, flag)) <= 0)
 	{
 		dprintf(2, "Failed to open OUT_FILE\n");
 		return (0);
