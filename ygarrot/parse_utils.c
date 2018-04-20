@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/19 17:25:14 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/20 12:56:27 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int		get_sep(char *str, char **tab)
 {
 	int	i;
 
-	i = 0;
-	while (tab[++i] && !ft_strnstr(str, tab[i], ft_strlen(tab[i])))
+	i = -1;
+	while (tab[++i] && ft_strncmp(str, tab[i], ft_strlen(tab[i])))
 		;
 	return (i);
 }
@@ -69,13 +69,13 @@ int		search_op(char *str, char **op)
 	i = 0;
 	while (str[i])
 	{
-		i += ((tmp = skip_comm(&str[i]))) ? tmp : 1;
 		ind = -1;
 		while (op[++ind])
-			if (ft_strnstr(&str[i], op[ind] , ft_strlen(op[ind])))
+			if (!ft_strncmp(&str[i], op[ind] , ft_strlen(op[ind])))
 				if (op[0][0] != '&' || !str[i]
 						|| (str[i + 1] != '&' && (i <= 0 || str[i - 1] != '&')))
 					return (i);
+		i += ((tmp = skip_comm(&str[i])) ? tmp : 1);
 	}
 	return (-1);
 }

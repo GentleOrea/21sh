@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 18:45:44 by ygarrot          ###   ########.fr       */
+/*   Created: 2017/11/13 11:30:25 by ygarrot           #+#    #+#             */
+/*   Updated: 2017/11/13 13:04:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "21sh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
 {
-	t_comm	*co = (t_comm*)ft_memalloc(sizeof(t_comm));
-	t_shell sh;
-	(void)ac;(void)av;(void)env;
-	sh.env = env;
-	hard_split(co, av[1]);
-	split_co(&sh, co);
+	t_list *maillon;
+
+	if (!(lst))
+		f(lst);
+	else
+	{
+		maillon = lst;
+		while (maillon)
+		{
+			f(maillon);
+			maillon = maillon->next;
+		}
+	}
 }

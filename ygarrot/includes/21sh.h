@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:17:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/19 17:25:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/20 18:45:38 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@
 #define QUOTES "\"\'"
 #define H_SEP ";&\n"
 
-//						 256   128   64   32   16    8     4    2     1
 #define ALL (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" }
 #define HD (char *[11]){"||", "&&", "|", "&", ";", ">>", "<<", "<", ">" , " "}
 #define SEP (char *[6]){"||", "&&", "|", "&", ";"}
 #define M_SEP (char *[6])								{"||", "&&", "|"}
 #define REDI (char *[7]){">>", "<<", ">&","<&", "<", ">"}
+
+#define BUILT (char *[6]){"echo", "cd", "env", "setenv", "unsetenv"}
 
 typedef struct	s_tab
 {
@@ -47,10 +48,12 @@ typedef struct	s_redi
 //Utilisée pour split les commandes et les redir
 typedef struct	s_inter
 {
-	int		size;
 	char	**cli;
+	int		len;
+	int		type;
 	t_tab	*tab;
 	t_redi	*redi;
+	struct s_inter	*next;
 }				t_inter;
 
 //Utilisée pour le parser
@@ -73,11 +76,9 @@ typedef struct	s_env
 
 typedef struct	s_shell
 {
-	void	(*f_built[5])(struct s_shell *sh, char *argv[]);
+	void	(*f_built[5])(char **av, char ***argv);
 	char	**env;
-	t_env	*env_t;
-	int		env_size;
-	char	*oldpwd;
+	t_inter	com_t;
 	char	*pwd;
 }				t_shell;
 
@@ -94,31 +95,26 @@ t_comm	*push_front(t_comm *com, char *str);
 t_comm	*easy_split(t_comm *c, char *str, char isamp);
 int		search_op(char *str, char **op);
 int		get_sep(char *str, char **tab);
-void	split_co(t_comm *c);
+void	split_co(t_shell *sh, t_comm *c);
+int		redi(t_redi *redi);
+char	*search_var(char **tab, char *str);
+int		wait_exec(t_shell *sh, char **cli);
+void	sort_comm(t_shell *sh, t_inter *com);
 
+int		ft_isbuiltin(char *path);
+void	ft_builtin(char **arg, char ***env, int pid);
+void	ft_echo(char **arg, char ***env);
+void	ft_cd(char **arg, char ***env);
+void	ft_setenv(char **arg, char ***env);
+void	ft_unsetenv(char **arg, char **env);
+void	ft_env(char **arg, char **env);
+void	ft_exit(char **arg, char **env);
+int		ft_setenvvar(char **env, char *cur, char *var);
+int		ft_strlento(char *str, char c);
+char	**ft_strtabdup(char **tab);
 
-
-/*
-** minishell ygarrot
-*/
-void			init(t_shell *sh, char **env);
-//void			mallcheck(t_shell *sh, void *to_check);
-t_env			*search_var(t_shell *sh, t_env *list, char *to_find);
-int				search_exec(t_shell *sh, char *comm, char *argv[]);
-void			fill_env(t_shell *sh);
-void			xe(t_shell *sh, char *comm, char **argv);
-void			comm(t_shell *sh, char **comma);
-void			signin_handler(int sig);
-void			sigquit_handler(int sig);
-void			tabchr(t_shell *sh, char *str, char is_old);
-void			ft_echo(t_shell *sh, char *argv[]);
-void			ft_cd(t_shell *sh, char *argv[]);
-void			ft_env(t_shell *sh, char *argv[]);
-void			ft_setenv(t_shell *sh, char *argv[]);
-void			ft_unsetenv(t_shell *sh, char *argv[]);
-void			sig_handler(int sign);
-void			sig_run(t_shell *sh);
-void			erase_shell(t_shell *sh);
-void			wait_exec(t_shell *sh, char **ta);
-void			exe(t_shell *sh, char *comm, char **argv);
+void	exe(t_shell *sh, char *comm, char **argv);
+int		search_exec(t_shell *sh, char *comm, char **argv);
+char	*ft_getenv(char **tab, char *str);
+int		exec_cli(t_shell *sh, t_inter *inter);
 #endif

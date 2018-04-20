@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/13 12:08:32 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/20 15:10:55 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,22 @@ int				ft_toupper(int c);
 size_t			ft_sizeof_tab(char **tab);
 size_t			ft_strlcat(char *dest, const char *src, size_t size);
 size_t			ft_strlen(const char *str1);
+
+
+typedef struct	s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}				t_list;
+
+t_list			*ft_lstnew(void const *content, size_t content_size);
+void			ft_lstdelone(t_list	**alst, void (*del)(void *, size_t));
+void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void			ft_lstadd(t_list **alst, t_list *n);
+void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
+t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+
 
 void			*ft_memalloc(size_t size);
 void			*ft_memccpy(void *dest, const void *src, int c, size_t n);

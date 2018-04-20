@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 18:45:44 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/02/09 11:58:27 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/04/20 16:56:27 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-int		main(int ac, char **av, char **env)
+void	ft_exit(char **arg, char **env)
 {
-	t_comm	*co = (t_comm*)ft_memalloc(sizeof(t_comm));
-	t_shell sh;
-	(void)ac;(void)av;(void)env;
-	sh.env = env;
-	hard_split(co, av[1]);
-	split_co(&sh, co);
+//	t_list	*lst;
+
+	//lst = ft_var();
+	//ft_lstdel(&lst, &ft_lstfree);
+	(void)arg;
+	(void)env;
+	exit(0);
 }

@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/18 16:38:01 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/20 15:08:01 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,6 +110,14 @@ SRC += \
 
 SRC += \
 	   get_next_line/get_next_line.c 
+
+SRC += \
+	   list/ft_lstadd.c \
+	   list/ft_lstdel.c \
+	   list/ft_lstdelone.c \
+	   list/ft_lstiter.c \
+	   list/ft_lstmap.c \
+	   list/ft_lstnew.c 
 
 SRC += \
 	   tab/ft_free_dblechar_tab.c \

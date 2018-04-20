@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 18:45:44 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/04/20 14:21:32 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/04/20 18:45:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-int		main(int ac, char **av, char **env)
+char	*ft_getenv(char **tab, char *str)
 {
-	t_comm	*co = (t_comm*)ft_memalloc(sizeof(t_comm));
-	t_shell sh;
-	(void)ac;(void)av;(void)env;
-	sh.env = env;
-	hard_split(co, av[1]);
-	split_co(&sh, co);
+	int	i;
+	int	len;
+
+	i = 0;
+	if (!tab || !str)
+		return (NULL);
+	len = ft_strlen(str);
+	while (*tab && ft_strncmp(*tab, str, ft_strlen(str)))
+		tab++;
+	return (*tab);
 }

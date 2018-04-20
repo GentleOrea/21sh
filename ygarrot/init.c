@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 18:45:44 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/04/20 13:14:26 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/04/20 13:54:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
-
-int		main(int ac, char **av, char **env)
+/*
+int		init(t_shell *sh)
 {
-	t_comm	*co = (t_comm*)ft_memalloc(sizeof(t_comm));
-	t_shell sh;
-	(void)ac;(void)av;(void)env;
-	sh.env = env;
-	hard_split(co, av[1]);
-	split_co(&sh, co);
-}
+	sh->f_built[0] = &ft_echo;
+	sh->f_built[1] = &ft_cd;
+	sh->f_built[2] = &ft_env;
+	sh->f_built[3] = &ft_setenv;
+	sh->f_built[4] = &ft_unsetenv;
+}*/

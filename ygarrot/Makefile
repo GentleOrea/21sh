@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/19 16:29:27 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/20 17:25:11 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,19 @@ SRC_FP = lexer.c \
 		 parse_utils.c \
 		 main.c \
 		 interpreter.c \
-		 redirect
+		 redirect.c \
+		 exec_utils.c \
+		 exec.c
+SRC_FP += \
+		  builtin/ft_cd.c \
+		  builtin/ft_echo.c \
+		  builtin/ft_env.c \
+		  builtin/ft_exit.c \
+		  builtin/ft_setenv.c \
+		  builtin/ft_strlento.c \
+		  builtin/ft_strtabdup.c \
+		  builtin/ft_unsetenv.c 
+
 #Colors
 _RED=\x1b[31m
 _GREEN=\x1b[32m
