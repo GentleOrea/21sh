@@ -1,0 +1,1 @@
+gcc -ltermcap  ../misc/ft_print.c ../misc/ft_error.c ../initialisation/*.c ../ft_separator_OK.c *.c  ../../libft/libft.a
