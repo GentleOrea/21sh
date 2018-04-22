@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 12:04:22 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/21 15:15:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** Gere les erreurs de parsing, ne gere (surement) pas toutes les erreurs
 */
 
-int		get_hdoc(char *str, int i, t_comm *par)
+int		get_hdoc(char *str, int i, t_parser *par)
 {
 	int	hdoc;
 	int		red;
@@ -32,7 +32,7 @@ int		get_hdoc(char *str, int i, t_comm *par)
 			while (str[i] == ' ')
 				i++;
 			par = push_front(par, ft_strndup(&str[i], (hdoc = search_op(&str[i],
-			HD) >= 0 ? hdoc + 1 : ft_strlen(&str[i]))));
+			HD) >= 0 ? hdoc + 1 : ft_strlen(&str[i]))), 0);
 		}
 		while (str[i] == ' ')
 			i++;
@@ -45,7 +45,7 @@ int		get_hdoc(char *str, int i, t_comm *par)
 	return (i);
 }
 
-int		sizeof_comm(char *str, t_comm *par)
+int		sizeof_comm(char *str, t_parser *par)
 {
 	int		i;
 	char	sep;
@@ -64,7 +64,7 @@ int		sizeof_comm(char *str, t_comm *par)
 	return (i || !str[i] ? i + sep : -1);
 }
 
-void	count_comm(t_comm *par, char *str)
+void	count_parser(t_parser *par, char *str)
 {
 	int		i;
 	int		sep;

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 18:17:35 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/21 16:53:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,25 @@ int		redi(t_redi *redi)
 	else if (dup2(fd, redi->n) == -1)
 		return (-ft_printf("Failed to dup2\n"));
 	return (0);
+}
+
+int 	exec_pipe(t_shell *sh, t_com *com)
+{
+	int		p_fd[2];
+	
+	pipe(p_fd);
+	close(p_fd[1]);
+	open("/dev/ttys004", O_RDWR);
+	if (dup2(p_fd[0], 0) == -1)
+	{
+		printf("WHOUPS\n");
+		return (-1);
+	}
+	if (exec_cli(sh, com) < 0)
+	{
+		close(p_fd[0]);
+		return (-1);
+	}
+	close(p_fd[0]);
+	return (p_fd[1]);
 }

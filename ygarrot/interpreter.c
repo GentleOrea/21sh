@@ -1,48 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   interpreter.c                                      :+:      :+:    :+:   */
+/*   compreter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 10:50:01 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 18:49:39 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/21 17:14:30 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-void	epur_tab(t_inter *inte, int len)
+void	epur_tab(t_com *com, int len)
 {
 	int		i;
 	t_tab	*to_del;
 	t_tab	*list;
 
 	i = -1;
-	list = inte->tab;
-	ft_memdel((void**)&inte->cli);
-	mallcheck(inte->cli = (char**)ft_memalloc((len  + 1) * sizeof(char*)));
+	list = com->tab;
+	ft_memdel((void**)&com->cli);
+	mallcheck(com->cli = (char**)ft_memalloc((len  + 1) * sizeof(char*)));
 	while (list)
 	{
-		inte->cli[++i] = list->str;
+		com->cli[++i] = list->str;
 		to_del = list;
 		list = list->next;
 		ft_memdel((void**)&to_del);
 	}
-	inte->tab = NULL;
+	com->tab = NULL;
 }
 
-static void	add_comm(t_inter *inte, char *str)
+static void	add_comm(t_com *com, char *str)
 {
 	t_tab	*to_add;
 	t_tab	*temp;
 	
 	mallcheck(to_add = (t_tab*)ft_memalloc(sizeof(t_tab)));
 	to_add->str = str;
-	temp = inte->tab;
+	temp = com->tab;
 	if (!temp)
 	{
-		inte->tab = to_add;
+		com->tab = to_add;
 		return ;
 	}
 	while (temp->next)
@@ -50,7 +50,7 @@ static void	add_comm(t_inter *inte, char *str)
 	temp->next = to_add;
 }
 
-static void	add_redi(t_inter *inte, char **tab, int *i)
+static void	add_redi(t_com *com, char **tab, int *i)
 {
 	t_redi	*redi;
 	t_redi	*temp;
@@ -66,10 +66,10 @@ static void	add_redi(t_inter *inte, char **tab, int *i)
 		redi->path = ft_strdup(tab[1]);
 	else
 		redi->path = ft_strdup(&*tab[len]);
-	temp = inte->redi;
+	temp = com->redi;
 	if (!temp)
 	{
-		inte->redi = redi;
+		com->redi = redi;
 		return ;
 	}
 	while (temp->next)
@@ -77,24 +77,29 @@ static void	add_redi(t_inter *inte, char **tab, int *i)
 	temp->next = redi;
 }
 
-void	split_co(t_shell *sh, t_comm *tmp)
+void	split_co(t_shell *sh, t_parser *tmp)
 {
-	t_inter	*inte;
+	t_com	*com;
 	int		i;
 
+	mallcheck(com = (t_com*)ft_memalloc(sizeof(t_com)));
+	sh->com = com;
 	while (tmp)
 	{
-		
-		inte->cli = ft_strsplit_comm(tmp->comm, " ");
+		if (tmp->next)
+			mallcheck(com->next = (t_com*)ft_memalloc(sizeof(t_com)));
+		com->cli = ft_strsplit_comm(tmp->comm, " ");
 		i = -1;
-		while (inte->cli[++i])
+		while (com->cli[++i])
 		{
-			if (search_op(inte->cli[i], REDI) >= 0)
-				add_redi(inte, &inte->cli[i], &i);
-			else if (++inte->len)
-				add_comm(inte, inte->cli[i]);
+			if (search_op(com->cli[i], REDI) >= 0)
+				add_redi(com, &com->cli[i], &i);
+			else if (++com->len)
+				add_comm(com, com->cli[i]);
 		}
+		com->type = tmp->type;
 		tmp = tmp->next;
+		com = com->next;
 	}
-	sort_comm(sh, inte);
+	sort_comm(sh, sh->com);
 }

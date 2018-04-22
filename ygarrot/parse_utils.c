@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 12:56:27 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/21 13:14:30 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		get_sep(char *str, char **tab)
 ** renvoie la taille de la chaine si trouvée dans le tab sinon 0
 */
 
-char		is_sep(char *str, t_comm *par, char **tab)
+char		is_sep(char *str, t_parser *par, char **tab)
 {
 	int		i;
 	int		len;

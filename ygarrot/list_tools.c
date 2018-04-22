@@ -6,24 +6,29 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/19 15:13:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/21 13:41:52 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-t_comm	*push_front(t_comm *com, char *str)
+t_parser	*push_front(t_parser *com, char *str, int type)
 {
-	t_comm	*ret;
-	t_comm	*begin;
+	t_parser	*ret;
+	t_parser	*begin;
 
 	begin = com;
 	if (!str)
 		return (NULL);
-	if (com && !com->comm && (com->comm = str))
+	if (com && !com->comm)
+	{
+		com->comm = str;
+		com->type = type;
 		return (com);
-	mallcheck(ret = (t_comm*)ft_memalloc(sizeof(t_comm)));
+	}
+	mallcheck(ret = (t_parser*)ft_memalloc(sizeof(t_parser)));
 	ret->comm = str;
+	ret->type = type;
 	if (!com)
 		return (ret);
 	while (com->next)
@@ -32,19 +37,19 @@ t_comm	*push_front(t_comm *com, char *str)
 	return (begin);
 }
 /*
-void	pop(t_comm *co)
+void	pop(t_parser *co)
 {
 	(co->next) ? co->next->prev = co->prev : 0;
 	(co->prev) ? co->prev->next = co->prev : 0;
 }
 
-void	insert_co(t_comm *co, char *str, int type)
+void	insert_co(t_parser *co, char *str, int type)
 {
-	t_comm *ins;
+	t_parser *ins;
 
 	if (!co)
 		return ;
-	mallcheck(ins = (t_comm*)ft_memalloc(sizeof(t_comm)));
+	mallcheck(ins = (t_parser*)ft_memalloc(sizeof(t_parser)));
 	ins->comm = str;
 	ins->type = type;
 	co->next = ins;
