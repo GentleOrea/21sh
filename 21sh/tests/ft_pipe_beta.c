@@ -1,24 +1,32 @@
 #include "../include.h"
 
+void	sig(int sig)
+{
+}
+
 int	main(int ac, char **av, char **env)
 {
 	int	pid;
 	int	p[2];
 	char	*str[10];
 	char	b;
+	pid_t next;
 
+	signal(SIGINT, sig);
+	while (1)
+		;
 	if (pipe(p))
 	{
 		printf("BOUYA!!?!?gpu@*$^&24\n");
 		return (0);
 	}
-	pid = fork();
+	next = fork();
 	if (pid < 0)
 	{
 		printf("WAZA IEU@*()(vv[ewlv\n");
 		return (0);
 	}
-	if (pid == 0)
+	if (next == 0)
 	{
 		close(p[0]);
 		if (dup2(p[1], 1) == -1)
@@ -26,15 +34,13 @@ int	main(int ac, char **av, char **env)
 			printf("BAGDAD\n");
 			return (0);
 		}
-		str[0] = strdup("ls");
-		str[1] = "/";
-		str[2] = 0;
-		execve("/bin/ls", str, env);
-		system("ls /");
+		str[0] = strdup("cat");
+		str[1] = 0;
+		execve("/bin/cat", str, env);
 	}
-	if (pid > 0)
+	pid = fork();
+	if (pid == 0)
 	{
-		wait(NULL);
 		close(p[1]);
 		if (dup2(p[0], 0) == -1)
 		{
@@ -45,7 +51,8 @@ int	main(int ac, char **av, char **env)
 		str[1] = strdup("p");
 		str[2] = 0;
 		execve("/usr/bin/grep", str, env);
-		system("grep L");
 	}
+	else
+		wait(0);
 	return (0);
 }

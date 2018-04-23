@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/21 15:15:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/23 14:51:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		get_hdoc(char *str, int i, t_parser *par)
 		}
 		while (str[i] == ' ')
 			i++;
-		if (((red == 2 || red == 3) && !ft_isdigit(str[i]))
+		if (((red == 2 || red == 3) && str[i] != '-' && !ft_isdigit(str[i]))
 			|| (!(hdoc = 0) && is_sep(&str[i], par, ALL)))
 			return (-1);
 	}
@@ -59,6 +59,7 @@ int		sizeof_comm(char *str, t_parser *par)
 		if (i < 0)
 			return (-1);
 	}
+	par->wait = (get_sep(&str[i], SEP) < 3 ? 1 : 0);
 	if (str[i] && (str[i] == ';' || ft_strnstr(&str[i], ";;", 2)))
 		return (!ft_strnstr(&str[i], ";;", 2) ? i | 1 : -1);
 	return (i || !str[i] ? i + sep : -1);

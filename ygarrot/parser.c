@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:22:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/21 15:01:08 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/23 16:32:13 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,23 @@
 
 void	medium_split(t_parser *c, char **ammoc)
 {
-	int		ind;
+	int		i[2];
 	char	*tab[3] = {"&"};
-	t_parser	*tmp;
 	char	*del;
 	char	*str;
 
-	tmp = c;
 	del = NULL;
+	ft_bzero(i, sizeof(i));
 	while (*ammoc)
 	{
 		str = *ammoc;
-		while ((ind = search_op(str, tab)) >= 0)
+		while ((i[1] = search_op(&str[i[0]], tab)) >= 0)
 		{
-			c = easy_split(c, del = ft_strndup(str, ind), 32);
-			str = &str[ind + 1];
+			c = easy_split(c, del = ft_strndup(&str[i[0]], i[1]), 32);
+			i[0] += i[1] + 1;
 		}
 		ft_memdel((void**)&del);
-		c = easy_split(c, str, 0);
+		c = easy_split(c, &str[i[0]], 0);
 		ammoc++;
 	}
 }

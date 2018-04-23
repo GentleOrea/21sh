@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 10:50:01 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/21 17:14:30 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/23 14:42:56 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ static void	add_redi(t_com *com, char **tab, int *i)
 	int		len;
 
 	mallcheck(redi = (t_redi*)ft_memalloc(sizeof(t_redi)));
-	redi->n = ft_isdigit(**tab) ? ft_atoi(*tab) : -1;
+	redi->fd[0] = ft_isdigit(**tab) ? ft_atoi(*tab) : -1;
 	while (**tab && ft_isdigit(**tab))
-		tab++;
+		++*tab;
 	redi->type = get_sep(*tab, REDI);
 	len = ft_strlen(REDI[redi->type]);
 	if (!(tab[0][len]) && ++*i)
 		redi->path = ft_strdup(tab[1]);
 	else
-		redi->path = ft_strdup(&*tab[len]);
+		redi->path = ft_strdup(&tab[0][len]);
 	temp = com->redi;
 	if (!temp)
 	{
@@ -92,10 +92,12 @@ void	split_co(t_shell *sh, t_parser *tmp)
 		i = -1;
 		while (com->cli[++i])
 		{
+			ft_printf("%s\n", com->cli[i]);
 			if (search_op(com->cli[i], REDI) >= 0)
 				add_redi(com, &com->cli[i], &i);
 			else if (++com->len)
 				add_comm(com, com->cli[i]);
+		
 		}
 		com->type = tmp->type;
 		tmp = tmp->next;

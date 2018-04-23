@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:17:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/22 12:08:01 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/23 16:32:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 #define QUOTES "\"\'"
 #define H_SEP ";&\n"
 
-#define ALL (char *[13]){"||", "&&", "|", "&", ";", ">>", "<<",  "<<", ">&", "<", ">" }
+#define ALL (char *[13]){"||", "&&", "|", "&", ";", ">>", "<<",  "<<", ">&", "<&","<", ">" }
 #define HD (char *[14]){"||", "&&", "|", "&", ";", ">>", "<<", ">&", "<&","<", ">" , " "}
-#define SEP (char *[6]){"||", "&&", "|", "&", ";"}
+#define SEP (char *[7]){"||", "&&", "|", "&", ";", "\n"}
 #define M_SEP (char *[6])								{"||", "&&", "|"}
 #define REDI (char *[7]){">>", "<<", ">&","<&", "<", ">"}
 
@@ -41,7 +41,7 @@ typedef struct	s_redi
 {
 	char	*path;
 	int		type;
-	int		n;
+	int		fd[2];
 	struct s_redi *next;
 }				t_redi;
 
@@ -63,6 +63,7 @@ typedef struct s_parser
 	char	*comm;
 	char	op[3];
 	char	type;
+	int		wait;
 	struct	s_parser	*next;
 }				t_parser;
 
@@ -95,7 +96,7 @@ char	*search_var(char **tab, char *str);
 int		wait_exec(t_shell *sh, char **cli);
 int		sort_comm(t_shell *sh, t_com *com);
 void	epur_tab(t_com *inte, int len);
-int 	exec_pipe(t_shell *sh, t_com *com);
+void	exec_pipe(t_shell *sh, char *comm, char **argv);
 
 int		ft_isbuiltin(char *path);
 void	ft_builtin(char **arg, char ***env, int pid);
@@ -109,8 +110,9 @@ int		ft_setenvvar(char **env, char *cur, char *var);
 int		ft_strlento(char *str, char c);
 char	**ft_strtabdup(char **tab);
 
-void	exe(t_shell *sh, char *comm, char **argv);
+int		exe(t_shell *sh, char *comm, char **argv);
 int		search_exec(t_shell *sh, char *comm, char **argv);
 char	*ft_getenv(char **tab, char *str);
 int		exec_cli(t_shell *sh, t_com *inter);
+int		exec_redi(t_redi *tmp);
 #endif
