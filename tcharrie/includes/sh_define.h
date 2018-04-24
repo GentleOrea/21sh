@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:54:38 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/03/10 15:25:27 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/04/24 10:47:05 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,6 @@
 # define CODE_SET 1
 # define CODE_GET 2
 # define CODE_PUSH 3
+
+# define ERR -1
 #endif

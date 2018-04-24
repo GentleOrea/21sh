@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:54:38 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/23 16:39:27 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/04/24 12:54:50 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define SH_H
 # include "sh_define.h"
 # include "../libft/libft.h"
-# include "../include.h"
-# include "minishell.h"
 # include "ft_printf.h"
+# include "minishell.h"
+# include <term.h>
+# include "ygarrot.h"
 
 typedef struct termios	t_termios;
 
@@ -81,6 +82,7 @@ char	*ft_history_cache(char *str, int code);
 int		ft_history_add(char *str);
 char	*ft_history_get(int pos);
 int		ft_move_tohist(t_line *line, int *val, int dec);
+char	*ft_history_parser(char *str);
 
 /*
 ** Recover user entry
@@ -88,6 +90,9 @@ int		ft_move_tohist(t_line *line, int *val, int dec);
 
 t_line	ft_getentry(void);
 int		ft_read(t_line *line, int *ta);
+int		ft_read_newline(t_line *line, int *val, t_parser **pars);
+int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars);
+int		ft_heredoc_purge(char *str, int size);
 
 int		ft_specialchar(t_line *line, char *str, int *val);
 int		ft_specialchar_aux(t_line *line, char *str, int *val);

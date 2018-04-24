@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 12:18:29 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/02/28 10:22:55 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/04/24 10:48:16 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <pwd.h>
 # include <uuid/uuid.h>
 # include <stdio.h>
-# include "../ft_printf/includes/ft_printf.h"
+# include "ft_printf.h"
 # define BUFFSIZE 30
 # define BUILTIN "echo\0cd\0setenv\0unsetenv\0env\0exit\0"
 
