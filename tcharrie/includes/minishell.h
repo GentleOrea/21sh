@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 12:18:29 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 10:48:16 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/04/24 13:24:27 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,6 @@ char	*ft_getpath(char *arg, char **env);
 char	*ft_getname(char *path);
 char	**ft_convarg(char *arg);
 
-int		ft_isbuiltin(char *path);
-void	ft_builtin(char **arg, char ***env, int pid);
-void	ft_echo(char **arg, char **env);
-void	ft_cd(char **arg, char ***env);
-void	ft_setenv(char **arg, char ***env);
-void	ft_unsetenv(char **arg, char **env);
-void	ft_env(char **arg, char **env);
-void	ft_exit(char **arg, char **env);
-
-char	*ft_getenv(char *name, char **env);
-int		ft_setenvvar(char **env, char *cur, char *var);
 
 t_list	*ft_var(void);
 char	*ft_getvar(char *argname, char **env);

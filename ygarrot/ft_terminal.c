@@ -6,13 +6,13 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:52:26 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 12:21:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 13:20:46 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-void	ft_init_terminal_data(char **env)
+void	ft_terminal_data(char **env)
 {
 	char	*termtype;
 	int		success;

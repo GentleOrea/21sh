@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:54:38 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 12:54:50 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/04/24 13:49:38 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "ft_printf.h"
 # include "minishell.h"
 # include <term.h>
-# include "ygarrot.h"
+# include "../../ygarrot/includes/21sh.h"
 
 typedef struct termios	t_termios;
 
@@ -90,8 +90,6 @@ char	*ft_history_parser(char *str);
 
 t_line	ft_getentry(void);
 int		ft_read(t_line *line, int *ta);
-int		ft_read_newline(t_line *line, int *val, t_parser **pars);
-int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars);
 int		ft_heredoc_purge(char *str, int size);
 
 int		ft_specialchar(t_line *line, char *str, int *val);
@@ -178,18 +176,5 @@ char	*ft_getline(void);
 int		ft_bl_active(char *str, int pos);
 int		ft_separator(char c, int sep, int bl);
 int		ft_separator_active(char *str, int pos, int *bl, int *sep);
-
-/*
-** Builtins
-*/
-
-void	ft_cd(char **a, char ***env);
-void	ft_echo(char **arg, char **env);
-void	ft_env(char **arg, char **env);
-void	ft_exit(char **arg, char **env);
-void	ft_setenv(char **arg, char ***env);
-void	ft_unsetenv(char **arg, char **env);
-
-char	*ft_getenv(char *varname, char **env);
 
 #endif

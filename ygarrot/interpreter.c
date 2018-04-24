@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 10:50:01 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 13:01:50 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:26:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	add_comm(t_com *com, char *str)
 {
 	t_tb	*to_add;
 	t_tb	*temp;
-	
+
 	mallcheck(to_add = (t_tb*)ft_memalloc(sizeof(t_tb)));
 	to_add->str = str;
 	temp = com->tb;
@@ -77,26 +77,36 @@ static void	add_redi(t_com *com, char **tb, int *i)
 	temp->next = redi;
 }
 
+static void norm(t_parser *tmp, t_com *com)
+{
+	int		i;
+	char	*free;
+
+	if (tmp->next)
+		mallcheck(com->next = (t_com*)ft_memalloc(sizeof(t_com)));
+	com->cli = ft_strsplit_comm(tmp->comm, " ");
+	i = -1;
+	while (com->cli[++i])
+	{
+		free = com->cli[i];
+		com->cli[i] = ft_find_and_replace(free, "\\", 1);
+		if (search_op(com->cli[i], REDI) >= 0)
+			add_redi(com, &com->cli[i], &i);
+		else if (++com->len)
+			add_comm(com, com->cli[i]);
+		ft_memdel((void**)&free);
+	}
+}
+
 void	split_co(t_shell *sh, t_parser *tmp)
 {
 	t_com	*com;
-	int		i;
 
 	mallcheck(com = (t_com*)ft_memalloc(sizeof(t_com)));
 	sh->com = com;
 	while (tmp)
 	{
-		if (tmp->next)
-			mallcheck(com->next = (t_com*)ft_memalloc(sizeof(t_com)));
-		com->cli = ft_strsplit_comm(tmp->comm, " ");
-		i = -1;
-		while (com->cli[++i])
-		{
-			if (search_op(com->cli[i], REDI) >= 0)
-				add_redi(com, &com->cli[i], &i);
-			else if (++com->len)
-				add_comm(com, com->cli[i]);
-		}
+		norm(tmp, com);
 		com->type = tmp->type;
 		tmp = tmp->next;
 		com = com->next;

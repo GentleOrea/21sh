@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 11:24:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:35:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,13 @@ int		search_op(char *str, char **op)
 	{
 		ind = -1;
 		while (op[++ind])
+		{
 			if (!ft_strncmp(&str[i], op[ind] , ft_strlen(op[ind])))
-				if (op[0][0] != '&' || !str[i]
-|| (!ft_isin(str[i + 1], "<&") && (i <= 0 || !ft_isin(str[i - 1], "&>"))))
+				if (ft_strncmp(op[ind], "&", ft_strlen(op[ind])) || !str[i]
+|| (!ft_isin(str[i + 1], "<&") && (i <= 0  || (i >= 2 &&  str[i - 2] == '\\')
+|| !ft_isin(str[i - 1], "&>"))))
 					return (i);
+				}
 		i += ((tmp = skip_comm(&str[i])) ? tmp : 1);
 	}
 	return (-1);

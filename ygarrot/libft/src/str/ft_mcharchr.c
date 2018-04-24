@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_mcharchr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 18:39:01 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/04/24 15:56:23 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/04/24 16:03:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "21sh.h"
+#include "libft.h"
 
-int		main(int ac, char **av, char **env)
+int		ft_mcharchr(char *c, char *str)
 {
-	t_shell sh;
+	int i;
 
-	ft_terminal_data(env);
-	(void)ac;(void)av;(void)env;
-	sh.env = env;
-	hard_split(&sh, av[1]);
+	i = 0;
+	while (str && str[i] && !ft_isin(str[i], c))
+		i++;
+	return ((str && str[i] && ft_isin(str[i], c)) ? i : -1);
 }

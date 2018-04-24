@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/24 13:02:39 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/24 16:02:34 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,6 @@ SRC += \
 	   mem/ft_memset.c \
 	   mem/ft_realloc.c
 
-
 SRC += \
 	   str/ft_tolower.c \
 	   str/ft_toupper.c \
@@ -104,6 +103,7 @@ SRC += \
 	   str/ft_strtrim.c \
 	   str/ft_implode.c \
 	   str/ft_charchr.c \
+	   str/ft_mcharchr.c \
 	   str/ft_capitalize.c \
 	   str/ft_putstr.c \
 	   str/ft_putstr_fd.c \

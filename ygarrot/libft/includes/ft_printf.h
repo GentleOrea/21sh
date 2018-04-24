@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/24 10:23:57 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/12 16:06:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 15:33:34 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,5 @@ int				ft_occur_in(char *str, char c);
 
 int				ft_row_div(int nb, int base);
 int				ft_rev_charchr(char *str, char tofind);
-int				ft_charchr(char c, char *str);
 
 #endif

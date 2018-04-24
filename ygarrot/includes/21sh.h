@@ -6,21 +6,19 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:17:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 13:01:50 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:40:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _21SH_H
 # define _21SH_H
 # include "../libft/includes/libft.h"
-# include "../../21sh/includes/sh_define.h"
-# include "../../21sh/includes/sh.h"
-# define UNESC "abfnrtvc0x"
-# define ESC "\a\b\f\n\r\t\v"
+# include "../../tcharrie/includes/sh_define.h"
+# include "../../tcharrie/includes/sh.h"
+# define UNESC "0xabfnrtv\\"
+# define ESC "\a\b\f\n\r\t\v\\"
 
 #define QUOTES "\"\'"
-#define H_SEP ";&\n"
-
 #define ALL (char *[13]){"||", "&&", "|", "&", ";", ">>", "<<",  "<<", ">&", "<&","<", ">" }
 #define HD (char *[14]){"||", "&&", "|", "&", ";", ">>", "<<", ">&", "<&","<", ">" , " "}
 #define SEP (char *[7]){"||", "&&", "|", "&", ";", "\n"}
@@ -115,4 +113,7 @@ char	*ft_getenv(char **tb, char *str);
 int		exec_cli(t_shell *sh, t_com *inter);
 int		exec_redi(t_shell *sh, t_redi *tmp);
 void	ft_fatal(char *str);
+
+char	*conv_esc(char *str);
+char	*set_esc(char *str);
 #endif

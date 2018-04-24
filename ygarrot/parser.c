@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 17:14:50 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 12:37:34 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:16:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	medium_split(t_parser *c, char **ammoc)
 	while (*ammoc)
 	{
 		str = *ammoc;
-		ft_printf("%s\n", *ammoc);
 		while ((i[1] = search_op(&str[i[0]], tb)) >= 0)
 		{
 			c = easy_split(c, del = ft_strndup(&str[i[0]], i[1]), 32);
@@ -70,10 +69,8 @@ int		hard_split(t_shell *sh, char *str)
 {
 	char		**tb;
 	t_parser	*par;
-	int			i;
 	t_parser	*to_del;
 
-	i = -1;
 	par = count_parser(str);
 	while ((to_del = par))
 	{

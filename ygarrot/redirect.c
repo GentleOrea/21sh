@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 13:03:36 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 19:40:14 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ int		stream(t_redi *redi, int mod)
 {
 	int		flag;
 
-	flag = O_RDWR | O_CREAT | (redi->type == 0 ? O_APPEND : 0);
+	flag = O_RDWR | (redi->type == 5 ? O_TRUNC : 0) |
+		redi->type == 5 ? O_CREAT : 0 | (redi->type == 1 ? O_APPEND : 0);
 	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, S_IRWXU)) < 0)
 		return (-ft_printf( "Failed to open file\n"));
 	if (dup2(redi->fd[!mod], redi->fd[mod]) == -1)
 		return (-ft_printf("Failed to dup2\n"));
 	return (0);
-
 }
+
 int		set_redi(t_shell *sh, t_redi *redi)
 {
 	int		mod;
