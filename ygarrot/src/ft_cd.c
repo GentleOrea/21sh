@@ -6,13 +6,13 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 11:10:57 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/13 11:49:27 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 11:26:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	tabchr(t_shell *sh, char *arg, char is_old)
+void	tbchr(t_shell *sh, char *arg, char is_old)
 {
 	char	path[256];
 	t_env	*pwd;
@@ -58,6 +58,6 @@ void	ft_cd(t_shell *sh, char *argv[])
 			return ;
 		}
 	}
-	tabchr(sh, argv[0], is_old);
+	tbchr(sh, argv[0], is_old);
 	!i ? ft_memdel((void**)&argv[0]) : 0;
 }

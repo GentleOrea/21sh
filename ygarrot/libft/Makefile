@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/20 15:08:01 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/24 13:02:39 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ SRC += \
 	   str/ft_charchr.c \
 	   str/ft_capitalize.c \
 	   str/ft_putstr.c \
+	   str/ft_putstr_fd.c \
 	   str/ft_strndup.c
 
 SRC += \

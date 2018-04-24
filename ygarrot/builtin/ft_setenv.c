@@ -6,23 +6,23 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/20 17:21:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 11:27:14 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-static void	ft_setenvnew_aux(char ***env, char **tab, char *str)
+static void	ft_setenvnew_aux(char ***env, char **tb, char *str)
 {
 	int	i;
 
 	i = -1;
 	while (env[0][++i])
-		tab[i] = env[0][i];
-	tab[i++] = str;
-	tab[i] = 0;
+		tb[i] = env[0][i];
+	tb[i++] = str;
+	tb[i] = 0;
 	free(*env);
-	*env = tab;
+	*env = tb;
 }
 
 static void	ft_setenvnew(char ***env, char *var, char *value)
@@ -30,12 +30,12 @@ static void	ft_setenvnew(char ***env, char *var, char *value)
 	int		i;
 	int		j;
 	char	*str;
-	char	**tab;
+	char	**tb;
 
 	i = 0;
 	while (env[0][i])
 		i++;
-	if (!(tab = (char**)malloc(sizeof(char*) * (i + 2))))
+	if (!(tb = (char**)malloc(sizeof(char*) * (i + 2))))
 		return ;
 	if (!(str = (char*)malloc(ft_strlen(var) + (value ? ft_strlen(value) : 0)
 		+ 2)))
@@ -48,7 +48,7 @@ static void	ft_setenvnew(char ***env, char *var, char *value)
 	while (value && value[j])
 		str[i++] = value[j++];
 	str[i] = 0;
-	ft_setenvnew_aux(env, tab, str);
+	ft_setenvnew_aux(env, tb, str);
 }
 
 static void	ft_setenvaux(char **a, char **env)

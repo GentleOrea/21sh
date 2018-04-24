@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_2.c                                          :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 16:22:30 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/23 16:32:13 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/04/23 17:14:50 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/04/24 12:37:34 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 void	medium_split(t_parser *c, char **ammoc)
 {
 	int		i[2];
-	char	*tab[3] = {"&"};
+	char	*tb[3] = {"&"};
 	char	*del;
 	char	*str;
 
@@ -28,7 +28,8 @@ void	medium_split(t_parser *c, char **ammoc)
 	while (*ammoc)
 	{
 		str = *ammoc;
-		while ((i[1] = search_op(&str[i[0]], tab)) >= 0)
+		ft_printf("%s\n", *ammoc);
+		while ((i[1] = search_op(&str[i[0]], tb)) >= 0)
 		{
 			c = easy_split(c, del = ft_strndup(&str[i[0]], i[1]), 32);
 			i[0] += i[1] + 1;
@@ -65,15 +66,24 @@ t_parser	*easy_split(t_parser *c, char *str, char isamp)
 	return (c);
 }
 
-void	hard_split(t_parser *c, char *str)
+int		hard_split(t_shell *sh, char *str)
 {
-	char	**tab;
-	t_parser	par;
-	int		i;
+	char		**tb;
+	t_parser	*par;
+	int			i;
+	t_parser	*to_del;
 
 	i = -1;
-	count_parser(&par, str);
-	mallcheck(tab = ft_strsplit_comm(str, ";"));
-	medium_split(c, tab);
-	ft_free_dblechar_tab(tab);
+	par = count_parser(str);
+	while ((to_del = par))
+	{
+		par = par->next;
+		ft_memdel((void**)&to_del);
+	}
+	mallcheck(par = (t_parser*)ft_memalloc(sizeof(t_parser)));
+	mallcheck(tb = ft_strsplit_comm(str, ";"));
+	medium_split(par, tb);
+	ft_free_dblechar_tab(tb);
+	split_co(sh, par);
+	return (1);
 }

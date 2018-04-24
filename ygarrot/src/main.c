@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/06 18:20:32 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 13:54:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 11:26:17 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	wait_exec(t_shell *sh, char **space)
 {
 	int index;
 
-	if ((index = ft_strisin_tab(space[0], sh->my_built, 0)) >= 0)
+	if ((index = ft_strisin_tb(space[0], sh->my_built, 0)) >= 0)
 		sh->f_built[index](sh, &space[1]);
 	else
 	{
@@ -58,7 +58,7 @@ int		search_exec(t_shell *sh, char *comm, char *argv[])
 	}
 	temp ? ft_memdel((void**)&temp) :
 		ft_printf("command not found : %s \n", comm);
-	ft_free_dblechar_tab(paths);
+	ft_free_dblechar_tb(paths);
 	return (1);
 }
 
@@ -73,12 +73,12 @@ void	comm(t_shell *sh, char **comma)
 		mallcheck(sh, space = ft_strmsplit(comma[i], " \t"));
 		if (!ft_strcmp(comma[i], "exit"))
 		{
-			ft_free_dblechar_tab(comma);
-			ft_free_dblechar_tab(space);
+			ft_free_dblechar_tb(comma);
+			ft_free_dblechar_tb(space);
 			erase_shell(sh);
 		}
 		wait_exec(sh, space);
-		ft_free_dblechar_tab(space);
+		ft_free_dblechar_tb(space);
 	}
 }
 
@@ -101,6 +101,6 @@ int		main(int ac, char **av, char **env)
 		mallcheck(sh, comma = ft_strsplit(line, ';'));
 		ft_memdel((void**)&line);
 		comm(sh, comma);
-		ft_free_dblechar_tab(comma);
+		ft_free_dblechar_tb(comma);
 	}
 }

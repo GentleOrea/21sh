@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/20 17:25:11 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/24 11:21:51 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,8 @@ SRC_FP = lexer.c \
 		 interpreter.c \
 		 redirect.c \
 		 exec_utils.c \
-		 exec.c
+		 exec.c \
+		 ft_terminal.c
 SRC_FP += \
 		  builtin/ft_cd.c \
 		  builtin/ft_echo.c \

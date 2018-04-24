@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/23 14:51:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 12:18:53 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,14 @@ int		sizeof_comm(char *str, t_parser *par)
 	return (i || !str[i] ? i + sep : -1);
 }
 
-void	count_parser(t_parser *par, char *str)
+t_parser	*count_parser(char *str)
 {
 	int		i;
+	t_parser *par;
 	int		sep;
 
 	i = 0;
+	mallcheck(par = (t_parser*)ft_memalloc(sizeof(t_parser)));
 	while (str[i])
 	{
 		while (str[i] && str[i] == ' ')
@@ -79,8 +81,9 @@ void	count_parser(t_parser *par, char *str)
 		if (sep < 0)
 		{
 			ft_printf("yosh: parse error near `%s'\n", par->op);
-			exit(EXIT_FAILURE) ;
+			return (NULL);
 		}
 		i += sep;
 	}
+	return (par);
 }

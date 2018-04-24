@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/21 13:15:00 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 12:21:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		main(int ac, char **av, char **env)
 {
-	t_parser	*co = (t_parser*)ft_memalloc(sizeof(t_parser));
 	t_shell sh;
+
+	ft_init_terminal_data(env);
 	(void)ac;(void)av;(void)env;
 	sh.env = env;
-	hard_split(co, av[1]);
-	split_co(&sh, co);
+	hard_split(&sh, av[1]);
 }

@@ -6,20 +6,20 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 10:50:01 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/23 14:42:56 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 13:01:50 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-void	epur_tab(t_com *com, int len)
+void	epur_tb(t_com *com, int len)
 {
 	int		i;
-	t_tab	*to_del;
-	t_tab	*list;
+	t_tb	*to_del;
+	t_tb	*list;
 
 	i = -1;
-	list = com->tab;
+	list = com->tb;
 	ft_memdel((void**)&com->cli);
 	mallcheck(com->cli = (char**)ft_memalloc((len  + 1) * sizeof(char*)));
 	while (list)
@@ -29,20 +29,20 @@ void	epur_tab(t_com *com, int len)
 		list = list->next;
 		ft_memdel((void**)&to_del);
 	}
-	com->tab = NULL;
+	com->tb = NULL;
 }
 
 static void	add_comm(t_com *com, char *str)
 {
-	t_tab	*to_add;
-	t_tab	*temp;
+	t_tb	*to_add;
+	t_tb	*temp;
 	
-	mallcheck(to_add = (t_tab*)ft_memalloc(sizeof(t_tab)));
+	mallcheck(to_add = (t_tb*)ft_memalloc(sizeof(t_tb)));
 	to_add->str = str;
-	temp = com->tab;
+	temp = com->tb;
 	if (!temp)
 	{
-		com->tab = to_add;
+		com->tb = to_add;
 		return ;
 	}
 	while (temp->next)
@@ -50,22 +50,22 @@ static void	add_comm(t_com *com, char *str)
 	temp->next = to_add;
 }
 
-static void	add_redi(t_com *com, char **tab, int *i)
+static void	add_redi(t_com *com, char **tb, int *i)
 {
 	t_redi	*redi;
 	t_redi	*temp;
 	int		len;
 
 	mallcheck(redi = (t_redi*)ft_memalloc(sizeof(t_redi)));
-	redi->fd[0] = ft_isdigit(**tab) ? ft_atoi(*tab) : -1;
-	while (**tab && ft_isdigit(**tab))
-		++*tab;
-	redi->type = get_sep(*tab, REDI);
+	redi->fd[0] = ft_isdigit(**tb) ? ft_atoi(*tb) : -1;
+	while (**tb && ft_isdigit(**tb))
+		++*tb;
+	redi->type = get_sep(*tb, REDI);
 	len = ft_strlen(REDI[redi->type]);
-	if (!(tab[0][len]) && ++*i)
-		redi->path = ft_strdup(tab[1]);
+	if (!(tb[0][len]) && ++*i)
+		redi->path = ft_strdup(tb[1]);
 	else
-		redi->path = ft_strdup(&tab[0][len]);
+		redi->path = ft_strdup(&tb[0][len]);
 	temp = com->redi;
 	if (!temp)
 	{
@@ -92,12 +92,10 @@ void	split_co(t_shell *sh, t_parser *tmp)
 		i = -1;
 		while (com->cli[++i])
 		{
-			ft_printf("%s\n", com->cli[i]);
 			if (search_op(com->cli[i], REDI) >= 0)
 				add_redi(com, &com->cli[i], &i);
 			else if (++com->len)
 				add_comm(com, com->cli[i]);
-		
 		}
 		com->type = tmp->type;
 		tmp = tmp->next;

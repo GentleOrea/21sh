@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/23 15:56:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 11:24:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,35 +28,35 @@ int		skip_comm(char *str)
 	return (i);
 }
 
-int		get_sep(char *str, char **tab)
+int		get_sep(char *str, char **tb)
 {
 	int	i;
 
 	i = -1;
-	while (tab[++i] && ft_strncmp(str, tab[i], ft_strlen(tab[i])))
+	while (tb[++i] && ft_strncmp(str, tb[i], ft_strlen(tb[i])))
 		;
 	return (i);
 }
 
 /*
-** strnstr pour un tableau passé en param
-** renvoie la taille de la chaine si trouvée dans le tab sinon 0
+** strnstr pour un tbleau passé en param
+** renvoie la taille de la chaine si trouvée dans le tb sinon 0
 */
 
-char		is_sep(char *str, t_parser *par, char **tab)
+char		is_sep(char *str, t_parser *par, char **tb)
 {
 	int		i;
 	int		len;
 
 	i = -1;
-	while (tab[++i] && !ft_strnstr(str, tab[i], len = ft_strlen(tab[i])))
+	while (tb[++i] && !ft_strnstr(str, tb[i], len = ft_strlen(tb[i])))
 		;
-	tab[i] ? ft_strcpy(par->op, tab[i]) : 0;
-	return (tab[i] ? len : 0);
+	tb[i] ? ft_strcpy(par->op, tb[i]) : 0;
+	return (tb[i] ? len : 0);
 }
 
 /*
-** recherche la premiere occurence d'une chaine du tableau donné en param
+** recherche la premiere occurence d'une chaine du tbleau donné en param
 ** dans la chaine donné en second param
 */
 

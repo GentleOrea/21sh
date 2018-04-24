@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/23 16:47:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/24 13:01:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		exe(t_shell *sh, char *comm, char **argv)
 		wait(0);
 	else
 	{
-		exec_redi(sh->tmp->redi);
+		exec_redi(sh, sh->tmp->redi);
 		execve(comm, argv, sh->env);
 		if (sh->tmp->type & 4)
 			close(sh->tmp->pipe[0]);
@@ -106,7 +106,7 @@ int		sort_comm(t_shell *sh, t_com *com)
 	sh->fd = open("/dev/ttys002", O_RDWR);
 	while (com)
 	{
-		epur_tab(com, com->len);
+		epur_tb(com, com->len);
 		sh->tmp = com;
 		if (com->next && com->next->type & 4)
 		{
