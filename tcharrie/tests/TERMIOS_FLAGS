@@ -1,0 +1,31 @@
+c_iflag
+IGNPAR	//Ignore parity errors	//Erreurs hardware
+IXON	//Enable XON/XOFF flow control on ouput
+IXOFF	//Enable XON/XOFF flow control on input	//Permet de stopper l'ecriture pendant l'execution
+ICRNL	//no CR to NL translations
+INLCR	//no NL to CR translations
+
+
+c_oflag
+OPOST	//Enable implementation-defined output processing
+CREAD	//Enable receiver
+
+
+c_cflag
+CS8		//Character size
+ICANON	//Enable canonical mode ??
+
+
+c_cc
+VINTR	//Ctr-C
+VTIME	//Timeout in deciseconds for noncanonial read
+
+VINTR > 3	== Ctr-C
+QUIT  > 28	== Ctr-D
+ERASE > 127	== Erase
+KILL  > 21	== Ctr-D
+EOF   > 4	== EOF
+EOL   > 255 == EOL
+SUP   > 26
+STOP  > 19
+START > 17
