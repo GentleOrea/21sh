@@ -1,4 +1,4 @@
-#include "../include.h"
+#include "../includes/sh.h"
 
 int	main(int ac, char **av, char **env)
 {
@@ -9,43 +9,43 @@ int	main(int ac, char **av, char **env)
 
 	if (pipe(p))
 	{
-		printf("BOUYA!!?!?gpu@*$^&24\n");
+		printf("error\n");
 		return (0);
 	}
 	pid = fork();
 	if (pid < 0)
 	{
-		printf("WAZA IEU@*()(vv[ewlv\n");
+		printf("error\n");
 		return (0);
 	}
 	if (pid == 0)
 	{
-		close(p[0]);
-		if (dup2(p[1], 1) == -1)
+		printf("la\n");
+		close(p[1]);
+		if (dup2(p[0], 0) == -1)
 		{
-			printf("BAGDAD\n");
+			printf("error\n");
 			return (0);
 		}
 		str[0] = strdup("ls");
-		str[1] = "/";
-		str[2] = 0;
+		str[1] = 0;
 		execve("/bin/ls", str, env);
-		system("ls /");
+		close(p[0]);
 	}
 	if (pid > 0)
 	{
-		wait(NULL);
-		close(p[1]);
-		if (dup2(p[0], 0) == -1)
+		printf("ici\n");
+		close(p[0]);
+		if (dup2(p[1], 1) == -1)
 		{
 			printf("WHOUPS\n");
 			return (0);
 		}
-		str[0] = strdup("grep");
-		str[1] = strdup("p");
-		str[2] = 0;
-		execve("/usr/bin/grep", str, env);
-		system("grep L");
+		str[0] = strdup("cat");
+		str[1] = 0;
+		execve("/bin/cat", str, env);
+		//waitpid(-1,  &pid, WUNTRACED);
+		close(p[1]);
 	}
 	return (0);
 }

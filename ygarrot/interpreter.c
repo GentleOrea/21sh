@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 10:50:01 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 19:26:24 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/26 12:58:55 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	epur_tb(t_com *com, int len)
 		list = list->next;
 		ft_memdel((void**)&to_del);
 	}
-	com->tb = NULL;
 }
 
 static void	add_comm(t_com *com, char *str)
@@ -84,7 +83,7 @@ static void norm(t_parser *tmp, t_com *com)
 
 	if (tmp->next)
 		mallcheck(com->next = (t_com*)ft_memalloc(sizeof(t_com)));
-	com->cli = ft_strsplit_comm(tmp->comm, " ");
+	mallcheck(com->cli = ft_strsplit_comm(tmp->comm, " "));
 	i = -1;
 	while (com->cli[++i])
 	{
@@ -101,6 +100,7 @@ static void norm(t_parser *tmp, t_com *com)
 void	split_co(t_shell *sh, t_parser *tmp)
 {
 	t_com	*com;
+	t_parser *to_del;
 
 	mallcheck(com = (t_com*)ft_memalloc(sizeof(t_com)));
 	sh->com = com;
@@ -108,8 +108,11 @@ void	split_co(t_shell *sh, t_parser *tmp)
 	{
 		norm(tmp, com);
 		com->type = tmp->type;
+		to_del = tmp;
 		tmp = tmp->next;
 		com = com->next;
+		ft_memdel((void**)&to_del->comm);
+		ft_memdel((void**)&to_del);
 	}
 	sort_comm(sh, sh->com);
 }

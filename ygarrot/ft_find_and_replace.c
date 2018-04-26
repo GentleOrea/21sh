@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 19:28:36 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/25 11:55:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static char	*replace(char *str, char *rep, int op, int len)
 	i2 = -1;
 	if (!(ret = ft_strnew(len)))
 		return (NULL);
-	ft_printf("%d %s\n",len, str);
 	while (str[i])
 	{
 		if (op & 1 && ft_isin(str[i], QUOTES) && (q = str[i] == '"' ? '"' : '\''))

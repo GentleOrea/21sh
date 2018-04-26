@@ -6,25 +6,26 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 19:40:14 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/26 12:54:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
 /*
- ** Ce programme effectue les changements pour x>fd
- ** Le format est le meme pour x>&fd (Simplement ne pas ouvrir le fichier)
- */
-
+** Ce programme effectue les changements pour x>fd
+** Le format est le meme pour x>&fd (Simplement ne pas ouvrir le fichier)
+*/
 
 int		stream(t_redi *redi, int mod)
 {
 	int		flag;
+	int		right;
 
+	right = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 	flag = O_RDWR | (redi->type == 5 ? O_TRUNC : 0) |
 		redi->type == 5 ? O_CREAT : 0 | (redi->type == 1 ? O_APPEND : 0);
-	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, S_IRWXU)) < 0)
+	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, right)) < 0)
 		return (-ft_printf( "Failed to open file\n"));
 	if (dup2(redi->fd[!mod], redi->fd[mod]) == -1)
 		return (-ft_printf("Failed to dup2\n"));
@@ -77,13 +78,13 @@ void	exec_pipe(t_shell *sh, char *comm, char **argv)
 		return ;
 	}
 	father = fork();
-	if (father == 0)
+	if (father > 0)
 	{
 		close(tmp->pipe[0]);
 		if (dup2(tmp->pipe[1], 1) == -1)
 			exit(printf("BAGDAD\n"));
 		exec_redi(sh, tmp->redi);
 		execve(comm, argv, sh->env);
+		close(tmp->pipe[1]);
 	}
-	close(tmp->pipe[1]);
 }

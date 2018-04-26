@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:17:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 19:40:16 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/26 14:24:22 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "../libft/includes/libft.h"
 # include "../../tcharrie/includes/sh_define.h"
 # include "../../tcharrie/includes/sh.h"
+# include "glob.h"
 # define UNESC "0xabfnrtv\\"
 # define ESC "\a\b\f\n\r\t\v\\"
 
@@ -26,6 +27,7 @@
 #define REDI (char *[7]){"<<", ">>", "<&","&>", "<", ">"}
 
 #define BUILT (char *[6]){"echo", "cd", "env", "setenv", "unsetenv"}
+
 
 typedef struct	s_tb
 {
@@ -67,6 +69,7 @@ typedef struct	s_shell
 {
 	void	(*f_built[5])(char **av, char ***argv);
 	int		fd;
+	pid_t	pipe;
 	char	*here_doc;
 	char	**env;
 	t_com	*com;
@@ -113,6 +116,7 @@ char	*ft_getenv(char **tb, char *str);
 int		exec_cli(t_shell *sh, t_com *inter);
 int		exec_redi(t_shell *sh, t_redi *tmp);
 void	ft_fatal(char *str);
+t_com	*shift_com(t_com *com, int fail);
 
 char	*conv_esc(char *str);
 char	*set_esc(char *str);

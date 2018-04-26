@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   glob.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/25 11:10:23 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/04/26 14:24:42 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/04/26 14:27:27 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef GLOB_H
+#define GLOB_H
 #include "21sh.h"
 
-int		main(int ac, char **av, char **env)
+typedef struct s_glob
 {
-	t_shell sh;
+	
 
-	//ft_terminal_data(env);
-	(void)ac;(void)av;(void)env;
-	sh.env = env;
-	hard_split(&sh, av[1]);
-}
+}			t_glob;
+
+#endif
