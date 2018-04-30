@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:24:42 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/26 16:49:29 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/30 18:56:50 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,28 @@
 typedef struct	s_glob
 {
 	char			b;
-	char			m;
-	char			m_files;
-	int				op;
 	DIR				*dire;
+	char			**regex;
 	struct dirent	*dir;
-	int				nb_block;
+	int				i;
 }				t_glob;
 
 typedef struct	s_ls
 {
 	char			is_dir;
 	char			b;
-	char			type;
 	char			*path;
 	char			*name;
 	struct s_ls		*next;
 }				t_ls;
 
-t_ls	*path_is_valid(t_glob *g, char *path, char *name, int op);
-void	end_sort(t_glob *g, t_ls *tmp, char *str, int op);
-void	sort_files(t_glob *g, t_ls *begin, char *str, int op);
-t_ls	*sort_files2(t_glob *g, char *str, int op);
-void	recc(char *str, int op);
+int ft_strlento_comm(char *str, char *to_find);
+int ft_match(char *str, char *to_match);
+char	*enclosed(char *str, char c);
+int		is_special(char **str, char **to_match);
+t_ls	*path_is_valid(t_glob *g, char *path, char *name);
+t_ls	*end_sort(t_glob *g, t_ls *tmp, char *str);
+t_ls	*sort_files(t_glob *g, t_ls *begin, char *str);
+t_ls	*sort_files2(t_glob *g, char *str);
+t_ls	*recc(char *str, char **regex);
 #endif

@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/04/26 12:14:23 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/04/28 13:51:28 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,6 @@ INCDIR = includes
 SRC = \
 	  misc/ft_occiter.c \
 	  misc/ft_occur_in.c \
-	  misc/ft_rev_charchr.c\
 	  misc/ft_row_div.c 
 
 SRC += \
@@ -102,6 +101,7 @@ SRC += \
 	   str/ft_strsub.c \
 	   str/ft_strtrim.c \
 	   str/ft_implode.c \
+	   str/ft_strrlento.c \
 	   str/ft_charchr.c \
 	   str/ft_mcharchr.c \
 	   str/ft_capitalize.c \

@@ -6,13 +6,13 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:56:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 16:03:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/04/29 17:38:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_mcharchr(char *c, char *str)
+int		ft_mcharchr(char *str, char *c)
 {
 	int i;
 
