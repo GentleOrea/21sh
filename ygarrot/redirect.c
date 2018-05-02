@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/29 14:18:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/02 18:51:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int		stream(t_redi *redi, int mod)
 
 	right = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 	flag = O_RDWR | (redi->type == 5 ? O_TRUNC : 0) |
-		redi->type == 5 ? O_CREAT : 0 | (redi->type == 1 ? O_APPEND : 0);
+		(redi->type == 5 ? O_CREAT : 0) | (redi->type == 1 ? O_APPEND : 0);
 	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, right)) < 0)
-		return (-ft_printf( "Failed to open file\n"));
+		return (-ft_printf("Failed to open file\n"));
 	if (dup2(redi->fd[!mod], redi->fd[mod]) == -1)
 		return (-ft_printf("Failed to dup2\n"));
-	return (0);
+	return (1);
 }
 
 int		set_redi(t_shell *sh, t_redi *redi)
@@ -60,31 +60,30 @@ int		exec_redi(t_shell *sh, t_redi *tmp)
 	while (tmp)
 	{
 		if (!set_redi(sh, tmp))
-			return (0);
+			return (-1);
 		tmp = tmp->next;
 	}
 	return (0);
 }
 
-void	exec_pipe(t_shell *sh, char *comm, char **argv)
+int		exec_pipe(t_shell *sh, char *comm, char **argv)
 {
-	pid_t father;
+	pid_t	father;
 	t_com	*tmp;
 
 	tmp = sh->tmp->next;
 	if (pipe(tmp->pipe))
-	{
-		printf("BOUYA!!?!?gpu@*$^&24\n");
-		return ;
-	}
+		return (-printf("Broken pipe\n"));
 	father = fork();
 	if (father > 0)
 	{
 		close(tmp->pipe[0]);
 		if (dup2(tmp->pipe[1], 1) == -1)
-			exit(printf("BAGDAD\n"));
+			exit(printf("dup error\n"));
 		exec_redi(sh, tmp->redi);
-		execve(comm, argv, sh->env);
+		if (execve(comm, argv, sh->env))
+			return (error_exec(argv));
 		close(tmp->pipe[1]);
 	}
+	return (father);
 }

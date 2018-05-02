@@ -6,28 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 16:50:42 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/30 18:56:49 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/02 18:46:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define GLOB "[*?"
 #include "21sh.h"
-
-int ft_strlento_comm(char *str, char *to_find)
-{
-	int i;
-
-	i = 0;
-	if (!str || !to_find)
-		return (-1);
-	while (str[i])
-	{
-		i += skip_comm(&str[i]);
-		if (ft_isin(str[i++], to_find))
-			return (i);
-	}
-	return (0);
-}
 
 int		brace(char **str, char **match)
 {
@@ -48,38 +31,38 @@ int		brace(char **str, char **match)
 			*match += len;
 			return (1);
 		}
-		i += temp ;
+		i += temp;
 	}
 	return (0);
 }
 
 char	*enclosed(char *str, char c)
 {
-	int			i;
-	int			len;
-
+	int		i;
+	int		len;
+	int		inv;
 
 	if (!str || !ft_isin(*str, "[?"))
 		return (NULL);
 	if (*str == '?')
 		return (str + 1);
 	str++;
+	inv = (*str == '^' && str++) ? 1 : 0;
 	i = 0;
 	len = ft_strlento_comm(str, "]");
 	while (i - len)
 	{
-		if (str[i] == '\\')
-			i++;
+		(str[i] == '\\') ? i++ : 0;
 		if (len - i + 2 >= 0 && str[i + 1] == '-')
 		{
 			if (c >= str[i] && c <= str[i + 2])
-				return (&str[len]);
+				return (inv ? NULL : &str[len]);
 			i += 2;
 		}
 		if (c == str[i++])
-			return (&str[len]);
+			return (inv ? NULL : &str[len]);
 	}
-	return (NULL);
+	return (inv ? &str[len] : NULL);
 }
 
 int		is_special(char **str, char **to_match)
@@ -97,19 +80,19 @@ int		is_special(char **str, char **to_match)
 	}
 	if (temp || **to_match == '[')
 		return (temp ? 1 : 0);
-	while (to_match[0][i] && !ft_isin(to_match[0][i], GLOB) && to_match[0][i] == str[0][i])
+	while (to_match[0][i] && !ft_isin(to_match[0][i], GLOB)
+			&& to_match[0][i] == str[0][i])
 		i++;
-	if ((to_match[0][i] && !ft_isin(to_match[0][i], GLOB)) || (!to_match[0][i] && str[0][i]))
+	if ((to_match[0][i] && !ft_isin(to_match[0][i], GLOB))
+			|| (!to_match[0][i] && str[0][i]))
 		return (0);
 	*to_match = &to_match[0][i];
 	*str = &str[0][i];
 	return (i | 1);
 }
 
-int ft_match(char *str, char *to_match)
+int		ft_match(char *str, char *to_match)
 {
-	int	len;
-
 	if (!to_match || !str)
 		return (0);
 	if (!*str && !*to_match)

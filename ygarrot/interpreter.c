@@ -1,43 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compreter.c                                      :+:      :+:    :+:   */
+/*   interpreter.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 10:50:01 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/26 12:58:55 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/05/02 18:52:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-void	epur_tb(t_com *com, int len)
-{
-	int		i;
-	t_tb	*to_del;
-	t_tb	*list;
-
-	i = -1;
-	list = com->tb;
-	ft_memdel((void**)&com->cli);
-	mallcheck(com->cli = (char**)ft_memalloc((len  + 1) * sizeof(char*)));
-	while (list)
-	{
-		com->cli[++i] = list->str;
-		to_del = list;
-		list = list->next;
-		ft_memdel((void**)&to_del);
-	}
-}
-
-static void	add_comm(t_com *com, char *str)
+void	add_comm(t_com *com, char *str)
 {
 	t_tb	*to_add;
 	t_tb	*temp;
 
 	mallcheck(to_add = (t_tb*)ft_memalloc(sizeof(t_tb)));
-	to_add->str = str;
+	if (!(to_add->glob = ft_glob(str, 0)))
+		to_add->str = str;
+	else
+		ft_memdel((void**)&str);
+	com->len += to_add->str ? 1 : to_add->glob->nb_paths;
 	temp = com->tb;
 	if (!temp)
 	{
@@ -49,7 +34,7 @@ static void	add_comm(t_com *com, char *str)
 	temp->next = to_add;
 }
 
-static void	add_redi(t_com *com, char **tb, int *i)
+void	add_redi(t_com *com, char **tb, int *i)
 {
 	t_redi	*redi;
 	t_redi	*temp;
@@ -76,7 +61,7 @@ static void	add_redi(t_com *com, char **tb, int *i)
 	temp->next = redi;
 }
 
-static void norm(t_parser *tmp, t_com *com)
+void norm(t_parser *tmp, t_com *com)
 {
 	int		i;
 	char	*free;
@@ -88,12 +73,12 @@ static void norm(t_parser *tmp, t_com *com)
 	while (com->cli[++i])
 	{
 		free = com->cli[i];
-		com->cli[i] = ft_find_and_replace(free, "\\", 1);
+		//com->cli[i] = ft_find_and_replace(free, "\\", 1);
 		if (search_op(com->cli[i], REDI) >= 0)
 			add_redi(com, &com->cli[i], &i);
-		else if (++com->len)
+		else
 			add_comm(com, com->cli[i]);
-		ft_memdel((void**)&free);
+		//ft_memdel((void**)&free);
 	}
 }
 

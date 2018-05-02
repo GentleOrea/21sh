@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/25 11:24:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/02 18:41:52 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 ** Gere les erreurs de parsing, ne gere (surement) pas toutes les erreurs
 */
 
-int		get_hdoc(char *str, int i, t_parser *par)
+int			get_hdoc(char *str, int i, t_parser *par)
 {
-	int	hdoc;
+	int		hdoc;
 	int		red;
 
 	if ((hdoc = is_sep(&str[i], par, REDI)))
@@ -31,8 +31,8 @@ int		get_hdoc(char *str, int i, t_parser *par)
 		{
 			while (str[i] == ' ')
 				i++;
-			par = push_front(par, ft_strndup(&str[i], (hdoc = search_op(&str[i],
-			HD) >= 0 ? hdoc + 1 : ft_strlen(&str[i]))), 0);
+			par = push_front(par, ft_strndup(&str[i],
+	(hdoc = search_op(&str[i], HD) >= 0 ? hdoc + 1 : ft_strlen(&str[i]))), 0);
 		}
 		while (str[i] == ' ')
 			i++;
@@ -45,7 +45,7 @@ int		get_hdoc(char *str, int i, t_parser *par)
 	return (i);
 }
 
-int		sizeof_comm(char *str, t_parser *par)
+int			sizeof_comm(char *str, t_parser *par)
 {
 	int		i;
 	char	sep;
@@ -67,9 +67,9 @@ int		sizeof_comm(char *str, t_parser *par)
 
 t_parser	*count_parser(char *str)
 {
-	int		i;
-	t_parser *par;
-	int		sep;
+	int			i;
+	t_parser	*par;
+	int			sep;
 
 	i = 0;
 	mallcheck(par = (t_parser*)ft_memalloc(sizeof(t_parser)));
@@ -80,6 +80,7 @@ t_parser	*count_parser(char *str)
 		sep = sizeof_comm(&str[i], par);
 		if (sep < 0)
 		{
+			free_parser(par);
 			ft_printf("yosh: parse error near `%s'\n", par->op);
 			return (NULL);
 		}

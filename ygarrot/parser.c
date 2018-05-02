@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 17:14:50 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/25 15:27:34 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/02 18:38:05 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@
 ** Split la chaine de caractere en fonction de ';' && '&'
 */
 
-void	medium_split(t_parser *c, char **ammoc)
+void		medium_split(t_parser *c, char **ammoc)
 {
 	int		i[2];
-	char	*tb[3] = {"&"};
+	char	**tb;
 	char	*del;
 	char	*str;
 
 	del = NULL;
+	tb = (char *[2]){"&"};
 	ft_bzero(i, sizeof(i));
 	while (*ammoc)
 	{
 		str = *ammoc;
 		while ((i[1] = search_op(&str[i[0]], tb)) >= 0)
 		{
-			c = easy_split(c, del = ft_strndup(&str[i[0]], i[1]), 32);
+			del = ft_strndup(&str[i[0]], i[1]);
+			c = easy_split(c, del, 32);
 			i[0] += i[1] + 1;
 		}
 		ft_memdel((void**)&del);
@@ -55,9 +57,9 @@ t_parser	*easy_split(t_parser *c, char *str, char isamp)
 	{
 		i[0] = -1;
 		while (M_SEP[++i[0]] &&
-				!ft_strnstr(&str[ind], M_SEP[i[0]], len = ft_strlen(M_SEP[i[0]])))
+			!ft_strnstr(&str[ind], M_SEP[i[0]], len = ft_strlen(M_SEP[i[0]])))
 			;
-		c = push_front(c, ft_strndup(str, ind), i[1] );
+		c = push_front(c, ft_strndup(str, ind), i[1]);
 		i[1] = 1 << i[0];
 		str = &str[ind + len];
 	}
@@ -65,20 +67,14 @@ t_parser	*easy_split(t_parser *c, char *str, char isamp)
 	return (c);
 }
 
-int		hard_split(t_shell *sh, char *str)
+int			hard_split(t_shell *sh, char *str)
 {
 	char		**tb;
 	t_parser	*par;
-	t_parser	*to_del;
 
-	if(!(par = count_parser(str)))
-		return (0);
-	while ((to_del = par))
-	{
-		par = par->next;
-		ft_memdel((void**)&to_del->comm);
-		ft_memdel((void**)&to_del);
-	}
+	if (!(par = count_parser(str)))
+		return (-1);
+	free_parser(par);
 	mallcheck(par = (t_parser*)ft_memalloc(sizeof(t_parser)));
 	mallcheck(tb = ft_strsplit_comm(str, ";"));
 	medium_split(par, tb);

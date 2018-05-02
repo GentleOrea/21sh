@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   glob_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/02 18:33:20 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/05/02 18:43:10 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/05/02 18:44:39 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "21sh.h"
+#include "glob.h"
 
-int		main(int ac, char **av, char **env)
+void	true_sort(t_paths *begin, t_paths *to_add)
 {
-	t_shell sh;
+	while (begin->next)
+		begin = begin->next;
+	begin->next = to_add;
+}
 
-	//ft_terminal_data(env);
-	(void)ac;(void)av;(void)env;
-	sh.env = env;
-	hard_split(&sh, av[1]);
+int ft_strlento_comm(char *str, char *to_find)
+{
+	int i;
+
+	i = 0;
+	if (!str || !to_find)
+		return (-1);
+	while (str[i])
+	{
+		i += skip_comm(&str[i]);
+		if (ft_isin(str[i++], to_find))
+			return (i);
+	}
+	return (0);
 }

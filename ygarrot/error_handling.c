@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:51:31 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 11:29:24 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/01 11:17:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,11 @@ void	ft_fatal(char *str)
 {
 	ft_printf(str);
 	exit(EXIT_FAILURE);
+}
+
+int		error_exec(char **argv)
+{
+	ft_printf("Command not found %s", *argv);
+	ft_free_dblechar_tab(argv);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/26 12:36:18 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/02 18:51:38 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_com	*shift_com(t_com *com, int fail)
 	com = com->next;
 	ft_memdel((void**)&to_del);
 	while (com && (com->type && !(com->type & 32)
-				&& !(com->type & (fail > 0 ? 2 : 1))))
+				&& !(com->type & (fail >= 0 ? 2 : 1))))
 	{
 		to_del = com;
 		epur_tb(com, com->len);
@@ -54,4 +54,34 @@ t_com	*shift_com(t_com *com, int fail)
 		ft_memdel((void**)&to_del);
 	}
 	return (com);
+}
+
+void	free_parser(t_parser *begin)
+{
+	t_parser *to_del;
+
+	while (begin)
+	{
+		to_del = begin;
+		begin = begin->next;
+		ft_memdel((void**)&to_del->comm);
+		ft_memdel((void**)&to_del);
+	}
+}
+
+void	free_globs(t_glob *glob)
+{
+	t_paths		*to_del;
+
+	if (!glob)
+		return ;
+	while (glob->paths)
+	{
+		to_del = glob->paths;
+		glob->paths = glob->paths->next;
+		ft_memdel((void**)&to_del->name);
+		//ft_memdel((void**)&to_del->path);
+		ft_memdel((void**)&to_del);
+	}
+	ft_memdel((void**)&glob);
 }

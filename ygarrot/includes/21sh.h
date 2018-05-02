@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:17:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/30 12:47:13 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/01 13:32:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,11 @@
 #define BUILT (char *[6]){"echo", "cd", "env", "setenv", "unsetenv"}
 
 
+typedef struct s_glob t_glob;
+
 typedef struct	s_tb
 {
+	t_glob	*glob;
 	char	*str;
 	struct s_tb *next;
 }				t_tb;
@@ -69,7 +72,6 @@ typedef struct	s_shell
 {
 	void	(*f_built[5])(char **av, char ***argv);
 	int		fd;
-	pid_t	pipe;
 	char	*here_doc;
 	char	**env;
 	t_com	*com;
@@ -96,7 +98,7 @@ char	*search_var(char **tb, char *str);
 int		wait_exec(t_shell *sh, char **cli);
 int		sort_comm(t_shell *sh, t_com *com);
 void	epur_tb(t_com *inte, int len);
-void	exec_pipe(t_shell *sh, char *comm, char **argv);
+int		exec_pipe(t_shell *sh, char *comm, char **argv);
 
 int		ft_isbuiltin(char *path);
 void	ft_builtin(char **arg, char ***env, int pid);
@@ -120,4 +122,6 @@ t_com	*shift_com(t_com *com, int fail);
 
 char	*conv_esc(char *str);
 char	*set_esc(char *str);
+int		error_exec(char **argv);
+void	free_parser(t_parser *begin);
 #endif

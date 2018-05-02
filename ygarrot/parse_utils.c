@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/27 16:11:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/02 18:33:16 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		get_sep(char *str, char **tb)
 ** renvoie la taille de la chaine si trouvée dans le tb sinon 0
 */
 
-char		is_sep(char *str, t_parser *par, char **tb)
+char	is_sep(char *str, t_parser *par, char **tb)
 {
 	int		i;
 	int		len;
@@ -72,12 +72,12 @@ int		search_op(char *str, char **op)
 		ind = -1;
 		while (op[++ind])
 		{
-			if (!ft_strncmp(&str[i], op[ind] , ft_strlen(op[ind])))
+			if (!ft_strncmp(&str[i], op[ind], ft_strlen(op[ind])))
 				if (ft_strncmp(op[ind], "&", ft_strlen(op[ind])) || !str[i]
-|| (!ft_isin(str[i + 1], "<&") && (i <= 0  || (i >= 2 &&  str[i - 2] == '\\')
-|| !ft_isin(str[i - 1], "&>"))))
+	|| (!ft_isin(str[i + 1], "<&") && (i <= 0 || (i >= 2 && str[i - 2] == '\\')
+	|| !ft_isin(str[i - 1], "&>"))))
 					return (i);
-				}
+		}
 		i += ((tmp = skip_comm(&str[i])) ? tmp : 1);
 	}
 	return (-1);
