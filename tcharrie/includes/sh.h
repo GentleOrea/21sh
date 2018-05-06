@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:54:38 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 13:49:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 11:51:29 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ char	*ft_history_parser(char *str);
 
 t_line	ft_getentry(void);
 int		ft_read(t_line *line, int *ta);
+int		ft_read_newline(t_line *line, int *val, t_parser **pars);
+int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars);
 int		ft_heredoc_purge(char *str, int size);
 
 int		ft_specialchar(t_line *line, char *str, int *val);
