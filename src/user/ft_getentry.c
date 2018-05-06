@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:45:03 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:48:25 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 14:33:01 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,12 @@ t_line	ft_getentry(void)
 {
 	int			val[13];
 	t_line		ligne;
+	char		*tmp;
 
 	ft_memset((void*)val, 0, sizeof(val));
 	val[4] = 1;
-	ligne.line = ft_init_aff(val);
+	if (!(ligne.line = ft_init_aff(val)))
+		return (ligne);
 	ligne.size_line = val[0] + 1;
 	ligne.size_eof = 2;
 	if (!(ligne.eof = (char*)ft_memalloc(2)))
@@ -53,7 +55,10 @@ t_line	ft_getentry(void)
 	}
 	else
 	{
-		ft_history_add(ft_history_parser(&(ligne.line)[val[1]]));
+		tmp = ft_history_parser(&(ligne.line)[val[1]]);
+		ft_history_add(tmp);
+		ft_strdel(&(ligne.line));
+		ligne.line = tmp;
 		ft_heredoc_purge(ligne.eof, ligne.size_eof);
 	}
 	ft_history_cache(0, CODE_RESET);

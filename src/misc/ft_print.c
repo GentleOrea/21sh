@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 12:48:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:13 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 14:33:50 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*ft_init_aff(int *val)
 	}
 	val[0] = c;
 	val[1] = c;
-	val[3] = c;
+	val[5] = c;
 	if (!(local = (char*)ft_memalloc(c + 1)))
 		return (0);
 	ft_memset((void*)local, 100, c);
