@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:45:03 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 13:11:43 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:48:25 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_line	ft_getentry(void)
 	ft_history_cache(0, CODE_RESET);
 	return (ligne);
 }
-
+/*
 int	main(int ac, char **av, char **env)
 {
 	t_line	line;
@@ -73,4 +73,4 @@ int	main(int ac, char **av, char **env)
 		while (line.line == 0)
 			line = ft_getentry();
 	}
-}
+}*/

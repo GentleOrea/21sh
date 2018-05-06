@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:43:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/03 13:00:55 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 13:54:26 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "sh.h"
 
 void	true_sort(t_paths *begin, t_paths *to_add)
 {

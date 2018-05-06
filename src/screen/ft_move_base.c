@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/07 13:32:18 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:21 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 14:04:23 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int		ft_move_down(t_line *line, int *val)
 	val[12] = (ft_lenline_v(str, val[9]) % val[6]) + 1;
 	return (ft_move_down_bis(str, val, x, y));
 }
-
+/*
 int		main(int ac, char **av, char **env)
 {
 	int	val[15];
@@ -229,3 +229,4 @@ int		main(int ac, char **av, char **env)
 	(void)av;
 	return (0);
 }
+*/

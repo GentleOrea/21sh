@@ -6,17 +6,19 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:18:21 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:02 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:39:58 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "sh.h"
 
-void		ft_echo(char **arg, char **env)
+void		ft_echo(char **arg, char ***en)
 {
 	size_t	i;
 	size_t	j;
+	char	**env;
 
+	env = *en;
 	i = 0;
 	if (arg && env && *arg)
 	{

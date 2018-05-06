@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 12:01:37 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 13:57:03 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "21sh.h"
+#include "sh.h"
 
 int		main(int ac, char **av, char **env)
 {
@@ -19,7 +19,7 @@ int		main(int ac, char **av, char **env)
 
 	(void)ac;(void)av;(void)env;
 	f_point(&sh);
-	ft_terminal_data(env);
+	ft_init_terminal_data(env);
 	sh.env = env;
 	sh.fd = open("/dev/ttys003", O_RDWR);
 	while (1)

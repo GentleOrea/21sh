@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 14:29:51 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:02 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:34:55 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/sh.h"
+#include "sh.h"
 
 int		ft_isbuiltin(char *arg)
 {

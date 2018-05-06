@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 11:32:12 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:07 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:46:03 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "glob.h"
+#include "sh.h"
 
 t_paths		*path_is_valid(char *path, char *name, t_dirent *dir, char **regex)
 {

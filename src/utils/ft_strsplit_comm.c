@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:27:38 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/24 11:25:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 13:53:38 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "21sh.h"
+#include "sh.h"
 
 static int		countletters(char const *s, char *c)
 {

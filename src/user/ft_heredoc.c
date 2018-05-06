@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:54:57 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 13:10:44 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:49:06 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_heredoc_purge(char *str, int size)
 		while (i < size && !str[i])
 			str[j++] = str[i++];
 		k = ft_strlento(&str[i], '\n');
-		if (i < size && k + 1 < ft_strlen(&str[i]))
+		if (i < size && k + 1 < (int)ft_strlen(&str[i]))
 		{
 			t = 0;
 			while (k-- >= 0)

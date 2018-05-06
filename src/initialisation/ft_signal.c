@@ -6,12 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 10:08:21 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:10 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:29:06 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
-#include "../../include.h"
 
 void	ft_initsig(void)
 {

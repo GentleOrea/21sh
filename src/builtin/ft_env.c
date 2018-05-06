@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:59:13 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:03 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:39:59 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "sh.h"
 
 static size_t	ft_envcpy_add(char **arg, char **env)
 {
@@ -59,14 +59,17 @@ static void		ft_envcpy(char **arg, char **env, char *null)
 	newenv[i - 1] = NULL;
 	i = ft_envcpy_add(arg, newenv);
 	if (!arg[i])
-		ft_env(&null, newenv);
-	else
-		ft_execute(ft_strtabdup(&(arg[i])), &newenv);
-	ft_cleanstrtab(newenv);
+		ft_env(&null, &newenv);
+	//else
+	//	ft_execute(ft_strtabdup(&(arg[i])), &newenv);
+	ft_free_dblechar_tab(newenv);
 }
 
-void			ft_env(char **arg, char **env)
+void			ft_env(char **arg, char ***aenv)
 {
+	char	**env;
+
+	env = *aenv;
 	if (!arg || !env)
 	{
 		ft_printf("env: An error occured\n");

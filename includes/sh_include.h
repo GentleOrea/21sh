@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:06:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:13:36 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:46:20 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "../libft/includes/libft.h"
 # include "ft_printf.h"
 # include <term.h>
+# include <sys/stat.h>
+# include <signal.h>
 # include <dirent.h>
 
 #endif

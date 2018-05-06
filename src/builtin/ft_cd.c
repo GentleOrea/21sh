@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 14:42:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:02 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:39:58 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "sh.h"
 
 static void	ft_cdvar(char *old, char ***env)
 {
@@ -47,6 +47,7 @@ static void	ft_cdback(char *a, char ***env, char **prev)
 {
 	char	*tmp;
 
+	tmp = NULL;
 	if (a)
 		ft_printf("minishell: cd: Too many arguments (1 expected)\n");
 	tmp = getcwd(tmp, 1);
@@ -66,9 +67,9 @@ static int	ft_cdhome(char *arg, char ***env, char **prev)
 	char	*home;
 	char	*path;
 
-	if (!(home = ft_getenv("HOME", *env)))
+	if (!(home = ft_getenv(*env, "HOME")))
 	{
-		ft_putstr_fd("No HOME variable is defined\n", 2);
+		ft_putendl_fd("No HOME variable is defined", 2);
 		return (0);
 	}
 	if (!(path = ft_memalloc(ft_strlen(arg) + ft_strlen(home))))
@@ -95,10 +96,11 @@ void		ft_cd(char **a, char ***env)
 	char		*tmp;
 	char		*s;
 
+	tmp = NULL;
 	if (!a[0] || !a[1])
 	{
 		tmp = getcwd(tmp, 256);
-		s = ft_getenv("HOME", *env);
+		s = ft_getenv(*env, "HOME");
 		if (!s || chdir(s) == -1)
 			ft_printf("minishell: cd: Can't access %s\n", s);
 		else
@@ -108,7 +110,7 @@ void		ft_cd(char **a, char ***env)
 			if (prev)
 				ft_cdvar(prev, env);
 		}
-		ft_strdel(&tmp)
+		ft_strdel(&tmp);
 	}
 	else if (a[2] || !ft_strcmp(a[1], "-"))
 		ft_cdback(a[2], env, &prev);

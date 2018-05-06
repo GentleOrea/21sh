@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:52:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:15 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:30:52 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/sh.h"
+#include "sh.h"
 
 /*
 ** Cette fonction prend une chaine de charactere, une position,

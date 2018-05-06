@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 12:00:24 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/21 13:46:44 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 12:34:25 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@
 # include <stdlib.h>
 # include <stdint.h>
 # include <sys/ioctl.h>
+
+typedef struct	s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}				t_list;
 
 char			*ft_strdup(const char *s1);
 size_t			ft_strlen(const char *s);
@@ -79,13 +86,6 @@ void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
 void			ft_memdel(void **ap);
-
-typedef struct	s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}				t_list;
 
 t_list			*ft_lstnew(void const *content, size_t content_size);
 t_list			*ft_lstnewc(void const *content, size_t content_size);

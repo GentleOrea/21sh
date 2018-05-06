@@ -6,13 +6,14 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 12:42:52 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:52:07 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_DEFINE_H
 # define SH_DEFINE_H
 
+# define BUFFSIZE 100
 # define ERR -1
 # define ERR_PARS1_MSG "21sh: syntax error near unexpected token '|'\n"
 # define ERR_PARS2_MSG "21sh: syntax error near unexpected token '&'\n"

@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:39:20 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:04 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 13:39:53 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "sh.h"
 
 static void	ft_unsetenv_move(char **env)
 {
@@ -25,11 +25,13 @@ static void	ft_unsetenv_move(char **env)
 	env[i - 1] = 0;
 }
 
-void		ft_unsetenv(char **arg, char **env)
+void		ft_unsetenv(char **arg, char ***aenv)
 {
 	size_t	j;
 	size_t	i;
+	char	**env;
 
+	env = *aenv;
 	if (!arg || !env || !*env || !*arg)
 		;
 	else if (!*arg || !arg[1])
