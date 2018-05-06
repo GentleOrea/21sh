@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 16:04:26 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 16:17:24 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 {
 	int	i[3];
 
+	ft_bzero((void*)i, sizeof(i));
 	while (!i[0] || ft_strlen(tmp) - i[1] > BUFFSIZE)
 	{
 		if (*tmp == 3 && (val[4] ? line->line : line->eof)[val[0]])
@@ -51,13 +52,15 @@ int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 			return (1);
 		else if (*tmp == '\n' && ft_read_newline(line, val, pars) == 1)
 			return (1);
-		else if (!(i[2] = ft_specialchar(line, &tmp[i[1]], val)))
-		{
-			i[2] = ft_lentospecial(&tmp[i[0]]);
+		i[1] += ft_specialchar(line, &tmp[i[1]], val);
+		if ((i[2] = ft_lentospecial(&tmp[i[1]])))
 			ft_printnchar(line, &tmp[i[1]], val, i[2]);
-		}
 		i[0] = 1;
 		i[1] += i[2];
 	}
+	i[2] = -1;
+	while (i[1] + ++i[2] <= 2 * BUFFSIZE)
+		tmp[i[2]] = tmp[i[1] + i[2]];
+	ft_bzero((void*)&tmp[i[2]], 2 * BUFFSIZE - i[2]);
 	return (0);
 }
