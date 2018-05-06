@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlento.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 10:44:02 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/11 14:44:47 by ygarrot          ###   ########.fr       */
+/*   Created: 2017/12/30 09:03:56 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/01/03 12:52:01 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int		ft_strlento(char *str, char c)
 {
-	size_t i;
+	int	i;
 
-	if (!dst || !src)
+	if (!str)
 		return (0);
 	i = 0;
-	while (i < n)
-	{
-		((unsigned char*)dst)[i] = ((unsigned char*)src)[i];
+	while (str[i] && str[i] != c)
 		i++;
-	}
-	return (dst);
+	return (i);
 }

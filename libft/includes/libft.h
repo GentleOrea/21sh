@@ -186,4 +186,6 @@ int				ft_insert(char **str, char *in, size_t to, size_t size);
 int				ft_addtofd(char *str, int fd);
 void			ft_strrev(char *str);
 void			ft_replace(char *str, char c, char n);
+int				ft_strinstr(char *str, char *pattern);
+int				ft_strprefix(char *pref, char *str);
 #endif
