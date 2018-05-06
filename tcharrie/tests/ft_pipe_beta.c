@@ -1,51 +1,44 @@
 #include "../includes/sh.h"
+#include "../../ygarrot/libft/includes/get_next_line.h"
+
+#define WRITE_END 0
+#define READ_END 1
 
 int	main(int ac, char **av, char **env)
 {
-	int	pid;
-	int	p[2];
-	char	*str[10];
-	char	b;
+	pid_t pid;
+	int fd[2];
 
-	if (pipe(p))
-	{
-		printf("error\n");
-		return (0);
-	}
+	pipe(fd);
 	pid = fork();
-	if (pid < 0)
+
+	if(pid==0)
 	{
-		printf("error\n");
-		return (0);
+		dup2(fd[WRITE_END], STDOUT_FILENO);
+		close(fd[READ_END]);
+		close(fd[WRITE_END]);
+		exit(1);
 	}
-	if (pid == 0)
-	{
-		printf("la\n");
-		close(p[1]);
-		if (dup2(p[0], 0) == -1)
+	else
+	{ 
+		pid=fork();
+		if(pid==0)
 		{
-			printf("error\n");
-			return (0);
+			dup2(fd[READ_END], STDIN_FILENO);
+			close(fd[WRITE_END]);
+			close(fd[READ_END]);
+			exit(1);
 		}
-		str[0] = strdup("ls");
-		str[1] = 0;
-		execve("/bin/ls", str, env);
-		close(p[0]);
-	}
-	if (pid > 0)
-	{
-		printf("ici\n");
-		close(p[0]);
-		if (dup2(p[1], 1) == -1)
+		else
 		{
-			printf("WHOUPS\n");
-			return (0);
+			int status;
+			close(fd[READ_END]);
+			close(fd[WRITE_END]);
+			waitpid(pid, &status, 0);
 		}
-		str[0] = strdup("cat");
-		str[1] = 0;
-		execve("/bin/cat", str, env);
-		//waitpid(-1,  &pid, WUNTRACED);
-		close(p[1]);
 	}
+	char *line;
+	get_next_line(0, &line);
+	ft_printf("%s\n", line);
 	return (0);
 }

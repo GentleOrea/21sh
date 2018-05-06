@@ -6,24 +6,24 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/02 18:49:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 12:00:20 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
 
-int		wait_exec(t_shell *sh, char **space)
+int		wait_exec(t_shell *sh, char **arg)
 {
 	int index;
 
-	if (0 && (index = ft_strisin_tab(space[0], BUILT, 0)) >= 0)
-		;//sh->f_built[index](sh, &space[1]);
+	if (0 && (index = ft_strisin_tab(arg[0], BUILT, 0)) >= 0)
+		;//sh->f_built[index](arg, &sh->env);
 	else
 	{
-		if (!access(space[0], F_OK | X_OK))
-			return (exe(sh, space[0], space));
+		if (!access(*arg, F_OK | X_OK))
+			return (exe(sh, *arg, arg));
 		else
-			return (search_exec(sh, space[0], space));
+			return (search_exec(sh, *arg, arg));
 	}
 	return (1);
 }
@@ -31,25 +31,28 @@ int		wait_exec(t_shell *sh, char **space)
 int		exe(t_shell *sh, char *comm, char **argv)
 {
 	pid_t father;
+	int status;
 
-	if (sh->tmp->type & 4)
-	{
-		close(sh->tmp->pipe[1]);
-		if (dup2(sh->tmp->pipe[0], 0) == -1)
-			return (-printf("dup error\n"));
-	}
 	if (sh->tmp->next && sh->tmp->next->type & 4)
 		return (exec_pipe(sh, comm, argv));
 	father = fork();
+	if (sh->tmp->type & 4)
+	{
+		if (dup2(sh->tmp->pipe[0], 0) == -1)
+			return (-printf("dup error\n"));
+		close(sh->tmp->pipe[0]);
+		close(sh->tmp->pipe[1]);
+	}
 	if (father > 0)
-		wait(0);
+	{
+		while(wait(&status) != -1);
+	}
 	else
 	{
 		if (exec_redi(sh, sh->tmp->redi) < 0 || execve(comm, argv, sh->env))
-			return (0);
-		(sh->tmp->type & 4) ? close(sh->tmp->pipe[0]) : 0;
+			exit(error_exec(argv));
 	}
-	return (father);
+	return (0);
 }
 
 int		search_exec(t_shell *sh, char *comm, char **argv)
@@ -64,13 +67,13 @@ int		search_exec(t_shell *sh, char *comm, char **argv)
 		return (!comm ? 0 : -ft_printf("command not found : %s\n", comm));
 	mallcheck(paths = ft_strsplit(&path[5], ':'));
 	index = -1;
-	while (paths[++index] && !temp)
+	while (!temp && paths[++index])
 	{
 		temp = ft_implode('/', paths[index], comm);
-		!access(temp, F_OK | X_OK) ? exe(sh, temp, argv) :
+		!access(temp, F_OK | X_OK) ? index = exe(sh, temp, argv) :
 			ft_memdel((void**)&temp);
 	}
-	!temp ? index = -ft_printf("command not found : %s\n", comm)
+	!temp && index >= 0 ? index = -ft_printf("command not found : %s\n", comm)
 		: ft_memdel((void**)&temp);
 	ft_free_dblechar_tab(paths);
 	return (index >= 0 ? 1 : -1);
@@ -99,10 +102,11 @@ int		sort_comm(t_shell *sh, t_com *com)
 	char	fail;
 
 	fail = 0;
-	sh->fd = open("/dev/ttys002", O_RDWR);
+	ft_printf("{boldblue}%s{reset}\n", com->cli[0]);
 	(!(com->type & 4)) ? epur_tb(com, com->len) : 0;
 	while (com)
 	{
+		//ft_printf("{boldblue}%s{reset}\n", com->cli[0]);
 		sh->tmp = com;
 		if (com->next && com->next->type & 4)
 		{
@@ -115,5 +119,6 @@ int		sort_comm(t_shell *sh, t_com *com)
 			return (fail);
 		com = shift_com(com, fail);
 	}
+	//ft_printf("ici\n");
 	return (1);
 }

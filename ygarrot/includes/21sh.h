@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:17:19 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/01 13:32:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/04 19:55:57 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define HD (char *[14]){"||", "&&", "|", "&", ";", ">>", "<<", ">&", "<&","<", ">" , " "}
 #define SEP (char *[7]){"||", "&&", "|", "&", ";", "\n"}
 #define M_SEP (char *[6])								{"||", "&&", "|"}
-#define REDI (char *[7]){"<<", ">>", "<&","&>", "<", ">"}
+#define REDI (char *[7]){"<<", ">>", "<&",">&", "<", ">"}
 
 #define BUILT (char *[6]){"echo", "cd", "env", "setenv", "unsetenv"}
 
@@ -72,10 +72,12 @@ typedef struct	s_shell
 {
 	void	(*f_built[5])(char **av, char ***argv);
 	int		fd;
+	
 	char	*here_doc;
 	char	**env;
 	t_com	*com;
 	t_com	*tmp;
+	pid_t	test;
 	char	*pwd;
 }				t_shell;
 
@@ -99,15 +101,16 @@ int		wait_exec(t_shell *sh, char **cli);
 int		sort_comm(t_shell *sh, t_com *com);
 void	epur_tb(t_com *inte, int len);
 int		exec_pipe(t_shell *sh, char *comm, char **argv);
+void		f_point(t_shell *sh);
 
 int		ft_isbuiltin(char *path);
 void	ft_builtin(char **arg, char ***env, int pid);
 void	ft_echo(char **arg, char ***env);
 void	ft_cd(char **arg, char ***env);
 void	ft_setenv(char **arg, char ***env);
-void	ft_unsetenv(char **arg, char **env);
-void	ft_env(char **arg, char **env);
-void	ft_exit(char **arg, char **env);
+void	ft_unsetenv(char **arg, char ***env);
+void	ft_env(char **arg, char ***env);
+void	ft_exit(char **arg, char ***env);
 int		ft_setenvvar(char **env, char *cur, char *var);
 int		ft_strlento(char *str, char c);
 char	**ft_strtbdup(char **tb);

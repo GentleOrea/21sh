@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:39:20 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 11:27:04 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/04 14:17:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ static void	ft_unsetenv_move(char **env)
 	env[i - 1] = 0;
 }
 
-void		ft_unsetenv(char **arg, char **env)
+void		ft_unsetenv(char **arg, char ***aenv)
 {
 	size_t	j;
 	size_t	i;
+	char	**env;
 
+	env = *aenv;
 	if (!arg || !env || !*env || !*arg)
 		;
 	else if (!*arg || !arg[1])

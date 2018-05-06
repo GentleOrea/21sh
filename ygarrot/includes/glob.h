@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 14:24:42 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/01 14:20:48 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/03 13:01:09 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ struct	s_glob
 int		ft_strlento_comm(char *str, char *to_find);
 int		ft_match(char *str, char *to_match);
 char	*enclosed(char *str, char c);
+void	true_sort(t_paths *begin, t_paths *to_add);
 int		is_special(char **str, char **to_match);
 t_glob *ft_glob(char *regstr, int opt);
 void	free_globs(t_glob *glob);

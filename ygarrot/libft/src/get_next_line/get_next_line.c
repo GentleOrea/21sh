@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:48:02 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/11 15:20:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 11:57:37 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_gnl	*get_fd(t_gnl *list, int fd)
 		list = list->next;
 	if (list->next)
 		return (list->next);
-	if (!(list->next = (t_gnl*)malloc(sizeof(t_gnl)))
+	if (!(list->next = (t_gnl*)ft_memalloc(sizeof(t_gnl)))
 			|| !(list->next->buf = ft_strnew(1)))
 		return (NULL);
 	list->next->fd = fd;
@@ -82,6 +82,6 @@ int				get_next_line(const int fd, char **line)
 		i = chachr(gl.buf) < ret;
 	}
 	if (ret < 0 || !*lst->buf)
-		return (ret < 0 ? -1 : 0);
+		return (ret < 0 ? -1 : 0 );
 	return ((*line = initline(lst)) ? 1 : -1);
 }

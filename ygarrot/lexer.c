@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/02 18:41:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/04 16:42:25 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ t_parser	*count_parser(char *str)
 		sep = sizeof_comm(&str[i], par);
 		if (sep < 0)
 		{
-			free_parser(par);
 			ft_printf("yosh: parse error near `%s'\n", par->op);
+			free_parser(par);
 			return (NULL);
 		}
 		i += sep;

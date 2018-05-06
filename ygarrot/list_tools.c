@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/02 18:51:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/04 16:42:23 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_com	*shift_com(t_com *com, int fail)
 	t_com *to_del;
 
 	to_del = com;
-	ft_free_dblechar_tab(com->cli);
+	//ft_free_dblechar_tab(com->cli);
 	com = com->next;
 	ft_memdel((void**)&to_del);
 	while (com && (com->type && !(com->type & 32)

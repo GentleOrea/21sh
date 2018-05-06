@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/02 18:51:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 11:39:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ int		stream(t_redi *redi, int mod)
 	int		flag;
 	int		right;
 
+	(void)mod;
 	right = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 	flag = O_RDWR | (redi->type == 5 ? O_TRUNC : 0) |
 		(redi->type == 5 ? O_CREAT : 0) | (redi->type == 1 ? O_APPEND : 0);
 	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, right)) < 0)
 		return (-ft_printf("Failed to open file\n"));
-	if (dup2(redi->fd[!mod], redi->fd[mod]) == -1)
+	if (dup2(redi->fd[1], redi->fd[0]) == -1)
 		return (-ft_printf("Failed to dup2\n"));
 	return (1);
 }
@@ -75,15 +76,17 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 	if (pipe(tmp->pipe))
 		return (-printf("Broken pipe\n"));
 	father = fork();
-	if (father > 0)
+	if (father == 0)
 	{
-		close(tmp->pipe[0]);
 		if (dup2(tmp->pipe[1], 1) == -1)
 			exit(printf("dup error\n"));
-		exec_redi(sh, tmp->redi);
+		close(tmp->pipe[0]);
+		close(tmp->pipe[1]);
+		exec_redi(sh, sh->tmp->redi);
 		if (execve(comm, argv, sh->env))
 			return (error_exec(argv));
-		close(tmp->pipe[1]);
 	}
+	//else if (!father)
+	//	waitpid(-1, &father, WUNTRACED);
 	return (father);
 }

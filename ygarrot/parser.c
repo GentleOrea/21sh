@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 17:14:50 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/02 18:38:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 10:11:59 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int			hard_split(t_shell *sh, char *str)
 	char		**tb;
 	t_parser	*par;
 
+	if (!str)
+		return (1);
 	if (!(par = count_parser(str)))
 		return (-1);
 	free_parser(par);

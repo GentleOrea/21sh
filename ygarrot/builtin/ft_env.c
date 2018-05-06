@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:59:13 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/24 11:27:49 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/04 14:15:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,17 @@ static void		ft_envcpy(char **arg, char **env, char *null)
 	newenv[i - 1] = NULL;
 	i = ft_envcpy_add(arg, newenv);
 	if (!arg[i])
-		ft_env(&null, newenv);
+		ft_env(&null, &newenv);
 	//else
 	//	ft_execute(ft_strtabdup(&(arg[i])), &newenv);
 	ft_free_dblechar_tab(newenv);
 }
 
-void			ft_env(char **arg, char **env)
+void			ft_env(char **arg, char ***aenv)
 {
+	char	**env;
+
+	env = *aenv;
 	if (!arg || !env)
 	{
 		ft_printf("env: An error occured\n");

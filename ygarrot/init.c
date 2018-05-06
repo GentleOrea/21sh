@@ -6,17 +6,17 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 13:14:26 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/04/20 13:54:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/04 14:17:44 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
-/*
-int		init(t_shell *sh)
+
+void		f_point(t_shell *sh)
 {
 	sh->f_built[0] = &ft_echo;
 	sh->f_built[1] = &ft_cd;
 	sh->f_built[2] = &ft_env;
 	sh->f_built[3] = &ft_setenv;
 	sh->f_built[4] = &ft_unsetenv;
-}*/
+}

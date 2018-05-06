@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/01 13:29:27 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/04 14:17:25 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ SRC_FP = lexer.c \
 		 ft_terminal.c \
 		 globbing.c \
 		 dir_tour.c \
-		 erase.c
+		 erase.c \
+		 glob_utils.c \
+		 init.c
 SRC_FP += \
 		  builtin/ft_cd.c \
 		  builtin/ft_echo.c \

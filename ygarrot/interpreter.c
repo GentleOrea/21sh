@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/02 18:52:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/04 19:50:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void norm(t_parser *tmp, t_com *com)
 
 	if (tmp->next)
 		mallcheck(com->next = (t_com*)ft_memalloc(sizeof(t_com)));
+	if (!tmp->comm)
+		return ;
 	mallcheck(com->cli = ft_strsplit_comm(tmp->comm, " "));
 	i = -1;
 	while (com->cli[++i])
