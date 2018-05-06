@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:52:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:30:52 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 16:28:18 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_separator_active(char *str, int pos, int *bl, int *sep)
 	while (str[i] && i < pos)
 	{
 		*sep = ft_separator(str[i], *sep, *bl);
-		*bl = (!*bl && *sep != '\'' && str[i] == '\n');
+		*bl = (!*bl && *sep != '\'' && str[i] == '\\');
 		i += ft_lenchar_r(str, i);
 	}
 	return (*sep || *bl);
