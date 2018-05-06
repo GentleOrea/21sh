@@ -112,7 +112,8 @@ SRC += \
 	   str/ft_addtofd.c \
 	   str/ft_strlento.c \
 	   str/ft_strinstr.c \
-	   str/ft_strprefix.c
+	   str/ft_strprefix.c \
+	   str/ft_strdupto.c
 
 SRC += \
 	   get_next_line/get_next_line.c 
