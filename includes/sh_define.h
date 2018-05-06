@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:52:07 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 15:27:57 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,23 @@
 
 # define BUILT (char *[6]){"echo", "cd", "env", "setenv", "unsetenv"}
 # define GLOB "[*?"
+
+# define KEY_LEFT "\33[D"
+# define KEY_LEFT_SHITED "\33[1;2D"
+# define KEY_RIGHT "\33[C"
+# define KEY_RIGHT_SHIFTED "\33[1;2C"
+# define KEY_UP "\33[A"
+# define KEY_UP_SHITED "\33[1;2A"
+# define KEY_DOWN "\33[B"
+# define KEY_DOWN_SHITED "\33[1;2B"
+# define KEY_SELECT_LEFT "\33\133\61\73\61\60\104"
+# define KEY_SELECT_RIGHT "\33\133\61\73\61\60\103"
+# define KEY_SELECT_CPY "\75"
+# define KEY_SELECT_PASTE "\36\170\146"
+# define KEY_END "\33[F"
+# define KEY_END_SHIFTED "\33[1;2F"
+# define KEY_HOME "\33[H"
+# define KEY_HOME_SHIFTED "\33[1;2H"
+
+# define SPECIAL_CHAR (char *[18]){KEY_LEFT, KEY_LEFT_SHITED, KEY_RIGHT, KEY_RIGHT_SHIFTED, KEY_UP, KEY_UP_SHITED, KEY_DOWN, KEY_DOWN_SHITED, KEY_SELECT_LEFT, KEY_SELECT_RIGHT, KEY_SELECT_CPY, KEY_SELECT_CPY, KEY_SELECT_PASTE, KEY_END, KEY_END_SHIFTED, KEY_HOME, KEY_HOME_SHIFTED, 0}
 #endif

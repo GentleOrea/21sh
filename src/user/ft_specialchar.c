@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:47:33 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 14:50:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/06 15:31:30 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		ft_strprefix(char *pref, char *str)
 	if (!pref || !str)
 		return (0);
 	i = 0;
-	while (pref[i] && pref[i] == str[i])
+	while (pref[i] && ft_abs(pref[i]) == ft_abs(str[i]))
 		i++;
 	if (pref[i])
 		return (0);
@@ -33,20 +33,19 @@ int		ft_specialchar(t_line *line, char *str, int *val)
 	i = 0;
 	if (ft_isin(*str, "\t\r\f\v"))
 		return (1);
-	else if (ft_strprefix("\33\133\61\73\61\60\104", str) && (i = 7))
+	else if ((i = ft_strprefix(KEY_SELECT_LEFT, str)))
 		ft_selected_moveleft(line, val);
-	else if (ft_strprefix("\33\133\61\73\61\60\103", str) && (i = 7))
+	else if ((i = ft_strprefix(KEY_SELECT_RIGHT, str)))
 		ft_selected_moveright(line, val);
-	else if (ft_abs(*str) == '\75' && (i = 1))
+	else if ((i = ft_strprefix(KEY_SELECT_CPY, str)))
 		ft_selected_cpy(line, val);
-	else if (ft_abs(*str) == '\36' && ft_abs(str[1]) == '\170' &&
-			ft_abs(str[2]) == '\146' && (i = 3))
+	else if ((i = ft_strprefix(KEY_SELECT_PASTE, str)))
 		ft_selected_paste(line, val);
 	else if (val[2])
 		ft_selected_reset(line, val);
-	else if (ft_strprefix("\33[1;2A", str) && (i = 6))
+	else if ((i = ft_strprefix(KEY_UP_SHITED, str)))
 		ft_move_up(line, val);
-	else if (ft_strprefix("\33[1;2B", str) && (i = 6))
+	else if ((i = ft_strprefix(KEY_DOWN_SHITED, str)))
 		ft_move_down(line, val);
 	else
 		return (ft_specialchar_aux(line, str, val));
@@ -58,25 +57,46 @@ int		ft_specialchar_aux(t_line *line, char *str, int *val)
 	int	i;
 
 	i = 0;
-	if (ft_strprefix("\33[F", str) && (i = 3))
+	if ((i = ft_strprefix(KEY_END, str)))
 		ft_move_toend(line, val);
-	else if ((i = ft_strprefix("\33[A", str)))
+	else if ((i = ft_strprefix(KEY_UP, str)))
 		ft_move_tohist(line, val, 1);
-	else if (ft_strprefix("\33[B", str) && (i = 3))
+	else if ((i = ft_strprefix(KEY_DOWN, str)))
 		ft_move_tohist(line, val , -1);
-	else if (ft_strprefix("\33[D", str) && (i = 3))
+	else if ((i = ft_strprefix(KEY_LEFT, str)))
 		ft_move_left(line, val);
-	else if (ft_strprefix("\33[C", str) && (i = 3))
+	else if ((i = ft_strprefix(KEY_RIGHT, str)))
 		ft_move_right(line, val);
-	else if ((i = ft_strprefix("\33[1;2D", str)))
+	else if ((i = ft_strprefix(KEY_LEFT_SHITED, str)))
 		ft_move_wordl(line, val);
-	else if ((i = ft_strprefix("\33[1;2C", str)))
+	else if ((i = ft_strprefix(KEY_RIGHT_SHIFTED, str)))
 		ft_move_wordr(line, val);
-	else if ((i = ft_strprefix("\33[H", str)))
+	else if ((i = ft_strprefix(KEY_HOME, str)))
 		ft_move_tohome(line, val);
-	else if ((i = ft_strprefix("\33\133\61\73\62\110", str)))
+	else if ((i = ft_strprefix(KEY_HOME_SHIFTED, str)))
 		ft_move_tolinel(line, val);
-	else if ((i = ft_strprefix("\33\133\61\73\62\106", str)))
+	else if ((i = ft_strprefix(KEY_END_SHIFTED, str)))
 		ft_move_toliner(line, val);
+	return (i);
+}
+
+int		ft_lentospecial(char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (str && str[i])
+	{
+		j = 0;
+		while (SPECIAL_CHAR[j])
+		{
+			if (SPECIAL_CHAR[j][0] == str[i] && (ft_strlen(&str[i]) <
+	ft_strlen(SPECIAL_CHAR[j]) || !ft_strprefix(SPECIAL_CHAR[j], &str[i])))
+				return (i ? i - 1 : 0);
+			j++;
+		}
+		i++;
+	}
 	return (i);
 }
