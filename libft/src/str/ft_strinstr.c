@@ -1,6 +1,6 @@
 #include "libft.h"
 
-int		ft_strinstr(char *str, int pat)
+int		ft_strinstr(char *str, char *pat)
 {
 	int	i;
 
@@ -9,7 +9,7 @@ int		ft_strinstr(char *str, int pat)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_strprefix(&str[i], pat))
+		if (ft_strprefix(pat, &str[i]))
 			return (i);
 		i++;
 	}
