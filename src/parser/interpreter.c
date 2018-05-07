@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 12:29:43 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 13:43:44 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void norm(t_parser *tmp, t_com *com)
 	while (com->cli[++i])
 	{
 		free = com->cli[i];
-		//com->cli[i] = ft_find_and_replace(free, "\\", 1);
+		com->cli[i] = ft_find_and_replace(free, "\\", 1);
 		if (search_op(com->cli[i], REDI) >= 0)
 			add_redi(com, &com->cli[i], &i);
 		else

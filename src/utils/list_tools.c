@@ -6,28 +6,31 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:53:40 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 14:02:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
 t_parser	*push_front(t_parser *com, char *str, int type)
 {
 	t_parser	*ret;
 	t_parser	*begin;
+	char		*trim;
 
 	begin = com;
 	if (!str)
 		return (NULL);
+	trim = ft_strtrim(str);
+	ft_memdel((void**)&str);
 	if (com && !com->comm)
 	{
-		com->comm = str;
+		com->comm = trim;
 		com->type = type;
 		return (com);
 	}
 	mallcheck(ret = (t_parser*)ft_memalloc(sizeof(t_parser)));
-	ret->comm = str;
+	ret->comm = trim;
 	ret->type = type;
 	if (!com)
 		return (ret);

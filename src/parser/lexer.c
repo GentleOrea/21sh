@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 12:48:47 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 14:02:22 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int			get_hdoc(char *str, int i, t_parser *par)
 	if ((hdoc = is_sep(&str[i], par, REDI)))
 	{
 		red = get_sep(&str[i], REDI);
-		if ((i += hdoc) && red == 4)
+		if ((i += hdoc) && !red)
 		{
 			while (str[i] == ' ')
 				i++;

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:53:35 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:43:43 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int		skip_co(char *str)
 			;
 	return (i);
 }
-
 
 static char	*replace(char *str, char *rep, int op, int len)
 {

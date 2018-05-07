@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:52:20 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:52:58 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int		search_op(char *str, char **op)
 	int	tmp;
 
 	i = 0;
-	while (str[i])
+	while (str && str[i])
 	{
 		ind = -1;
 		while (op[++ind])
