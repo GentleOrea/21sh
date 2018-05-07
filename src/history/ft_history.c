@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 13:51:32 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:08 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:28:44 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ char	*ft_history_get(int pos)
 		return (0);
 	if (!(lst = *adr))
 		return (0);
-	while (pos-- && lst)
+	while (--pos && lst)
 		lst = lst->next;
-	if (!lst)
+	if (!lst || !lst->next)
 		return (0);
 	return ((char*)(lst->content));
 }
