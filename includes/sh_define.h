@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 12:12:09 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:55:01 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,6 @@
 # define NEWLINE "\n"
 
 # define SPECIAL_CHAR (char *[21]){KEY_LEFT, KEY_LEFT_SHITED, KEY_RIGHT, KEY_RIGHT_SHIFTED, KEY_UP, KEY_UP_SHITED, KEY_DOWN, KEY_DOWN_SHITED, KEY_SELECT_LEFT, KEY_SELECT_RIGHT, KEY_SELECT_CPY, KEY_SELECT_CPY, KEY_SELECT_PASTE, KEY_END, KEY_END_SHIFTED, KEY_HOME, KEY_HOME_SHIFTED, KEY_DELETE, KEY_ERASE, NEWLINE, 0}
+
+# define HISTORYFILE "~/.sh_history"
 #endif

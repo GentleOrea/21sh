@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 12:48:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 14:33:50 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 13:50:38 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/sh.h"
+#include "sh.h"
 
 char	*ft_init_aff(int *val)
 {
@@ -39,7 +39,6 @@ char	*ft_init_aff(int *val)
 	ft_memset((void*)local, 100, c);
 	return (local);
 }
-
 
 int		writechar(int c)
 {

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:28:55 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:13 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:50:50 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		ft_realloc_line(t_line *line, int *val, int newsize)
 
 	s = (val[4] ? line->line : line->eof);
 	if (!s || !(str = (char*)ft_memalloc(newsize)))
-			return (-1);
+		return (-1);
 	tmp = (val[4] ? line->size_line : line->size_eof);
 	while (tmp-- > 0)
 		str[tmp] = s[tmp];
