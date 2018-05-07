@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/03 13:51:32 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 13:28:44 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:51:40 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	**ft_history(void)
 	return (&lst);
 }
 
-int		ft_history_add(char	*str)
+int		ft_history_add(char *str)
 {
 	t_list	**history;
 	t_list	*maille;

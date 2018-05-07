@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:48:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 12:30:07 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 14:15:14 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_read_newline(t_line *line, int *val, t_parser **pars)
 	{
 		if (!(tmp = count_parser(&(line->line)[val[5]])))
 			return (-1);
+		*pars = tmp;
 		if (tmp->comm)
 		{
 			val[4] = 0;
@@ -44,10 +45,12 @@ int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars)
 {
 	t_parser	*tmp;
 
-	tmp = *pars;
+	if (!(tmp = *pars))
+		return (-1);
 	val[9] = 0;
 	if ((ft_strlen(tmp->comm) == 0 && ft_strlen(&(line->eof)[val[5]])) == 1
-	|| !ft_strncmp(&(line->eof)[val[5]], tmp->comm, ft_strlen(tmp->comm) - 1))
+	|| (!ft_strncmp(&(line->eof)[val[5]], tmp->comm, ft_strlen(tmp->comm)) &&
+		line->eof[val[5] + (int)ft_strlen(tmp->comm)] == '\n'))
 	{
 		val[9] = (tmp->next == 0 && tmp->wait == 0);
 		ft_strdel(&(tmp->comm));
@@ -55,7 +58,7 @@ int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars)
 		ft_memdel((void*)&tmp);
 	}
 	val[3] = val[0];
-	val[4] = (pars == 0);
+	val[4] = (*pars == 0);
 	val[5] = (val[4] ? (int)ft_strlen(line->line) : val[0]);
 	val[0] = (val[4] ? val[5] : val[0]);
 	return (val[9]);
