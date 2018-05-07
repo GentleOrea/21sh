@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 12:28:28 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 12:49:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int		search_exec(t_shell *sh, char *comm, char **argv)
 	while (!temp && paths[++index])
 	{
 		temp = ft_implode('/', paths[index], comm);
-	printf("%d\n",access(temp, F_OK | X_OK));
 		!access(temp, F_OK | X_OK) ? index = exe(sh, temp, argv) :
 			ft_memdel((void**)&temp);
 	}
