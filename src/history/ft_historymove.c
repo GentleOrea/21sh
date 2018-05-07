@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 11:32:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:09 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:19:58 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int		ft_move_tohist(t_line *line, int *val, int dec)
 		ft_bzero((void*)(&(line->line)[val[0]]), line->size_line - val[0]);
 	else
 		ft_bzero((void*)(&(line->eof)[val[0]]), line->size_eof - val[0]);
+	tputs(tgetstr("cd", 0), 0, writechar);
 	val[9] = ft_printstr(line, history, val);
 	val[8] += dec;
 	return (val[9]);

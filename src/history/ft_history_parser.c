@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:02:43 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 16:30:24 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:12:51 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*ft_history_parser(char *str)
 	char	*res;
 	int		t[4];
 
-	if (!(res = (char*)ft_memalloc(ft_strlen(str) + 1)))
+	if (!str || !*str || (str[0] == '\n' && !str[1] ) || 
+			!(res = (char*)ft_memalloc(ft_strlen(str) + 1)))
 		return (0);
 	ft_bzero((void*)t, sizeof(t));
 	while (str[t[0]])
@@ -33,5 +34,7 @@ char	*ft_history_parser(char *str)
 			res[t[1]++] = str[t[0]++];
 		}
 	}
+	if (t[1] > 0)
+		res[t[1] - 1] = 0;
 	return (res);
 }
