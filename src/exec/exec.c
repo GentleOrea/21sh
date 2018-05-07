@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:05 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 11:35:10 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,23 @@ int		exe(t_shell *sh, char *comm, char **argv)
 	pid_t father;
 	int status;
 
-	if (sh->tmp->next && sh->tmp->next->type & 4)
-		return (exec_pipe(sh, comm, argv));
-	father = fork();
 	if (sh->tmp->type & 4)
 	{
 		if (dup2(sh->tmp->pipe[0], 0) == -1)
 			return (-printf("dup error\n"));
-		close(sh->tmp->pipe[0]);
 		close(sh->tmp->pipe[1]);
+		close(sh->tmp->pipe[0]);
 	}
-	if (father > 0)
-	{
-		while(wait(&status) != -1);
-	}
-	else
+	if (sh->tmp->next && sh->tmp->next->type & 4)
+		return (exec_pipe(sh, comm, argv));
+	if ((father = fork()) > 0)
+		wait(&status);//waitpid(father, &status, WUNTRACED);
+	else if (!father)
 	{
 		if (exec_redi(sh, sh->tmp->redi) < 0 || execve(comm, argv, sh->env))
 			exit(error_exec(argv));
 	}
-	return (0);
+	return (father);
 }
 
 int		search_exec(t_shell *sh, char *comm, char **argv)
@@ -102,8 +99,7 @@ int		sort_comm(t_shell *sh, t_com *com)
 	char	fail;
 
 	fail = 0;
-	ft_printf("{boldblue}%s{reset}\n", com->cli[0]);
-	(!(com->type & 4)) ? epur_tb(com, com->len) : 0;
+	!(com->type & 4) ? epur_tb(com, com->len) : 0;
 	while (com)
 	{
 		//ft_printf("{boldblue}%s{reset}\n", com->cli[0]);
@@ -119,6 +115,5 @@ int		sort_comm(t_shell *sh, t_com *com)
 			return (fail);
 		com = shift_com(com, fail);
 	}
-	//ft_printf("ici\n");
 	return (1);
 }
