@@ -1,0 +1,64 @@
+=================================================================
+==97113==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x619000006d69 at pc 0x0001078f89e5 bp 0x7fff5833a4c0 sp 0x7fff5833a4b8
+READ of size 1 at 0x619000006d69 thread T0
+    #0 0x1078f89e4 in ft_strlen ft_strlen.c:20
+    #1 0x1078fa9b5 in ft_addtofd ft_addtofd.c:21
+    #2 0x1078d9e14 in ft_getpos_a ft_getpos.c:32
+    #3 0x1078d915e in ft_getpos ft_getpos.c:51
+    #4 0x1078f1e37 in ft_printinsert ft_printchar.c:73
+    #5 0x1078f3af5 in ft_printstr ft_printstr.c:37
+    #6 0x1078f3d99 in ft_printnchar ft_printstr.c:51
+    #7 0x1078e9016 in ft_read_process ft_read.c:56
+    #8 0x1078e8381 in ft_read ft_read.c:34
+    #9 0x1078e794d in ft_getentry ft_getentry.c:51
+    #10 0x1078c5532 in main main.c:32
+    #11 0x7fffb9ab5234 in start (libdyld.dylib:x86_64+0x5234)
+
+0x619000006d69 is located 0 bytes to the right of 1001-byte region [0x619000006980,0x619000006d69)
+allocated by thread T0 here:
+    #0 0x107984f5c in wrap_malloc (libclang_rt.asan_osx_dynamic.dylib:x86_64+0x55f5c)
+    #1 0x1078e6d32 in ft_addmemory ft_readtopattern.c:9
+    #2 0x1078e7276 in ft_readtostr ft_readtopattern.c:42
+    #3 0x1078d90e9 in ft_getpos ft_getpos.c:46
+    #4 0x1078f1e37 in ft_printinsert ft_printchar.c:73
+    #5 0x1078f3af5 in ft_printstr ft_printstr.c:37
+    #6 0x1078f3d99 in ft_printnchar ft_printstr.c:51
+    #7 0x1078e9016 in ft_read_process ft_read.c:56
+    #8 0x1078e8381 in ft_read ft_read.c:34
+    #9 0x1078e794d in ft_getentry ft_getentry.c:51
+    #10 0x1078c5532 in main main.c:32
+    #11 0x7fffb9ab5234 in start (libdyld.dylib:x86_64+0x5234)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow ft_strlen.c:20 in ft_strlen
+Shadow bytes around the buggy address:
+  0x1c3200000d50: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1c3200000d60: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1c3200000d70: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1c3200000d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x1c3200000d90: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x1c3200000da0: 00 00 00 00 00 00 00 00 00 00 00 00 00[01]fa fa
+  0x1c3200000db0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c3200000dc0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c3200000dd0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c3200000de0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x1c3200000df0: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==97113==ABORTING

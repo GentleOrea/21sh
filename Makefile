@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/06 14:00:17 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/07 11:43:55 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,7 +69,8 @@ SRC_FP += \
 		  screen/ft_move_base.c \
 		  screen/ft_move_base_.c \
 		  screen/ft_move_bonus.c \
-		  screen/ft_scroll.c
+		  screen/ft_scroll.c \
+		  screen/ft_readtopattern.c
 
 SRC_FP += \
 		  signal/error_handling.c \

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 16:04:24 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 11:28:36 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		ft_lentospecial(char *str);
 */
 
 int		ft_getpos(int *x, int *y);
+char	*ft_readtostr(char *str, char end, int fd, int tr);
 int		ft_goto(int x, int y);
 
 int		ft_move_left(t_line *line, int *val);
