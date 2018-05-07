@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 14:19:36 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 12:00:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int		main(int ac, char **av, char **env)
 		line = ft_getentry();
 		while (line.line == 0)
 			line = ft_getentry();
-		ft_printf("%s\n", line.line);
 		hard_split(&sh, line.line);
 	}
 }

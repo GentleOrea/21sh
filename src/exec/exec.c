@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 11:35:10 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 12:28:28 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
 int		wait_exec(t_shell *sh, char **arg)
 {
@@ -67,6 +67,7 @@ int		search_exec(t_shell *sh, char *comm, char **argv)
 	while (!temp && paths[++index])
 	{
 		temp = ft_implode('/', paths[index], comm);
+	printf("%d\n",access(temp, F_OK | X_OK));
 		!access(temp, F_OK | X_OK) ? index = exe(sh, temp, argv) :
 			ft_memdel((void**)&temp);
 	}
@@ -102,7 +103,6 @@ int		sort_comm(t_shell *sh, t_com *com)
 	!(com->type & 4) ? epur_tb(com, com->len) : 0;
 	while (com)
 	{
-		//ft_printf("{boldblue}%s{reset}\n", com->cli[0]);
 		sh->tmp = com;
 		if (com->next && com->next->type & 4)
 		{
