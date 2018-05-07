@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 13:34:36 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:18 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 11:28:15 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/sh.h"
+#include "sh.h"
 
 static int	ft_getpos_a(int *x, int *y, char *buff, int re)
 {
@@ -31,26 +31,22 @@ static int	ft_getpos_a(int *x, int *y, char *buff, int re)
 		*y = (*y) * 10 + (int)(buff[re++]) - '0';
 	ft_addtofd(&buff[re + 1], STDIN_FILENO);
 	ft_addtofd(buff, STDIN_FILENO);
+	ft_strdel(&buff);
 	return (0);
 }
 
 int			ft_getpos(int *x, int *y)
 {
-	char	buff[100];
-	int		re;
+	char	*buff;
 	int		lim;
 
-	if (!x || !y || !write(STDOUT_FILENO, "\33[6n", 4) || (re = 0))
+	if (!x || !y || !write(STDOUT_FILENO, "\33[6n", 4))
 		return (-1);
 	lim = 10;
-	ft_bzero((void*)buff, 100);
-	while (lim-- > 0 && re < 5 &&
-			ft_strlento(buff, '\33') + 5 > (int)ft_strlen(buff))
-		re += read(STDIN_FILENO, &buff[re], 99 - re);
-	if ((re = ft_strlento(buff, '\33')) + 5 > (int)ft_strlen(buff))
+	if (!(buff = ft_readtostr("\33[", 'R', STDIN_FILENO, 100)))
 	{
-		ft_addtofd(buff, STDIN_FILENO);
+		dprintf(2, "Failed to getpos\n");
 		return (-1);
 	}
-	return (ft_getpos_a(x, y, buff, re));
+	return (ft_getpos_a(x, y, buff, ft_strinstr(buff, "\33[")));
 }

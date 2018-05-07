@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 12:20:22 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 16:04:24 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ char	*ft_history_parser(char *str);
 
 t_line	ft_getentry(void);
 int		ft_read(t_line *line, int *ta);
+int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars);
 int		ft_read_newline(t_line *line, int *val, t_parser **pars);
 int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars);
 int		ft_heredoc_purge(char *str, int size);
 
 int		ft_specialchar(t_line *line, char *str, int *val);
 int		ft_specialchar_aux(t_line *line, char *str, int *val);
+int		ft_lentospecial(char *str);
 
 /*
 ** Move on the screnn
@@ -101,6 +103,7 @@ int		ft_lenword_r(char *str, int pos);
 */
 
 int		ft_printchar(t_line *line, char *str, int *val);
+int		ft_printnchar(t_line *line, char *str, int *val, int n);
 int		ft_printstr(t_line *line, char *str, int *val);
 int		ft_printinsert(t_line *line, int *val);
 int		ft_printdec(char *str, int *val);

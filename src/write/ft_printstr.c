@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 12:22:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/23 15:34:09 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/06 15:50:28 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_printstr(t_line *line, char *str, int *val)
 {
-	int	i;
+	int		i;
 	char	*tmp;
 
 	if (!str || !line || !val || !(tmp = (val[4] ? line->line : line->eof)))
@@ -34,5 +34,21 @@ int		ft_printstr(t_line *line, char *str, int *val)
 	val[9] = ft_lenline_v(tmp, val[0]);
 	if (val[9] && val[9] % val[6] == 0)
 		ft_getdown();
-	return (ft_printinsert(line, val));
+	return (tmp[val[0]] ? ft_printinsert(line, val) : 1);
+}
+
+int		ft_printnchar(t_line *line, char *str, int *val, int n)
+{
+	int		ret;
+	char	*tmp;
+
+	n = ft_min(n, ft_abs((int)ft_strlen(str)));
+	if (n <= 0)
+		return (0);
+	if (!(tmp = ft_memalloc(n + 1)))
+		return (-1);
+	ft_strncat(tmp, str, n);
+	ret = ft_printstr(line, tmp, val);
+	ft_strdel(&tmp);
+	return (ret);
 }
