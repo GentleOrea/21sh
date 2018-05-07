@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:45:03 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 14:33:01 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 12:18:22 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,3 @@ t_line	ft_getentry(void)
 	ft_history_cache(0, CODE_RESET);
 	return (ligne);
 }
-/*
-int	main(int ac, char **av, char **env)
-{
-	t_line	line;
-
-	ft_initsig();
-	ft_init_terminal_data(env);
-	ft_setattr();
-	while (1)
-	{
-		line = ft_getentry();
-		while (line.line == 0)
-			line = ft_getentry();
-	}
-}*/

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 15:27:57 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 12:12:09 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,9 @@
 # define KEY_END_SHIFTED "\33[1;2F"
 # define KEY_HOME "\33[H"
 # define KEY_HOME_SHIFTED "\33[1;2H"
+# define KEY_DELETE "\33\133\63\176\12"
+# define KEY_ERASE "\177"
+# define NEWLINE "\n"
 
-# define SPECIAL_CHAR (char *[18]){KEY_LEFT, KEY_LEFT_SHITED, KEY_RIGHT, KEY_RIGHT_SHIFTED, KEY_UP, KEY_UP_SHITED, KEY_DOWN, KEY_DOWN_SHITED, KEY_SELECT_LEFT, KEY_SELECT_RIGHT, KEY_SELECT_CPY, KEY_SELECT_CPY, KEY_SELECT_PASTE, KEY_END, KEY_END_SHIFTED, KEY_HOME, KEY_HOME_SHIFTED, 0}
+# define SPECIAL_CHAR (char *[21]){KEY_LEFT, KEY_LEFT_SHITED, KEY_RIGHT, KEY_RIGHT_SHIFTED, KEY_UP, KEY_UP_SHITED, KEY_DOWN, KEY_DOWN_SHITED, KEY_SELECT_LEFT, KEY_SELECT_RIGHT, KEY_SELECT_CPY, KEY_SELECT_CPY, KEY_SELECT_PASTE, KEY_END, KEY_END_SHIFTED, KEY_HOME, KEY_HOME_SHIFTED, KEY_DELETE, KEY_ERASE, NEWLINE, 0}
 #endif

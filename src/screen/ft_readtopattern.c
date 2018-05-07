@@ -6,14 +6,12 @@ char	*ft_addmemory(char **str, int size, int add)
 
 	if (!str || add < 0 || size < 0)
 		return (0);
-	if (!(val = (char*)malloc(size + add)))
+	if (!(val = (char*)ft_memalloc(size + add)))
 	{
 		ft_strdel(str);
 		return (0);
 	}
 	ft_memcpy((void*)val, (void*)*str, (size_t)(size));
-	while (add-- > 0)
-		val[size++] = 0;
 	free(*str);
 	*str = val;
 	return (val);

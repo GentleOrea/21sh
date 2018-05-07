@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:48:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 16:28:32 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 12:30:07 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ int		ft_read_newline(t_line *line, int *val, t_parser **pars)
 		return (-1);
 	tmp = *pars;
 	ft_printchar(line, "\n", val);
-	if (val[4] && !ft_separator_active(line->line ,
-			val[0], &val[10], &val[11]))
+	if (val[4] && !ft_separator_active(line->line,
+			val[0] - 1, &val[10], &val[11]))
 	{
 		if (!(tmp = count_parser(&(line->line)[val[5]])))
 			return (-1);
@@ -46,8 +46,8 @@ int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars)
 
 	tmp = *pars;
 	val[9] = 0;
-	if ((ft_strlen(tmp->comm) == 0  && ft_strlen(&(line->eof)[val[5]])) == 1
-|| !ft_strncmp(&(line->eof)[val[5]], tmp->comm, ft_strlen(tmp->comm) - 1))
+	if ((ft_strlen(tmp->comm) == 0 && ft_strlen(&(line->eof)[val[5]])) == 1
+	|| !ft_strncmp(&(line->eof)[val[5]], tmp->comm, ft_strlen(tmp->comm) - 1))
 	{
 		val[9] = (tmp->next == 0 && tmp->wait == 0);
 		ft_strdel(&(tmp->comm));

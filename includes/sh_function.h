@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 11:28:36 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 12:22:22 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		ft_read_newline_eof(t_line *line, int *val, t_parser **pars);
 int		ft_heredoc_purge(char *str, int size);
 
 int		ft_specialchar(t_line *line, char *str, int *val);
-int		ft_specialchar_aux(t_line *line, char *str, int *val);
+int		ft_specialchar_a(t_line *line, char *str, int *val);
 int		ft_lentospecial(char *str);
 
 /*

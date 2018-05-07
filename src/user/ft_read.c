@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 16:37:12 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 12:17:38 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ int		ft_read(t_line *line, int *val)
 	char		buf[BUFFSIZE + 1];
 	char		tmp[2 * BUFFSIZE + 1];
 	t_parser	*pars;
-	int			i[3];
+	int			re;
 
 	pars = 0;
 	ft_bzero((void*)tmp, 2 * BUFFSIZE);
 	while (1)
 	{
-		ft_bzero((void*)i, sizeof(i));
 		if (ft_sigint(0))
 			return (ft_sigint_clear(line) ? -1 : -1);
 		val[9] = read(0, buf, 9);
@@ -31,8 +30,8 @@ int		ft_read(t_line *line, int *val)
 			return (ft_sigint_clear(line) ? -1 : -1);
 		buf[val[9]] = 0;
 		ft_strcat(tmp, buf);
-		if (ft_read_process(line, val, tmp, &pars))
-			return (1);
+		if ((re = ft_read_process(line, val, tmp, &pars)))
+			return (re);
 	}
 	return (0);
 }
@@ -40,6 +39,7 @@ int		ft_read(t_line *line, int *val)
 int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 {
 	int	i[3];
+	int	re;
 
 	ft_bzero((void*)i, sizeof(i));
 	while (!i[0] || ft_strlen(tmp) - i[1] > BUFFSIZE)
@@ -48,8 +48,9 @@ int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 			ft_delete(line, val);
 		else if (*tmp == 3)
 			ft_exit(0, 0);
-		else if (tmp[i[1]] == '\n' && ft_read_newline(line, val, pars) == 1)
-			return (1);
+		else if (tmp[i[1]] == '\n' &&
+				(re = ft_read_newline(line, val, pars) == 1))
+			return (re);
 		i[1] += (tmp[i[1]] == '\n');
 		i[1] += ft_specialchar(line, &tmp[i[1]], val);
 		if ((i[2] = ft_lentospecial(&tmp[i[1]])))

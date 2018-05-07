@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:47:33 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 15:31:30 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 12:21:50 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,29 @@ int		ft_specialchar(t_line *line, char *str, int *val)
 	else if ((i = ft_strprefix(KEY_DOWN_SHITED, str)))
 		ft_move_down(line, val);
 	else
-		return (ft_specialchar_aux(line, str, val));
+		return (ft_specialchar_a(line, str, val));
 	return (i);
 }
 
-int		ft_specialchar_aux(t_line *line, char *str, int *val)
+int		ft_specialchar_b(t_line *line, char *str, int *val)
+{
+	int	i;
+
+	i = 0;
+	if ((i = ft_strprefix(KEY_HOME, str)))
+		ft_move_tohome(line, val);
+	else if ((i = ft_strprefix(KEY_HOME_SHIFTED, str)))
+		ft_move_tolinel(line, val);
+	else if ((i = ft_strprefix(KEY_END_SHIFTED, str)))
+		ft_move_toliner(line, val);
+	else if ((i = ft_strprefix(KEY_ERASE, str)))
+		ft_erase(line, val);
+	else if ((i = ft_strprefix(KEY_DELETE, str)))
+		ft_delete(line, val);
+	return (i);
+}
+
+int		ft_specialchar_a(t_line *line, char *str, int *val)
 {
 	int	i;
 
@@ -48,7 +66,7 @@ int		ft_specialchar_aux(t_line *line, char *str, int *val)
 	else if ((i = ft_strprefix(KEY_UP, str)))
 		ft_move_tohist(line, val, 1);
 	else if ((i = ft_strprefix(KEY_DOWN, str)))
-		ft_move_tohist(line, val , -1);
+		ft_move_tohist(line, val, -1);
 	else if ((i = ft_strprefix(KEY_LEFT, str)))
 		ft_move_left(line, val);
 	else if ((i = ft_strprefix(KEY_RIGHT, str)))
@@ -57,12 +75,8 @@ int		ft_specialchar_aux(t_line *line, char *str, int *val)
 		ft_move_wordl(line, val);
 	else if ((i = ft_strprefix(KEY_RIGHT_SHIFTED, str)))
 		ft_move_wordr(line, val);
-	else if ((i = ft_strprefix(KEY_HOME, str)))
-		ft_move_tohome(line, val);
-	else if ((i = ft_strprefix(KEY_HOME_SHIFTED, str)))
-		ft_move_tolinel(line, val);
-	else if ((i = ft_strprefix(KEY_END_SHIFTED, str)))
-		ft_move_toliner(line, val);
+	else
+		return (ft_specialchar_b(line, str, val));
 	return (i);
 }
 
