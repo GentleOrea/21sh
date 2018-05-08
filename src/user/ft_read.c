@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 11:35:31 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 12:20:10 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,18 @@ int		ft_read(t_line *line, int *val)
 
 	pars = 0;
 	ft_bzero((void*)tmp, 2 * BUFFSIZE);
+	ft_sigint(0);
 	while (1)
 	{
 		if (ft_sigint(0))
 			return (ft_sigint_clear(line) ? -1 : -1);
-		val[9] = read(0, buf, 9);
-		if (ft_sigint(0))
+		val[9] = read(STDIN_FILENO, buf, BUFFSIZE);
+		if (ft_sigint(0) || val[9] < 0)
 			return (ft_sigint_clear(line) ? -1 : -1);
-		if (val[9] > 0)
-		{
-			buf[val[9]] = 0;
-			ft_strcat(tmp, buf);
-			if ((re = ft_read_process(line, val, tmp, &pars)))
-				return (re);
-		}
+		buf[val[9]] = 0;
+		ft_strcat(tmp, buf);
+		if ((re = ft_read_process(line, val, tmp, &pars)))
+			return (re);
 	}
 	return (0);
 }
@@ -47,9 +45,9 @@ int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 	ft_bzero((void*)i, sizeof(i));
 	while (!i[0] || ft_strlen(tmp) - i[1] > BUFFSIZE)
 	{
-		if (*tmp == 3 && (val[4] ? line->line : line->eof)[val[0]])
+		if (!*tmp && (val[4] ? line->line : line->eof)[val[0]])
 			ft_delete(line, val);
-		else if (*tmp == 3)
+		else if (!*tmp)
 			ft_exit(0, 0);
 		else if (tmp[i[1]] == '\n' &&
 				(re = ft_read_newline(line, val, pars) == 1))
