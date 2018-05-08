@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/08 17:48:22 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 17:54:59 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,10 @@ int		wait_exec(t_shell *sh, char **arg)
 int		exe(t_shell *sh, char *comm, char **argv)
 {
 	pid_t father;
-	int status;
 
-	(void)status;
 	if (sh->tmp->next && sh->tmp->next->type & 4)
 		return (exec_pipe(sh, comm, argv));
 	father = fork();
-		//wait(0);
 	if (!father)
 	{
 		if (sh->tmp->type & 4)
@@ -51,20 +48,12 @@ int		exe(t_shell *sh, char *comm, char **argv)
 			exit(error_exec(argv));
 	}
 	if (sh->tmp->type & 4){
-	  close(sh->tmp->pipe[1]);
-	  close(sh->tmp->pipe[0]);
+		close(sh->tmp->pipe[1]);
+		close(sh->tmp->pipe[0]);
 	}
 	if (father > 0)
-	{
-		if (sh->tmp->next && sh->tmp->type & 4)
-			while (wait(0) != -1)
-				;
-		else
-		{
-			waitpid(sh->test ? sh->test : father, &status, WUNTRACED);
-			sh->test = 0;
-		}
-	}
+		while (wait(0) != -1)
+			;
 	return (father);
 }
 

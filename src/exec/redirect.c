@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/08 17:42:12 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 17:55:34 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int		exec_redi(t_shell *sh, t_redi *tmp)
 
 int		exec_pipe(t_shell *sh, char *comm, char **argv)
 {
-	pid_t	father;
 	t_com	*tmp;
 
 	tmp = sh->tmp->next;
@@ -85,22 +84,17 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 			close(sh->tmp->pipe[1]);
 			close(sh->tmp->pipe[0]);
 		}
-		
-		
 		if (dup2(tmp->pipe[1], 1) == -1)
 			exit(printf("dup error\n"));
 		close(tmp->pipe[0]);
 		close(tmp->pipe[1]);
 		exec_redi(sh, sh->tmp->redi);
-		//ft_terminal_reset(0);
 		if (execve(comm, argv, sh->env))
 			return (error_exec(argv));
 	}
-	father = 0;
 	if (sh->tmp->type & 4){
 	  close(sh->tmp->pipe[1]);
 	  close(sh->tmp->pipe[0]);
 	}
-
-	return (father);
+	return (sh->test);
 }
