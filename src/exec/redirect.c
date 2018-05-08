@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/08 12:29:20 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 17:42:12 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,18 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 	tmp = sh->tmp->next;
 	if (pipe(tmp->pipe))
 		return (-printf("Broken pipe\n"));
-	if (!(sh->test = fork()))
+	sh->test = fork();
+	if (!sh->test)
 	{
-		//ft_printf("{boldblue}%s %s{reset}\n", comm, argv[1]);
+		if (sh->tmp->type & 4)
+		{
+			if (dup2(sh->tmp->pipe[0], 0) == -1)
+				return (-printf("dup error\n"));
+			close(sh->tmp->pipe[1]);
+			close(sh->tmp->pipe[0]);
+		}
+		
+		
 		if (dup2(tmp->pipe[1], 1) == -1)
 			exit(printf("dup error\n"));
 		close(tmp->pipe[0]);
@@ -88,5 +97,10 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 			return (error_exec(argv));
 	}
 	father = 0;
+	if (sh->tmp->type & 4){
+	  close(sh->tmp->pipe[1]);
+	  close(sh->tmp->pipe[0]);
+	}
+
 	return (father);
 }

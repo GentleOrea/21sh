@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/01 12:02:52 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/01/18 13:53:27 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 16:11:58 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_print_chartab(char **tab, int fd)
 	size_t		i;
 
 	i = 0;
-	while (tab && tab[i] && *tab[i])
+	while (tab && tab[i])
 	{
 		ft_putendl_fd(tab[i], fd);
 		i++;
