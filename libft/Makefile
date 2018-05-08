@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/06 13:58:32 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/08 14:48:33 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ INCDIR = includes
 SRC = \
 	  misc/ft_occiter.c \
 	  misc/ft_occur_in.c \
-	  misc/ft_row_div.c 
+	  misc/ft_row_div.c \
+	  misc/ft_intswap.c
 
 SRC += \
 	   to/ft_atoi.c \
@@ -146,6 +147,17 @@ SRC += \
 	   printf/parser_printf.c \
 	   printf/print_nchar.c \
 	   printf/printp.c
+
+SRC += \
+	   tree/btree_create_node.c \
+	   tree/btree_apply_infix.c \
+	   tree/btree_apply_prefix.c \
+	   tree/btree_apply_suffix.c \
+	   tree/btree_search_item.c \
+	   tree/btree_level_count.c \
+	   tree/btree_swapcolor.c \
+	   tree/btree_balancefrom.c \
+	   tree/btree_insert_data.c
 
 #Colors
 

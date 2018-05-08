@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:59:07 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 14:32:54 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # include <sys/ioctl.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
+# include "ft_btree.h"
 
 typedef struct	s_list
 {
@@ -188,4 +189,5 @@ void			ft_strrev(char *str);
 void			ft_replace(char *str, char c, char n);
 int				ft_strinstr(char *str, char *pattern);
 int				ft_strprefix(char *pref, char *str);
+void			ft_intswap(int *i, int *j);
 #endif
