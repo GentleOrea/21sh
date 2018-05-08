@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 11:35:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 11:18:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
 /*
 ** Ce programme effectue les changements pour x>fd
@@ -75,19 +75,17 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 	tmp = sh->tmp->next;
 	if (pipe(tmp->pipe))
 		return (-printf("Broken pipe\n"));
-	if (!(father = fork()))
+	if (!(sh->test = fork()))
 	{
 		//ft_printf("{boldblue}%s %s{reset}\n", comm, argv[1]);
 		if (dup2(tmp->pipe[1], 1) == -1)
 			exit(printf("dup error\n"));
-		close(tmp->pipe[1]);
 		close(tmp->pipe[0]);
+		//close(tmp->pipe[1]);
 		exec_redi(sh, sh->tmp->redi);
 		if (execve(comm, argv, sh->env))
 			return (error_exec(argv));
 	}
-		//int status;
-	wait (0);
-		//waitpid(father, &status, WUNTRACED);
+	father = 0;
 	return (father);
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 13:14:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 11:25:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int		main(int ac, char **av, char **env)
 	(void)ac;(void)av;(void)env;
 	f_point(&sh);
 	ft_init_terminal_data(env);
+	ft_initsig();
 	if (ft_setattr() == -1)
 		return (-1);
 	sh.env = env;
 	sh.fd = open("/dev/ttys003", O_RDWR);
 	while (1)
 	{
-		if ((fd = open("/dev/stdout", O_RDWR)) <= 0)
-			ft_printf("error open\n");
+		fd = open("/dev/stdout", O_RDWR);
 		line = ft_getentry();
 		while (line.line == 0)
 			line = ft_getentry();
-		hard_split(&sh, line.line);
+		hard_split(&sh, &line);
 	}
 }

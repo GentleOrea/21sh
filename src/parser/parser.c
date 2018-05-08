@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 17:14:50 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 13:14:20 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/07 14:27:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,16 @@ t_parser	*easy_split(t_parser *c, char *str, char isamp)
 	return (c);
 }
 
-int			hard_split(t_shell *sh, char *str)
+int			hard_split(t_shell *sh, t_line *line)
 {
 	char		**tb;
 	t_parser	*par;
+	char		*str;
 
+	str = line->line;
 	if (!str)
 		return (1);
+	sh->here_doc = line->eof;
 	if (!(par = count_parser(str)))
 		return (-1);
 	free_parser(par);

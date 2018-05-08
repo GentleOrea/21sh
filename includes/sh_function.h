@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 12:22:22 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 14:21:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int		sizeof_comm(char *str, t_parser *par);
 char	**split_cli(char *str, t_parser *par);
 t_parser	*count_parser(char *str);
 void	mallcheck(void *foo);
-int		hard_split(t_shell *sh, char *str);
+int		hard_split(t_shell *sh, t_line *line);
 char	**ft_strsplit_comm(char *str, char *split);
 int		skip_comm(char *str);
 char	*ft_find_and_replace(char *str, char *rep, int op);
