@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 11:58:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:39:59 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 11:51:47 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_exit(char **arg, char ***env)
 
 	//lst = ft_var();
 	//ft_lstdel(&lst, &ft_lstfree);
+	ft_terminal_reset(0);
 	(void)arg;
 	(void)env;
 	exit(0);
