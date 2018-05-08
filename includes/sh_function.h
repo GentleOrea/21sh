@@ -6,7 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/05/07 14:21:15 by ygarrot          ###   ########.fr       */
+=======
+/*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
+>>>>>>> 838577a9e21202b4b83b51d9ef53138f1aa3d9d7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +51,8 @@ int		ft_history_add(char *str);
 char	*ft_history_get(int pos);
 int		ft_move_tohist(t_line *line, int *val, int dec);
 char	*ft_history_parser(char *str);
+
+int		ft_historyfile_open(void);
 
 /*
 ** Recover user entry
