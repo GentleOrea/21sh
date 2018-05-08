@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:52:26 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 11:49:00 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 11:50:18 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		ft_setattr(void)
 
 	if (tcgetattr(0, &term) == -1)
 		ft_fatal("Can't recover the terminal structure");
+	ft_terminal_reset(&term);
 	term.c_lflag &= ~(ICANON | ECHO);
 	term.c_cc[VTIME] = 1;
 	term.c_cc[VMIN] = 1;
