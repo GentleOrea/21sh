@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/08 12:20:31 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 12:30:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		exe(t_shell *sh, char *comm, char **argv)
 	}
 	else if (!father)
 	{
-		ft_terminal_reset(0);
+//		ft_terminal_reset(0);
 		if (exec_redi(sh, sh->tmp->redi) < 0 || execve(comm, argv, sh->env))
 			exit(error_exec(argv));
 	}
