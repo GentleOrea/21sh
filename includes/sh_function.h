@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 11:49:37 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 15:31:32 by tcharrie         ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -140,6 +140,14 @@ int		ft_selected_moveright(t_line *line, int *val);
 int		ft_selected_cpy(t_line *line, int *val);
 int		ft_selected_paste(t_line *line, int *val);
 int		ft_selected_reset(t_line *line, int *val);
+
+/*
+** Variable
+*/
+
+int			ft_variablecmp(void *left, void *right);
+t_variable	ft_variable_create(char *name, void *data, int deep);
+
 
 /*
 ** Fonction de traitement de la ligne
