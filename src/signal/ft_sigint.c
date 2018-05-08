@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 10:45:56 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:25 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 12:21:35 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int		ft_sigint(int sig)
 	static int	status = 0;
 	int			tmp;
 
+	if (sig == SIGINT)
+		ft_addtofd("\v", STDIN_FILENO);
 	tmp = status;
 	status = (sig == SIGINT);
 	return (tmp);
