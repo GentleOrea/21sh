@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:52:26 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:26:11 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 11:49:00 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,14 @@ void	ft_init_terminal_data(char **env)
 
 	(void)env;
 	if (!(termtype = getenv("TERM")))
-		;
-		//ft_fatal("No terminal type is defined in the environment");
+		ft_fatal("No terminal type is defined in the environment");
 	success = tgetent(term_buffer, termtype);
 	if (success < 0)
-		;
-		//ft_fatal("Could not access the termcap data base");
+		ft_fatal("Could not access the termcap data base");
 	else if (success == 0)
-		;
-		//ft_fatal("The terminal type is not defined");
+		ft_fatal("The terminal type is not defined");
 	if (tgetnum("li") == ERR || tgetnum("co") == ERR)
-		;
-//		ft_fatal("Can't get terminal size");
+		ft_fatal("Can't get terminal size");
 	if ((!tgetstr("im", NULL) || !tgetstr("ei", NULL)) && !tgetstr("ic",
 				NULL))
 		write(2, NO_CHAR_MSG, ft_strlen(NO_CHAR_MSG));
@@ -46,13 +42,22 @@ int		ft_setattr(void)
 	t_termios	term;
 
 	if (tcgetattr(0, &term) == -1)
-		;
-//		ft_fatal("Can't recover the terminal structure");
+		ft_fatal("Can't recover the terminal structure");
 	term.c_lflag &= ~(ICANON | ECHO);
-	term.c_cc[VTIME] = 0;
+	term.c_cc[VTIME] = 1;
 	term.c_cc[VMIN] = 1;
 	if (tcsetattr(0, 0, &term) == -1)
-		;
-		//ft_fatal("Can't set the terminal to have great power, exit ...");
+		ft_fatal("Can't set the terminal to have great power, exit ...");
+	return (1);
+}
+
+int		ft_terminal_reset(t_termios *term)
+{
+	static t_termios	save;
+
+	if (term)
+		save = *term;
+	else
+		return (tcsetattr(0, 0, &save));
 	return (1);
 }

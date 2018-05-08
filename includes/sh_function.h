@@ -6,11 +6,8 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/05/07 14:21:15 by ygarrot          ###   ########.fr       */
-=======
+/*   Updated: 2018/05/08 11:49:37 by tcharrie         ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
->>>>>>> 838577a9e21202b4b83b51d9ef53138f1aa3d9d7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +35,7 @@ void	ft_command_del(void *c, size_t t);
 void	ft_initenv(char ***env);
 void	ft_init_terminal_data(char **env);
 int		ft_setattr(void);
+int		ft_terminal_reset(t_termios *term);
 void	ft_initsig(void);
 void	ft_sig_line(int sig);
 

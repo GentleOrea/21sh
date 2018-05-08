@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 12:17:38 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/08 11:35:31 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ int		ft_read(t_line *line, int *val)
 		val[9] = read(0, buf, 9);
 		if (ft_sigint(0))
 			return (ft_sigint_clear(line) ? -1 : -1);
-		buf[val[9]] = 0;
-		ft_strcat(tmp, buf);
-		if ((re = ft_read_process(line, val, tmp, &pars)))
-			return (re);
+		if (val[9] > 0)
+		{
+			buf[val[9]] = 0;
+			ft_strcat(tmp, buf);
+			if ((re = ft_read_process(line, val, tmp, &pars)))
+				return (re);
+		}
 	}
 	return (0);
 }
