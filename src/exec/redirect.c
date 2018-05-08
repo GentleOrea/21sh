@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/08 11:18:42 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/08 12:04:01 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 		if (dup2(tmp->pipe[1], 1) == -1)
 			exit(printf("dup error\n"));
 		close(tmp->pipe[0]);
-		//close(tmp->pipe[1]);
+		close(tmp->pipe[1]);
 		exec_redi(sh, sh->tmp->redi);
+		ft_terminal_reset(0);
 		if (execve(comm, argv, sh->env))
 			return (error_exec(argv));
 	}
