@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 13:43:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/09 14:27:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
 void	add_comm(t_com *com, char *str)
 {
@@ -61,6 +61,30 @@ void	add_redi(t_com *com, char **tb, int *i)
 	temp->next = redi;
 }
 
+char *get_redi(char *str, t_redi *com)
+{
+	t_redi	*redi;
+	int		ind;
+	int		i[3];
+
+	i[1] = 0;
+	mallcheck(redi = (t_redi*)ft_memalloc(sizeof(t_redi)));
+	while ((ind = search_op(str, REDI)) >= 0)
+	{
+		i[0] = -1;
+		i[2] = ind;
+		while (i[2] >= 0 && ft_isdigit(str[i[2]]))
+			i[2]--;
+		redi->fd[0] = ft_isdigit(str[i[2]]) ? ft_atoi(&(str[i[2]])) : -1;
+		redi->type = get_sep(&str[ind], REDI);
+		while (str[ind] && str[ind] == ' ')
+			ind++;
+		redi->path = ft_strndup(str, ft_charchr(' ', str));
+		i[1] = i[0];
+	}
+	return (str);
+}
+
 void norm(t_parser *tmp, t_com *com)
 {
 	int		i;
@@ -70,13 +94,15 @@ void norm(t_parser *tmp, t_com *com)
 		mallcheck(com->next = (t_com*)ft_memalloc(sizeof(t_com)));
 	if (!tmp->comm)
 		return ;
+	ft_printf("%s\n", tmp->comm);
+	get_redi(tmp->comm, com->redi);
 	mallcheck(com->cli = ft_strsplit_comm(tmp->comm, " "));
 	i = -1;
 	while (com->cli[++i])
 	{
 		free = com->cli[i];
 		com->cli[i] = ft_find_and_replace(free, "\\", 1);
-		if (search_op(com->cli[i], REDI) >= 0)
+		if (search_op(com->cli[i], REDI) == 0)
 			add_redi(com, &com->cli[i], &i);
 		else
 			add_comm(com, com->cli[i]);

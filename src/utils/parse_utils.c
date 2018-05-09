@@ -6,11 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 14:17:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/09 12:50:37 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../includes/sh.h"
 
 int		skip_comm(char *str)
 {
