@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/08 17:54:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/09 16:32:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int		wait_exec(t_shell *sh, char **arg)
 {
 	int index;
 
-	if (0 && (index = ft_strisin_tab(arg[0], BUILT, 0)) >= 0)
-		;//sh->f_built[index](arg, &sh->env);
+	if (0&&(index = ft_strisin_tab(arg[0], BUILT, 0)) >= 0)
+		sh->f_built[index](arg, &sh->env);
 	else
 	{
 		if (!access(*arg, F_OK | X_OK))
@@ -37,20 +37,13 @@ int		exe(t_shell *sh, char *comm, char **argv)
 	father = fork();
 	if (!father)
 	{
-		if (sh->tmp->type & 4)
-		{
-			if (dup2(sh->tmp->pipe[0], 0) == -1)
-				return (-printf("dup error\n"));
-			close(sh->tmp->pipe[1]);
-			close(sh->tmp->pipe[0]);
-		}
+		if (sh->tmp->type & 4 && safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
+			exit(EXIT_FAILURE);
 		if (exec_redi(sh, sh->tmp->redi) < 0 || execve(comm, argv, sh->env))
 			exit(error_exec(argv));
 	}
-	if (sh->tmp->type & 4){
-		close(sh->tmp->pipe[1]);
-		close(sh->tmp->pipe[0]);
-	}
+	if (sh->tmp->type & 4)
+		safe_dup(-1, 0, sh->tmp->pipe);
 	if (father > 0)
 		while (wait(0) != -1)
 			;

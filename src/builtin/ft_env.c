@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:59:13 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:39:59 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/09 16:32:31 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
 static size_t	ft_envcpy_add(char **arg, char **env)
 {

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/09 12:50:37 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/09 16:13:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,15 @@
 ** Ce programme effectue les changements pour x>fd
 ** Le format est le meme pour x>&fd (Simplement ne pas ouvrir le fichier)
 */
+
+int	safe_dup(int fd1, int fd2, int *pipe)
+{
+	if (fd1 != -1 && dup2(fd1, fd2) == -1)
+		return (-printf("dup error\n"));
+	close(pipe[1]);
+	close(pipe[0]);
+	return (0);
+}
 
 int		stream(t_redi *redi, int mod)
 {
@@ -77,24 +86,15 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 	sh->test = fork();
 	if (!sh->test)
 	{
-		if (sh->tmp->type & 4)
-		{
-			if (dup2(sh->tmp->pipe[0], 0) == -1)
-				return (-printf("dup error\n"));
-			close(sh->tmp->pipe[1]);
-			close(sh->tmp->pipe[0]);
-		}
-		if (dup2(tmp->pipe[1], 1) == -1)
-			exit(printf("dup error\n"));
-		close(tmp->pipe[0]);
-		close(tmp->pipe[1]);
+		if (sh->tmp->type & 4 && safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
+			exit(EXIT_FAILURE);
+		if (safe_dup(tmp->pipe[1], STDOUT_FILENO, tmp->pipe))
+			exit(EXIT_FAILURE);
 		exec_redi(sh, sh->tmp->redi);
 		if (execve(comm, argv, sh->env))
 			return (error_exec(argv));
 	}
-	if (sh->tmp->type & 4){
-	  close(sh->tmp->pipe[1]);
-	  close(sh->tmp->pipe[0]);
-	}
+	if (sh->tmp->type & 4)
+		safe_dup(-1, 0, sh->tmp->pipe);
 	return (sh->test);
 }
