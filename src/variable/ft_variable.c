@@ -12,7 +12,7 @@
 
 #include "sh.h"
 
-t_btree	**ft_variable(t_btree **val)
+t_btree		**ft_variable(t_btree **val)
 {
 	static t_btree	**root = 0;
 
@@ -21,7 +21,7 @@ t_btree	**ft_variable(t_btree **val)
 	return (root);
 }
 
-int		ft_variableadd(char *name, void *data, int deep)
+int			ft_variableadd(char *name, void *data, int deep)
 {
 	t_variable	*var;
 	t_btree		**root;
@@ -45,4 +45,45 @@ int		ft_variableadd(char *name, void *data, int deep)
 		return (-1);
 	}
 	return (0);
+}
+
+t_variable	*ft_variableget(char *name)
+{
+	t_btree		**root;
+	void		*var;
+	t_variable	v;
+
+	if (!name)
+		return (0);
+	if (!(root = ft_variable(0)))
+		return (0);
+	ft_bzero((void*)&v, sizeof(v));
+	v.name = name;
+	var = btree_search_item(*root, (void*)&v, &ft_variablecmp);
+	if (!var || !((t_variable*)var)->name)
+		return (0);
+	return ((t_variable*)var);
+}
+
+size_t		ft_variablelen(char *name)
+{
+	t_variable	*var;
+	int			i;
+	size_t		len;
+
+	var = ft_variableget(name);
+	if (!var || var->deep < 1 || var->deep > 2)
+		return (0);
+	if (var->deep == 1)
+		return (ft_strlen(var->str));
+	if (!(var->array))
+		return (0);
+	i = 0;
+	len = 0;
+	while (var->array[i])
+		len += ft_strlen(var->array[i]);
+	len += (size_t)i;
+	if (i > 0)
+		len -= 1;
+	return (len);
 }
