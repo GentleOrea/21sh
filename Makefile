@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/07 11:43:55 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/09 15:46:00 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,8 +28,7 @@ SRC_FP = \
 		  builtin/ft_unsetenv.c
 
 SRC_FP += exec/exec.c \
-		 exec/exec_utils.c \
-		 exec/redirect.c
+		  exec/redirect.c
 
 SRC_FP += \
 		  history/ft_history.c \
@@ -88,6 +87,7 @@ SRC_FP += \
 		  utils/ft_find_and_replace.c \
 		  utils/glob_utils.c \
 		  utils/ft_strsplit_comm.c \
+		  utils/exec_utils.c \
 		  utils/list_tools.c
 
 SRC_FP += \
