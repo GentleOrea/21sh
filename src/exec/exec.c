@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 12:43:11 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 16:11:07 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		wait_exec(t_shell *sh, char **arg)
 {
 	int index;
 
-	if (0&&(index = ft_strisin_tab(arg[0], BUILT, 0)) >= 0)
+	if (0 && (index = ft_strisin_tab(arg[0], BUILT, 0)) >= 0)
 		sh->f_built[index](arg, &sh->env);
 	else
 	{
@@ -37,7 +37,8 @@ int		exe(t_shell *sh, char *comm, char **argv)
 	father = fork();
 	if (!father)
 	{
-		if (sh->tmp->type & 4 && safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
+		if (sh->tmp->type & 4 && 
+				safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
 			exit(EXIT_FAILURE);
 		if (exec_redi(sh, sh->tmp->redi) < 0 || execve(comm, argv, sh->env))
 			exit(error_exec(argv));
@@ -64,7 +65,7 @@ int		search_exec(t_shell *sh, char *comm, char **argv)
 	index = -1;
 	while (!temp && paths[++index])
 	{
-		temp = ft_implode('/', paths[index], comm);
+		temp = ft_implode("/", paths[index], comm);
 		!access(temp, F_OK | X_OK) ? index = exe(sh, temp, argv) :
 			ft_memdel((void**)&temp);
 	}

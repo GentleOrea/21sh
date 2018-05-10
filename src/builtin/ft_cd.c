@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 14:42:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:39:58 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:16:05 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,34 +62,6 @@ static void	ft_cdback(char *a, char ***env, char **prev)
 	}
 }
 
-static int	ft_cdhome(char *arg, char ***env, char **prev)
-{
-	char	*home;
-	char	*path;
-
-	if (!(home = ft_getenv(*env, "HOME")))
-	{
-		ft_putendl_fd("No HOME variable is defined", 2);
-		return (0);
-	}
-	if (!(path = ft_memalloc(ft_strlen(arg) + ft_strlen(home))))
-		return (ft_printf("minishell: cd: An error occured"));
-	ft_strcat(path, home);
-	ft_strcat(path, &(arg[1]));
-	home = getcwd(NULL, 1);
-	if (chdir(path) == -1)
-	{
-		ft_strdel(&path);
-		ft_strdel(&home);
-		return (ft_printf("minishell: cd: Can't access %s\n", arg));
-	}
-	ft_strdel(prev);
-	ft_strdel(&path);
-	*prev = home;
-	ft_cdvar(*prev, env);
-	return (1);
-}
-
 void		ft_cd(char **a, char ***env)
 {
 	static char	*prev;
@@ -114,8 +86,6 @@ void		ft_cd(char **a, char ***env)
 	}
 	else if (a[2] || !ft_strcmp(a[1], "-"))
 		ft_cdback(a[2], env, &prev);
-	else if (a[1][0] == '~')
-		ft_cdhome(a[1], env, &prev);
 	else
 		ft_cdaux(a, env, &prev);
 }

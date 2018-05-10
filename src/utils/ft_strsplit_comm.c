@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:27:38 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:53:38 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:14:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static char		**cpy(char const *s, char *c, char **fresh, int words)
 		i3 = 0;
 		while (*s && ft_isin(*s, c))
 			s++;
-		if (!(fresh[i] = ft_strnew(i3 = countletters(s, c))))
+		i3 = countletters(s, c);
+		if (!(fresh[i] = ft_strnew(i3)))
 		{
 			ft_free_dblechar_tab(fresh);
 			return (NULL);

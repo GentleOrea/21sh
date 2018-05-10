@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/07 14:17:10 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 16:08:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int			get_hdoc(char *str, int i, t_parser *par)
 {
 	int		hdoc;
 	int		red;
+	char	*todel;
 
 	if ((hdoc = is_sep(&str[i], par, REDI)))
 	{
@@ -31,18 +32,19 @@ int			get_hdoc(char *str, int i, t_parser *par)
 		{
 			while (str[i] == ' ')
 				i++;
-			par = push_front(par, ft_strndup(&str[i],
-	(hdoc = search_op(&str[i], HD) >= 0 ? hdoc + 1 : ft_strlen(&str[i]))), 0);
+			todel = ft_strndup(&str[i],
+		(hdoc = search_op(&str[i], HD) >= 0 ? hdoc + 1 : ft_strlen(&str[i])));
+			par = push_front(par, ft_find_and_replace(todel, "\\", 1), 0);
+			ft_memdel((void**)&todel);
 		}
 		while (str[i] == ' ')
 			i++;
 		if (((red == 2 || red == 3) && str[i] != '-' && !ft_isdigit(str[i]))
 			|| (!(hdoc = 0) && is_sep(&str[i], par, ALL)))
 			return (-1);
+		return (i);
 	}
-	else
-		i++;
-	return (i);
+	return (i + 1);
 }
 
 int			sizeof_comm(char *str, t_parser *par)

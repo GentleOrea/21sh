@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/09 15:43:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 16:08:01 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	add_redi(t_com *com, t_redi *toadd)
 	com->redi->next = toadd;
 }
 
-char *get_redi(char *str, t_com *com)
+char	*get_redi(char *str, t_com *com)
 {
 	t_redi	*redi;
 	int		ind;
@@ -56,22 +56,24 @@ char *get_redi(char *str, t_com *com)
 	while ((ind = search_op(str, REDI)) >= 0)
 	{
 		mallcheck(redi = (t_redi*)ft_memalloc(sizeof(t_redi)));
-		i[0] = ind - (ft_isdigit(str[ind - 1]) && ind > 1 && str[ind - 2] == ' ');
+		i[0] = ind -
+			(ft_isdigit(str[ind - 1]) && ind > 1 && str[ind - 2] == ' ');
 		redi->fd[0] = (i[0] == ind - 1) ? ft_atoi(&(str[i[0]])) : -1;
 		redi->type = get_sep(&str[ind], REDI);
 		ind += ft_strlen(REDI[redi->type]);
 		while (str[ind] && str[ind] == ' ')
 			ind++;
-		if ((i[1] = search_op(&str[ind], REDI)) < 0 || (i[1] < 0 && (i[1] = ft_charchr(' ', &str[ind])) < 0))
+		if ((i[1] = search_op(&str[ind], REDI)) < 0
+				|| (i[1] < 0 && (i[1] = ft_charchr(' ', &str[ind])) < 0))
 			i[1] = ft_strlen(&str[ind]);
-		redi->path = ft_strndup(&str[ind], i[1]); 
+		redi->path = ft_strndup(&str[ind], i[1]);
 		ft_strcpy(&str[i[0]], &str[ind + i[1]]);
 		add_redi(com, redi);
 	}
 	return (str);
 }
 
-void norm(t_parser *tmp, t_com *com)
+void	norm(t_shell *sh, t_parser *tmp, t_com *com)
 {
 	int		i;
 	char	*free;
@@ -80,6 +82,7 @@ void norm(t_parser *tmp, t_com *com)
 		mallcheck(com->next = (t_com*)ft_memalloc(sizeof(t_com)));
 	if (!tmp->comm)
 		return ;
+	arg_replace(sh, &tmp->comm);
 	get_redi(tmp->comm, com);
 	mallcheck(com->cli = ft_strsplit_comm(tmp->comm, " "));
 	i = -1;
@@ -88,20 +91,20 @@ void norm(t_parser *tmp, t_com *com)
 		free = com->cli[i];
 		com->cli[i] = ft_find_and_replace(free, "\\", 1);
 		add_comm(com, com->cli[i]);
-		//ft_memdel((void**)&free);
+		ft_memdel((void**)&free);
 	}
 }
 
 void	split_co(t_shell *sh, t_parser *tmp)
 {
-	t_com	*com;
-	t_parser *to_del;
+	t_com		*com;
+	t_parser	*to_del;
 
 	mallcheck(com = (t_com*)ft_memalloc(sizeof(t_com)));
 	sh->com = com;
 	while (tmp)
 	{
-		norm(tmp, com);
+		norm(sh, tmp, com);
 		com->type = tmp->type;
 		to_del = tmp;
 		tmp = tmp->next;

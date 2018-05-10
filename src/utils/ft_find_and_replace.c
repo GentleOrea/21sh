@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 12:43:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 16:12:19 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ** op : 1 pour skip les comments
 */
 
-int		skip_co(char *str)
+int			skip_co(char *str)
 {
 	int		i;
 	char	q;
@@ -45,7 +45,8 @@ static char	*replace(char *str, char *rep, int op, int len)
 		return (NULL);
 	while (str[i])
 	{
-		if (op & 1 && ft_isin(str[i], QUOTES) && (q = str[i] == '"' ? '"' : '\''))
+		if (op & 1 && ft_isin(str[i], QUOTES)
+				&& (q = str[i] == '"' ? '"' : '\''))
 			while (str[++i] && str[i] != q)
 				ret[++i2] = str[i];
 		if (str[i] && (str[i] == q || str[i] == rep[0]) && ++i)
@@ -56,7 +57,7 @@ static char	*replace(char *str, char *rep, int op, int len)
 	return (ret);
 }
 
-char	*ft_find_and_replace(char *str, char *rep, int op)
+char		*ft_find_and_replace(char *str, char *rep, int op)
 {
 	int		len;
 	int		i;

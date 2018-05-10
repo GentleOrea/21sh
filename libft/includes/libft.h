@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/08 14:32:54 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/10 13:35:02 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # define CYAN "\x1b[36m"
 # define WHITE "\x1b[37m"
 # define RESET "\x1b[0m"
-
-
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -55,7 +53,7 @@ char			**ft_strnsplit(const char *str, char c, int row);
 char			**ft_strsplit(char const *s, char c);
 char			**ft_strmsplit(char const *s, char *c);
 char			*ft_imaxtoabase(intmax_t value, int base);
-char			*ft_implode(char glue, const char *str, const char *str2);
+char			*ft_implode(char *glue, const char *str, const char *str2);
 char			*ft_itoa(int n);
 char			*ft_itoabase(int value, int base);
 

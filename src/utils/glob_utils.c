@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 18:43:10 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:54:26 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/10 16:14:19 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	true_sort(t_paths *begin, t_paths *to_add)
 	begin->next = to_add;
 }
 
-int ft_strlento_comm(char *str, char *to_find)
+int		ft_strlento_comm(char *str, char *to_find)
 {
 	int i;
 

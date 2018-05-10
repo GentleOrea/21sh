@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/10 12:43:16 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 15:39:26 by ygarrot          ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -217,7 +217,7 @@ int		is_special(char **str, char **to_match);
 t_glob *ft_glob(char *regstr, int opt);
 void	free_globs(t_glob *glob);
 int		safe_dup(int fd1, int fd2, int *pipe);
-void here_doc(t_shell *sh, t_redi *redi);
+void	arg_replace(t_shell *sh, char **arg);
 
 t_paths	*path_is_valid(char *path, char *name, t_dirent *dire, char **regex);
 t_paths	*end_sort(t_paths *tmp, char *str, char **regex);

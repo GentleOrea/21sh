@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 12:50:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 16:11:22 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Le format est le meme pour x>&fd (Simplement ne pas ouvrir le fichier)
 */
 
-int	safe_dup(int fd1, int fd2, int *pipe)
+int		safe_dup(int fd1, int fd2, int *pipe)
 {
 	if (fd1 != -1 && dup2(fd1, fd2) == -1)
 		return (-printf("dup error\n"));
@@ -30,7 +30,7 @@ int		stream(t_shell *sh, t_redi *redi)
 {
 	int		flag;
 	int		right;
-	
+
 	if (!redi->type)
 	{
 		if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path,
@@ -41,7 +41,7 @@ int		stream(t_shell *sh, t_redi *redi)
 		close(redi->fd[1]);
 		redi->fd[1] = -1;
 	}
-	right = !redi->type ?  S_IRWXU : S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	right = !redi->type ? S_IRWXU : S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 	flag = O_RDWR | (redi->type == 5 ? O_TRUNC : 0) |
 		(!redi->type || redi->type == 5 ? O_CREAT : 0)
 		| (redi->type == 1 ? O_APPEND : 0);
@@ -62,7 +62,7 @@ int		set_redi(t_shell *sh, t_redi *redi)
 	if (!redi->type)
 	{
 		mallcheck(redi->path = (char*)ft_memalloc(18 * (sizeof(char))));
-		ft_strcpy(redi->path,"/tmp/.sh_heredoc");
+		ft_strcpy(redi->path, "/tmp/.sh_heredoc");
 		redi->path[16] = redi->fd[0] + '0';
 	}
 	if (redi->type == 2 || redi->type == 3)
@@ -96,7 +96,8 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 	sh->test = fork();
 	if (!sh->test)
 	{
-		if (sh->tmp->type & 4 && safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
+		if (sh->tmp->type & 4 &&
+				safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
 			exit(EXIT_FAILURE);
 		if (safe_dup(tmp->pipe[1], STDOUT_FILENO, tmp->pipe))
 			exit(EXIT_FAILURE);
