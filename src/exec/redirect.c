@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/09 16:13:07 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 12:50:23 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,25 @@ int	safe_dup(int fd1, int fd2, int *pipe)
 	return (0);
 }
 
-int		stream(t_redi *redi, int mod)
+int		stream(t_shell *sh, t_redi *redi)
 {
 	int		flag;
 	int		right;
-
-	(void)mod;
-	right = S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
+	
+	if (!redi->type)
+	{
+		if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path,
+						O_RDWR | O_CREAT, S_IRWXU)) < 0)
+			return (-ft_printf("Failed to open file\n"));
+		ft_putstr_fd(sh->here_doc, redi->fd[1]);
+		sh->here_doc += ft_strlen(sh->here_doc);
+		close(redi->fd[1]);
+		redi->fd[1] = -1;
+	}
+	right = !redi->type ?  S_IRWXU : S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH;
 	flag = O_RDWR | (redi->type == 5 ? O_TRUNC : 0) |
-		(redi->type == 5 ? O_CREAT : 0) | (redi->type == 1 ? O_APPEND : 0);
+		(!redi->type || redi->type == 5 ? O_CREAT : 0)
+		| (redi->type == 1 ? O_APPEND : 0);
 	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, right)) < 0)
 		return (-ft_printf("Failed to open file\n"));
 	if (dup2(redi->fd[1], redi->fd[0]) == -1)
@@ -46,14 +56,14 @@ int		set_redi(t_shell *sh, t_redi *redi)
 {
 	int		mod;
 
-	mod = (redi->type % 2 || !redi->type);
+	mod = (redi->type % 2);
 	redi->fd[1] = -1;
 	(redi->fd[0] < 0) ? redi->fd[0] = mod : 0;
 	if (!redi->type)
 	{
-		ft_putstr_fd(sh->here_doc, redi->fd[0]);
-		sh->here_doc += ft_strlen(sh->here_doc);
-		return (1);
+		mallcheck(redi->path = (char*)ft_memalloc(18 * (sizeof(char))));
+		ft_strcpy(redi->path,"/tmp/.sh_heredoc");
+		redi->path[16] = redi->fd[0] + '0';
 	}
 	if (redi->type == 2 || redi->type == 3)
 	{
@@ -62,14 +72,14 @@ int		set_redi(t_shell *sh, t_redi *redi)
 		else
 			redi->fd[1] = ft_atoi(redi->path);
 	}
-	return (stream(redi, mod));
+	return (stream(sh, redi));
 }
 
 int		exec_redi(t_shell *sh, t_redi *tmp)
 {
 	while (tmp)
 	{
-		if (!set_redi(sh, tmp))
+		if (set_redi(sh, tmp) <= 0)
 			return (-1);
 		tmp = tmp->next;
 	}

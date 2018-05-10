@@ -6,11 +6,10 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/08 14:48:33 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/10 10:24:52 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all $(NAME) clean fclean re
 
 NAME = libft.a
 
@@ -199,3 +198,6 @@ fclean: clean
 re:
 	make fclean 
 	make all
+
+
+.PHONY: all $(NAME) clean fclean re

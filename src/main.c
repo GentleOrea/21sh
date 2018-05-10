@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/09 15:52:03 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 12:43:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ int		main(int ac, char **av, char **env)
 	if (ft_setattr() == -1)
 		return (-1);
 	sh.env = env;
-	sh.fd = open("/dev/ttys003", O_RDWR);
+	sh.fd = open("/dev/ttys004", O_RDWR);
 	while (1)
 	{
 		line = ft_getentry();
 		while (line.line == 0)
 			line = ft_getentry();
 		hard_split(&sh, &line);
+		ft_memdel((void**)&line.line);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/09 16:32:00 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/10 12:43:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ int		exec_cli(t_shell *sh, t_com *com)
 	fail = wait_exec(sh, com->cli);
 	while (com->redi)
 	{
-		if (com->redi->type != 2 && com->redi->type != 3)
-			close(com->redi->fd[1]);
+		//if (com->redi->type != 2 && com->redi->type != 3)
+		//	close(com->redi->fd[1]);
 		to_del = com->redi;
 		com->redi = com->redi->next;
 		ft_memdel((void**)&to_del->path);
