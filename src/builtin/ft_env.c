@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:59:13 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:47:55 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 14:39:20 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void			ft_env(t_shell *sh, char **arg, char ***aenv)
 	char	**env;
 
 	env = *aenv;
+	ft_getenvfile(CODE_ENVADD);
 	if (!arg || !env)
 	{
 		ft_printf("env: An error occured\n");
@@ -79,6 +80,7 @@ void			ft_env(t_shell *sh, char **arg, char ***aenv)
 			ft_printf("%s\n", *env);
 			env++;
 		}
+		(void)sh;
 	}
 	else
 		ft_envcpy(sh, &arg[1], env);

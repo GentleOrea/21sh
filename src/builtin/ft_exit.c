@@ -6,20 +6,15 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/09 11:58:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 11:51:47 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 14:48:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	ft_exit(char **arg, char ***env)
+void	ft_exit(t_shell *sh)
 {
-//	t_list	*lst;
-
-	//lst = ft_var();
-	//ft_lstdel(&lst, &ft_lstfree);
 	ft_terminal_reset(0);
-	(void)arg;
-	(void)env;
+	(void)sh;
 	exit(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 13:14:26 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 13:27:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 14:45:03 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void		f_point(t_shell *sh)
 {
 	sh->f_built[0] = &ft_echo;
-	sh->f_built[1] = &ft_cd;
 	sh->f_built[2] = &ft_setenv;
 	sh->f_built[3] = &ft_unsetenv;
-	//sh->f_built[2] = &ft_env;
 }

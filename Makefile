@@ -6,13 +6,13 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/11 13:07:47 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/11 15:01:28 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = yosh
 
-FLAGS =  -Wall -Werror -Wextra -g3 #-fsanitize=address
+FLAGS =  -Wall -Werror -Wextra -g3 -fsanitize=address
 
 SRC_FOLDER = src/
 
@@ -23,9 +23,11 @@ SRC_FP = \
 		  builtin/ft_env.c \
 		  builtin/ft_exit.c \
 		  builtin/ft_setenv.c \
+		  builtin/no_set_env.c \
 		  builtin/ft_strlento.c \
 		  builtin/ft_strtabdup.c \
-		  builtin/ft_unsetenv.c
+		  builtin/ft_unsetenv.c \
+		  builtin/env_file.c
 
 SRC_FP += exec/exec.c \
 		  exec/redirect.c
@@ -102,7 +104,8 @@ SRC_FP += \
 
 SRC_FP += \
 		  env/ft_getenvfile.c \
-		  env/ft_recoverenv.c
+		  env/ft_recoverenv.c \
+		  env/ft_envwrite.c
 
 #Colors
 _RED=\x1b[31m

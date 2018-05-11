@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:30:41 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 14:41:20 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define REDI (char *[7]){"<<", ">>", "<&",">&", "<", ">"}
 # define UNESC "0xabfnrtv\\"
 
-# define BUILT (char *[6]){"echo", "cd", "env", "setenv", "unsetenv"}
+# define BUILT (char *[6]){"echo", "setenv", "unsetenv"}
 # define GLOB "[*?"
 # define ENDWORD " \n|;&<>"
 

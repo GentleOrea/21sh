@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:02:04 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 12:05:16 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 14:25:41 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,17 @@ int	ft_dblstr_add(char ***t, char *str)
 	if (!str)
 		return (0);
 	i = 0;
-	while (t[0][i])
+	while (t[0] && t[0][i])
 		i++;
 	if (!(tmp = (char**)malloc(sizeof(char*) * (i + 2))))
 		return (-1);
 	i = -1;
-	while (t[0][++i])
+	while (t[0] && t[0][++i])
 		tmp[i] = t[0][i];
-	t[0][i] = str;
-	t[0][i + 1] = 0;
+	if (i < 0)
+		i = 0;
+	tmp[i] = str;
+	tmp[i + 1] = 0;
 	free(*t);
 	*t = tmp;
 	return (0);

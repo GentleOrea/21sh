@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 14:42:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/10 16:16:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 15:00:00 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	ft_cdvar(char *old, char ***env)
 	tmp[3] = NULL;
 	tmp[1] = "OLDPWD";
 	tmp[2] = old;
-	ft_setenv(tmp, env);
+	ft_setenvno(tmp, env);
 	tmp[1] = "PWD";
 	tmp[2] = getcwd(NULL, 1);
-	ft_setenv(tmp, env);
+	ft_setenvno(tmp, env);
 	ft_strdel(&(tmp[2]));
 }
 
@@ -73,7 +73,7 @@ void		ft_cd(char **a, char ***env)
 	{
 		tmp = getcwd(tmp, 256);
 		s = ft_getenv(*env, "HOME");
-		if (!s || chdir(s) == -1)
+		if (!s || chdir(&s[5]) == -1)
 			ft_printf("minishell: cd: Can't access %s\n", s);
 		else
 		{

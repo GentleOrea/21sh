@@ -6,7 +6,8 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:48:35 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 15:00:17 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +35,7 @@ void	ft_errorlog(char *str);
 
 int		ft_recoverenv(char ***env);
 char	*ft_getenvfile(int code);
+int		ft_envwrite(char *file, char **env);
 void	ft_initenv(char ***env);
 void	ft_init_terminal_data(char **env);
 int		ft_setattr(void);
@@ -192,9 +194,10 @@ void	ft_builtin(char **arg, char ***env, int pid);
 void	ft_echo(char **arg, char ***env);
 void	ft_cd(char **arg, char ***env);
 void	ft_setenv(char **arg, char ***env);
+void	ft_setenvno(char **arg, char ***env);
 void	ft_unsetenv(char **arg, char ***env);
 void	ft_env(t_shell *sh, char **arg, char ***env);
-void	ft_exit(char **arg, char ***env);
+void	ft_exit(t_shell *sh);
 int		ft_setenvvar(char **env, char *cur, char *var);
 int		ft_strlento(char *str, char c);
 char	**ft_strtbdup(char **tb);
@@ -221,7 +224,8 @@ void	free_globs(t_glob *glob);
 int		safe_dup(int fd1, int fd2, int *pipe);
 void	arg_replace(t_shell *sh, char **arg);
 int		write_env(char **env);
-void	parse_exe(t_shell *sh, char *comm, char **arg);
+void		parse_exe(t_shell *sh, char *comm, char **argv);
+
 
 t_paths	*path_is_valid(char *path, char *name, t_dirent *dire, char **regex);
 t_paths	*end_sort(t_paths *tmp, char *str, char **regex);

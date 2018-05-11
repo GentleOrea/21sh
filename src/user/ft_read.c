@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 12:20:10 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 14:47:34 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 		if (!*tmp && (val[4] ? line->line : line->eof)[val[0]])
 			ft_delete(line, val);
 		else if (!*tmp)
-			ft_exit(0, 0);
+			ft_exit(0);
 		else if (tmp[i[1]] == '\n' &&
 				(re = ft_read_newline(line, val, pars) == 1))
 			return (re);

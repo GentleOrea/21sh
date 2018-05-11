@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:45:03 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 11:25:32 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 14:42:42 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ t_line	ft_getentry(void)
 		ligne.line = tmp;
 		ft_heredoc_purge(ligne.eof, ligne.size_eof);
 	}
-	if (ligne.line && !ft_strncmp("exit", ligne.line, 4))
-		ft_exit(0, 0);
 	ft_history_cache(0, CODE_RESET);
 	return (ligne);
 }
