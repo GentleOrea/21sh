@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:51:31 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 15:41:59 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 17:09:45 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	parse_exe(t_shell *sh, char *comm, char **arg)
 {
 	int	index;
 
-	ft_printf("%s\n", comm);
 	if (exec_redi(sh, sh->tmp->redi) < 0)
 		exit(error_exec(arg));
 	if (!ft_strcmp(comm, "env"))

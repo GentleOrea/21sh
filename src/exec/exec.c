@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 15:38:08 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 17:13:14 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		wait_exec(t_shell *sh, char **arg)
 		ft_exit(sh);
 	if (!ft_strcmp(*arg, "cd"))
 	{
+		if (exec_redi(sh, sh->tmp->redi) < 0)
+			return(-1);
 		ft_cd(arg, &sh->env);
 		return (1);
 	}
@@ -59,7 +61,6 @@ int		search_exec(t_shell *sh, char *comm, char **argv)
 	char	*path;
 
 	temp = NULL;
-	ft_print_chartab(sh->env, 4);
 	if (!comm || !(path = ft_getenv(sh->env, "PATH")))
 		return (!comm ? 0 : -ft_printf("command not found : %s\n", comm));
 	mallcheck(paths = ft_strsplit(&path[5], ':'));
