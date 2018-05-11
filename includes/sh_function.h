@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/10 15:39:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 10:12:59 by tcharrie         ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -27,11 +27,13 @@ int		writechar(int c);
 
 void	ft_direction_del(void *content, size_t t);
 void	ft_command_del(void *c, size_t t);
+void	ft_errorlog(char *str);
 
 /*
 ** Parametrage du terminal
 */
 
+int		ft_recoverenv(char ***env);
 void	ft_initenv(char ***env);
 void	ft_init_terminal_data(char **env);
 int		ft_setattr(void);

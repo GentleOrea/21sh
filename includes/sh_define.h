@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 11:42:15 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 10:07:12 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define ERR -1
 # define ERR_PARS1_MSG "21sh: syntax error near unexpected token '|'\n"
 # define ERR_PARS2_MSG "21sh: syntax error near unexpected token '&'\n"
+# define ENVFAILED "Failed to get the environment\n"
 # define MALLOC_ERR '\00'
 # define MALLOC_ERR_MSG "21sh: An error occured while using malloc\n"
 # define NO_CHAR_MSG "21sh: Starting without insert character mode\n"
