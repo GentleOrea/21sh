@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   env_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/20 13:14:26 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 13:27:40 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/05/11 11:24:11 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/05/11 13:29:51 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
-void		f_point(t_shell *sh)
+int		write_env(char **env)
 {
-	sh->f_built[0] = &ft_echo;
-	sh->f_built[1] = &ft_cd;
-	sh->f_built[2] = &ft_setenv;
-	sh->f_built[3] = &ft_unsetenv;
-	//sh->f_built[2] = &ft_env;
+	int	fd;
+	int	i;
+
+	i = -1;
+	if ((fd = open(str, O_RDWR | O_TRUNC | O_CREAT, S_IRWXU)))
+		return (-1);
+	while (env[++i])
+	{
+		ft_putstr_fd("\v", fd);
+		ft_putstr_fd(env[i], fd);
+	}
+	return (close(fd));
 }

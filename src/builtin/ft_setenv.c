@@ -6,11 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:40:00 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:26:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
 static void	ft_setenvnew_aux(char ***env, char **tb, char *str)
 {
@@ -18,7 +18,7 @@ static void	ft_setenvnew_aux(char ***env, char **tb, char *str)
 
 	i = -1;
 	while (env[0][++i])
-		tb[i] = env[0][i];
+		tb[i] = (*env)[i];
 	tb[i++] = str;
 	tb[i] = 0;
 	free(*env);
@@ -28,50 +28,25 @@ static void	ft_setenvnew_aux(char ***env, char **tb, char *str)
 static void	ft_setenvnew(char ***env, char *var, char *value)
 {
 	int		i;
-	int		j;
 	char	*str;
 	char	**tb;
 
 	i = 0;
-	while (env[0][i])
+	while ((*env)[i])
 		i++;
 	if (!(tb = (char**)malloc(sizeof(char*) * (i + 2))))
 		return ;
-	if (!(str = (char*)malloc(ft_strlen(var) + (value ? ft_strlen(value) : 0)
-		+ 2)))
-		return ;
-	i = -1;
-	while (var[++i])
-		str[i] = var[i];
-	str[i++] = '=';
-	j = 0;
-	while (value && value[j])
-		str[i++] = value[j++];
-	str[i] = 0;
+	str = ft_implode(var, "=", value);
 	ft_setenvnew_aux(env, tb, str);
 }
 
 static void	ft_setenvaux(char **a, char **env)
 {
-	size_t	i;
-	char	*tmp;
+	char *tmp;
 
-	if (!(tmp = (char*)malloc(sizeof(char) * (ft_strlen(a[1]) + 1))))
-	{
-		ft_printf("setenv: An error occured");
-		return ;
-	}
-	i = 0;
-	while (a[1][i])
-	{
-		tmp[i] = a[1][i];
-		i++;
-	}
-	tmp[i] = '=';
-	tmp[i + 1] = 0;
-	(void)env;
-	//	ft_setenvvar(env, a[2], tmp);
-	ft_strdel(&tmp);
+	tmp = ft_implode(a[1], "=", a[2]);
+	ft_memdel((void**)*env);
+	*env = tmp;
 }
 
 void		ft_setenv(char **arg, char ***env)
@@ -87,14 +62,15 @@ void		ft_setenv(char **arg, char ***env)
 	else
 	{
 		j = ft_strlen(arg[1]);
-		while (env[0][i] && (ft_strncmp(arg[1], env[0][i], j) ||
-				env[0][i][j] != '='))
+		while ((*env)[i] && (ft_strncmp(arg[1], (*env)[i], j) ||
+				(*env)[i][j] != '='))
 			i++;
-		if (env[0][i] && !arg[2])
-			env[0][i][ft_strlento(env[0][i], '=') + 1] = 0;
-		else if (env[0][i] && arg[2])
-			ft_setenvaux(arg, *env);
+		if ((*env)[i] && !arg[2])
+			(*env)[i][ft_strlento((*env)[i], '=') + 1] = 0;
+		else if ((*env)[i] && arg[2])
+			ft_setenvaux(arg, &(*env)[i]);
 		else
-			return (ft_setenvnew(env, arg[1], arg[2]));
+			ft_setenvnew(env, arg[1], arg[2]);
 	}
+	write_env(*env);
 }

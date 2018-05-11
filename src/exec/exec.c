@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 10:13:07 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:43:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,11 @@
 
 int		wait_exec(t_shell *sh, char **arg)
 {
-	int index;
-
-	if (0 && (index = ft_strisin_tab(arg[0], BUILT, 0)) >= 0)
-		sh->f_built[index](arg, &sh->env);
+	//cd
+	if (!access(*arg, F_OK | X_OK))
+		return (exe(sh, *arg, arg));
 	else
-	{
-		if (!access(*arg, F_OK | X_OK))
-			return (exe(sh, *arg, arg));
-		else
-			return (search_exec(sh, *arg, arg));
-	}
+		return (search_exec(sh, *arg, arg));
 	return (1);
 }
 
@@ -40,8 +34,7 @@ int		exe(t_shell *sh, char *comm, char **argv)
 		if (sh->tmp->type & 4 && 
 				safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
 			exit(EXIT_FAILURE);
-		if (exec_redi(sh, sh->tmp->redi) < 0 || execve(comm, argv, sh->env))
-			exit(error_exec(argv));
+		parse_exe(sh, comm, argv);
 	}
 	if (sh->tmp->type & 4)
 		safe_dup(-1, 0, sh->tmp->pipe);

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:39:20 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:39:53 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:26:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@ static void	ft_unsetenv_move(char **env)
 
 void		ft_unsetenv(char **arg, char ***aenv)
 {
-	size_t	j;
-	size_t	i;
 	char	**env;
+	int		i;
+	int		j;
 
 	env = *aenv;
 	if (!arg || !env || !*env || !*arg)
 		;
 	else if (!*arg || !arg[1])
-		ft_printf("minishell: unsetenv: Argument missing\n");
+		ft_printf("21sh: unsetenv: Argument missing\n");
 	else if (arg[2])
-		ft_printf("minishell: unsetenv: Too many arguments\n");
+		ft_printf("21sh unsetenv: Too many arguments\n");
 	else
 	{
 		j = ft_strlen(arg[1]);
@@ -51,4 +51,5 @@ void		ft_unsetenv(char **arg, char ***aenv)
 				ft_unsetenv_move(&(env[i]));
 		}
 	}
+	write_env(env);
 }

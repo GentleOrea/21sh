@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 16:11:22 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 13:43:19 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,7 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 			exit(EXIT_FAILURE);
 		if (safe_dup(tmp->pipe[1], STDOUT_FILENO, tmp->pipe))
 			exit(EXIT_FAILURE);
-		exec_redi(sh, sh->tmp->redi);
-		if (execve(comm, argv, sh->env))
-			return (error_exec(argv));
+		parse_exe(sh, comm, argv);
 	}
 	if (sh->tmp->type & 4)
 		safe_dup(-1, 0, sh->tmp->pipe);

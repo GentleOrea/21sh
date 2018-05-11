@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:59:13 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/09 16:32:31 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 13:19:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,35 +37,32 @@ static size_t	ft_envcpy_add(char **arg, char **env)
 	return (j);
 }
 
-static void		ft_envcpy(char **arg, char **env, char *null)
+static void		ft_envcpy(t_shell *sh, char **arg, char **env)
 {
 	size_t	i;
-	size_t	j;
 	char	**newenv;
+	t_com	com;
+
 
 	if (!arg || !env)
 		return ;
-	i = 0;
-	j = 0;
-	while (env[i])
-		i++;
-	while (arg[j++])
-		i++;
-	if (!(newenv = (char**)malloc(sizeof(char*) * (i + 1))))
+	i = ft_tablen(env) + ft_tablen(arg);
+	if (!(newenv = (char**)ft_memalloc(sizeof(char*) * (i + 1))))
 		return ;
 	i = 0;
 	while (env[i++])
 		newenv[i - 1] = ft_strdup(env[i - 1]);
-	newenv[i - 1] = NULL;
 	i = ft_envcpy_add(arg, newenv);
+	ft_bzero(&com, sizeof(t_com));
+	com.cli = &arg[i];
 	if (!arg[i])
-		ft_env(&null, &newenv);
-	//else
-	//	ft_execute(ft_strtabdup(&(arg[i])), &newenv);
+		ft_env(sh, NULL, &newenv);
+	else
+		exec_cli(sh, &com);
 	ft_free_dblechar_tab(newenv);
 }
 
-void			ft_env(char **arg, char ***aenv)
+void			ft_env(t_shell *sh, char **arg, char ***aenv)
 {
 	char	**env;
 
@@ -84,5 +81,5 @@ void			ft_env(char **arg, char ***aenv)
 		}
 	}
 	else
-		ft_envcpy(&(arg[1]), env, NULL);
+		ft_envcpy(sh, &arg[1], env);
 }
