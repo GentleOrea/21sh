@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:59:13 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 14:39:20 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:04:29 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void		ft_envcpy(t_shell *sh, char **arg, char **env)
 	ft_bzero(&com, sizeof(t_com));
 	com.cli = &arg[i];
 	if (!arg[i])
-		ft_env(sh, NULL, &newenv);
+		ft_env(sh, &arg[i], &newenv);
 	else
 		exec_cli(sh, &com);
 	ft_free_dblechar_tab(newenv);
@@ -84,4 +84,5 @@ void			ft_env(t_shell *sh, char **arg, char ***aenv)
 	}
 	else
 		ft_envcpy(sh, &arg[1], env);
+	exit(EXIT_SUCCESS);
 }

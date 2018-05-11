@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:31:11 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:49:15 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:02:08 by tcharrie         ###   ########.fr       */
 /*   Updated: 2018/05/11 13:07:10 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -24,6 +24,7 @@ char	*ft_getenvfile(int code)
 		str = ft_strdup(ENVFILE);
 	if (code == CODE_ENVADD)
 	{
+		printf("ENVADD;\n");
 		if (!(tmp = ft_memalloc(ft_strlen(str) + 2)))
 			return (0);
 		ft_strcat(tmp, str);
@@ -33,9 +34,6 @@ char	*ft_getenvfile(int code)
 		str = tmp;
 	}
 	else if (code == CODE_ENVGET)
-	{
-		if (ft_strlen(str) < ft_strlen(ENVFILE))
-			return (0);
-	}
-	return (ft_strdup(str));
+		return (ft_strdup(str));
+	return (0);
 }

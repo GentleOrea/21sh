@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 14:41:20 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 15:28:57 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define REDI (char *[7]){"<<", ">>", "<&",">&", "<", ">"}
 # define UNESC "0xabfnrtv\\"
 
-# define BUILT (char *[6]){"echo", "setenv", "unsetenv"}
+# define BUILT (char *[6]){"echo","env", "setenv", "unsetenv"}
 # define GLOB "[*?"
 # define ENDWORD " \n|;&<>"
 
@@ -64,7 +64,7 @@
 # define KEY_DOWN_SHITED "\33[1;2B"
 # define KEY_SELECT_LEFT "\33\133\61\73\61\60\104"
 # define KEY_SELECT_RIGHT "\33\133\61\73\61\60\103"
-# define KEY_SELECT_CPY "\75"
+# define KEY_SELECT_CPY "\7"
 # define KEY_SELECT_PASTE "\36\170\146"
 # define KEY_END "\33[F"
 # define KEY_END_SHIFTED "\33[1;2F"

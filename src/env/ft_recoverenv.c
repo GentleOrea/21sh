@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:53:46 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:15:26 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:22:29 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		ft_recoverenv(char ***env)
 
 	if (!(file = ft_getenvfile(CODE_ENVGET)))
 		return (-1);
-	if (!ft_envmodiftime(file))
+	if (ft_envmodiftime(file))
 	{
 		ft_strdel(&file);
 		return (0);

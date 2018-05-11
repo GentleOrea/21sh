@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 12:48:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 15:18:50 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 15:24:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_init_aff(int *val)
 			ft_strcat(local, &tmp[i]);
 		else
 			ft_strcat(local, "/");
-		ft_strcat(local, ">");
+		ft_strcat(local, " >");
 	}
 	ft_putstr(local);
 	i = ft_strlen(local);
