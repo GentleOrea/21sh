@@ -6,12 +6,16 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 11:51:41 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:30:41 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_DEFINE_H
 # define SH_DEFINE_H
+
+# define LOGFILE "/tmp/.sh_errorlog"
+# define HISTORYFILE "~/.sh_history"
+# define ENVFILE "/tmp/.sh_env"
 
 # define BUFFSIZE 100
 # define ERR -1
@@ -48,6 +52,7 @@
 
 # define BUILT (char *[6]){"echo", "cd", "env", "setenv", "unsetenv"}
 # define GLOB "[*?"
+# define ENDWORD " \n|;&<>"
 
 # define KEY_LEFT "\33[D"
 # define KEY_LEFT_SHITED "\33[1;2D"
@@ -69,9 +74,9 @@
 # define KEY_ERASE "\177"
 # define NEWLINE "\n"
 
-# define HISTORYFILE "~/.sh_history"
-
 # define CODE_ENVGET '\01'
 # define CODE_ENVADD '\02'
-# define ENVFILE /tmp/.sh_env
+
+# define COMPLETION_FILE 1
+# define COMPLETION_COM 2
 #endif

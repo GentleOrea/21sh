@@ -6,13 +6,13 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:31:11 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 12:32:24 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:07:10 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*ft_getenvfile(int code, char **env)
+char	*ft_getenvfile(int code)
 {
 	static char		*str = 0;
 	char			*tmp;
@@ -33,8 +33,7 @@ char	*ft_getenvfile(int code, char **env)
 	}
 	else if (code == CODE_ENVGET)
 	{
-		if (ft_strlen(str) < ft_strlen(ENVFILE) ||
-				ft_atoi(str[ft_strlen(str)]) != countenv)
+		if (ft_strlen(str) < ft_strlen(ENVFILE))
 			return (0);
 	}
 	return (ft_strdup(str));

@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/10 15:39:49 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/11 13:07:47 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,6 +99,10 @@ SRC_FP += \
 		  write/ft_printstr.c \
 		  write/ft_select.c \
 		  write/ft_select_reset.c
+
+SRC_FP += \
+		  env/ft_getenvfile.c \
+		  env/ft_recoverenv.c
 
 #Colors
 _RED=\x1b[31m

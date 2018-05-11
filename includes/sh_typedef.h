@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 15:23:19 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:09:54 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 typedef struct termios	t_termios;
 typedef struct dirent	t_dirent;
 typedef struct s_glob	t_glob;
+typedef struct stat	t_stat;
 
 typedef struct	s_variable
 {
