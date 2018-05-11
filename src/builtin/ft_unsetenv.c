@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:39:20 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 15:34:57 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:54:53 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,5 @@ void		ft_unsetenv(char **arg, char ***aenv)
 				ft_unsetenv_move(&(env[i]));
 		}
 	}
-	write_env(env);
 	exit(EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/11 15:01:28 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/11 16:54:32 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ SRC_FP = \
 		  builtin/no_set_env.c \
 		  builtin/ft_strlento.c \
 		  builtin/ft_strtabdup.c \
-		  builtin/ft_unsetenv.c \
-		  builtin/env_file.c
+		  builtin/ft_unsetenv.c
 
 SRC_FP += exec/exec.c \
 		  exec/redirect.c
