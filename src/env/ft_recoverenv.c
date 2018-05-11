@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:53:46 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 11:58:01 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 12:13:31 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,22 @@ int		ft_recoverenv(char ***env)
 	if (!(file = ft_getenvfile(CODE_ENVGET, 0)))
 		return (-1);
 	if (!ft_envmodiftime(file))
+	{
+		ft_strdel(&file);
 		return (0);
-	if ((fd = open(file, RD_ONLY)) == -1)
+	}
+	fd = open(file, RD_ONLY);
+	ft_strdel(&file);
+	if (fd == -1)
 		return (-1);
 	ft_free_dblechar_tab(*env);
+	*env = 0;
 	line = 0;
 	while (get_filetochar(fd, &line, '\v') == 1)
 	{
-
+		if (ft_dlstr_add(env, line) == -1)
+			return (-1);
 	}
 	return (0);
 }
+

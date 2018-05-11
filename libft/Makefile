@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/11 12:06:31 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/11 12:31:30 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC = \
 	  misc/ft_occur_in.c \
 	  misc/ft_row_div.c \
 	  misc/ft_intswap.c \
-	  misc/ft_power.c
+	  misc/ft_power.c \
+	  misc/ft_cpy.c
 
 SRC += \
 	   to/ft_atoi.c \

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:31:11 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 11:51:35 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 12:32:24 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char	*ft_getenvfile(int code, char **env)
 			return (0);
 		ft_strcat(tmp, str);
 		tmp[ft_strlen(str)] = '0';
+		ft_cpy(str, tmp);
 		free(str);
 		str = tmp;
 	}
