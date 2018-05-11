@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/11 11:55:20 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/11 12:06:31 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -137,7 +137,8 @@ SRC += \
 	   tab/ft_print_dbl_inttab.c \
 	   tab/ft_print_inttab.c \
 	   tab/ft_sizeof_tab.c \
-	   tab/ft_tablen.c 
+	   tab/ft_tablen.c \
+	   tab/ft_dblstr_add.c
 
 SRC += \
 	   printf/chooseconv.c \

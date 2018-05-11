@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 11:55:56 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 12:05:59 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,4 +188,5 @@ int				ft_strinstr(char *str, char *pattern);
 int				ft_strprefix(char *pref, char *str);
 void			ft_intswap(int *i, int *j);
 int				ft_power(int nb, int pow);
+int				ft_dlstr_add(char ***t, char *str);
 #endif
