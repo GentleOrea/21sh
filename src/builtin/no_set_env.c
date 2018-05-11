@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 15:02:35 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 15:05:58 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	ft_setenvnew_aux(char ***env, char **tb, char *str)
 	int	i;
 
 	i = -1;
+	if (!env)
+		return ;
 	while (*env[++i])
 		tb[i] = (*env)[i];
 	tb[i++] = str;
@@ -32,6 +34,8 @@ static void	ft_setenvnew(char ***env, char *var, char *value)
 	char	**tb;
 
 	i = 0;
+	if (!env)
+		return ;
 	while ((*env)[i])
 		i++;
 	if (!(tb = (char**)malloc(sizeof(char*) * (i + 2))))
@@ -44,8 +48,8 @@ static void	ft_setenvaux(char **a, char **env)
 {
 	char *tmp;
 
-	tmp = ft_implode(a[1], "=", a[2]);
-	ft_memdel((void**)*env);
+	tmp = ft_implode("=", a[1], a[2]);
+	//ft_memdel((void**)*env);
 	*env = tmp;
 }
 

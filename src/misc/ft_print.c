@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 12:48:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 13:50:38 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 15:18:50 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,30 @@
 char	*ft_init_aff(int *val)
 {
 	char	*local;
+	char	*tmp;
 	size_t	i;
-	int		c;
 
-	c = 2;
-	if (!(local = getcwd(0, 1)))
-		write(1, "$>", 2);
+	if (!(local = (char*)ft_memalloc(100 + 1)))
+		return (0);
+	if (!(tmp = getcwd(0, 0)))
+		ft_strcat(local, "$>");
 	else
 	{
-		i = ft_strlen(local);
-		while (i && local[i] != '/')
+		i = ft_strlen(tmp);
+		while (i && tmp[i] != '/')
 			i--;
-		if (local[i] == '/')
-			i++;
-		c = write(1, &(local[i]), ft_strlen(&(local[i])));
-		c += write(1, " >", 2);
+		i += (tmp[i] == '/');
+		if (tmp[i])
+			ft_strcat(local, &tmp[i]);
+		else
+			ft_strcat(local, "/");
+		ft_strcat(local, ">");
 	}
-	val[0] = c;
-	val[1] = c;
-	val[5] = c;
-	if (!(local = (char*)ft_memalloc(c + 1)))
-		return (0);
-	ft_memset((void*)local, 100, c);
+	ft_putstr(local);
+	i = ft_strlen(local);
+	val[0] = i;
+	val[1] = i;
+	val[5] = i;
 	return (local);
 }
 
