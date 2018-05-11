@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/11 15:23:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 13:35:02 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 11:55:56 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,6 @@ void			ft_strswap(char *str, char *str2);
 
 char			**ft_strtabdup(char **tabl);
 char			*ft_strdupto(char *str, char to);
-size_t			ft_power(size_t nb, size_t pow);
 int				ft_indexmin(int *tabl, size_t len);
 int				ft_sqrt(int n);
 int				ft_gotmod(size_t nb, int i);
@@ -188,4 +187,5 @@ void			ft_replace(char *str, char c, char n);
 int				ft_strinstr(char *str, char *pattern);
 int				ft_strprefix(char *pref, char *str);
 void			ft_intswap(int *i, int *j);
+int				ft_power(int nb, int pow);
 #endif

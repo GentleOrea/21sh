@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/10 15:40:01 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/11 11:55:20 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ SRC = \
 	  misc/ft_occiter.c \
 	  misc/ft_occur_in.c \
 	  misc/ft_row_div.c \
-	  misc/ft_intswap.c
+	  misc/ft_intswap.c \
+	  misc/ft_power.c
 
 SRC += \
 	   to/ft_atoi.c \
@@ -116,7 +117,8 @@ SRC += \
 	   str/ft_strdupto.c
 
 SRC += \
-	   get_next_line/get_next_line.c 
+	   get_next_line/get_next_line.c \
+	   get_next_line/get_filetochar.c
 
 SRC += \
 	   list/ft_lstadd.c \

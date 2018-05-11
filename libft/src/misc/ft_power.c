@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_power.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 10:07:36 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 11:16:09 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/05/11 10:57:20 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/05/11 11:15:43 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+int	ft_power(int nb, int pow)
 {
-	size_t i;
-
-	i = 0;
-	while (i < n)
-	{
-		((unsigned char*)s)[i] = '\0';
-		i++;
-	}
+	if (pow < 0)
+		return (0);
+	if (pow == 0)
+		return (0);
+	return (nb * ft_power(nb, pow - 1));
 }

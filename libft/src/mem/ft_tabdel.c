@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_tabdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/09 10:07:36 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 11:16:09 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/05/11 11:16:44 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/05/11 11:19:04 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_memmdel(char ***t)
 {
-	size_t i;
+	int	i;
 
+	if (!t || !*t)
+		return ;
 	i = 0;
-	while (i < n)
-	{
-		((unsigned char*)s)[i] = '\0';
-		i++;
-	}
+	while (t[0][i])
+		free(tab[0][i++]);
+	free(t[0]);
+	t[0] = 0;
 }

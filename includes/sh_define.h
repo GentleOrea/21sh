@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 10:07:12 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 11:51:41 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,8 @@
 # define NEWLINE "\n"
 
 # define HISTORYFILE "~/.sh_history"
+
+# define CODE_ENVGET '\01'
+# define CODE_ENVADD '\02'
+# define ENVFILE /tmp/.sh_env
 #endif
