@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 16:11:07 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/11 10:13:07 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ int		sort_comm(t_shell *sh, t_com *com)
 	while (com)
 	{
 		sh->tmp = com;
+		if (ft_recoverenv(&(sh->env)) == -1)
+			ft_errorlog(ENVFAILED);
 		if (com->next && com->next->type & 4)
 		{
 			fail = exec_cli(sh, com);
