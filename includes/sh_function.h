@@ -6,8 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:36:45 by ygarrot          ###   ########.fr       */
-/*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:48:35 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +33,7 @@ void	ft_errorlog(char *str);
 */
 
 int		ft_recoverenv(char ***env);
+char	*ft_getenvfile(int code);
 void	ft_initenv(char ***env);
 void	ft_init_terminal_data(char **env);
 int		ft_setattr(void);

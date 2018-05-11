@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:53:46 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 12:13:31 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 13:15:26 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 int		ft_envmodiftime(char *file)
 {
 	static time_t	time = -1;
-	struct t_stat	buff;
+	t_stat	buff;
 	time_t			i;
 
 	if (!file || lstat(file, &buff) == -1)
 		return (-1);
 	i = time;
-	time = buff->st_mtimespec;
+	time = buff.st_mtimespec.tv_sec;
 	return (i != time);
 }
 
@@ -37,14 +37,14 @@ int		ft_recoverenv(char ***env)
 	char	*line;
 	int		fd;
 
-	if (!(file = ft_getenvfile(CODE_ENVGET, 0)))
+	if (!(file = ft_getenvfile(CODE_ENVGET)))
 		return (-1);
 	if (!ft_envmodiftime(file))
 	{
 		ft_strdel(&file);
 		return (0);
 	}
-	fd = open(file, RD_ONLY);
+	fd = open(file, O_RDONLY);
 	ft_strdel(&file);
 	if (fd == -1)
 		return (-1);
@@ -53,7 +53,7 @@ int		ft_recoverenv(char ***env)
 	line = 0;
 	while (get_filetochar(fd, &line, '\v') == 1)
 	{
-		if (ft_dlstr_add(env, line) == -1)
+		if (ft_dblstr_add(env, line) == -1)
 			return (-1);
 	}
 	return (0);
