@@ -6,75 +6,43 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 15:05:58 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:44:30 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-static void	ft_setenvnew_aux(char ***env, char **tb, char *str)
+static void	ft_putendv_fd(char *str, int fd)
 {
-	int	i;
-
-	i = -1;
-	if (!env)
-		return ;
-	while (*env[++i])
-		tb[i] = (*env)[i];
-	tb[i++] = str;
-	tb[i] = 0;
-	free(*env);
-	*env = tb;
-}
-
-static void	ft_setenvnew(char ***env, char *var, char *value)
-{
-	int		i;
-	char	*str;
-	char	**tb;
-
-	i = 0;
-	if (!env)
-		return ;
-	while ((*env)[i])
-		i++;
-	if (!(tb = (char**)malloc(sizeof(char*) * (i + 2))))
-		return ;
-	str = ft_implode(var, "=", value);
-	ft_setenvnew_aux(env, tb, str);
-}
-
-static void	ft_setenvaux(char **a, char **env)
-{
-	char *tmp;
-
-	tmp = ft_implode("=", a[1], a[2]);
-	//ft_memdel((void**)*env);
-	*env = tmp;
+	ft_putstr_fd(str, fd);
+	write(fd, "\v", 1);
 }
 
 void		ft_setenvno(char **arg, char ***env)
 {
 	int		i;
 	size_t	j;
+	int		fd;
 
-	i = 0;
-	if (!arg || !env || !*env)
+	if (!arg || !env || !*env || (i = 0))
 		ft_printf("\n");
-	else if (!arg[1])
-		ft_putendl_fd("minishell: setenv VARNAME [VARVALUE]", 2);
+	else if (!*arg || !arg[1])
+		ft_putendl_fd("21sh: setenv VARNAME [VARVALUE]", 2);
 	else
 	{
+		if ((fd = open(ft_getenvfile(CODE_ENVGET), O_WRONLY | O_CREAT | O_TRUNC)) < 0)
+			exit(EXIT_FAILURE);
 		j = ft_strlen(arg[1]);
 		while ((*env)[i] && (ft_strncmp(arg[1], (*env)[i], j) ||
 				(*env)[i][j] != '='))
-			i++;
-		if ((*env)[i] && !arg[2])
-			(*env)[i][ft_strlento((*env)[i], '=') + 1] = 0;
-		else if ((*env)[i] && arg[2])
-			ft_setenvaux(arg, &(*env)[i]);
-		else
-			ft_setenvnew(env, arg[1], arg[2]);
+			ft_putendv_fd(env[0][i++], fd);
+		i += (env[0][i] != 0);
+		ft_putstr_fd(arg[1], fd);
+		ft_putstr_fd("=", fd);
+		ft_putendv_fd(arg[2], fd);
+		while ((*env)[i] && (ft_strncmp(arg[1], (*env)[i], j) ||
+				(*env)[i][j] != '='))
+			ft_putendv_fd(env[0][i++], fd);
+		close(fd);
 	}
-	write_env(*env);
 }

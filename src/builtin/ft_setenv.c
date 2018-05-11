@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 16:29:21 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:36:58 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void		ft_setenv(char **arg, char ***env)
 		while ((*env)[i] && (ft_strncmp(arg[1], (*env)[i], j) ||
 				(*env)[i][j] != '='))
 			ft_putendv_fd(env[0][i++], fd);
+		close(fd);
 	}
 	exit(EXIT_SUCCESS);
 }

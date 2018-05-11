@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:53:46 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 16:22:29 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:42:08 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		ft_envmodiftime(char *file)
 		return (-1);
 	i = time;
 	time = buff.st_mtimespec.tv_sec;
-	return (i != time);
+	return (i != -1 && i != time);
 }
 
 int		ft_recoverenv(char ***env)
@@ -39,7 +39,7 @@ int		ft_recoverenv(char ***env)
 
 	if (!(file = ft_getenvfile(CODE_ENVGET)))
 		return (-1);
-	if (ft_envmodiftime(file))
+	if (ft_envmodiftime(file) != 1)
 	{
 		ft_strdel(&file);
 		return (0);
