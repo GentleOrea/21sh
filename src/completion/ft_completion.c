@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:56:06 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 14:43:52 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 17:13:44 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,33 @@ int		ft_completion_type(t_line *line, int *val)
 		line->line[val[10]] == ' ' && line->line[val[9] - 1] != ';')
 		return (COMPLETION_COM);
 	return (COMPLETION_FILE);
+}
+
+int		ft_completion_count(int code)
+{
+	static int	save = 0;
+
+	if (code == CODE_RESET)
+		save = 0;
+	else if (code == CODE_PUSH)
+		save++;
+	else if (code == CODE_GET)
+		return (save);
+	return (0);
+}
+
+char	*ft_completion_save(int code, char *str)
+{
+	static char	*save = 0;
+
+	if (code == CODE_RESET)
+		ft_strdel(&save);
+	if (code == CODE_SET)
+	{
+		ft_strdel(&save);
+		save = ft_strdup(str);
+	}
+	if (code == CODE_GET)
+		return (save);
+	return (save);
 }

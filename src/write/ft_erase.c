@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 15:24:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 12:29:50 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:42:58 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		ft_delete(t_line *line, int *val)
 		return (-1);
 	if ((val[9] = val[0] + ft_strlen(&str[val[0]])) == 0)
 		return (1);
+	if (val[9] < 0)
+		return (-1);
 	val[10] = val[0];
 	while (val[10]++ < val[9])
 		str[val[10] - 1] = str[val[10]];
