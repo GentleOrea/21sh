@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 14:43:37 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 15:30:20 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:31:28 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*ft_completion_startcpy(char *str, char *tmp, int from, int to)
 			sep[0] = ft_separator(tmp[from], sep[0], sep[1]);
 			sep[1] = !sep[1] && sep[0] != '\'' && tmp[from++] == '\\';
 		}
-		else if (k = ft_lenchar_r(tmp, from) > 0)
+		else if ((k = ft_lenchar_r(tmp, from)) > 0)
 		{
 			sep[0] = ft_separator(tmp[from], sep[0], sep[1]);
 			sep[1] = !sep[1] && sep[0] != '\'' && tmp[from] == '\\';
