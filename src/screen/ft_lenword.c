@@ -6,13 +6,13 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 16:05:24 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 12:12:39 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:17:59 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-int		ft_lenword_r(char *str, int pos)
+int			ft_lenword_r(char *str, int pos)
 {
 	int	i;
 	int	sep;
@@ -58,7 +58,7 @@ static void	ft_lenword_left(char *str, int pos, int *i, int *mov)
 	}
 }
 
-int		ft_lenword_l(char *str, int pos)
+int			ft_lenword_l(char *str, int pos)
 {
 	int	mov;
 	int	i;

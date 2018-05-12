@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 14:47:34 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:15:05 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 		else if (!*tmp)
 			ft_exit(0);
 		else if (tmp[i[1]] == '\n' &&
-				(re = ft_read_newline(line, val, pars) == 1))
+				(re = ft_read_newline(line, val, pars)))
 			return (re);
 		i[1] += (tmp[i[1]] == '\n');
 		i[1] += ft_specialchar(line, &tmp[i[1]], val);

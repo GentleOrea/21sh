@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:28:55 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 13:50:50 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:16:38 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,10 @@ int		ft_realloc_line(t_line *line, int *val, int newsize)
 		line->eof = str;
 	}
 	return (1);
+}
+
+void	ft_delline(t_line line)
+{
+	ft_strdel(&(line.line));
+	ft_strdel(&(line.eof));
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 14:15:56 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:06:10 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		main(int ac, char **av, char **env)
 	t_shell sh;
 	t_line	line;
 
-	(void)ac;(void)av;(void)env;
+	(void)ac;
+	(void)av;
 	f_point(&sh);
 	ft_init_terminal_data(env);
 	ft_initsig();

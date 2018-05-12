@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:59:13 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 16:04:29 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 12:48:22 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static void		ft_envcpy(t_shell *sh, char **arg, char **env)
 	size_t	i;
 	char	**newenv;
 	t_com	com;
-
 
 	if (!arg || !env)
 		return ;

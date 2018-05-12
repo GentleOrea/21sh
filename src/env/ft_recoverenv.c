@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 10:53:46 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 16:42:08 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:04:52 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 int		ft_envmodiftime(char *file)
 {
 	static time_t	time = -1;
-	t_stat	buff;
+	t_stat			buff;
 	time_t			i;
 
 	if (!file || lstat(file, &buff) == -1)
@@ -58,4 +58,3 @@ int		ft_recoverenv(char ***env)
 	}
 	return (0);
 }
-

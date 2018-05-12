@@ -6,15 +6,15 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 14:57:08 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:04:13 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-static void    ft_setenvnew_aux(char ***env, char **tb, char *str)
+static void	ft_setenvnew_aux(char ***env, char **tb, char *str)
 {
-	int    i;
+	int	i;
 
 	i = -1;
 	while (env[0][++i])
@@ -25,12 +25,12 @@ static void    ft_setenvnew_aux(char ***env, char **tb, char *str)
 	*env = tb;
 }
 
-static void    ft_setenvnew(char ***env, char *var, char *value)
+static void	ft_setenvnew(char ***env, char *var, char *value)
 {
-	int        i;
-	int        j;
-	char    *str;
-	char    **tb;
+	int		i;
+	int		j;
+	char	*str;
+	char	**tb;
 
 	i = 0;
 	while (env[0][i])
@@ -51,10 +51,10 @@ static void    ft_setenvnew(char ***env, char *var, char *value)
 	ft_setenvnew_aux(env, tb, str);
 }
 
-static void    ft_setenvaux(char **a, char **env)
+static void	ft_setenvaux(char **a, char **env)
 {
-	size_t    i;
-	char    *tmp;
+	size_t	i;
+	char	*tmp;
 
 	if (!(tmp = (char*)malloc(sizeof(char) * (ft_strlen(a[1]) + 1))))
 	{
@@ -70,14 +70,13 @@ static void    ft_setenvaux(char **a, char **env)
 	tmp[i] = '=';
 	tmp[i + 1] = 0;
 	(void)env;
-	//    ft_setenvvar(env, a[2], tmp);
 	ft_strdel(&tmp);
 }
 
-void        ft_setenv(char **arg, char ***env)
+void		ft_setenv(char **arg, char ***env)
 {
-	int        i;
-	size_t    j;
+	int		i;
+	size_t	j;
 
 	i = 0;
 	if (!arg || !env || !*env)
