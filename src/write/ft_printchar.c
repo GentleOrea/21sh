@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 14:52:44 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/04/23 15:33:43 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:38:39 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		ft_printinsert(t_line *line, int *val)
 	char	*com;
 	int		loc[2];
 
-	if ((val[6] = tgetnum("co")) <= 1 || !tgetstr("le", 0))
+	if (!val || !line || (val[6] = tgetnum("co")) <= 1 || !tgetstr("le", 0))
 		return (-1);
 	if ((val[7] = tgetnum("li")) <= 1)
 		return (-1);
