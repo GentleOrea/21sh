@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 09:53:12 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:04:36 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 12:30:15 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_fatal(char *str)
 {
 	write(2, str, ft_strlen(str));
 	write(2, "\n", 1);
+	ft_errorlog(str);
 	exit(0);
 }
 
@@ -32,15 +33,12 @@ char	*ft_conversion_error(int code)
 
 void	ft_errorlog(char *msg)
 {
-	int	fd;
-	int	i;
+	int		fd;
 
 	if (!msg)
 		return ;
-	if ((fd = open(LOGFILE, O_WRONLY | O_APPEND)) < 0)
+	if ((fd = open(LOGFILE, O_CREAT | O_WRONLY | O_APPEND, S_IRWXU)) < 0)
 		return ;
-	i = ft_strlen(msg);
-	msg[i] = '\n';
-	write(fd, msg, i + 1);
+	ft_putendl_fd(msg, fd);
 	close(fd);
 }

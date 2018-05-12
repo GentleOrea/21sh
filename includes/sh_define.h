@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 15:28:57 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 12:39:01 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 # define KEY_END_SHIFTED "\33[1;2F"
 # define KEY_HOME "\33[H"
 # define KEY_HOME_SHIFTED "\33[1;2H"
-# define KEY_DELETE "\33\133\63\176\12"
+# define KEY_DELETE tgetstr("kD", 0)
 # define KEY_ERASE "\177"
 # define NEWLINE "\n"
 
