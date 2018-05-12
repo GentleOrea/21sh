@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:53:24 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 11:55:37 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 12:14:07 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ int				get_filetochar(const int fd, char **line, char lim)
 		i = chachr(gl.buf, lim) < ret;
 	}
 	if (ret < 0 || !*lst->buf)
-		return (ret < 0 ? -1 : 0 );
+		return (ret < 0 ? -1 : 0);
 	return ((*line = initline(lst, lim)) ? 1 : -1);
 }

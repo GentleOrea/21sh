@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 11:48:02 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 11:57:37 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/12 12:14:16 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,6 @@ int				get_next_line(const int fd, char **line)
 		i = chachr(gl.buf) < ret;
 	}
 	if (ret < 0 || !*lst->buf)
-		return (ret < 0 ? -1 : 0 );
+		return (ret < 0 ? -1 : 0);
 	return ((*line = initline(lst)) ? 1 : -1);
 }

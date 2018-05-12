@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 14:55:48 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 14:59:22 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 12:15:44 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	btree_remove_data(t_btree **root, void *data)
 {
- *data)
- {
-
-
- }
-
+	(void)root;
+	(void)data;
 }
