@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 13:11:53 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:20:31 by tcharrie         ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -24,7 +24,7 @@ void	ft_fatal(char *str);
 char	*ft_conversion_error(int code);
 char	*ft_init_aff(int *val);
 int		writechar(int c);
-void	ft_delline(t_line line);
+void	ft_delline(t_line *line);
 void	ft_direction_del(void *content, size_t t);
 void	ft_command_del(void *c, size_t t);
 void	ft_errorlog(char *str);

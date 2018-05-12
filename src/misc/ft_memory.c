@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:28:55 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 13:16:38 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:20:51 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int		ft_realloc_line(t_line *line, int *val, int newsize)
 	return (1);
 }
 
-void	ft_delline(t_line line)
+void	ft_delline(t_line *line)
 {
-	ft_strdel(&(line.line));
-	ft_strdel(&(line.eof));
+	ft_strdel(&(line->line));
+	ft_strdel(&(line->eof));
 }
