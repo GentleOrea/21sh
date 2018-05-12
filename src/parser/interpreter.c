@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 16:08:01 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/12 16:04:36 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ char	*get_redi(char *str, t_com *com)
 		mallcheck(redi = (t_redi*)ft_memalloc(sizeof(t_redi)));
 		i[0] = ind -
 			(ft_isdigit(str[ind - 1]) && ind > 1 && str[ind - 2] == ' ');
-		redi->fd[0] = (i[0] == ind - 1) ? ft_atoi(&(str[i[0]])) : -1;
 		redi->type = get_sep(&str[ind], REDI);
+		redi->fd[0] = (i[0] == ind - 1) ? ft_atoi(&(str[i[0]])) 
+			: redi->type % 2;
 		ind += ft_strlen(REDI[redi->type]);
 		while (str[ind] && str[ind] == ' ')
 			ind++;

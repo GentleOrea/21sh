@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 15:20:31 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:47:00 by ygarrot          ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -212,7 +212,7 @@ t_com	*shift_com(t_com *com, int fail);
 
 char	*conv_esc(char *str);
 char	*set_esc(char *str);
-int		error_exec(char **argv);
+int		error_exec(char **argv, int is_redi);
 void	free_parser(t_parser *begin);
 int		ft_strlento_comm(char *str, char *to_find);
 int		ft_match(char *str, char *to_match);

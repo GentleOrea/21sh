@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/12 13:05:30 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 16:03:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,25 @@ int		search_exec(t_shell *sh, char *comm, char **argv)
 int		exec_cli(t_shell *sh, t_com *com)
 {
 	t_redi	*to_del;
+	t_redi	*redi;
 	int		fail;
+	int		fd;
 
 	fail = wait_exec(sh, com->cli);
-	while (com->redi)
+	redi = com->redi;
+	while (redi)
 	{
-		to_del = com->redi;
-		com->redi = com->redi->next;
+		if (!redi->type)
+		{
+			mallcheck(redi->path = (char*)ft_memalloc(18 * (sizeof(char))));
+			ft_strcpy(redi->path, "/tmp/.sh_heredoc");
+			redi->path[16] = redi->fd[0] + '0';
+			fd = open(redi->path, O_RDONLY | O_CREAT | O_TRUNC, S_IRWXU);
+			if (fd < 0 || close(fd) < 0)
+				ft_printf("Erreur lors du nettoyage des here_doc\n");
+		}
+		to_del = redi;
+		redi = redi->next;
 		ft_memdel((void**)&to_del->path);
 		ft_memdel((void**)&to_del);
 	}

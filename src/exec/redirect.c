@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 13:43:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/12 16:04:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		stream(t_shell *sh, t_redi *redi)
 	if (!redi->type)
 	{
 		if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path,
-						O_RDWR | O_CREAT, S_IRWXU)) < 0)
+						O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) < 0)
 			return (-ft_printf("Failed to open file\n"));
 		ft_putstr_fd(sh->here_doc, redi->fd[1]);
 		sh->here_doc += ft_strlen(sh->here_doc);
@@ -54,11 +54,7 @@ int		stream(t_shell *sh, t_redi *redi)
 
 int		set_redi(t_shell *sh, t_redi *redi)
 {
-	int		mod;
-
-	mod = (redi->type % 2);
 	redi->fd[1] = -1;
-	(redi->fd[0] < 0) ? redi->fd[0] = mod : 0;
 	if (!redi->type)
 	{
 		mallcheck(redi->path = (char*)ft_memalloc(18 * (sizeof(char))));
