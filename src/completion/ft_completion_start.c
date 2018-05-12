@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 14:43:37 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 15:00:35 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 15:30:20 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ static char	*ft_completion_startcpy(char *str, char *tmp, int from, int to)
 	ft_bzero((void*)sep, sizeof(sep));
 	while (from < to)
 	{
-		if (((sep[0] == '\'' || (sep[0] && !sep[1])) &&
-	tmp[from] == '\'') || (tmp[from] == '"' && (sep[0] == '\'' && !sep[1])) ||
+		if ((tmp[from] == '\n' && !sep[0] && sep[1]) ||
+	((sep[0] == '\'' || (sep[0] && !sep[1])) && tmp[from] == '\'') ||
+	(tmp[from] == '"' && (sep[0] == '\'' && !sep[1])) ||
 	(tmp[from] == '\\' && (!sep[1] && sep[0] != '\'')))
 		{
 			sep[0] = ft_separator(tmp[from], sep[0], sep[1]);
 			sep[1] = !sep[1] && sep[0] != '\'' && tmp[from++] == '\\';
 		}
-		else
+		else if (k = ft_lenchar_r(tmp, from) > 0)
 		{
 			sep[0] = ft_separator(tmp[from], sep[0], sep[1]);
 			sep[1] = !sep[1] && sep[0] != '\'' && tmp[from] == '\\';
-			k = ft_lenchar_r(tmp, from);
 			while (k-- > 0)
 				str[j++] = tmp[from++];
 		}
