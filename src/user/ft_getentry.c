@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:45:03 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 14:42:42 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:12:10 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ t_line	ft_getentry(void)
 	if (!(ligne.eof = (char*)ft_memalloc(2)))
 		ft_strdel(&(ligne.line));
 	else if (ft_read(&ligne, val) == -1)
-	{
-		ft_strdel(&(ligne.line));
-		ft_strdel(&(ligne.eof));
-	}
+		ft_delline(ligne);
 	else
 	{
 		tmp = ft_history_parser(&(ligne.line)[val[1]]);

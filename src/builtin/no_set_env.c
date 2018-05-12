@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 16:44:30 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:01:01 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void		ft_setenvno(char **arg, char ***env)
 	int		fd;
 
 	if (!arg || !env || !*env || (i = 0))
-		ft_printf("\n");
-	else if (!*arg || !arg[1])
+		write(STDOUT_FILENO, "\n", 1);
+	else if (!*arg || !arg[1] || (j = ft_strlen(arg[1])) <= 0)
 		ft_putendl_fd("21sh: setenv VARNAME [VARVALUE]", 2);
 	else
 	{
-		if ((fd = open(ft_getenvfile(CODE_ENVGET), O_WRONLY | O_CREAT | O_TRUNC)) < 0)
+		if ((fd = open(ft_getenvfile(CODE_ENVGET), O_WRONLY | O_CREAT |
+						O_TRUNC)) < 0)
 			exit(EXIT_FAILURE);
-		j = ft_strlen(arg[1]);
 		while ((*env)[i] && (ft_strncmp(arg[1], (*env)[i], j) ||
 				(*env)[i][j] != '='))
 			ft_putendv_fd(env[0][i++], fd);

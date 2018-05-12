@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:22:01 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 15:38:22 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:17:21 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int			ft_variableadd(char *name, void *data, int deep)
 	{
 		if (!(pt = btree_create_node((void*)var, RB_RED)))
 		{
-		ft_memdel((void**)&var);
-		return (-1);
+			ft_memdel((void**)&var);
+			return (-1);
 		}
 		pt->color = RB_BLACK;
 		ft_variable(&pt);

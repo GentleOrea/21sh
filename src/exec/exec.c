@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 17:13:14 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/12 13:05:30 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int		wait_exec(t_shell *sh, char **arg)
 {
-	//cd
 	if (!ft_strcmp(*arg, "exit"))
 		ft_exit(sh);
 	if (!ft_strcmp(*arg, "cd"))
 	{
 		if (exec_redi(sh, sh->tmp->redi) < 0)
-			return(-1);
+			return (-1);
 		ft_cd(arg, &sh->env);
 		return (1);
 	}
@@ -40,7 +39,7 @@ int		exe(t_shell *sh, char *comm, char **argv)
 	father = fork();
 	if (!father)
 	{
-		if (sh->tmp->type & 4 && 
+		if (sh->tmp->type & 4 &&
 				safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
 			exit(EXIT_FAILURE);
 		parse_exe(sh, comm, argv);
@@ -85,8 +84,6 @@ int		exec_cli(t_shell *sh, t_com *com)
 	fail = wait_exec(sh, com->cli);
 	while (com->redi)
 	{
-		//if (com->redi->type != 2 && com->redi->type != 3)
-		//	close(com->redi->fd[1]);
 		to_del = com->redi;
 		com->redi = com->redi->next;
 		ft_memdel((void**)&to_del->path);

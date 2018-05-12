@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/07 13:32:18 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 14:04:23 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 13:09:00 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,102 +131,3 @@ int		ft_move_down(t_line *line, int *val)
 	val[12] = (ft_lenline_v(str, val[9]) % val[6]) + 1;
 	return (ft_move_down_bis(str, val, x, y));
 }
-/*
-int		main(int ac, char **av, char **env)
-{
-	int	val[15];
-	char	str[100];
-	t_line	line[1];
-	char	term_buffer[2048];
-	char	*s;
-
-	s = (char*)malloc(111);
-	ft_initsig();
-	ft_init_terminal_data(env);
-	ft_setattr();
-	line->line = (char*)ft_memalloc(5);
-	line->size_line = 5;
-	line->eof = "";
-	ft_bzero((void*)val, sizeof(val));
-	val[4] = 1;
-	write(1, "Bl:", 3);
-	val[5] = 3;
-	val[0] = 3;
-	ft_strcat(line->line, "Bl:");
-	while (1)
-	{
-		tgetent(term_buffer, getenv("TERM"));
-		val[9] = read(0, str, 90);
-		str[val[9]] = 0;
-		if (val[9] == 1 && ft_isin(*str, "\t\r\f\v"))
-			exit (1);
-		else if (!ft_strcmp(str, "\33\133\61\73\61\60\104"))
-			ft_selected_moveleft(line, val);
-		else if (!ft_strcmp(str, "\33\133\61\73\61\60\103"))
-			ft_selected_moveright(line, val);
-		else if (ft_abs(str[0]) == '\75')
-			ft_selected_cpy(line, val);
-		else if (ft_abs(str[0]) == '\36' && ft_abs(str[1]) == '\170' && ft_abs(str[2]) == '\146')
-			ft_selected_paste(line, val);
-		else if (val[2])
-			ft_selected_reset(line, val);
-		else if (!ft_strcmp(str, "\33\133\104"))
-			ft_move_left(line, val);
-		else if (!ft_strcmp(str, "\33\133\103"))
-			ft_move_right(line, val);
-		else if (!ft_strcmp(str, "\33\133\102"))
-			ft_move_tohist(line, val, -1);
-		else if (!ft_strcmp(str, "\33\133\101"))
-			ft_move_tohist(line, val, 1);
-		else if (!ft_strcmp(str, "\33\133\61\73\62\101"))
-			ft_move_up(line, val);
-		else if (!ft_strcmp(str, "\33\133\61\73\62\102"))
-			ft_move_down(line, val);
-		else if (!ft_strcmp(str, "\33\133\61\73\62\104"))
-			ft_move_wordl(line, val);
-		else if (!ft_strcmp(str, "\33\133\61\73\62\103"))
-			ft_move_wordr(line, val);
-		else if (!ft_strcmp(str, "\33\133\110"))
-			ft_move_tohome(line, val);
-		else if (!ft_strcmp(str, "\33\133\106"))
-			ft_move_toend(line, val);
-		else if (!ft_strcmp(str, "\33\133\61\73\62\110"))
-			ft_move_tolinel(line, val);
-		else if (!ft_strcmp(str, "\33\133\61\73\62\106"))
-			ft_move_toliner(line, val);
-		else if (val[9] > 1)
-		{
-			dprintf(2, "This one sucks |%d|%s|\n", val[9], &str[1]);
-			val[9] = 0;
-			while (str[val[9]])
-				dprintf(2, "%o.", ft_abs(str[val[9]++]));
-			dprintf(2, "\n");
-		}
-		else if (*str == 127)
-			ft_erase(line, val);
-		else if (*str == 'S')
-			tputs(tgetstr("sc", 0), 0, writechar);
-		else if (*str == 'R')
-			tputs(tgetstr("rc", 0), 0, writechar);
-		else if (*str == 'E')
-			exit(0);
-		else if (*str == 'Q')
-		{
-			val[9] = 0;
-			while (val[9] < 9)
-				dprintf(2, "|%d|", val[val[9]++]);
-			dprintf(2, "\n");
-		}
-		else
-		{
-			dprintf(2, ".");
-			if (ft_printchar(line, str, val) == -1)
-				exit(10);
-			dprintf(2, "\n");
-		}
-	}
-	(void)ac;
-	(void)av;
-	return (0);
-}
-*/

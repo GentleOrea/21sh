@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:51:31 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/11 17:09:45 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/12 13:10:14 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ void	parse_exe(t_shell *sh, char *comm, char **arg)
 int		error_exec(char **argv)
 {
 	ft_printf("Command not found %s\n", *argv);
-	//ft_free_dblechar_tab(argv);
 	return (-1);
 }
