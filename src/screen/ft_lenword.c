@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 16:05:24 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:44:40 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/12 12:12:39 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,26 @@ int		ft_lenword_r(char *str, int pos)
 	return (i);
 }
 
+static void	ft_lenword_left(char *str, int pos, int *i, int *mov)
+{
+	int		j;
+
+	*mov = 0;
+	j = ft_isin(str[*i], "l|&<>;");
+	if (j && str[*i + 1] == str[*i])
+		j++;
+	*i += j;
+	if (j && *i >= pos)
+		*mov = j;
+	if (j)
+		return ;
+	while (*i < pos && str[*i] && (ft_isin(str[*i], " \n")))
+	{
+		*mov += 1;
+		*i += ft_lenchar_r(str, *i);
+	}
+}
+
 int		ft_lenword_l(char *str, int pos)
 {
 	int	mov;
@@ -60,10 +80,7 @@ int		ft_lenword_l(char *str, int pos)
 		}
 		if (i >= pos || !str[i])
 			break ;
-		if (ft_isin(str[i], ";|&<>") || (mov = 0))
-			return (1 + (str[i] != ';' && str[i] == str[i + 1]));
-		while (i < pos && str[i] && (ft_isin(str[i], ENDWORD)) && ++mov)
-			i += ft_lenchar_r(str, i);
+		ft_lenword_left(str, pos, &i, &mov);
 	}
 	return (mov ? mov : 1);
 }
