@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/13 15:13:12 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:17:54 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		stream(t_shell *sh, t_redi *redi)
 	{
 		if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path,
 						O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) < 0)
-			return (-ft_printf("Failed to open file\n"));
+			return (-ft_printf("en file\n"));
 		ft_putstr_fd(sh->here_doc, redi->fd[1]);
 		sh->here_doc += ft_strlen(sh->here_doc);
 		close(redi->fd[1]);
@@ -46,7 +46,7 @@ int		stream(t_shell *sh, t_redi *redi)
 		(!redi->type || redi->type == 5 ? O_CREAT : 0)
 		| (redi->type == 1 ? O_APPEND : 0);
 	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, right)) < 0)
-		return (-ft_printf("Failed to open %s\n", redi->path));
+		return (-ft_printf("yosh: no such file: %s\n", redi->path));
 	if (dup2(redi->fd[1], redi->fd[0]) == -1)
 		return (-ft_printf("Failed to dup2\n"));
 	return (1);

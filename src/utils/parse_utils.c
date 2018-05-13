@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/12 15:12:27 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/13 15:18:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	is_sep(char *str, t_parser *par, char **tb)
 	i = -1;
 	while (tb[++i] && !ft_strnstr(str, tb[i], len = ft_strlen(tb[i])))
 		;
-	if(tb[i])
+	if (tb[i])
 		ft_strcpy(par->op, tb[i][0] != '\n' ? tb[i] : "\\n");
 	return (tb[i] ? len : 0);
 }

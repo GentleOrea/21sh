@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/13 15:12:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:16:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,14 @@ char	*get_redi(char *str, t_com *com)
 		i[0] = ind -
 			(ft_isdigit(str[ind - 1]) && ind > 1 && str[ind - 2] == ' ');
 		redi->type = get_sep(&str[ind], REDI);
-		redi->fd[0] = (i[0] == ind - 1) ? ft_atoi(&(str[i[0]])) 
+		redi->fd[0] = (i[0] == ind - 1) ? ft_atoi(&(str[i[0]]))
 			: redi->type % 2;
 		ind += ft_strlen(REDI[redi->type]);
 		while (str[ind] && str[ind] == ' ')
 			ind++;
-		if ((i[1] = search_op(&str[ind], REDI)) < 0
-				|| (i[1] < 0 && (i[1] = ft_charchr(' ', &str[ind])) < 0))
-		i[1] = ft_strlento(&str[ind], ' ');
-		i[1] -= (str[ind + i[1] - 1] == ' ');
+		if ((i[1] = search_op(&str[ind], REDI)) < 0 &&
+				(i[1] = ft_strlento(&str[ind], ' ')))
+			i[1] -= (str[ind + i[1] - 1] == ' ');
 		redi->path = ft_strndup(&str[ind], i[1]);
 		ft_strcpy(&str[i[0]], &str[ind + i[1]]);
 		add_redi(com, redi);

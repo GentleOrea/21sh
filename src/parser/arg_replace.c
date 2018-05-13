@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 16:09:11 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/13 16:02:57 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	arg_replace(t_shell *sh, char **arg)
 	int		len;
 
 	i = -1;
-	while ((*arg)[++i])
+	while ((*arg)[++i] && (i += skip_comm(&(*arg)[i])) && (*arg)[i])
 		if ((*arg)[i] == '$'
 				|| ((*arg)[i] == '~' && (!i || (*arg)[i - 1] == ' ')))
 		{
