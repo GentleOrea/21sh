@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/12 16:04:36 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/13 15:12:52 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	*get_redi(char *str, t_com *com)
 	int		ind;
 	int		i[5];
 
-	(void)com;
 	while ((ind = search_op(str, REDI)) >= 0)
 	{
 		mallcheck(redi = (t_redi*)ft_memalloc(sizeof(t_redi)));
@@ -66,7 +65,8 @@ char	*get_redi(char *str, t_com *com)
 			ind++;
 		if ((i[1] = search_op(&str[ind], REDI)) < 0
 				|| (i[1] < 0 && (i[1] = ft_charchr(' ', &str[ind])) < 0))
-			i[1] = ft_strlen(&str[ind]);
+		i[1] = ft_strlento(&str[ind], ' ');
+		i[1] -= (str[ind + i[1] - 1] == ' ');
 		redi->path = ft_strndup(&str[ind], i[1]);
 		ft_strcpy(&str[i[0]], &str[ind + i[1]]);
 		add_redi(com, redi);

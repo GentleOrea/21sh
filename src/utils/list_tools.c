@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/12 13:13:20 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/13 12:05:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		free_globs(t_glob *glob)
 		to_del = glob->paths;
 		glob->paths = glob->paths->next;
 		ft_memdel((void**)&to_del->name);
-		ft_memdel((void**)&to_del->path);
+		//ft_memdel((void**)&to_del->path);
 		ft_memdel((void**)&to_del);
 	}
 	ft_memdel((void**)&glob);
