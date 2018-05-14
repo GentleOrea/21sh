@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/12 13:06:10 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/14 16:44:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		main(int ac, char **av, char **env)
 	sh.env = ft_strtbdup(env);
 	if (ft_envwrite(ft_getenvfile(CODE_ENVGET), sh.env) == -1)
 		ft_fatal("Failed to copy env\n");
-	sh.fd = open("/dev/ttys004", O_RDWR);
+	sh.fd = open("/dev/ttys000", O_RDWR);
 	while (1)
 	{
 		line = ft_getentry();
@@ -35,5 +35,6 @@ int		main(int ac, char **av, char **env)
 			line = ft_getentry();
 		hard_split(&sh, &line);
 		ft_memdel((void**)&line.line);
+		ft_memdel((void**)&line.eof);
 	}
 }

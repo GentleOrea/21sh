@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/13 14:54:10 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/14 16:40:21 by ygarrot          ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -208,7 +208,7 @@ char	*ft_getenv(char **tb, char *str);
 int		exec_cli(t_shell *sh, t_com *inter);
 int		exec_redi(t_shell *sh, t_redi *tmp);
 void	ft_fatal(char *str);
-t_com	*shift_com(t_com *com, int fail);
+void	shift_com(t_shell *sh, int fail);
 
 char	*conv_esc(char *str);
 char	*set_esc(char *str);
@@ -226,6 +226,8 @@ void	arg_replace(t_shell *sh, char **arg);
 int		write_env(char **env);
 void		parse_exe(t_shell *sh, char *comm, char **argv);
 
+void	comm_substitute(t_shell *sh, char **str, int i);
+void	get_sub(t_shell *sh);
 
 t_paths	*path_is_valid(char *path, char *name, t_dirent *dire, char **regex);
 t_paths	*end_sort(t_paths *tmp, char *str, char **regex);

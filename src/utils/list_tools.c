@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/13 12:05:29 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/14 15:39:53 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,22 @@ t_parser	*push_front(t_parser *com, char *str, int type)
 	return (begin);
 }
 
-t_com		*shift_com(t_com *com, int fail)
+void	shift_com(t_shell *sh, int fail)
 {
 	t_com *to_del;
 
-	to_del = com;
-	ft_free_dblechar_tab(com->cli);
-	com = com->next;
+	to_del = sh->com;
+	ft_free_dblechar_tab(sh->com->cli);
+	sh->com = sh->com->next;
 	ft_memdel((void**)&to_del);
-	while (com && (com->type && !(com->type & 32)
-				&& !(com->type & (fail >= 0 ? 2 : 1))))
+	while (sh->com && (sh->com->type && !(sh->com->type & 32)
+				&& !(sh->com->type & (fail >= 0 ? 2 : 1))))
 	{
-		to_del = com;
-		epur_tb(com, com->len);
-		com = com->next;
+		to_del = sh->com;
+		epur_tb(sh->com, sh->com->len);
+		sh->com = sh->com->next;
 		ft_memdel((void**)&to_del);
 	}
-	return (com);
 }
 
 void		free_parser(t_parser *begin)
@@ -83,7 +82,6 @@ void		free_globs(t_glob *glob)
 		to_del = glob->paths;
 		glob->paths = glob->paths->next;
 		ft_memdel((void**)&to_del->name);
-		//ft_memdel((void**)&to_del->path);
 		ft_memdel((void**)&to_del);
 	}
 	ft_memdel((void**)&glob);

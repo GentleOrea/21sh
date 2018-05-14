@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 13:48:12 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/14 16:40:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,15 @@ typedef struct s_parser
 	struct	s_parser	*next;
 }				t_parser;
 
+
+typedef struct	s_substitute
+{
+	bool	is_sub;
+	int		pipe[2];
+	size_t	size;
+	t_list	*begin;
+}				t_sub;
+
 typedef struct	s_shell
 {
 	void	(*f_built[5])(char **av, char ***argv);
@@ -99,9 +108,7 @@ typedef struct	s_shell
 	char	*here_doc;
 	char	**env;
 	t_com	*com;
-	t_com	*tmp;
-	pid_t	test;
-	char	*pwd;
+	t_sub	sub;
 }				t_shell;
 
 typedef struct	s_paths

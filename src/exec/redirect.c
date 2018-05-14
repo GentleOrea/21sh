@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/13 16:17:54 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/14 16:05:54 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,21 +85,26 @@ int		exec_redi(t_shell *sh, t_redi *tmp)
 int		exec_pipe(t_shell *sh, char *comm, char **argv)
 {
 	t_com	*tmp;
+	pid_t	father;
+	int		*pipe_fd;
 
-	tmp = sh->tmp->next;
-	if (pipe(tmp->pipe))
+	tmp = sh->com->next;
+	pipe_fd = (sh->sub.is_sub ? sh->sub.pipe : tmp->pipe);
+	if (pipe(pipe_fd))
 		return (-printf("Broken pipe\n"));
-	sh->test = fork();
-	if (!sh->test)
+	father = fork();
+	if (!father)
 	{
-		if (sh->tmp->type & 4 &&
-				safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
+		if (sh->com->type & 4 &&
+				safe_dup(sh->com->pipe[0], STDIN_FILENO, sh->com->pipe))
 			exit(EXIT_FAILURE);
-		if (safe_dup(tmp->pipe[1], STDOUT_FILENO, tmp->pipe))
+		if (safe_dup(pipe_fd[1], STDOUT_FILENO, pipe_fd))
 			exit(EXIT_FAILURE);
 		parse_exe(sh, comm, argv);
 	}
-	if (sh->tmp->type & 4)
-		safe_dup(-1, 0, sh->tmp->pipe);
-	return (sh->test);
+	if (father > 0 && sh->sub.is_sub)
+		wait(0);
+	if (sh->com->type & 4)
+		safe_dup(-1, 0, sh->com->pipe);
+	return (father);
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/12 16:03:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/14 16:03:20 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		wait_exec(t_shell *sh, char **arg)
 		ft_exit(sh);
 	if (!ft_strcmp(*arg, "cd"))
 	{
-		if (exec_redi(sh, sh->tmp->redi) < 0)
+		if (exec_redi(sh, sh->com->redi) < 0)
 			return (-1);
 		ft_cd(arg, &sh->env);
 		return (1);
@@ -34,18 +34,19 @@ int		exe(t_shell *sh, char *comm, char **argv)
 {
 	pid_t father;
 
-	if (sh->tmp->next && sh->tmp->next->type & 4)
+	if ((sh->com->next && sh->com->next->type & 4)
+	|| (sh->sub.is_sub && (!sh->com->next ||sh->com->next->type != 4)))
 		return (exec_pipe(sh, comm, argv));
 	father = fork();
 	if (!father)
 	{
-		if (sh->tmp->type & 4 &&
-				safe_dup(sh->tmp->pipe[0], STDIN_FILENO, sh->tmp->pipe))
+		if (sh->com->type & 4 &&
+				safe_dup(sh->com->pipe[0], STDIN_FILENO, sh->com->pipe))
 			exit(EXIT_FAILURE);
 		parse_exe(sh, comm, argv);
 	}
-	if (sh->tmp->type & 4)
-		safe_dup(-1, 0, sh->tmp->pipe);
+	if (sh->com->type & 4)
+		safe_dup(-1, 0, sh->com->pipe);
 	if (father > 0)
 		while (wait(0) != -1)
 			;
@@ -108,11 +109,13 @@ int		sort_comm(t_shell *sh, t_com *com)
 {
 	char	fail;
 
+	if (!sh || !com)
+		return (1);
 	fail = 0;
 	!(com->type & 4) ? epur_tb(com, com->len) : 0;
 	while (com)
 	{
-		sh->tmp = com;
+		sh->com = com;
 		if (ft_recoverenv(&sh->env) == -1)
 			ft_errorlog(ENVFAILED);
 		if (com->next && com->next->type & 4)
@@ -122,9 +125,11 @@ int		sort_comm(t_shell *sh, t_com *com)
 		}
 		else
 			fail = exec_cli(sh, com);
+		sh->sub.is_sub ? get_sub(sh) : 0;
 		if (com->type & 4)
 			return (fail);
-		com = shift_com(com, fail);
+		shift_com(sh, fail);
+		com = sh->com;
 	}
-	return (1);
+	return (0);
 }
