@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:12:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/14 16:40:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 12:00:15 by ygarrot          ###   ########.fr       */
 /*   Updated: 2018/05/07 13:55:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -224,7 +224,8 @@ void	free_globs(t_glob *glob);
 int		safe_dup(int fd1, int fd2, int *pipe);
 void	arg_replace(t_shell *sh, char **arg);
 int		write_env(char **env);
-void		parse_exe(t_shell *sh, char *comm, char **argv);
+void	parse_exe(t_shell *sh, char *comm, char **argv);
+void	free_comm(t_com *com);
 
 void	comm_substitute(t_shell *sh, char **str, int i);
 void	get_sub(t_shell *sh);

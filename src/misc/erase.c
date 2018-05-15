@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:28:44 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 15:57:31 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 12:05:30 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	epur_tb(t_com *com, int len)
 
 	i = -1;
 	list = com->tb;
+	if (!list)
+		return ;
 	ft_memdel((void**)&com->cli);
 	mallcheck(com->cli = (char**)ft_memalloc((len + 1) * sizeof(char*)));
 	while (list)

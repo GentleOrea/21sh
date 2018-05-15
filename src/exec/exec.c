@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/14 16:03:20 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 12:07:34 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,13 @@ int		exec_cli(t_shell *sh, t_com *com)
 int		sort_comm(t_shell *sh, t_com *com)
 {
 	char	fail;
+	t_com	*begin;
 
 	if (!sh || !com)
 		return (1);
+	begin = sh->com;
 	fail = 0;
-	!(com->type & 4) ? epur_tb(com, com->len) : 0;
+	epur_tb(com, com->len);
 	while (com)
 	{
 		sh->com = com;
@@ -131,5 +133,6 @@ int		sort_comm(t_shell *sh, t_com *com)
 		shift_com(sh, fail);
 		com = sh->com;
 	}
+	free_comm(begin);
 	return (0);
 }
