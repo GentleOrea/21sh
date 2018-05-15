@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/14 16:44:23 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 18:32:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	arg_replace(t_shell *sh, char **arg)
 	while ((*arg)[++i])
 	{
 		i += skip_comm(&(*arg)[i]);
-		//comm_substitute(sh, arg, i);
+		comm_substitute(sh, arg, i);
 		assign(sh, arg, i);
 	}
 }
@@ -77,7 +77,7 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 	t_line	tmp;
 	char	*glue;
 	int		len;
-	char	*to_del;
+	char	*to_del[2];
 
 	if ((*str)[i++] != '`')
 		return ;
@@ -87,13 +87,15 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 	len = ft_strlento(&(*str)[i], '`');
 	mallcheck(tmp.line = ft_strndup(&(*str)[i], len));
 	hard_split(sh, &tmp);
-	if (!(to_del = ft_strndup(*str, i - 1)))
-		mallcheck(to_del = ft_strnew(0));
+	if (!(*to_del = ft_strndup(*str, i - 1)))
+		mallcheck(*to_del = ft_strnew(0));
 	glue = replace_loop(sh);
-	*str = ft_implode(glue, to_del, &(*str)[i + len + 1]);
+	to_del[1] = *str;
+	*str = ft_implode(glue, *to_del, &(*str)[i + len + 1]);
 	ft_memdel((void**)&glue);
 	ft_memdel((void**)&tmp.line);
-	ft_memdel((void**)&to_del);
+	ft_memdel((void**)&to_del[1]);
+	ft_memdel((void**)&(*to_del));
 	sh->com = com;
 	sh->sub.is_sub = 0;
 }
@@ -116,8 +118,9 @@ void	get_sub(t_shell *sh)
 		mallcheck(begin->next = (t_list*)ft_memalloc(sizeof(t_list)));
 		begin = begin->next;
 	}
-	close(sh->sub.pipe[0]);
-	close(sh->sub.pipe[1]);
-	if (open("/dev/stdout", O_RDWR) < 0 || open("/dev/stdin", O_RDWR) < 0)
-		ft_printf("error open\n");
+	safe_dup(-1, 0, sh->sub.pipe);
+	if (dup2(sh->std[0], STDIN_FILENO) == -1)
+		ft_printf("STDIN dup error\n");
+	if (dup2(sh->std[1], STDOUT_FILENO) == -1)
+		ft_printf("STDOUT dup error\n");
 }

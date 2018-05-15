@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:28:44 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 12:05:30 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 18:44:28 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ void	epur_tb(t_com *com, int len)
 	t_tb	*list;
 
 	i = -1;
-	list = com->tb;
-	if (!list)
+	if (!(list = com->tb))
 		return ;
 	ft_memdel((void**)&com->cli);
 	mallcheck(com->cli = (char**)ft_memalloc((len + 1) * sizeof(char*)));
@@ -40,4 +39,10 @@ void	epur_tb(t_com *com, int len)
 		free_globs(to_del->glob);
 		ft_memdel((void**)&to_del);
 	}
+}
+
+void	erase_shell(t_shell *sh)
+{
+	free_comm(sh->begin);
+	erase_hash_tab(sh->hash_tb);
 }

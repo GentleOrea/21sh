@@ -6,17 +6,11 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 13:01:01 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/15 13:52:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
-
-static void	ft_putendv_fd(char *str, int fd)
-{
-	ft_putstr_fd(str, fd);
-	write(fd, "\v", 1);
-}
 
 void		ft_setenvno(char **arg, char ***env)
 {

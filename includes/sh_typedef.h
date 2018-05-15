@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/14 16:40:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 19:09:19 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,39 +59,38 @@ typedef struct	s_corr
 
 typedef struct	s_tb
 {
-	t_glob	*glob;
-	char	*str;
-	struct s_tb *next;
+	t_glob		*glob;
+	char		*str;
+	struct s_tb	*next;
 }				t_tb;
 
 typedef struct	s_redi
 {
-	char	*path;
-	int		type;
-	int		fd[2];
-	struct s_redi *next;
+	char			*path;
+	int				type;
+	int				fd[2];
+	struct s_redi	*next;
 }				t_redi;
 
 typedef struct	s_com
 {
-	char	**cli;
-	int		pipe[2];
-	int		len;
-	int		type;
-	t_tb	*tb;
-	t_redi	*redi;
+	char			**cli;
+	int				pipe[2];
+	int				len;
+	int				type;
+	t_tb			*tb;
+	t_redi			*redi;
 	struct s_com	*next;
 }				t_com;
 
-typedef struct s_parser
+typedef struct	s_parser
 {
-	char	*comm;
-	char	op[3];
-	char	type;
-	int		wait;
-	struct	s_parser	*next;
+	char			*comm;
+	char			op[3];
+	char			type;
+	int				wait;
+	struct s_parser	*next;
 }				t_parser;
-
 
 typedef struct	s_substitute
 {
@@ -101,14 +100,23 @@ typedef struct	s_substitute
 	t_list	*begin;
 }				t_sub;
 
+typedef struct	s_hash
+{
+	char	*key;
+	char	*value;
+}				t_hash;
+
 typedef struct	s_shell
 {
-	void	(*f_built[5])(char **av, char ***argv);
-	int		fd;
-	char	*here_doc;
-	char	**env;
-	t_com	*com;
-	t_sub	sub;
+	void		(*f_built[5])(char **av, char ***argv);
+	t_btree		**hash_tb;
+	int			std[3];
+	int			fd;
+	char		*here_doc;
+	char		**env;
+	t_com		*begin;
+	t_com		*com;
+	t_sub		sub;
 }				t_shell;
 
 typedef struct	s_paths
@@ -119,7 +127,7 @@ typedef struct	s_paths
 	struct s_paths	*next;
 }				t_paths;
 
-struct	s_glob
+struct			s_glob
 {
 	int				nb_paths;
 	t_paths			*paths;

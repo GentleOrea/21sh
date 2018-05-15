@@ -6,13 +6,13 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/15 11:42:31 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/15 18:32:33 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh 
 
-FLAGS =  -Wall -Werror -Wextra -g3 #-fsanitize=address
+FLAGS =  -Wall -Werror -Wextra -g3 -fsanitize=address
 
 SRC_FOLDER = src/
 
@@ -28,7 +28,8 @@ SRC_FP = \
 		  builtin/ft_strtabdup.c \
 		  builtin/ft_unsetenv.c
 
-SRC_FP += exec/exec.c \
+SRC_FP += \
+		  exec/exec.c \
 		  exec/redirect.c
 
 SRC_FP += \
@@ -40,6 +41,10 @@ SRC_FP += \
 		  glob/dir_tour.c \
 		  glob/globbing.c
 
+SRC_FP += \
+		  hash/btree_erase.c \
+		  hash/ft_hashcmp.c \
+		  hash/ft_hash.c
 SRC_FP += \
 		  initialisation/ft_initenv.c \
 		  initialisation/ft_signal.c \

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 17:28:21 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 19:18:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define HISTORYFILE "~/.sh_history"
 # define ENVFILE "/tmp/.sh_env"
 
+# define HASH_SIZE 10000
 # define BUFFSIZE 100
 # define ERR -1
 # define ERR_PARS1_MSG "21sh: syntax error near unexpected token '|'\n"
@@ -42,9 +43,8 @@
 # define BUILTIN "echo\0cd\0setenv\0unsetenv\0env\0exit\0"
 # define ESC "\a\b\f\n\r\t\v\\"
 # define QUOTES "\"\'"
-# define ALL (char *[16]){"||", "&&", "|", "&", ";", ">>", "<<",  "<<", ">&", "<&","<", ">" , "\n", "\0"}
-# define HD (char *[14]){"||", "&&", "|", "&", ";", ">>", "<<", ">&", "<&",\
-	"<", ">" , " "}
+# define HD (char *[14]){"||", "&&", "|", "&", ";", ">>", "<<", ">&", "<&" }
+# define NORM "<> "
 # define SEP (char *[7]){"||", "&&", "|", "&", ";", "\n"}
 # define M_SEP (char *[6]){"||", "&&", "|"}
 # define REDI (char *[7]){"<<", ">>", "<&",">&", "<", ">"}

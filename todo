@@ -1,4 +1,2 @@
-reset des redirections lors du cd
-check le probleme du exit lors du replace ``
 leaks lors de l'appel du parser
 erreurs lors des '\n'

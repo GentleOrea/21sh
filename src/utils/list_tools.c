@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 12:00:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 18:44:43 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_parser	*push_front(t_parser *com, char *str, int type)
 	return (begin);
 }
 
-void	shift_com(t_shell *sh, int fail)
+void		shift_com(t_shell *sh, int fail)
 {
 	sh->com = sh->com->next;
 	while (sh->com && (sh->com->type && !(sh->com->type & 32)

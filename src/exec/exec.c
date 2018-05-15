@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 12:07:34 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 18:41:28 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int		wait_exec(t_shell *sh, char **arg)
 {
+	char	*tmp;
+
 	if (!ft_strcmp(*arg, "exit"))
 		ft_exit(sh);
 	if (!ft_strcmp(*arg, "cd"))
@@ -23,8 +25,15 @@ int		wait_exec(t_shell *sh, char **arg)
 		ft_cd(arg, &sh->env);
 		return (1);
 	}
-	if (ft_strisin_tab(arg[0], BUILT, 0) >= 0 || !access(*arg, F_OK | X_OK))
+	if (sh->hash_tb && (tmp = ft_get_hash(sh->hash_tb, *arg)))
+		return (exe(sh, tmp, arg));
+	if (ft_strisin_tab(arg[0], BUILT, 0) >= 0)
 		return (exe(sh, *arg, arg));
+	if (!access(*arg, F_OK | X_OK))
+	{
+		ft_set_hash(sh->hash_tb, *arg, *arg);
+		return (exe(sh, *arg, arg));
+	}
 	else
 		return (search_exec(sh, *arg, arg));
 	return (1);
@@ -35,7 +44,7 @@ int		exe(t_shell *sh, char *comm, char **argv)
 	pid_t father;
 
 	if ((sh->com->next && sh->com->next->type & 4)
-	|| (sh->sub.is_sub && (!sh->com->next ||sh->com->next->type != 4)))
+	|| (sh->sub.is_sub && (!sh->com->next || sh->com->next->type != 4)))
 		return (exec_pipe(sh, comm, argv));
 	father = fork();
 	if (!father)
@@ -68,6 +77,8 @@ int		search_exec(t_shell *sh, char *comm, char **argv)
 	while (!temp && paths[++index])
 	{
 		temp = ft_implode("/", paths[index], comm);
+		sh->hash_tb && !access(temp, F_OK | X_OK) ?
+			ft_set_hash(&sh->hash_tb[hash(comm) % HASH_SIZE], comm, temp) : 0;
 		!access(temp, F_OK | X_OK) ? index = exe(sh, temp, argv) :
 			ft_memdel((void**)&temp);
 	}
@@ -97,6 +108,7 @@ int		exec_cli(t_shell *sh, t_com *com)
 			if (fd < 0 || close(fd) < 0)
 				ft_printf("Erreur lors du nettoyage des here_doc\n");
 		}
+		reset_std(sh, com, redi);
 		to_del = redi;
 		redi = redi->next;
 		ft_memdel((void**)&to_del->path);
@@ -105,34 +117,30 @@ int		exec_cli(t_shell *sh, t_com *com)
 	return (fail);
 }
 
-int		sort_comm(t_shell *sh, t_com *com)
+int		sort_comm(t_shell *sh)
 {
-	char	fail;
-	t_com	*begin;
+	char	fail[2];
 
-	if (!sh || !com)
+	if (!sh || !sh->com)
 		return (1);
-	begin = sh->com;
-	fail = 0;
-	epur_tb(com, com->len);
-	while (com)
+	fail[1] = sh->com->type & 4;
+	epur_tb(sh->begin = sh->com, sh->com->len);
+	while (sh->com)
 	{
-		sh->com = com;
-		if (ft_recoverenv(&sh->env) == -1)
-			ft_errorlog(ENVFAILED);
-		if (com->next && com->next->type & 4)
+		ft_recoverenv(&sh->env) == -1 ? ft_errorlog(ENVFAILED) : 0;
+		if (sh->com->next && sh->com->next->type & 4)
 		{
-			fail = exec_cli(sh, com);
-			fail = sort_comm(sh, com->next);
+			*fail = exec_cli(sh, sh->com);
+			sh->com = sh->com->next;
+			*fail = sort_comm(sh);
 		}
 		else
-			fail = exec_cli(sh, com);
-		sh->sub.is_sub ? get_sub(sh) : 0;
-		if (com->type & 4)
-			return (fail);
-		shift_com(sh, fail);
-		com = sh->com;
+			*fail = exec_cli(sh, sh->com);
+		*fail > 0 && sh->sub.is_sub ? get_sub(sh) : 0;
+		if (fail[1] && sh->com->type & 4)
+			return (*fail);
+		shift_com(sh, *fail);
 	}
-	free_comm(begin);
+	free_comm(sh->begin);
 	return (0);
 }

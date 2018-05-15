@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/14 16:05:54 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 15:54:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		stream(t_shell *sh, t_redi *redi)
 	{
 		if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path,
 						O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) < 0)
-			return (-ft_printf("en file\n"));
+			return (-ft_printf("21sh: no such file: %s\n", redi->path));
 		ft_putstr_fd(sh->here_doc, redi->fd[1]);
 		sh->here_doc += ft_strlen(sh->here_doc);
 		close(redi->fd[1]);

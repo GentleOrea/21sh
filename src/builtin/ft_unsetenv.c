@@ -6,50 +6,36 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 17:39:20 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/11 16:54:53 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/15 13:09:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
-static void	ft_unsetenv_move(char **env)
+void		ft_unsetenv(char **arg, char ***env)
 {
-	size_t	i;
-
-	if (!env || !*env)
-		return ;
-	i = 0;
-	free(*env);
-	while (env[++i])
-		env[i - 1] = env[i];
-	env[i - 1] = 0;
-}
-
-void		ft_unsetenv(char **arg, char ***aenv)
-{
-	char	**env;
 	int		i;
 	int		j;
+	int		fd;
 
-	env = *aenv;
-	if (!arg || !env || !*env || !*arg)
-		;
+	if (!arg || !env || !*env || (i = 0))
+		write(STDOUT_FILENO, "\n", 1);
 	else if (!*arg || !arg[1])
 		ft_printf("21sh: unsetenv: Argument missing\n");
 	else if (arg[2])
-		ft_printf("21sh unsetenv: Too many arguments\n");
+		ft_printf("21sh: unsetenv: Too many arguments\n");
 	else
 	{
 		j = ft_strlen(arg[1]);
-		i = 0;
-		while (env[i])
+		if ((fd = open(ft_getenvfile(CODE_ENVGET), O_WRONLY | O_CREAT |
+						O_TRUNC)) < 0)
+			exit(EXIT_FAILURE);
+		while ((*env)[i])
 		{
-			while (env[i] && (ft_strncmp(env[i], arg[1], j) ||
-						env[i][j] != '='))
-				i++;
-			if (env[i])
-				ft_unsetenv_move(&(env[i]));
+			i += (!ft_strncmp(arg[1], (*env)[i], j) && (*env)[i][j] == '=');
+			ft_putendv_fd(env[0][i++], fd);
 		}
+		exit(close(fd) < 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 	}
-	exit(EXIT_SUCCESS);
+	exit(EXIT_FAILURE);
 }

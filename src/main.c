@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/14 16:44:00 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 17:01:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ int		main(int ac, char **av, char **env)
 		ft_memdel((void**)&line.line);
 		ft_memdel((void**)&line.eof);
 	}
+	erase_shell(&sh);
 }

@@ -6,14 +6,16 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 12:54:34 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/15 13:09:05 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-static void	ft_putendv_fd(char *str, int fd)
+void	ft_putendv_fd(char *str, int fd)
 {
+	if (!str || fd < 0)
+		return ;
 	ft_putstr_fd(str, fd);
 	write(fd, "\v", 1);
 }

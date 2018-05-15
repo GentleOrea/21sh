@@ -6,18 +6,18 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 11:32:12 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/06 13:46:03 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/15 18:43:02 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
 t_paths		*path_is_valid(char *path, char *name, t_dirent *dir, char **regex)
 {
 	struct stat	st;
 	t_paths		*tmp;
 
-	if (dir->d_name[0] == '.' || !ft_match(name, *regex))
+	if ((*dir->d_name == '.' && **regex != '.') || !ft_match(name, *regex))
 		return (NULL);
 	name ? path = ft_strjoin(path, name) : 0;
 	if (stat(path, &st) == -1 && lstat(path, &st) == -1)
@@ -43,8 +43,7 @@ t_paths		*end_sort(t_paths *tmp, char *str, char **regex)
 	begin = *regex && **regex ? NULL : tmp;
 	while (tmp)
 	{
-		if (*regex && **regex && tmp->is_dir
-				&& ft_strcmp(tmp->name, ".") && ft_strcmp(tmp->name, ".."))
+		if (*regex && **regex && tmp->is_dir)
 		{
 			!tmp->path ? mallcheck(tmp->path = ft_strjoin(str, tmp->name)) : 0;
 			if (!begin)
@@ -100,21 +99,25 @@ t_glob		*ft_glob(char *regstr, int opt)
 	t_paths		*tmp;
 	char		**regtab;
 	t_glob		*glob;
+	int			len;
 
 	(void)opt;
+	if (!ft_strcmp(regstr, "/"))
+		return (NULL);
 	mallcheck(glob = (t_glob*)ft_memalloc(sizeof(t_glob)));
 	ft_bzero(glob, sizeof(glob));
 	mallcheck(regtab = ft_strsplit_comm(regstr, "/"));
-	begin = recc(".", regtab);
+	begin = recc(*regstr == '/' ? "/" : ".", regtab);
 	tmp = begin;
+	len = *regstr == '/' ? 1 : 2;
 	while (tmp)
 	{
+		ft_strcpy(tmp->path, &tmp->path[len]);
 		glob->nb_paths++;
 		tmp = tmp->next;
 	}
 	glob->paths = begin;
 	ft_free_dblechar_tab(regtab);
-	if (!begin)
-		ft_memdel((void**)&glob);
+	(!begin) ? ft_memdel((void**)&glob) : 0;
 	return (glob);
 }

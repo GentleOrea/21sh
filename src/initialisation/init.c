@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 13:14:26 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/14 16:43:08 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/15 16:35:25 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 void		f_point(t_shell *sh)
 {
 	ft_bzero(sh, sizeof(sh));
+	if (!(sh->hash_tb = (t_btree**)ft_memalloc(HASH_SIZE * sizeof(t_btree*))))
+		exit(EXIT_FAILURE);
+	sh->std[0] = dup(STDIN_FILENO);
+	sh->std[1] = dup(STDOUT_FILENO);
+	sh->std[2] = dup(STDERR_FILENO);
 	sh->f_built[0] = &ft_echo;
 	sh->f_built[2] = &ft_setenv;
 	sh->f_built[3] = &ft_unsetenv;

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_hashcmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/09 11:58:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/15 17:01:21 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/05/13 12:24:57 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/05/15 18:13:37 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-void	ft_exit(t_shell *sh)
+int		ft_hashcmp(void *s1, void *s2)
 {
-	ft_terminal_reset(0);
-	erase_shell(sh);
-	exit(EXIT_SUCCESS);
+	if (!s1 || !s2)
+		return (0);
+	return (ft_strcmp(*((char**)s1), *((char**)s2)));
 }
