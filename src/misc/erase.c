@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:28:44 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 18:44:28 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 12:50:17 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	epur_tb(t_com *com, int len)
 
 void	erase_shell(t_shell *sh)
 {
+	if (!sh)
+		return ;
 	free_comm(sh->begin);
 	erase_hash_tab(sh->hash_tb);
 }

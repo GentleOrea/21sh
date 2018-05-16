@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/08 14:25:29 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 14:03:55 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 12:52:14 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char			*ft_implode(char *glue, char const *s1, char const *s2)
 	int		i2;
 	char	*fresh;
 
-	if (!(glue && s1 && s2))
+	if (!glue || !s1 || !s2)
 		return (!glue ? ft_strjoin(s1, s2) : NULL);
 	i = ft_strlen(s1) + ft_strlen(glue);
 	i2 = ft_strlen(s2);

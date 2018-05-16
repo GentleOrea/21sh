@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/13 16:15:00 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 13:11:39 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ int			skip_co(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	if (ft_isin(str[i], QUOTES) && (q = str[i++] == '"' ? '"' : '\''))
+	if (ft_isin(str[i], QUOTES) && (q = str[i++]))
+	{
 		while (str[i] && str[i++] != q)
 			;
+		if (!str[i])
+			return (0);
+	}
 	return (i);
 }
 
@@ -45,7 +49,7 @@ static char	*replace(char *str, char *rep, int op, int len)
 		return (NULL);
 	while (str[i])
 	{
-		if (op & 1 && ft_isin(str[i], "\'\"") && (q = str[i]))
+		if (op & 1 && ft_isin(str[i], QUOTES) && (q = str[i]))
 			while (str[++i] && str[i] != q)
 				ret[++i2] = str[i];
 		if (str[i] == '\\' && ++i)

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 12:06:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 13:27:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ int		skip_comm(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	if (ft_isin(str[i], QUOTES) && (q = str[i++] == '"' ? '"' : '\''))
+	if (ft_isin(str[i], QUOTES) && (q = str[i++]))
+	{
 		while (str[i] && str[i++] != q)
-			;
+			if (!str[i])
+				return (0);
+	}
 	while (str[i] == '\\')
 		i += str[i + 1] ? 2 : 1;
 	return (i);
@@ -65,12 +68,12 @@ int		search_op(char *str, char **op)
 {
 	int	i;
 	int	ind;
-	int	tmp;
 
-	i = 0;
-	while (str && str[i])
+	i = -1;
+	while (str && str[++i])
 	{
 		ind = -1;
+		i += skip_comm(&str[i]);
 		while (op[++ind])
 		{
 			if (!ft_strncmp(&str[i], op[ind], ft_strlen(op[ind])))
@@ -79,7 +82,8 @@ int		search_op(char *str, char **op)
 	|| !ft_isin(str[i - 1], "&>"))))
 					return (i);
 		}
-		i += ((tmp = skip_comm(&str[i])) ? tmp : 1);
+		if (!str[i])
+			return (-1);
 	}
 	return (-1);
 }

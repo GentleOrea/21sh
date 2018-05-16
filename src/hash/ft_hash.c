@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:57:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 18:13:40 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 11:36:44 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ unsigned long	hash(char *str)
 	unsigned long	hash;
 	unsigned long	c;
 
+	if (!str)
+		return (0);
 	hash = 5381;
 	while ((c = (unsigned long)*str++))
 		hash = ((hash << 5) + hash) + c;
