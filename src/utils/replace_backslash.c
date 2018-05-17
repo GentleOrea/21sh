@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   replace_backslash.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/19 14:02:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 16:39:09 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/05/17 15:03:12 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/05/17 16:39:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
 
-int		main(int ac, char **av, char **env)
+#include "../../includes/sh.h"
+
+void	replace_backslashn(char **str)
 {
-	t_shell sh;
-	t_line	line;
+	int tmp;
+	int i;
 
-	(void)ac;
-	(void)av;
-	f_point(&sh, av);
-	ft_initialisation(env, &sh);
-	while (1)
+	i = -1;
+	while ((*str)[++i])
 	{
-		line = ft_getentry();
-		while (line.line == 0)
-			line = ft_getentry();
-		hard_split(&sh, &line);
-		ft_delline(&line);
+		i += skip_comm(&(*str)[i]);
+		if ((*str)[i] == '\n')
+		{
+			tmp = i;
+			while (tmp  >= 0 && (*str)[tmp] == ' ')
+				tmp--;
+			if (get_sep(&(*str)[tmp], SEP) > 0)
+				ft_strcpy(&(*str)[i - 1], &(*str)[i]);
+		}
 	}
-	erase_shell(&sh);
 }

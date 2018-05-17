@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 14:48:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 16:39:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,16 @@ int		exec_cli(t_shell *sh, t_com *com)
 int		sort_comm(t_shell *sh)
 {
 	char	fail[2];
+	t_com *tmp;
 
-	if (!sh || !sh->com)
+	if (!sh || (!sh->begin && !(sh->begin = sh->com)))
 		return (1);
 	fail[1] = sh->com->next && sh->com->next->type & 4;
-	epur_tb(sh->begin = sh->com, sh->com->len);
-	while (sh->com)
+	epur_tb(sh->com, sh->com->len);
+	while (!(tmp = NULL) && sh->com)
 	{
 		ft_recoverenv(&sh->env) == -1 ? ft_errorlog(ENVFAILED) : 0;
-		if (fail[1])
+		if (fail[1] && (tmp = sh->com))
 		{
 			*fail = exec_cli(sh, sh->com);
 			sh->com = sh->com->next;
@@ -136,11 +137,11 @@ int		sort_comm(t_shell *sh)
 		}
 		else
 			*fail = exec_cli(sh, sh->com);
-		!fail[1] && *fail > 0  && sh->sub.is_sub ? get_sub(sh) : 0;
-		if (sh->com->type & 4)
+		!fail[1] && *fail > 0 && sh->sub.is_sub ? get_sub(sh) : 0;
+		if (((!tmp && sh->com) || (sh->com = tmp)) && sh->com->type & 4)
 			return (*fail);
 		shift_com(sh, *fail);
 	}
-	free_comm(sh->begin);
+	free_comm(sh);
 	return (0);
 }

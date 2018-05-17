@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 15:15:29 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 16:39:09 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int			error_exec(char **argv, int is_redi);
 ** list / erase
 */
 
-void		free_comm(t_com *com);
+void		free_comm(t_shell *sh);
 void		erase_shell(t_shell *sh);
 void		free_parser(t_parser *begin);
 t_parser	*push_front(t_parser *com, char *str, int type);

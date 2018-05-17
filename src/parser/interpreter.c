@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 14:33:11 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 16:22:32 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,6 @@ void	split_co(t_shell *sh, t_parser *tmp)
 		ft_memdel((void**)&to_del->comm);
 		ft_memdel((void**)&to_del);
 	}
+	sh->begin = sh->com;
 	sort_comm(sh);
 }

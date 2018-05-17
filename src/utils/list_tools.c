@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 18:44:43 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 16:30:12 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,28 @@ t_parser	*push_front(t_parser *com, char *str, int type)
 
 void		shift_com(t_shell *sh, int fail)
 {
-	sh->com = sh->com->next;
+	if (!sh->com)
+		return ;
+	sh->com = sh->com->next ;
 	while (sh->com && (sh->com->type && !(sh->com->type & 32)
 				&& !(sh->com->type & (fail >= 0 ? 2 : 1))))
 	{
-		epur_tb(sh->com, sh->com->len);
+		!(sh->com->type & 4) ? epur_tb(sh->com, sh->com->len) : 0;
 		sh->com = sh->com->next;
 	}
 }
 
-void		free_comm(t_com *com)
+void		free_comm(t_shell *sh)
 {
 	t_com *to_del;
 
-	while (com)
+	if (!sh->begin)
+		return ;
+	while (sh->begin)
 	{
-		to_del = com;
-		com = com->next;
+		to_del = sh->begin;
+		epur_tb(to_del, to_del->len);
+		sh->begin = sh->begin->next;
 		ft_free_dblechar_tab(to_del->cli);
 		ft_memdel((void**)&to_del);
 	}
