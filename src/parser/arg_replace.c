@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 13:14:16 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 13:32:09 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 	int		len;
 	char	*to_del[2];
 
-	//ft_printf("%s\n", *str);
 	if ((*str)[i++] != '`' || ft_charchr('`', &(*str)[i]) <= 0)
 		return ;
 	com = sh->com;
@@ -96,7 +95,7 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 		mallcheck(*to_del = ft_strnew(0));
 	glue = replace_loop(sh);
 	to_del[1] = *str;
-	*str = ft_implode(glue, *to_del, &(*str)[i + len + 1]);
+	mallcheck(*str = ft_implode(glue, *to_del, &(*str)[i + len + 1]));
 	ft_memdel((void**)&glue);
 	ft_memdel((void**)&tmp.line);
 	ft_memdel((void**)&to_del[1]);
@@ -124,8 +123,10 @@ void	get_sub(t_shell *sh)
 		begin = begin->next;
 	}
 	safe_dup(-1, 0, sh->sub.pipe);
-	if (dup2(sh->std[0], STDIN_FILENO) == -1)
-		ft_printf("STDIN dup error\n");
-	if (dup2(sh->std[1], STDOUT_FILENO) == -1)
-		ft_printf("STDOUT dup error\n");
+	if (dup2(sh->std[0], STDIN_FILENO) == -1
+		|| dup2(sh->std[1], STDOUT_FILENO) == -1)
+		{
+			ft_printf("STD dup error\n");
+			ft_exit(sh);
+		}
 }
