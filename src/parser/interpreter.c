@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 12:35:14 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 13:14:18 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	norm(t_shell *sh, t_parser *tmp, t_com *com)
 	while (com->cli[++i])
 	{
 		free = com->cli[i];
-		com->cli[i] = ft_find_and_replace(free, "\\", 1);
-		add_comm(com, com->cli[i]);
+		if (*(com->cli[i] = ft_find_and_replace(free, "\\", 1)))
+			add_comm(com, com->cli[i]);
 		ft_memdel((void**)&free);
 	}
 }
