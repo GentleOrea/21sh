@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 13:14:07 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 14:36:02 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int			skip_co(char *str)
 	if (ft_isin(str[i], QUOTES) && (q = str[i++]) && ft_charchr(q, &str[i]) > 0)
 	{
 		while (str[i] && str[i++] != q)
+			if (!str[i])
+				return (0);
 			;
-		if (!str[i])
-			return (0);
 	}
 	return (i);
 }

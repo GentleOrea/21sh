@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 11:32:12 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 18:43:02 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 14:00:08 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_glob		*ft_glob(char *regstr, int opt)
 	int			len;
 
 	(void)opt;
-	if (!ft_strcmp(regstr, "/"))
+	if (!regstr || !ft_strcmp(regstr, "/"))
 		return (NULL);
 	mallcheck(glob = (t_glob*)ft_memalloc(sizeof(t_glob)));
 	ft_bzero(glob, sizeof(glob));

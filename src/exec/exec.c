@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 13:43:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 13:47:24 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,6 @@ int		sort_comm(t_shell *sh)
 		}
 		else
 			*fail = exec_cli(sh, sh->com);
-	dprintf(sh->fd, "get_sub\n");
 		!fail[1] && *fail > 0  && sh->sub.is_sub ? get_sub(sh) : 0;
 		if (sh->com->type & 4)
 			return (*fail);

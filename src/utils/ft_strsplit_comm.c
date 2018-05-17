@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:27:38 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/10 16:14:06 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 14:33:37 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static int		countletters(char const *s, char *c)
 {
 	int		cl;
+	int		co;
 
 	cl = 0;
-	while (!ft_isin(s[cl], c) && s[cl])
+	while (s[cl] && !ft_isin(s[cl], c))
 	{
-		cl += skip_comm((char*)&s[cl]);
+		while ((co = skip_comm((char*)&s[cl])))
+			cl += co;
 		if (s[cl] && !ft_isin(s[cl], c))
 			cl++;
 	}
@@ -52,7 +54,6 @@ static char		**cpy(char const *s, char *c, char **fresh, int words)
 	i = -1;
 	while (++i < words)
 	{
-		i3 = 0;
 		while (*s && ft_isin(*s, c))
 			s++;
 		i3 = countletters(s, c);
