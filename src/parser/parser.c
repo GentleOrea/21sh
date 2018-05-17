@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 17:14:50 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 14:06:00 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 15:06:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int			hard_split(t_shell *sh, t_line *line)
 		return (-1);
 	free_parser(par);
 	mallcheck(par = (t_parser*)ft_memalloc(sizeof(t_parser)));
+	replace_backslashn(&str);
 	if (!(tb = ft_strsplit_comm(str, "\n;")))
 		return (0);
 	if (!*tb)
