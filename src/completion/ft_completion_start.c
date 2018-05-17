@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 14:43:37 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 16:40:00 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/17 13:20:21 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ char		*ft_completion_start(t_line *line, int *val)
 		i = 0;
 	else
 		i = ft_lennchar_l(tmp, val[0], ft_lenword_l(tmp, val[0]));
-	printf("%d\n", i);
 	if (!(str = (char*)ft_memalloc(i + 1)))
 		return (0);
 	i = val[0] - i;
