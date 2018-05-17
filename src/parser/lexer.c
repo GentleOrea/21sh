@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 15:40:03 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 12:21:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 12:23:36 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int			sizeof_comm(char *str, t_parser *par)
 			return (-1);
 	}
 	par->wait = get_sep(&str[i], SEP);
-	par->wait = par->wait > 0 && par->wait < 3 ? 1 : 0;
+	par->wait = par->wait >= 0 && par->wait < 3 ? 1 : 0;
 	if (str[i] && (str[i] == ';' || ft_strnstr(&str[i], ";;", 2)))
 		return (!ft_strnstr(&str[i], ";;", 2) ? i | 1 : -1);
 	return (i || !str[i] ? i + sep : -1);

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 13:11:39 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 12:48:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			skip_co(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	if (ft_isin(str[i], QUOTES) && (q = str[i++]))
+	if (ft_isin(str[i], QUOTES) && (q = str[i++]) && ft_charchr(q, &str[i]) > 0)
 	{
 		while (str[i] && str[i++] != q)
 			;
@@ -49,10 +49,11 @@ static char	*replace(char *str, char *rep, int op, int len)
 		return (NULL);
 	while (str[i])
 	{
-		if (op & 1 && ft_isin(str[i], QUOTES) && (q = str[i]))
+		if (op & 1 && ft_isin(str[i], QUOTES) && (q = str[i])
+				&& ft_charchr(q, &str[i + 1]) >= 0)
 			while (str[++i] && str[i] != q)
 				ret[++i2] = str[i];
-		if (str[i] == '\\' && ++i)
+		while (str[i] == '\\' && ++i)
 			ret[++i2] = str[i++];
 		if (str[i] && (str[i] == q || str[i] == rep[0]) && ++i)
 			rep[1] ? ret[++i2] = rep[1] : 0;
@@ -75,7 +76,8 @@ char		*ft_find_and_replace(char *str, char *rep, int op)
 		return (NULL);
 	while (str[i])
 	{
-		i += str[i] == '\\';
+		while (str[i] == '\\' && len--)
+			i += (str[i] == '\\') * 2;
 		op & 1 ? temp = skip_co(&str[i]) : 0;
 		i += temp;
 		temp ? len -= 2 : 0;
