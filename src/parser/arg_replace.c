@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 13:32:09 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 13:43:43 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void	get_sub(t_shell *sh)
 {
 	t_list *begin;
 
+	while (wait(0) != -1)
+		;
 	if (!sh->sub.begin)
 		mallcheck(sh->sub.begin = (t_list*)ft_memalloc(sizeof(t_list)));
 	close(sh->sub.pipe[1]);
