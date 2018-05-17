@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:28:55 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 15:20:51 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/17 09:36:53 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,22 @@ void	ft_delline(t_line *line)
 {
 	ft_strdel(&(line->line));
 	ft_strdel(&(line->eof));
+}
+
+void	ft_delparser(t_parser **pars)
+{
+	t_parser	*el;
+	t_parser	*tmp;
+
+	if (!pars || !*pars)
+		return ;
+	el = *pars;
+	while (el)
+	{
+		tmp = el;
+		el = el->next;
+		ft_strdel(&(tmp->comm));
+		free(tmp);
+		tmp = 0;
+	}
 }
