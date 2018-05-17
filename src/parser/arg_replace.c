@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 12:08:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 12:15:06 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	arg_replace(t_shell *sh, char **arg)
 	while ((*arg)[++i])
 	{
 		comm_substitute(sh, arg, i);
-		i += skip_comm(&(*arg)[i]);
+		i += skip_double(&(*arg)[i]);
 		assign(sh, arg, i);
 		if (!(*arg)[i])
 			return ;

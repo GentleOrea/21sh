@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/17 11:16:04 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/17 12:16:15 by ygarrot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,8 @@ SRC_FP += \
 		  utils/glob_utils.c \
 		  utils/ft_strsplit_comm.c \
 		  utils/exec_utils.c \
-		  utils/list_tools.c
+		  utils/list_tools.c \
+		  utils/replace_utils.c
 
 SRC_FP += \
 		  write/ft_erase.c \

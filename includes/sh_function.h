@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 11:14:35 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 12:13:19 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,6 +205,7 @@ int			hard_split(t_shell *sh, t_line *line);
 t_parser	*easy_split(t_parser *c, char *str, char isamp);
 void		f_point(t_shell *sh);
 void		parse_exe(t_shell *sh, char *comm, char **argv);
+int			skip_double(char *str);
 
 /*
 ** builtin
