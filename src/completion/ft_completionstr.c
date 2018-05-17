@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_variable_create.c                               :+:      :+:    :+:   */
+/*   ft_completionstr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/08 15:28:08 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/17 12:47:34 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/05/17 15:18:16 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/05/17 15:55:23 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-t_variable	*ft_variable_create(char *name, void *data, int deep)
+char	*ft_straddsep(char *str, int bl, int sep)
 {
-	t_variable	*el;
+	char	*split;
+	int		i;
+	int		j;
 
-	if (!(el = (t_variable*)malloc(sizeof(t_variable))))
+	if (!str)
 		return (0);
-	el->name = name;
-	el->deep = deep;
-	if (el->deep == 1)
+	if (!(split = (char*)ft_memalloc(2 * ft_strlen(str) + 3)))
+		return (0);
+	i = 0;
+	j = 0;
+	while (str[i])
 	{
-		el->str = (char*)data;
-		el->array = 0;
+		if (sep && (sep == '\'' || !bl) && str[i] == sep)
+			split[j++] = '\\';
+		else if (!sep && !bl && ft_isin(str[i], SPECIALCHAR))
+			split[j++] = '\\';
+		
 	}
-	else if (el->deep == 2)
-	{
-		el->str = 0;
-		el->array = (char**)data;
-	}
-	return (el);
+	return (split);
 }

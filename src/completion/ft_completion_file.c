@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:42:56 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 17:13:44 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/17 15:16:29 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,47 +17,49 @@ char	*ft_getdir(char *str)
 	char	*directory;
 	char	*tmp;
 	size_t	i;
-	size_t	j;
 
-	if (!(j = 0) && str && (*str == '/' || *str == '~'))
+	if (!str)
+		return (0);
+	if (str && *str == '/' && (i = ft_strlen(str)))
 	{
-		i = ft_strlen(str);
 		while (i >= 0 && str[i] != '/')
 			i--;
 		return (ft_strndup(str, i));
 	}
-	if (!(tmp = getcwd(0, 0)))
+	tmp = 0;
+	if (*str != '~' && !(tmp = getcwd(0, 0)))
 		return (0);
-	if (!(directory = (char*)malloc(ft_strlen(tmp) + ft_strlen(str) + 1)))
+	if (!(directory = (char*)ft_memalloc(ft_strlen(str) + 1 +
+		((*str == '~') ? (ft_strlen(ft_getenv(HOME))) : (ft_strlen(tmp))))))
 		ft_strdel(&tmp);
-	if (!directory || (i = 0))
+	if (!directory)
 		return (0);
-	while (tmp[i])
-		directory[j++] = tmp[i++];
-	i = 0;
-	while (str && str[i])
-		directory[j++] = str[i++];
-	directory[j] = 0;
+	ft_strcat(directory, (*str == '~') ? ft_getenv(HOME) : (tmp));
+	ft_strcat(directory, (*str == '~')  ? (&str[1]) : (str));
 	return (directory);
 }
 
-char	*ft_completion_getfilename(char *begin)
+char	*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 {
-	char	*file;
-	int		i;
-	char	*directory;
-	DIR		*dir;
+	char		*right;
+	size_t		i;
+	DIR			*dir;
+	t_dirent	*file;
 
-	i = 0;
-	if (!(directory = ft_completion_save(CODE_GET, 0)))
-	{
-		directory = ft_getdir(begin);
-		ft_completion_save(CODE_SET, directory);
-		ft_completion_count(CODE_RESET);
-	}
-	ft_strdel(&begin);
-	if (!directory)
+	if (loc <= 0)
 		return (0);
-	
-	return (str);
+	if (!(dir = opendir(ft_getdir(left))))
+		return (0);
+	i =  ft_strlen(left);
+	right = 0;
+	while (loc > 0 && (file = readdir(dir)))
+	{
+		if (!ft_strncmp(left, dir->name, i))
+			loc--;
+		if (loc == 0 && ft_strlen(dir->name) != i)
+			right = &(dir->name)[i];
+		else if (loc == 0)
+			return (ft_strdup(" "));
+	}
+	return (right);
 }
