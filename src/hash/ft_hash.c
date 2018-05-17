@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:57:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 10:41:41 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/17 11:56:18 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void			delhash(void *item)
 {
+	if (!item)
+		return ;
 	ft_strdel(&((char**)item)[0]);
 	ft_strdel(&((char**)item)[1]);
 	free(item);
@@ -48,20 +50,21 @@ int				ft_set_hash(t_btree **begin, char *key, char *value)
 		btree_insert_data(begin, content, ft_hashcmp, delhash);
 		return (1);
 	}
-	ft_memdel((void**)&key);
-	ft_memdel((void**)&(((char**)tmp->item)[1]));
-	((char**)tmp->item)[1] = value;
+	//ft_memdel((void**)&key);
+	//ft_memdel((void**)&(((char**)tmp->item)[1]));
+	//((char**)tmp->item)[1] = value;
 	return (1);
 }
 
 char			*ft_get_hash(t_btree **hash_tb, char *key)
 {
 	unsigned long	index;
-	t_btree			*tmp;
+	char			**tmp;
+	t_btree			*root;
 
 	index = hash(key) % HASH_SIZE;
-	if (!(tmp = hash_tb[index]))
+	if (!(root = hash_tb[index]))
 		return (NULL);
-	tmp = btree_search_item(tmp, &key, ft_hashcmp);
-	return (tmp && tmp->item ? ((char**)(tmp->item))[1] : NULL);
+	tmp = btree_search_item(root, &key, ft_hashcmp);
+	return (tmp ? tmp[1] : NULL);
 }
