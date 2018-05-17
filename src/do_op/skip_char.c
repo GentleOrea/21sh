@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op.c                                               :+:      :+:    :+:   */
+/*   skip_char.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/16 12:10:38 by ygarrot           #+#    #+#             */
+/*   Created: 2018/05/16 14:05:20 by ygarrot           #+#    #+#             */
 /*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
-int		ft_mult(int a, int b)
+int		skip_char(char *str, char *to_skip)
 {
-	return (a * b);
+	int i;
+
+	i = -1;
+	if (!str || !to_skip)
+		return (0);
+	while (str[++i] && ft_isin(str[i], to_skip))
+		;
+	return (i);
 }
 
-int		ft_summ(int a, int b)
+int		ft_occiter2(char *str, int (*f)(int))
 {
-	return (a + b);
-}
+	int	i;
 
-int		ft_div(int a, int b)
-{
-	return (a / b);
-}
-
-int		ft_sub(int a, int b)
-{
-	return (a - b);
-}
-
-int		ft_mod(int a, int b)
-{
-	return (a % b);
+	i = 0;
+	if (!str || !f)
+		return (0);
+	while (str[i] && f(str[i]))
+		i++;
+	return (i);
 }

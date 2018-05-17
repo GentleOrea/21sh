@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 19:06:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,5 +291,34 @@ int			ft_hashcmp(void *content, void *content2);
 void		btree_erase(t_btree **root, void *erase(void **));
 void		erase_hash_tab(t_btree **hash_tb);
 void		*erasehash(void **item);
+
+/*
+** math functions
+*/
+char			**ft_custom_split(char *s, char **tb);
+
+/*
+** bitwise
+*/
+
+int		ft_left_shift(int a, int b);
+int		ft_right_shift(int a, int b);
+int		ft_and(int a, int b);
+int		ft_or(int a, int b);
+int		ft_xor(int a, int b);
+int		ft_bitneg(int a, int b);
+
+/*
+** classic op
+*/
+
+int		ft_mult(int a, int b);
+int		ft_summ(int a, int b);
+int		ft_div(int a, int b);
+int		ft_sub(int a, int b);
+int		ft_mod(int a, int b);
+
+int		skip_char(char *str, char *to_skip);
+int		ft_occiter2(char *str, int (*f)(int));
 
 #endif

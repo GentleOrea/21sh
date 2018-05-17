@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 13:36:02 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 13:40:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,6 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 			exit(EXIT_FAILURE);
 		parse_exe(sh, comm, argv);
 	}
-	//if (father > 0 && sh->sub.is_sub)
-	//	wait(0);
 	if (sh->com->type & 4)
 		safe_dup(-1, 0, sh->com->pipe);
 	return (father);

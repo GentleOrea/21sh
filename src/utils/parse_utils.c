@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 13:27:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		skip_comm(char *str)
 		return (0);
 	if (ft_isin(str[i], QUOTES) && (q = str[i++]))
 	{
-		while (str[i] && str[i++] != q)
+		while (str[i++] != q)
 			if (!str[i])
 				return (0);
 	}
@@ -38,7 +38,7 @@ int		get_sep(char *str, char **tb)
 	i = -1;
 	while (tb[++i] && ft_strncmp(str, tb[i], ft_strlen(tb[i])))
 		;
-	return (i);
+	return (tb[i] ? i : -1);
 }
 
 /*

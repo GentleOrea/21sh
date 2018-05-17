@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 18:27:13 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 11:13:57 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ void	split_co(t_shell *sh, t_parser *tmp)
 	t_com		*com;
 	t_parser	*to_del;
 
+	if (!tmp)
+		return ;
 	mallcheck(com = (t_com*)ft_memalloc(sizeof(t_com)));
 	sh->com = com;
 	while (tmp)

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/15 19:09:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,4 +133,8 @@ struct			s_glob
 	t_paths			*paths;
 };
 
+typedef struct s_do_op
+{
+	int		(*f_built[20])(int a, int b);
+}				t_do_op;
 #endif

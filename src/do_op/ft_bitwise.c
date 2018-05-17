@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   op.c                                               :+:      :+:    :+:   */
+/*   ft_bitwise.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/16 12:10:38 by ygarrot           #+#    #+#             */
+/*   Created: 2018/05/16 13:53:22 by ygarrot           #+#    #+#             */
 /*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
-
-int		ft_mult(int a, int b)
+int		ft_left_shift(int a, int b)
 {
-	return (a * b);
+	return (a << b);
 }
 
-int		ft_summ(int a, int b)
+int		ft_right_shift(int a, int b)
 {
-	return (a + b);
+	return (a >> b);
 }
 
-int		ft_div(int a, int b)
+int		ft_and(int a, int b)
 {
-	return (a / b);
+	return (a & b);
 }
 
-int		ft_sub(int a, int b)
+int		ft_or(int a, int b)
 {
-	return (a - b);
+	return (a | b);
 }
 
-int		ft_mod(int a, int b)
+int		ft_xor(int a, int b)
 {
-	return (a % b);
+	return (a ^ b);
+}
+
+int		ft_bitneg(int a, int b)
+{
+	return(~a);
 }

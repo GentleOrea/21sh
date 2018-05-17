@@ -1,2 +1,12 @@
+en cours:
+
+arithmetic replacement
+$(())
+=/*-+
+
+->next:
+aliases
+
+a faire:
 leaks lors de l'appel du parser
 erreurs lors des '\n'
