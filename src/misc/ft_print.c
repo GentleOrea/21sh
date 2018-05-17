@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 12:48:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 13:14:32 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/17 10:54:23 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ char	*ft_init_aff(int *val)
 		while (i && tmp[i] != '/')
 			i--;
 		i += (tmp[i] == '/');
-		if (tmp[i])
-			ft_strcat(local, &tmp[i]);
-		else
+		ft_strcat(local, &tmp[i]);
+		if (!tmp[i])
 			ft_strcat(local, "/");
 		ft_strcat(local, " >");
+		ft_strdel(&tmp);
 	}
 	ft_putstr(local);
 	i = ft_strlen(local);

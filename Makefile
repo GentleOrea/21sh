@@ -6,13 +6,13 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/15 18:32:33 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/17 11:02:36 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh 
 
-FLAGS =  -Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS =  -Wall -Werror -Wextra #-g3 -fsanitize=address
 
 SRC_FOLDER = src/
 
@@ -49,7 +49,8 @@ SRC_FP += \
 		  initialisation/ft_initenv.c \
 		  initialisation/ft_signal.c \
 		  initialisation/ft_terminal.c \
-		  initialisation/init.c
+		  initialisation/init.c \
+		  initialisation/ft_initialisation.c
 
 SRC_FP += \
 		  misc/erase.c \

@@ -6,13 +6,20 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/16 13:43:52 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 11:15:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-int		ft_read(t_line *line, int *val)
+static int	ft_sigintcall(t_parser **pars, t_line *line)
+{
+	ft_delparser(pars);
+	ft_sigint_clear(line);
+	return (-1);
+}
+
+int			ft_read(t_line *line, int *val)
 {
 	char		buf[BUFFSIZE + 1];
 	char		tmp[2 * BUFFSIZE + 1];
@@ -25,19 +32,22 @@ int		ft_read(t_line *line, int *val)
 	while (1)
 	{
 		if (ft_sigint(0))
-			return (ft_sigint_clear(line) ? -1 : -1);
+			return (ft_sigintcall(&pars, line));
 		val[9] = read(STDIN_FILENO, buf, BUFFSIZE);
 		if (ft_sigint(0) || val[9] < 0)
-			return (ft_sigint_clear(line) ? -1 : -1);
+			return (ft_sigintcall(&pars, line));
 		buf[val[9]] = 0;
 		ft_strcat(tmp, buf);
 		if ((re = ft_read_process(line, val, tmp, &pars)))
+		{
+			ft_delparser(&pars);
 			return (re);
+		}
 	}
 	return (0);
 }
 
-int		ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
+int			ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars)
 {
 	int	i[3];
 	int	re;

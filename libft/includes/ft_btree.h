@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/07/21 15:42:16 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 14:49:41 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/17 10:32:42 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			btree_apply_infix(t_btree *root, void (*applyf)(void *));
 void			btree_apply_suffix(t_btree *root, void (*applyf)(void *));
 int				btree_balancefrom(t_btree **root, t_btree *from);
 int				btree_insert_data(t_btree **root, void *item, int (*cmpf)
-		(void *, void *));
+		(void *, void *), void (*del)(void *item));
 void			*btree_search_item(t_btree *root, void *data_ref,
 		int (*cmpf)(void *, void *));
 int				btree_level_count(t_btree *root);

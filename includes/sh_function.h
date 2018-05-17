@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 11:14:35 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ void		ft_delline(t_line *line);
 void		ft_direction_del(void *content, size_t t);
 void		ft_command_del(void *c, size_t t);
 void		ft_errorlog(char *str);
+void		ft_delparser(t_parser **pars);
 
 /*
 ** Parametrage du terminal
 */
 
+void		ft_initialisation (char **env, t_shell *sh);
 int			ft_recoverenv(char ***env);
 char		*ft_getenvfile(int code);
 int			ft_envwrite(char *file, char **env);

@@ -6,11 +6,18 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:57:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 11:36:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 10:41:41 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
+
+void			delhash(void *item)
+{
+	ft_strdel(&((char**)item)[0]);
+	ft_strdel(&((char**)item)[1]);
+	free(item);
+}
 
 unsigned long	hash(char *str)
 {
@@ -38,7 +45,7 @@ int				ft_set_hash(t_btree **begin, char *key, char *value)
 			return (-1);
 		content[0] = ft_strdup(key);
 		content[1] = ft_strdup(value);
-		btree_insert_data(begin, content, ft_hashcmp);
+		btree_insert_data(begin, content, ft_hashcmp, delhash);
 		return (1);
 	}
 	ft_memdel((void**)&key);
