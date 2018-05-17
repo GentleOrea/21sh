@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 15:05:53 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 15:15:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,7 @@ t_parser	*push_front(t_parser *com, char *str, int type);
 ** utils
 */
 
-void	replace_backslashn(char **str);
+void		replace_backslashn(char **str);
 char		**ft_strsplit_comm(char *str, char *split);
 char		*ft_find_and_replace(char *str, char *rep, int op);
 char		is_sep(char *str, t_parser *par, char **tb);
@@ -204,7 +204,7 @@ t_parser	*count_parser(char *str);
 
 int			hard_split(t_shell *sh, t_line *line);
 t_parser	*easy_split(t_parser *c, char *str, char isamp);
-void		f_point(t_shell *sh);
+void		f_point(t_shell *sh, char **av);
 void		parse_exe(t_shell *sh, char *comm, char **argv);
 int			skip_double(char *str);
 

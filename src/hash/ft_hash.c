@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:57:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 12:04:03 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 15:14:34 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				ft_set_hash(t_btree **begin, char *key, char *value)
 	char	**content;
 	t_btree *tmp;
 
-	if (!key || !value)
+	if (!begin || !key || !value)
 		return (-1);
 	if (!*begin || !(tmp = btree_search_item(*begin, &key, ft_hashcmp)))
 	{
@@ -59,6 +59,8 @@ char			*ft_get_hash(t_btree **hash_tb, char *key)
 	char			**tmp;
 	t_btree			*root;
 
+	if (!hash_tb || !key)
+		return (NULL);
 	index = hash(key) % HASH_SIZE;
 	if (!(root = hash_tb[index]))
 		return (NULL);
