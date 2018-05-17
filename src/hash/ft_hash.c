@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 11:57:58 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 11:56:18 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 12:04:03 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,6 @@ int				ft_set_hash(t_btree **begin, char *key, char *value)
 		btree_insert_data(begin, content, ft_hashcmp, delhash);
 		return (1);
 	}
-	//ft_memdel((void**)&key);
-	//ft_memdel((void**)&(((char**)tmp->item)[1]));
-	//((char**)tmp->item)[1] = value;
 	return (1);
 }
 

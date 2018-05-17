@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 13:40:48 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/17 12:08:41 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,8 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 	int		len;
 	char	*to_del[2];
 
-	if ((*str)[i++] != '`')
+	if ((*str)[i++] != '`' || ft_charchr('`', &(*str)[i]) < 0)
 		return ;
-	//ft_printf("%s\n", &(*str)[i]);
 	com = sh->com;
 	ft_bzero(&sh->sub, sizeof(sh->sub));
 	sh->sub.is_sub = 1;
@@ -96,7 +95,6 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 		mallcheck(*to_del = ft_strnew(0));
 	glue = replace_loop(sh);
 	to_del[1] = *str;
-	//ft_printf("[%s] [%s] [%s][%d]\n",glue, *to_del,&(*str)[i], len);
 	*str = ft_implode(glue, *to_del, &(*str)[i + len + 1]);
 	ft_memdel((void**)&glue);
 	ft_memdel((void**)&tmp.line);
