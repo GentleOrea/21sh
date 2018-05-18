@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:45:03 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/18 14:37:36 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 14:42:30 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ t_line	ft_getentry(void)
 		ft_delline(&ligne);
 	else
 	{
-		ft_errorlog(ligne.eof);
 		tmp = ft_history_parser(&(ligne.line)[val[1]]);
 		ft_history_add(tmp);
 		ft_strdel(&(ligne.line));
