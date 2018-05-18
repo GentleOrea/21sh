@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 16:34:09 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 13:57:47 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static int		countletters(char const *s, char **tb)
 	cl = 0;
 	while (get_sep((char*)&s[cl], tb) < 0  && s[cl])
 	{
-		while (s[cl] && ft_isin(s[cl], " \n\t"))
-			cl++;
+		if (ft_isin(s[cl], " \n\t"))
+			return(cl);
 		if (s[cl] && get_sep((char*)&s[cl], tb) < 0)
 			cl++;
 	}

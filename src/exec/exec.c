@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 11:51:44 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 12:28:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ int		exe(t_shell *sh, char *comm, char **argv)
 	if (father > 0)
 		while (wait(0) != -1)
 			;
-	return (father == -1 ? -1 : 1);
+	else
+		return (-ft_printf("sh : fork error : %d", father));
+	return (1);
 }
 
 int		search_exec(t_shell *sh, char *comm, char **argv)

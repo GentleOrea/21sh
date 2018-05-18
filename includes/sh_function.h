@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 16:39:09 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 14:35:00 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,6 +300,7 @@ void		*erasehash(void **item);
 ** math functions
 */
 char			**ft_custom_split(char *s, char **tb);
+int (**f_opget(void))(int, int);
 
 /*
 ** bitwise
@@ -307,6 +308,8 @@ char			**ft_custom_split(char *s, char **tb);
 
 int		ft_left_shift(int a, int b);
 int		ft_right_shift(int a, int b);
+int		ft_log_or(int a, int b);
+int		ft_log_and(int a, int b);
 int		ft_and(int a, int b);
 int		ft_or(int a, int b);
 int		ft_xor(int a, int b);
