@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 13:40:49 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 11:51:28 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,5 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 	}
 	if (sh->com->type & 4)
 		safe_dup(-1, 0, sh->com->pipe);
-	return (father);
+	return (father == -1 ? -1 : 1);
 }

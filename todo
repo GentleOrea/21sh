@@ -8,11 +8,5 @@ $(())
 aliases
 
 a faire:
-<<<<<<< HEAD
-=======
-leaks lors de l'appel du parser
-erreurs lors des '\n'
-
 
 Le straddsep dans completion
->>>>>>> 61d920b551c5fef9e473e532458357372391c978
