@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/18 11:19:34 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/18 14:39:25 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC_FP += \
 		  misc/ft_memory.c \
 		  misc/ft_print.c \
 		  misc/ft_separator.c \
+		  misc/ft_parserpushback.c
 
 SRC_FP += \
 		  parser/interpreter.c \
