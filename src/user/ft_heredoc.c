@@ -6,36 +6,56 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:54:57 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 13:49:06 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 14:36:38 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-int		ft_heredoc_purge(char *str, int size)
+static void	ft_heredoc_purge_(char *str, t_parser *parser, int *i, int *j)
+{
+	int	k;
+	int	u;
+	int	v;
+
+	u = *i;
+	v = *j;
+	k = ft_strlen(parser->comm);
+	while (str[u] && (ft_strlento(&str[u], '\n') != k ||
+			ft_strncmp(parser->comm, &str[u], k)))
+	{
+		while (str[u] && str[u] != '\n')
+			str[v++] = str[u++];
+		if (str[u] == '\n')
+			str[v++] = str[u++];
+	}
+	if (ft_strlento(&str[u], '\n' == k &&
+				!ft_strncmp(parser->comm, &str[u], k)))
+		u += k + 1;
+	*i = u;
+	*j = v;
+}
+
+void		ft_heredoc_purge(char *str, int size, t_parser *parser)
 {
 	int	i;
 	int	j;
-	int	k;
-	int	t;
 
 	i = 0;
 	j = 0;
-	if (!str)
-		return (-1);
+	if (!parser || !str)
+		return ;
 	while (i < size)
 	{
-		while (i < size && !str[i])
-			str[j++] = str[i++];
-		k = ft_strlento(&str[i], '\n');
-		if (i < size && k + 1 < (int)ft_strlen(&str[i]))
+		if (!parser->comm)
 		{
-			t = 0;
-			while (k-- >= 0)
+			while (str[i])
 				str[j++] = str[i++];
 		}
-		else if (i < size)
-			i += ft_strlen(&str[i]) + 1;
+		else
+			ft_heredoc_purge_(str, parser, &i, &j);
+		str[j++] = str[i++];
 	}
-	return (1);
+	while (j < size)
+		str[j++] = 0;
 }

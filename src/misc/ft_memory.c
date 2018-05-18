@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 11:28:55 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/17 09:36:53 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 12:24:45 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,19 @@ int		ft_realloc_line(t_line *line, int *val, int newsize)
 
 void	ft_delline(t_line *line)
 {
+	t_parser	*tmp;
+
+	if (!line)
+		return ;
 	ft_strdel(&(line->line));
 	ft_strdel(&(line->eof));
+	while (line->parser)
+	{
+		tmp = line->parser;
+		line->parser = tmp->next;
+		ft_strdel(&(tmp->comm));
+		ft_memdel((void**)&tmp);
+	}
 }
 
 void	ft_delparser(t_parser **pars)
