@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 12:30:27 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ typedef struct	s_variable
 	char	*str;
 	char	**array;
 }				t_variable;
-
-typedef struct	s_line
-{
-	char	*eof;
-	int		size_eof;
-	char	*line;
-	int		size_line;
-}				t_line;
 
 typedef struct	s_direction
 {
@@ -137,4 +129,14 @@ typedef struct s_do_op
 {
 	int		(*f_built[20])(int a, int b);
 }				t_do_op;
+
+typedef struct	s_line
+{
+	char		*eof;
+	int			size_eof;
+	char		*line;
+	int			size_line;
+	t_parser	*parser;
+	int			parser_nb;
+}				t_line;
 #endif

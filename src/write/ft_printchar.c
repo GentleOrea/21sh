@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 14:52:44 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 15:38:39 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 13:05:27 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_printchar(t_line *line, char *str, int *val)
 	val[9] = ft_lenchar_r(str, 0);
 	if (str[0] == '\n' && ft_move_toend(line, val) == -1)
 		return (-1);
-	if ((val[10] = val[0] + val[9] + ft_strlen(&tmp[val[0]])) >=
+	if ((val[10] = val[0] + val[9] + ft_strlen(&tmp[val[0]])) + 5 >=
 		(val[4] ? line->size_line : line->size_eof))
 		if (ft_realloc_line(line, val, (val[10] + 30)) == -1)
 			return (-1);

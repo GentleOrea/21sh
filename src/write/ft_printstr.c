@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 12:22:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/06 15:50:28 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 13:52:15 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,17 @@ int		ft_printnchar(t_line *line, char *str, int *val, int n)
 {
 	int		ret;
 	char	*tmp;
+	char	buf[BUFFSIZE + 1];
 
 	n = ft_min(n, ft_abs((int)ft_strlen(str)));
 	if (n <= 0)
 		return (0);
+	if (n <= BUFFSIZE)
+	{
+		buf[0] = 0;
+		ft_strcat(buf, str);
+		return (ft_printstr(line, buf, val));
+	}
 	if (!(tmp = ft_memalloc(n + 1)))
 		return (-1);
 	ft_strncat(tmp, str, n);

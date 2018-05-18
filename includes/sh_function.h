@@ -6,7 +6,11 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/05/18 14:35:00 by ygarrot          ###   ########.fr       */
+=======
+/*   Updated: 2018/05/18 14:14:17 by tcharrie         ###   ########.fr       */
+>>>>>>> ab2f0ea4d019e7e777291652a00019b37b9a471d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +67,11 @@ int			ft_historyfile_open(void);
 
 t_line		ft_getentry(void);
 int			ft_read(t_line *line, int *ta);
-int			ft_read_process(t_line *line, int *val, char *tmp, t_parser **pars);
-int			ft_read_newline(t_line *line, int *val, t_parser **pars);
-int			ft_read_newline_eof(t_line *line, int *val, t_parser **pars);
-int			ft_heredoc_purge(char *str, int size);
+int			ft_read_process(t_line *line, int *val, char *tmp, t_parser *pars);
+int			ft_read_newline(t_line *line, int *val, t_parser *pars);
+int			ft_read_newline_eof(t_line *line, int *val, t_parser *pars);
+int			ft_read_eot(t_line *line, int *val, t_parser *pars);
+void		ft_heredoc_purge(char *str, int size, t_parser *parser);
 
 int			ft_specialchar(t_line *line, char *str, int *val);
 int			ft_specialchar_a(t_line *line, char *str, int *val);
@@ -207,6 +212,7 @@ t_parser	*easy_split(t_parser *c, char *str, char isamp);
 void		f_point(t_shell *sh, char **av);
 void		parse_exe(t_shell *sh, char *comm, char **argv);
 int			skip_double(char *str);
+void		ft_parserpushback(t_parser *begin, t_parser *end);
 
 /*
 ** builtin
