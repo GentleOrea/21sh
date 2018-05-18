@@ -6,13 +6,13 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 16:56:40 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/15 13:09:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 14:43:08 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
 
-void	ft_putendv_fd(char *str, int fd)
+void		ft_putendv_fd(char *str, int fd)
 {
 	if (!str || fd < 0)
 		return ;

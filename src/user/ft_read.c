@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 13:33:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/18 12:38:26 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 14:44:01 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		ft_sigintcall(t_line *line)
 
 static t_parser	*ft_getparser(t_line *line)
 {
-	int		i;
+	int			i;
 	t_parser	*tmp;
 
 	if (!line)
