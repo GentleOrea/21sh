@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:47:33 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/08 11:41:57 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 15:01:47 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		ft_lentospecial(char *str)
 	KEY_RIGHT_SHIFTED, KEY_UP, KEY_UP_SHITED, KEY_DOWN, KEY_DOWN_SHITED,
 	KEY_SELECT_LEFT, KEY_SELECT_RIGHT, KEY_SELECT_CPY, KEY_SELECT_PASTE,
 	KEY_END, KEY_END_SHIFTED, KEY_HOME, KEY_HOME_SHIFTED, KEY_DELETE,
-	KEY_ERASE, NEWLINE, 0};
+	KEY_ERASE, NEWLINE, "\4", 0};
 	i = 0;
 	while (str && str[i])
 	{
