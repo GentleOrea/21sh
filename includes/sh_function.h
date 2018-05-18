@@ -6,11 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/05/18 14:35:00 by ygarrot          ###   ########.fr       */
-=======
-/*   Updated: 2018/05/18 14:14:17 by tcharrie         ###   ########.fr       */
->>>>>>> ab2f0ea4d019e7e777291652a00019b37b9a471d
+/*   Updated: 2018/05/18 15:07:21 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -307,6 +303,7 @@ void		*erasehash(void **item);
 */
 char			**ft_custom_split(char *s, char **tb);
 int (**f_opget(void))(int, int);
+int		calc_op(char **op_tb);
 
 /*
 ** bitwise
