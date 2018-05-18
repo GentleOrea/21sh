@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 14:05:20 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/16 18:00:33 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 13:57:55 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,11 @@ int		ft_occiter2(char *str, int (*f)(int))
 	i = 0;
 	if (!str || !f)
 		return (0);
-	while (str[i] && f(str[i]))
+	while (str[i])
+	{
+		if (!f(str[i]))
+			return (-1);
 		i++;
+	}
 	return (i);
 }
