@@ -12,7 +12,36 @@
 
 #include "sh.h"
 
-char	*ft_straddsep(char *str, int bl, int sep)
+static char	*ft_straddsep_(char *str, char *split, int sep, int i, int j)
+{
+	while (sep && str[i])
+	{
+		if (str[i] == '\\' && sep != '\'')
+		{
+			split[j++] = '\\';
+			split[j++] = '\\';
+		}
+		if (str[i] == sep)
+		{
+			split[j++] = sep;
+			split[j++] = '\\';
+			split[j++] = sep;
+			sep = 0;
+		}
+		else
+			split[j++] = str[i];
+		i++;
+	}
+	while (str[i])
+	{
+		if (ft_isin(str[i], SPECIALCHAR))
+			split[j++] = '\\';
+		split[j++] = str[i++];
+	}
+	return (split);
+}
+
+char		*ft_straddsep(char *str, int bl, int sep)
 {
 	char	*split;
 	int		i;
@@ -24,13 +53,36 @@ char	*ft_straddsep(char *str, int bl, int sep)
 		return (0);
 	i = 0;
 	j = 0;
+	if (bl)
+		split[j++] = str[i++];
+	return (ft_straddsep_(str, split, sep, i, j));
+}
+
+char		*ft_strpurgesep(char *str)
+{
+	int		i;
+	char	*purged;
+	int		j;
+	int		sep;
+	int		bl;
+
+	if (!str)
+		return (0);
+	if (!(purged = (char*)ft_memalloc(ft_strlen(str) + 1)))
+		return (0);
+	i = 0;
+	j = 0;
+	sep = 0;
+	bl = 0;
 	while (str[i])
 	{
-		if (sep && (sep == '\'' || !bl) && str[i] == sep)
-			split[j++] = '\\';
-		else if (!sep && !bl && ft_isin(str[i], SPECIALCHAR))
-			split[j++] = '\\';
-		
+		sep = ft_separator(str[i], sep, bl);
+		bl = (str[i] == '\\' && !bl && sep != '\'');
+		if (sep || bl)
+			i++;
+		bl = 0;
+		if (str[i])
+			split[j++] = str[i++];
 	}
 	return (split);
 }
