@@ -31,33 +31,7 @@ int		ft_completion_type(t_line *line, int *val)
 	return (COMPLETION_FILE);
 }
 
-int		ft_completion_count(int code)
-{
-	static int	save = 0;
-
-	if (code == CODE_RESET)
-		save = 0;
-	else if (code == CODE_PUSH)
-		save++;
-	else if (code == CODE_GET)
-		return (save);
-	return (0);
-}
-
-int			ft_completion_lastwrite(int code, int val)
-{
-	static int	save = 0;
-
-	if (code == CODE_RESET)
-		save = 0;
-	if (code == CODE_SET)
-		save = val;
-	if (code == CODE_GET)
-		return (save);
-	return (0);
-}
-
-static int	ft_completion_(t_line *line, int *val, char *left)
+static int	ft_completion_(t_line *line, int *val, char *left, int type)
 {
 	char	*right;
 	int		*bl;
@@ -70,24 +44,24 @@ static int	ft_completion_(t_line *line, int *val, char *left)
 	else
 		ft_separator_active(&(line->eof)[val[0] - (int)ft_strlen(left)],
 			(int)ft_strlen(left), bl, sep);
-	if (!(right = ft_completion_getfilename(left,
-		ft_completion_count(CODE_GET), *bl, *sep)))
-	{
-		ft_strdel(&left);
-		ft_completion_count(CODE_RESET);
+	right = ft_completion_getfilename(left,
+		ft_completion_count(CODE_GET), *bl, *sep);
+	ft_strdel(&left);
+	if (!right)
 		return (-1);
-	}
 	else if (ft_printstr(line, right, val) < 0)
 	{
-		ft_strdel(&left);
+		ft_strdel(&right);
 		return (-1);
 	}
+	ft_strdel(&right);
 	ft_completion_lastwrite(CODE_SET, ft_strlen(right));
 	return (0);
 }
 
 int		ft_completion(t_line *line, int *val)
 {
+	char	*leftpurged;
 	char	*left;
 	char	*right;
 
@@ -95,10 +69,12 @@ int		ft_completion(t_line *line, int *val)
 		if (ft_nerase(line, val, ft_completion_lastwrite(CODE_GET)) < 0)
 			return (-1);
 	if (!(left = ft_completion_start(line, val)))
-	{
-		ft_completion_count(CODE_RESET);
-		ft_completion_save(CODE_RESET);
-		return (-1);
-	}
-	return (ft_completion_(line, val, left));
+		return (ft_completion_reset() ? -1 : -1);
+	leftpurged = ft_strpurgesep(left);
+	ft_strdel(&left);
+	if (!leftpurged)
+		return (ft_completion_reset(CODE_RESET) ? -1 : -1);
+	if (ft_completion_(line, val, left, ft_completion_type(line, val)) < 0)
+		return (ft_completion_reset() ? -1 : -1);
+	return (0);
 }

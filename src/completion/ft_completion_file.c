@@ -48,7 +48,7 @@ char	*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 
 	if (loc <= 0)
 		return (0);
-	if (!(dir = opendir(ft_getdir(left))))
+	if (!(dir = ft_opendirfree(ft_getdir(left))))
 		return (0);
 	i =  ft_strlen(left);
 	right = 0;
@@ -59,7 +59,11 @@ char	*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 		if (loc == 0 && ft_strlen(dir->name) != i)
 			right = &(dir->name)[i];
 		else if (loc == 0)
+		{
+			closedir(dir);
 			return (ft_strdup(" "));
+		}
 	}
-	return (right);
+	closedir(dir);
+	return (ft_straddsep(right, bl, sep));
 }

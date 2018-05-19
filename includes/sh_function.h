@@ -164,6 +164,23 @@ int			ft_separator(char c, int sep, int bl);
 int			ft_separator_active(char *str, int pos, int *bl, int *sep);
 
 /*
+** Completion
+*/
+
+int			ft_completion(t_line *line, int *val);
+int			ft_completion_type(t_line *line, int *val);
+int			ft_completion_reset(void);
+int			ft_completion_count(int code);
+int			ft_completion_lastwrite(int code, int val);
+char		*ft_completion_start(t_line *line, int *val);
+char		*ft_completion_getfilename(char *left, int loc, int bl, int sep);
+char		ft_getdir(char *str);
+char		*ft_straddsep(char *str, int bl, int sep);
+char		*ft_strpurgesep(char *str);
+
+DIR			*ft_opendirfree(char *str);
+
+/*
 ** ...
 */
 
