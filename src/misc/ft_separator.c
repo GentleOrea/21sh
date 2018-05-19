@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 10:52:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/18 15:07:34 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/18 15:10:55 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int		ft_separator(char c, int sep, int bl)
 {
 	if ((sep == '\'' || (sep && !bl)) && c == sep)
 		return (0);
-	if (!sep && !bl && (c == '\'' || c == '"' && c == '`'))
+	if (!sep && !bl && (c == '\'' || c == '"' || c == '`'))
 		return ((int)c);
 	return (sep);
 }

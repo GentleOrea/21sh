@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 14:16:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 14:50:57 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 15:22:22 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int (**f_opget(void))(int, int)
 {
-	static int		(**f_op)(int, int);
+	static int		(*f_op[14])(int, int);
 	
 	f_op[0] = ft_left_shift;
 	f_op[1] = ft_right_shift;
@@ -32,4 +32,3 @@ int (**f_opget(void))(int, int)
 	f_op[13] = ft_mod;
 	return (f_op);
 }
-

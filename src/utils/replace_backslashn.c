@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:03:59 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 11:42:29 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 15:29:12 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	replace_backslashn(char **str)
 			tmp = i;
 			while (tmp  >= 0 && (*str)[tmp] == ' ')
 				tmp--;
-			if (get_sep(&(*str)[tmp], SEP) > 0)
+			if (get_sep(&(*str)[tmp], SEP) >= 0)
 				ft_strcpy(&(*str)[i], &(*str)[i + 1]);
 		}
 	}

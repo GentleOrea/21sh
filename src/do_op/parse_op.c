@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 12:06:05 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 15:07:47 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 17:18:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,13 @@ int		is_local(char *str)
 int	 parse_op(char *str)
 {
 	char	**op_tb;
+	int		*tb_res;
 	int			tab_len;
 	int		res;
 
 	op_tb = ft_custom_split(str, ft_strsplit(ALL_OP, ' '));
 	tab_len = ft_tablen(op_tb) -1;
+	mallcheck(tb_res = (int*)ft_memalloc((tab_len / 2) * sizeof(int)));
 	while (tab_len > -1 && ft_strisin_tab(op_tb[tab_len], ASSIGN, 0) < 0)
 		tab_len--;
 	if (tab_len >= 0 && ft_occiter2(op_tb[tab_len - 1], ft_isdigit) >= 0)
@@ -62,5 +64,5 @@ int	 parse_op(char *str)
 
 int	main()
 {
-	parse_op("1 + 1");
+	ft_printf("%d\n", parse_op("1 | 2 +10*30"));
 }

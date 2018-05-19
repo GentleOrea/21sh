@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 14:33:00 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 14:35:03 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/18 15:15:14 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int		ft_or(int a, int b)
 {
 	return (a | b);
 }
-int		ft_or(int a, int b)
+int		ft_and(int a, int b)
 {
-	return (a | b);
+	return (a & b);
 }
 
