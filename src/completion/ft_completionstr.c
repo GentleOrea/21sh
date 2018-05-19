@@ -63,7 +63,7 @@ char		*ft_strpurgesep(char *str)
 	int		i;
 	char	*purged;
 	int		j;
-	int		sep;
+	int		sep[2];
 	int		bl;
 
 	if (!str)
@@ -72,17 +72,17 @@ char		*ft_strpurgesep(char *str)
 		return (0);
 	i = 0;
 	j = 0;
-	sep = 0;
 	bl = 0;
+	ft_bzero((void*)sep, sizeof(sep));
 	while (str[i])
 	{
-		sep = ft_separator(str[i], sep, bl);
+		sep[1] = ft_separator(str[i], sep[0], bl);
 		bl = (str[i] == '\\' && !bl && sep != '\'');
-		if (sep || bl)
+		if (sep[1] != sep[0] || bl)
 			i++;
-		bl = 0;
-		if (str[i])
+		else
 			split[j++] = str[i++];
+		sep[0] = sep[1];
 	}
 	return (split);
 }
