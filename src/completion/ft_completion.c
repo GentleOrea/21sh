@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:56:06 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:21:51 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/21 15:21:40 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,25 @@ static int	ft_completion_(t_line *line, int *val, char *left, int type)
 	char	*right;
 	int		*bl;
 	int		*sep;
+	int		re;
+	int		bq;
 
 	ft_completion_count(CODE_PUSH);
 	if (val[4])
-		ft_separator_active(&(line->line)[val[0] - (int)ft_strlen(left)],
-			(int)ft_strlen(left), bl, sep);
+		bq = ft_separator_active(&(line->line)[val[0] - (int)ft_strlen(left)],
+			(int)ft_strlen(left), sep, bl);
 	else
-		ft_separator_active(&(line->eof)[val[0] - (int)ft_strlen(left)],
-			(int)ft_strlen(left), bl, sep);
+		bq = ft_separator_active(&(line->eof)[val[0] - (int)ft_strlen(left)],
+			(int)ft_strlen(left), sep, bl);
 	right = ft_completion_getfilename(left,
 		ft_completion_count(CODE_GET), *bl, *sep);
 	ft_strdel(&left);
 	if (!right)
 		return (-1);
-	else if (ft_printstr(line, right, val) < 0)
-	{
-		ft_strdel(&right);
-		return (-1);
-	}
+	re = (ft_printstr(line, right, val) < 0) ? (-1) : (0);
+	ft_completion_lastwrite(CODE_SET, re ? 0 : ft_strlen(right));
 	ft_strdel(&right);
-	ft_completion_lastwrite(CODE_SET, ft_strlen(right));
-	return (0);
+	return (re);
 }
 
 int		ft_completion(t_line *line, int *val)
@@ -45,7 +43,13 @@ int		ft_completion(t_line *line, int *val)
 	char	*leftpurged;
 	char	*left;
 	char	*right;
+	int		type;
 
+	if (!(type = ft_completion_type(line, val)))
+	{
+		ft_completion_reset();
+		return (0);
+	}
 	if (ft_completion_count(CODE_GET) > 0)
 		if (ft_nerase(line, val, ft_completion_lastwrite(CODE_GET)) < 0)
 			return (-1);
@@ -55,7 +59,5 @@ int		ft_completion(t_line *line, int *val)
 	ft_strdel(&left);
 	if (!leftpurged)
 		return (ft_completion_reset(CODE_RESET) ? -1 : -1);
-	if (ft_completion_(line, val, left, ft_completion_type(line, val)) < 0)
-		return (ft_completion_reset() ? -1 : -1);
-	return (0);
+	return (ft_completion_(line, val, left, ft_completion_type(line, val)));
 }

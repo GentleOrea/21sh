@@ -6,11 +6,29 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 11:09:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:17:39 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/21 11:42:55 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+
+int		ft_bl_active(char *str, int pos, int sep)
+{
+	int	bl;
+
+	if (!str || pos <= 0 || sep == '\'')
+		return (0);
+	bl = 0;
+	pos -= ft_lenchar_l(str, pos);
+	while (pos > 0 && str[pos] == '\\')
+	{
+		pos--;
+		bl = !bl;
+	}
+	if (pos == 0 && str[pos] == '\\')
+		bl = !bl;
+	return (bl);
+}
 
 /*
 ** Cette fonction prend une chaine de charactere, une position,

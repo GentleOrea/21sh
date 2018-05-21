@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 15:18:16 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/17 15:55:23 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/21 15:22:47 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char		*ft_strpurgesep(char *str)
 	ft_bzero((void*)sep, sizeof(sep));
 	while (str[i])
 	{
-		sep[1] = ft_separator(str[i], sep[0], bl);
+		ft_separator(str[i], &sep[1], &bl);
 		bl = (str[i] == '\\' && !bl && sep != '\'');
 		if (sep[1] != sep[0] || bl)
 			i++;
