@@ -18,7 +18,7 @@ int		ft_completion_type(t_line *line, int *val)
 		return (COMPLETION_FILE);
 	if (val[0] <= val[5] || ft_isin(line->line[val[0] - 1], ENDWORD))
 		return (COMPLETION_COM);
-	val[9] = ft_lenword_l(line->line, val[0]);
+	val[9] = ft_lenword_l_com(line->line, val[0]);
 	val[9] = val[0] - ft_lennchar_l(line->line, val[0], val[9]);
 	if (val[9] <= val[5] || ft_isin(line->line[val[9] - 1], "|&;\n"))
 		return (line->line[val[9]] != '.' ? COMPLETION_COM : COMPLETION_FILE);

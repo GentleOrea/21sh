@@ -10,50 +10,56 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/sh.h"
+#include "sh.h"
 
-int			ft_lenword_r(char *str, int pos)
+static int	ft_lenword_right_com(char *str, int pos)
 {
 	int	mov;
+	int	bl;
+
+	mov = 0;
+	bl = 0;
+	while (str[pos] && (bl || !ft_isin(str[pos], ENDWORD)))
+	{
+		mov++;
+		pos += ft_lenchar_r(str, pos);
+	}
+	if (mov)
+		return (mov);
+	while (str[pos] && ft_isin(str[pos], ENDWORD))
+	{
+		mov++;
+		pos += ft_lenchar_r(str, pos);
+	}
+	return (mov > 0 ? mov : 1);
+}
+
+int			ft_lenword_r_com(char *str, int pos)
+{
+	int	i;
+	int	sep;
+	int	bl;
 
 	if (!str || pos < 0)
 		return (0);
-	mov = 0;
-	while (str[pos] && !ft_isin(str[pos], ENDWORDVIS))
+	i = 0;
+	ft_separator_active(str, pos, &bl, &sep);
+	if (!sep && !bl && ft_isin(str[pos], "`&|<>;"))
+		return (1 + (!ft_isin(str[pos], ";`") && str[pos] == str[pos + 1]));
+	if (!sep && !bl && ft_isin(str[pos], " \n"))
 	{
-		mov++;
+		while (str[pos] && ft_isin(str[pos], " \n") && ++i)
+			pos += ft_lenchar_r(str, pos);
+		return (i);
+	}
+	if (sep == '`')
+		return (ft_lenword_right_com(str, pos));
+	while (str[pos] && (bl || sep || !ft_isin(str[pos], ENDWORD)))
+	{
+		sep = ft_separator(str[pos], sep, bl);
+		bl = (!bl && sep != '\'' && str[pos] == '\\');
+		i++;
 		pos += ft_lenchar_r(str, pos);
 	}
-	while (str[pos] && ft_isin(str[pos], ENDWORDVIS))
-	{
-		mov++;
-		pos += ft_lenchar_r(str, pos);
-	}
-	return (mov);
-}
-
-int			ft_lenword_l(char *str, int pos)
-{
-	int	mov;
-
-	if (!str || pos <= 0)
-		return (0);
-	if (!str[pos])
-		pos--;
-	else
-		pos -= ft_lenchar_l(str, pos);
-	if (pos <= 0)
-		return (1);
-	mov = 0;
-	while(pos > 0 && ft_isin(str[pos], ENDWORDVIS))
-	{
-		mov++;
-		pos -= ft_lenchar_l(str, pos);
-	}
-	while (pos > 0 && !ft_isin(str[pos], ENDWORDVIS))
-	{
-		mov++;
-		pos -= ft_lenchar_l(str, pos);
-	}
-	return (mov);
+	return (i > 0 ? i : 1);
 }

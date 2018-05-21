@@ -178,6 +178,8 @@ char		ft_getdir(char *str);
 char		*ft_straddsep(char *str, int bl, int sep);
 char		*ft_strpurgesep(char *str);
 
+int			ft_lenword_l_com(char *str, int pos);
+int			ft_lenword_r_com(char *str, int pos);
 DIR			*ft_opendirfree(char *str);
 
 /*
