@@ -4,9 +4,7 @@ arithmetic replacement
 $(())
 =/*-+
 
+Completion {TYPE && STR && SAVE == 1}
+
 ->next:
 aliases
-
-a faire:
-
-Le straddsep dans completion

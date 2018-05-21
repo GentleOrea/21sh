@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 14:43:37 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/17 13:20:21 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:08:10 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,10 @@ static char	*ft_completion_startcpy(char *str, char *tmp, int from, int to)
 	(tmp[from] == '\'' && (sep[0] == '\'' || (!sep[1] && !sep[0]))) ||
 	(tmp[from] == '\"' && (sep[0] != '\'' && !sep[1])) ||
 	(tmp[from] == '\\' && (!sep[1] && sep[0] != '\'')))
-		{
-			sep[0] = ft_separator(tmp[from], sep[0], sep[1]);
-			sep[1] = tmp[from++] == '\\' && !sep[1] && sep[0] != '\'';
-		}
+			ft_separator(tmp[from], sep, &sep[1], 0);
 		else if ((k = ft_lenchar_r(tmp, from)) > 0)
 		{
-			sep[0] = ft_separator(tmp[from], sep[0], sep[1]);
-			sep[1] = !sep[1] && sep[0] != '\'' && tmp[from] == '\\';
+			ft_separator(tmp[from], sep, &sep[1], 0);
 			while (k-- > 0)
 				str[j++] = tmp[from++];
 		}
