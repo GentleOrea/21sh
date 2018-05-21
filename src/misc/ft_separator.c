@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getline.c                                       :+:      :+:    :+:   */
+/*   ft_separator.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/01 10:52:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/18 15:10:55 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/05/21 11:09:28 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/05/21 11:17:39 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,29 @@
 
 /*
 ** Cette fonction prend une chaine de charactere, une position,
-** et determine si on est dans un separateur, renvoyant selon le format
-** de ft_separator
+** et determine si on est dans un separateur, renvoyant la valeur de bq
 ** Utile pour determiner si un '\n' est actif lors de la recuperation
 ** de ligne
+** Elle ne verifie pas les erreurs de parsing tel que `ls '`
 */
 
-int		ft_separator_active(char *str, int pos, int *bl, int *sep)
+int		ft_separator_active(char *str, int pos, int *sep, int *bl)
 {
 	int	i;
+	int	bq;
 
 	i = 0;
-	*bl = 0;
-	*sep = 0;
+	if (bl)
+		*bl = 0;
+	if (sep)
+		*sep = 0;
+	bq = 0;
 	while (str[i] && i < pos)
 	{
-		*sep = ft_separator(str[i], *sep, *bl);
-		*bl = (!*bl && *sep != '\'' && str[i] == '\\');
+		ft_separator(str[i], sep, bl, &bq);
 		i += ft_lenchar_r(str, i);
 	}
-	return (*sep || *bl);
+	return (bq);
 }
 
 /*
@@ -45,11 +48,18 @@ int		ft_separator_active(char *str, int pos, int *bl, int *sep)
 **	Autre : 0
 */
 
-int		ft_separator(char c, int sep, int bl)
+void	ft_separator(char c, int *sep, int *bl, int *bq)
 {
-	if ((sep == '\'' || (sep && !bl)) && c == sep)
-		return (0);
-	if (!sep && !bl && (c == '\'' || c == '"' || c == '`'))
-		return ((int)c);
-	return (sep);
+	if (sep && *sep && *sep == c && (!bl || !*bl) && (!bq || !*bq))
+		*sep = 0;
+	else if (sep && !*sep && ft_isin(c, "'\"") && (!bl || !*bl))
+		*sep = c;
+	if (bq && *bq == '`' && c == '`' && (!bl || !*bl))
+		*bq = 0;
+	else if (bq && !*bq && c == '`' && (!sep || *sep != '\'') && (!bl || !*bl))
+		*bq = '`';
+	if (bl && c == '\\' && !*bl && (!sep || *sep != '\''))
+		*bl = 1;
+	else if (bl && *bl)
+		*bl = 0;
 }

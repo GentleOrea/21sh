@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/15 16:05:24 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 13:17:59 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/21 11:15:26 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,73 +14,48 @@
 
 int			ft_lenword_r(char *str, int pos)
 {
-	int	i;
-	int	sep;
-	int	bl;
+	int	mov;
 
-	i = 0;
-	ft_separator_active(str, pos, &bl, &sep);
-	if (!sep && !bl && ft_isin(str[pos], "&|<>;"))
-		return (1 + (str[pos] != ';' && str[pos] == str[pos + 1]));
-	if (!sep && !bl && ft_isin(str[pos], " \n"))
+	if (!str || pos < 0)
+		return (0);
+	mov = 0;
+	while (str[pos] && !ft_isin(str[pos], ENDWORDVIS))
 	{
-		while (str[pos] && ft_isin(str[pos], " \n") && ++i)
-			pos += ft_lenchar_r(str, pos);
-		return (i);
-	}
-	while (str[pos] && (bl || sep || !ft_isin(str[pos], ENDWORD)))
-	{
-		sep = ft_separator(str[pos], sep, bl);
-		bl = (!bl && sep != '\'' && str[pos] == '\\');
-		i++;
+		mov++;
 		pos += ft_lenchar_r(str, pos);
 	}
-	return (i);
-}
-
-static void	ft_lenword_left(char *str, int pos, int *i, int *mov)
-{
-	int		j;
-
-	*mov = 0;
-	j = ft_isin(str[*i], "l|&<>;");
-	if (j && str[*i + 1] == str[*i])
-		j++;
-	*i += j;
-	if (j && *i >= pos)
-		*mov = j;
-	if (j)
-		return ;
-	while (*i < pos && str[*i] && (ft_isin(str[*i], " \n")))
+	while (str[pos] && ft_isin(str[pos], ENDWORDVIS))
 	{
-		*mov += 1;
-		*i += ft_lenchar_r(str, *i);
+		mov++;
+		pos += ft_lenchar_r(str, pos);
 	}
+	return (mov);
 }
 
 int			ft_lenword_l(char *str, int pos)
 {
 	int	mov;
-	int	i;
-	int	bl;
-	int	sep;
 
-	if (!str || !pos || (i = 0))
+	if (!str || pos <= 0)
 		return (0);
-	bl = 0;
-	sep = 0;
-	while ((i < pos && str[i]) && !(mov = 0))
+	if (!str[pos])
+		pos--;
+	else
+		pos -= ft_lenchar_l(str, pos);
+	if (pos <= 0)
+		return (1);
+	mov = 0;
+	while(pos > 0 && ft_isin(str[pos], ENDWORDVIS))
 	{
-		while (i < pos && str[i] && (sep || bl || !ft_isin(str[i], ENDWORD)))
-		{
-			mov++;
-			sep = ft_separator(str[i], sep, bl);
-			bl = (!bl && sep != '\'' && str[i] == '\\');
-			i += ft_lenchar_r(str, i);
-		}
-		if (i >= pos || !str[i])
-			break ;
-		ft_lenword_left(str, pos, &i, &mov);
+		mov++;
+		pos -= ft_lenchar_l(str, pos);
 	}
-	return (mov ? mov : 1);
+	while (pos > 0 && !ft_isin(str[pos], ENDWORDVIS))
+	{
+		mov++;
+		pos -= ft_lenchar_l(str, pos);
+	}
+	if (pos == 0 && !ft_isin(str[pos], ENDWORDVIS))
+		mov++;
+	return (mov);
 }

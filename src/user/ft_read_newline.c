@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:48:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/18 15:02:59 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/21 11:07:18 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ int		ft_read_newline(t_line *line, int *val, t_parser *pars)
 	t_parser	*tmp;
 
 	ft_printchar(line, "\n", val);
-	if (val[4] && !ft_separator_active(line->line,
-			val[0] - 1, &val[10], &val[11]))
+	if (val[4])
 	{
+		val[12] = ft_separator_active(line->line, val[0] - 1,
+				&val[10], &val[11]);
+		if (val[10] || val[11] || val[12])
+			return (0);
 		if (!(tmp = count_parser(&(line->line)[val[5]])))
 			return (-1);
 		line->parser_nb++;
@@ -27,18 +30,15 @@ int		ft_read_newline(t_line *line, int *val, t_parser *pars)
 		if (!line->parser)
 			line->parser = tmp;
 		if (tmp->comm)
-		{
 			val[4] = 0;
+		if (tmp->comm)
 			val[0] = val[3];
-		}
 		if (tmp->comm || tmp->wait)
 			val[5] = val[0];
-		else
-			return (1);
+		return ((tmp->comm || tmp->wait) ? 0 : 1);
 	}
-	else if (!val[4])
+	else
 		return (ft_read_newline_eof(line, val, pars));
-	return (0);
 }
 
 int		ft_read_newline_eof(t_line *line, int *val, t_parser *pars)

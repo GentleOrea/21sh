@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/17 16:40:05 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/21 11:13:04 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@
 # define BUILT (char *[6]){"echo","env", "setenv", "unsetenv"}
 # define GLOB "[*?"
 # define ENDWORD " \n|;&<>"
+# define ENDWORDVIS " \n;|&<>`'\""
 # define SPECIALCHAR "`\"'\\!$&|?<>*\n"
 
 # define KEY_LEFT "\33[D"

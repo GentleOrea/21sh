@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 15:09:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/21 10:47:43 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,8 +160,8 @@ t_variable	ft_variable_create(char *name, void *data, int deep);
 
 char		*ft_getline(void);
 int			ft_bl_active(char *str, int pos);
-int			ft_separator(char c, int sep, int bl);
-int			ft_separator_active(char *str, int pos, int *bl, int *sep);
+void		ft_separator(char c, int *sep, int *bl, int *bq);
+int			ft_separator_active(char *str, int pos, int *sep, int *bl);
 
 /*
 ** Completion

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_opendir.c                                       :+:      :+:    :+:   */
+/*   ft_signal.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 11:09:49 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:09:50 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/02/28 10:08:21 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/05/06 13:29:06 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
-DIR	*ft_opendirfree(char *str)
+void	ft_initsig(void)
 {
-	DIR	*dir;
+	if (signal(SIGINT, ft_sig_line) == SIG_ERR)
+		ft_fatal("Failed to catch CRL+C, exit ...");
+}
 
-	if (!str)
-		return (0);
-	dir = opendir(str);
-	ft_strdel(&str);
-	return (dir);
+void	ft_sig_line(int sig)
+{
+	if (sig == SIGINT)
+		ft_sigint(SIGINT);
 }

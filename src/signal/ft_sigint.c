@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_opendir.c                                       :+:      :+:    :+:   */
+/*   ft_sigint.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 11:09:49 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:09:50 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/04/23 10:45:56 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/05/08 12:21:35 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
-DIR	*ft_opendirfree(char *str)
+int		ft_sigint(int sig)
 {
-	DIR	*dir;
+	static int	status = 0;
+	int			tmp;
 
-	if (!str)
-		return (0);
-	dir = opendir(str);
-	ft_strdel(&str);
-	return (dir);
+	if (sig == SIGINT)
+		ft_addtofd("\v", STDIN_FILENO);
+	tmp = status;
+	status = (sig == SIGINT);
+	return (tmp);
+}
+
+int		ft_sigint_clear(t_line *line)
+{
+	ft_strdel(&(line->line));
+	ft_strdel(&(line->eof));
+	tputs(tgetstr("cd", 0), 0, writechar);
+	ft_putchar('\n');
+	return (SIGINT);
 }

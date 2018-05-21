@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_opendir.c                                       :+:      :+:    :+:   */
+/*   ft_select_reset.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 11:09:49 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:09:50 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/04/23 16:31:06 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/05/07 13:49:35 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
-DIR	*ft_opendirfree(char *str)
+int		ft_selected_reset(t_line *line, int *val)
 {
-	DIR	*dir;
+	char	*str;
+	int		tmp;
 
-	if (!str)
-		return (0);
-	dir = opendir(str);
-	ft_strdel(&str);
-	return (dir);
+	if (!line || !(str = (val[4] ? line->line : line->eof)))
+		return (-1);
+	tmp = ft_abs(val[2]);
+	while (val[2] > 0 && val[2]--)
+		if (ft_move_left(line, val) == -1)
+			return (-1);
+	ft_printf("{whiteblack}%.*s",
+			ft_lennchar_r(str, val[0], tmp), &str[val[0]]);
+	val[0] += tmp;
+	val[2] = 0;
+	return (1);
 }

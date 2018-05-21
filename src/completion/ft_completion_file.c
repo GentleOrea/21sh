@@ -54,10 +54,10 @@ char	*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 	right = 0;
 	while (loc > 0 && (file = readdir(dir)))
 	{
-		if (!ft_strncmp(left, dir->name, i))
+		if (!ft_strncmp(left, file->name, i))
 			loc--;
-		if (loc == 0 && ft_strlen(dir->name) != i)
-			right = &(dir->name)[i];
+		if (loc == 0 && ft_strlen(file->name) != i)
+			right = &(file->name)[i];
 		else if (loc == 0)
 		{
 			closedir(dir);

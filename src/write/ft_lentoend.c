@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_opendir.c                                       :+:      :+:    :+:   */
+/*   ft_lentoend.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/21 11:09:49 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:09:50 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/04/18 11:43:22 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/04/20 09:40:38 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../../includes/sh.h"
 
-DIR	*ft_opendirfree(char *str)
+int		ft_lennline(char *str, int line, int col)
 {
-	DIR	*dir;
+	int	i;
+	int	c;
 
-	if (!str)
+	if (!str || (i = 0))
 		return (0);
-	dir = opendir(str);
-	ft_strdel(&str);
-	return (dir);
+	c = 0;
+	while (line && *str)
+	{
+		if (!(c = (c + 1) % col) || *str == '\n')
+			line--;
+		if (*str == '\n')
+			c = 0;
+		if (line || *str != '\n')
+			i += ft_lenchar_r(str, 0);
+		str += ft_lenchar_r(str, 0);
+	}
+	return (i);
 }
