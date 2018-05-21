@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:13:04 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/21 15:53:56 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define GLOB "[*?"
 # define ENDWORD " \n|;&<>"
 # define ENDWORDVIS " \n;|&<>`'\""
-# define SPECIALCHAR "`\"'\\!$&|?<>*\n"
+# define SPECIALCHAR "`\"'\\!$&|?<>* \n"
 
 # define KEY_LEFT "\33[D"
 # define KEY_LEFT_SHITED "\33[1;2D"
