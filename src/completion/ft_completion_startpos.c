@@ -17,9 +17,8 @@ static int	ft_lenword_left_bq(char *str, int to, int *mov, int *sep)
 	int		i;
 
 	*mov = 0;
-	if (to <= (i = 1))
+	if (to <= (i = (*str == '`')))
 		return (i);
-	sep[2] = '`';
 	while (i < to && ft_isin(str[i], " \n"))
 		i++;
 	*mov = 0;
@@ -30,36 +29,31 @@ static int	ft_lenword_left_bq(char *str, int to, int *mov, int *sep)
 	*mov = 0;
 	if (i > 1)
 		return (i);
+	sep[2] = '`';
 	while (i < to && sep[2] && (sep[0] || sep[1] ||
 			!ft_isin(str[i], " \n<>&|;")))
 	{
 		ft_separator(str[i], sep, &sep[1], &sep[2]);
 		i += ft_lenchar_r(str, i);
 	}
-	*mov = (i == to && !(sep[2] && (sep[0] || sep[1] || !ft_isin(str[i],
-	 " \n<>&|;")))) ? (0) : (i - 1);
+	*mov = (sep[2]) ? (i - 1) : (0);
 	return (i);
 }
 
-static int	ft_lenword_left_sp(char *str, int to, int *mov, int *sep)
+static int	ft_lenword_left_sp(char *str, int to, int *mov)
 {
 	int	i;
 
 	i = 0;
+	*mov = 0;
 	if (ft_isin(str[i], "<>|&;"))
 	{
 		while (i < to && ft_isin(str[i], "<>|&;"))
 			i++;
-		*mov = (i == to && !ft_isin(str[i], "<>|&;")) ? (0) : (i);
-		sep[1] = (str[i] == '\\');
-		sep[0] = (ft_isin(str[i], "'`\"")) ? (str[i]) : (0);
 		return (i);
 	}
 	while (i < to && ft_isin(str[i], " \n"))
 		i++;
-	*mov = 0;
-	sep[1] = (str[i] == '\\');
-	sep[0] = (ft_isin(str[i], "'\"")) ? (str[i]) : (0);
 	return (i);
 }
 
@@ -89,10 +83,10 @@ int			ft_completion_startpos(char *str, int pos)
 	ft_bzero((void*)sep, sizeof(sep));
 	while (i < pos && !(mov = 0))
 	{
-		if (sep[0] == 0 && sep[1] == 0 && str[i] == '`')
+		if (sep[0] == 0 && sep[1] == 0 && (str[i] == '`' || sep[2]))
 			i += ft_lenword_left_bq(&str[i], pos - i, &mov, sep);
 		else if (ft_isin(str[i], " \n&|<>;") && !sep[0] && !sep[1])
-			i += ft_lenword_left_sp(&str[i], pos - i, &mov, sep);
+			i += ft_lenword_left_sp(&str[i], pos - i, &mov);
 		else
 			i += ft_lenword_left_n(&str[i], pos - i, &mov, sep);
 		if (i >= pos)
