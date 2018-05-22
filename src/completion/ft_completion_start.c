@@ -22,7 +22,7 @@ char		*ft_completion_start(t_line *line, int *val)
 		return (0);
 	if (val[0] <= val[5])
 		return (0);
-	i = ft_lenword_left_hard(tmp, val[0]);
+	i = ft_completion_startpos(tmp, val[0]);
 	if (i == 0)
 		return (0);
 	if (!(str = (char*)ft_memalloc(i + 1)))

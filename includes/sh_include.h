@@ -17,6 +17,7 @@
 # include "ft_printf.h"
 # include <term.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <signal.h>
 # include <dirent.h>
 

@@ -52,7 +52,7 @@
 # define BUILT (char *[6]){"echo","env", "setenv", "unsetenv"}
 # define GLOB "[*?"
 # define ENDWORD " \n|;&<>"
-# define ENDWORDVIS " \n;|&<>`'\""
+# define ENDWORDVIS " \n;|&<>`'\"\\"
 # define SPECIALCHAR "`\"'\\!$&|?<>* \n"
 
 # define KEY_LEFT "\33[D"

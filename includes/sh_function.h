@@ -108,7 +108,6 @@ int			ft_lennchar_l(char *str, int pos, int n);
 int			ft_lennchar_r(char *str, int pos, int n);
 int			ft_lenword_l(char *str, int pos);
 int			ft_lenword_r(char *str, int pos);
-int			ft_lenword_left_hard(char *str, int pos);
 
 /*
 ** Fonction d'affichage
@@ -175,6 +174,7 @@ int			ft_completion_reset(void);
 int			ft_completion_count(int code);
 int			ft_completion_lastwrite(int code, int val);
 char		*ft_completion_start(t_line *line, int *val);
+int			ft_completion_startpos(char *str, int pos);
 char		*ft_completion_getfilename(char *left, int loc, int bl, int sep);
 char		ft_getdir(char *str);
 char		*ft_straddsep(char *str, int bl, int sep);
