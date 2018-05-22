@@ -2,13 +2,9 @@
 
 int	main(int ac, char **av)
 {
-	t_line	line;
-	int		val[13];
+	int	i;
 
-	line.line = av[1];
-	ft_bzero((void*)val, sizeof(val));
-	val[4] = 1;
-	val[0] = ft_atoi(av[2]);
-	printf("%s\n%s\n", &av[1][val[0]], ft_completion_start(&line, val));
+	i = ft_lenword_left_hard(av[1], atoi(av[2]));
+	printf("%s\n%d\n%s\n", &av[1][atoi(av[2])], i, &av[1][atoi(av[2]) - i]);
 	return (0);
 }

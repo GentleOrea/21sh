@@ -44,7 +44,7 @@ int				bin_count(wchar_t v);
 
 char			*convwstr(wchar_t *str);
 char			*convc(int dec);
-char			*convwchar(wint_t dec);
+char			*convwchar(wchar_t dec);
 char			*convim(intmax_t nb);
 char			*convuim(uintmax_t nb);
 char			*convuimo(uintmax_t nb);

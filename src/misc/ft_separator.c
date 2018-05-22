@@ -73,11 +73,35 @@ void	ft_separator(char c, int *sep, int *bl, int *bq)
 	else if (sep && !*sep && ft_isin(c, "'\"") && (!bl || !*bl))
 		*sep = c;
 	if (bq && *bq == '`' && c == '`' && (!bl || !*bl))
+	{
+		if (sep)
+			*sep = 0;
 		*bq = 0;
-	else if (bq && !*bq && c == '`' && (!sep || *sep != '\'') && (!bl || !*bl))
+	}
+	else if (bq && !*bq && c == '`' && (!sep || !*sep) && (!bl || !*bl))
 		*bq = '`';
 	if (bl && c == '\\' && !*bl && (!sep || *sep != '\''))
 		*bl = 1;
 	else if (bl && *bl)
 		*bl = 0;
+}
+
+/*
+** bl est le résultat de ft_bl_active dans cette configuration
+*/
+
+void	ft_separator_rev(char c, int *sep, int bl, int *bq)
+{
+	if (sep && *sep && c == *sep && !bl)
+		*sep = 0;
+	else if (sep && !*sep && ft_isin(c, "'\"") && !bl)
+		*sep = c;
+	if (bq && *bq && c == *bq && !bl)
+	{
+		if (sep)
+			*sep = 0;
+		*bq = 0;
+	}
+	else if (bq && !*bq && c == '`' && (!sep || *sep != '\'') && !bl)
+		*bq = 0;
 }

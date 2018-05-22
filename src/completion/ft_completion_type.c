@@ -56,7 +56,7 @@ static int	ft_completion_type_bq(char *str, int *val, int i)
 
 static int	ft_completion_type_nobq(char *str, int *val, int i, int j)
 {
-	if (j == 0 && (*str == ';' || (ft_isin(*str, " \n;&|") && str[1] == '.')))
+	if (j == 0 && ft_isin(*str, " \n;&|") && str[1] == '.')))
 		return (COMPLETION_FILE);
 	else if (j == 0)
 		return (COMPLETION_COM);

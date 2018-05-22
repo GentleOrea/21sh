@@ -108,6 +108,7 @@ int			ft_lennchar_l(char *str, int pos, int n);
 int			ft_lennchar_r(char *str, int pos, int n);
 int			ft_lenword_l(char *str, int pos);
 int			ft_lenword_r(char *str, int pos);
+int			ft_lenword_left_hard(char *str, int pos);
 
 /*
 ** Fonction d'affichage
@@ -161,6 +162,7 @@ t_variable	ft_variable_create(char *name, void *data, int deep);
 char		*ft_getline(void);
 int			ft_bl_active(char *str, int pos, int sep);
 void		ft_separator(char c, int *sep, int *bl, int *bq);
+void		ft_separator_rev(char c, int *sep, int bl, int *bq);
 int			ft_separator_active(char *str, int pos, int *sep, int *bl);
 
 /*
