@@ -115,6 +115,16 @@ SRC_FP += \
 		  env/ft_recoverenv.c \
 		  env/ft_envwrite.c
 
+SRC_FP += \
+		completion/ft_completion.c \
+		completion/ft_completion_com.c \
+		completion/ft_completion_file.c \
+		completion/ft_completion_save.c \
+		completion/ft_completion_start.c \
+		completion/ft_completion_startpos.c \
+		completion/ft_completionstr.c \
+		completion/ft_completion_type.c
+
 #Colors
 _RED=\x1b[31m
 _GREEN=\x1b[32m

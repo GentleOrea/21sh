@@ -17,8 +17,12 @@ int		ft_specialchar(t_line *line, char *str, int *val)
 	int	i;
 
 	i = 0;
-	if (ft_isin(*str, "\t\r\f\v"))
+	if (!*str == '\t')
+		ft_completion_reset();
+	if (ft_isin(*str, "\r\f\v"))
 		return (1);
+	else if ((i = (*str == '\t')))
+		ft_completion(line, val);
 	else if ((i = ft_strprefix(KEY_SELECT_LEFT, str)))
 		ft_selected_moveleft(line, val);
 	else if ((i = ft_strprefix(KEY_SELECT_RIGHT, str)))
@@ -31,8 +35,6 @@ int		ft_specialchar(t_line *line, char *str, int *val)
 		ft_selected_reset(line, val);
 	else if ((i = ft_strprefix(KEY_UP_SHITED, str)))
 		ft_move_up(line, val);
-	else if ((i = ft_strprefix(KEY_DOWN_SHITED, str)))
-		ft_move_down(line, val);
 	else
 		return (ft_specialchar_a(line, str, val));
 	return (i);
@@ -61,7 +63,9 @@ int		ft_specialchar_a(t_line *line, char *str, int *val)
 	int	i;
 
 	i = 0;
-	if ((i = ft_strprefix(KEY_END, str)))
+	if ((i = ft_strprefix(KEY_DOWN_SHITED, str)))
+		ft_move_down(line, val);
+	else if ((i = ft_strprefix(KEY_END, str)))
 		ft_move_toend(line, val);
 	else if ((i = ft_strprefix(KEY_UP, str)))
 		ft_move_tohist(line, val, 1);
