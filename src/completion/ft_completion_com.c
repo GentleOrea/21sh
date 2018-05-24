@@ -15,7 +15,7 @@
 void	ft_completion_com_(char *left, int *loc, DIR *dir, char **right)
 {
 	size_t		i;
-	t_dirent	*file
+	t_dirent	*file;
 
 	if (!dir || !left || !loc || !right)
 		return ;
@@ -58,4 +58,4 @@ char	*ft_completion_com(char *left, int loc, int bl, int sep)
 	path = ft_straddsep(right, bl, sep);
 	ft_strdel(&right);
 	return(path);
-	}
+}

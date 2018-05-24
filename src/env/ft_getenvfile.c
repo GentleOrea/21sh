@@ -28,6 +28,7 @@ char	*ft_getenvfile(int code)
 		ft_strcat(tmp, str);
 		tmp[ft_strlen(str)] = '0';
 		ft_cpy(str, tmp);
+		ft_strdel(&str);
 		str = tmp;
 	}
 	else if (code == CODE_ENVGET)

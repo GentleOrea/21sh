@@ -229,6 +229,8 @@ void		parse_exe(t_shell *sh, char *comm, char **argv);
 int			skip_double(char *str);
 void		ft_parserpushback(t_parser *begin, t_parser *end);
 
+int			ft_checkquotes(char *str);
+
 /*
 ** builtin
 */
