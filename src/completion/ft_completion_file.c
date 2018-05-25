@@ -6,64 +6,54 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:42:56 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/17 15:16:29 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 13:25:23 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*ft_getdir(char *str)
+static char	*ft_completion_getfilename_(char *str, int loc, int bl, int sep)
 {
-	char	*directory;
-	char	*tmp;
-	size_t	i;
+	char	*res;
 
-	if (!str)
-		return (0);
-	if (str && *str == '/' && (i = ft_strlen(str)))
-	{
-		while (i >= 0 && str[i] != '/')
-			i--;
-		return (ft_strndup(str, i));
-	}
-	tmp = 0;
-	if (*str != '~' && !(tmp = getcwd(0, 0)))
-		return (0);
-	if (!(directory = (char*)ft_memalloc(ft_strlen(str) + 1 +
-		((*str == '~') ? (ft_strlen(ft_getenv(HOME))) : (ft_strlen(tmp))))))
-		ft_strdel(&tmp);
-	if (!directory)
-		return (0);
-	ft_strcat(directory, (*str == '~') ? ft_getenv(HOME) : (tmp));
-	ft_strcat(directory, (*str == '~')  ? (&str[1]) : (str));
-	return (directory);
+	if (loc == 0)
+		res = ft_straddsep(str, bl, sep);
+	else if (loc == -1)
+		res = ft_strdup(" ");
+	else
+		res = 0;
+	ft_strdel(&str);
+	return (res);
 }
 
-char	*ft_completion_getfilename(char *left, int loc, int bl, int sep)
+char		*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 {
 	char		*right;
 	size_t		i;
 	DIR			*dir;
 	t_dirent	*file;
 
-	if (loc <= 0)
+	if (loc <= 0 || !left || (*left == '~' && !left[1]))
 		return (0);
 	if (!(dir = ft_opendirfree(ft_getdir(left))))
 		return (0);
+	left = ((*left == '~') ? (left + 1) : (left));
+	if (ft_isin('/', left))
+		left += ft_strlento_rev(left, ft_strlen(left), "/") + 1;
 	i =  ft_strlen(left);
 	right = 0;
 	while (loc > 0 && (file = readdir(dir)))
 	{
-		if (!ft_strncmp(left, file->name, i))
-			loc--;
-		if (loc == 0 && ft_strlen(file->name) != i)
-			right = &(file->name)[i];
-		else if (loc == 0)
+		if (file->d_name[0] != '.' && !ft_strncmp(left, file->d_name, i))
 		{
-			closedir(dir);
-			return (ft_strdup(" "));
+			ft_errorlog(ft_itoa(loc));
+			loc--;
 		}
+		if (loc == 0 && ft_strlen(file->d_name) != i)
+			right = ft_strdup(&(file->d_name)[i]);
+		else if (loc == 0)
+			loc = -1;
 	}
 	closedir(dir);
-	return (ft_straddsep(right, bl, sep));
+	return (ft_completion_getfilename_(right, loc, bl, sep));
 }

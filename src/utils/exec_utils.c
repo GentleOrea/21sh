@@ -21,7 +21,7 @@ char	*ft_getenv(char **tb, char *str)
 	if (!tb || !str)
 		return (NULL);
 	len = ft_strlen(str);
-	while (*tb && ft_strncmp(*tb, str, len))
+	while (*tb && ft_strncmp(*tb, str, len) && tb[0][len] != '=')
 		tb++;
 	return (*tb);
 }
