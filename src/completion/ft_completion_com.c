@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 13:51:09 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 12:45:42 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 13:00:05 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ft_completion_com_(char *left, int *loc, char *path, char **right)
 	i = ft_strlen(left);
 	while (loc[0] > 0 && (file = readdir(dir)))
 	{
-		ft_errorlog(file->d_name);
 		if (!ft_strncmp(left, file->d_name, i))
 			loc[0]--;
 		if (*loc == 0 && ft_strlen(file->d_name) > i)
