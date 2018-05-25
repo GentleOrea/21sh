@@ -59,14 +59,11 @@ char		*ft_completion_saveleft(int code, char *left)
 		return (save);
 	else if (code == CODE_SET)
 	{
-		ft_strdel(&save);
+		ft_memdel((void**)&save);
 		save = left;
 	}
 	else if (code == CODE_RESET)
-	{
-		ft_strdel(&save);
-		save = 0;
-	}
+		ft_memdel((void**)&save);
 	return (0);
 }
 
