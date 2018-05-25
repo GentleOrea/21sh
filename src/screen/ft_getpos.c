@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 13:34:36 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/07 11:28:15 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:18:36 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int			ft_getpos(int *x, int *y)
 	lim = 10;
 	if (!(buff = ft_readtostr("\33[", 'R', STDIN_FILENO, 100)))
 	{
-		dprintf(2, "Failed to getpos\n");
+		ft_errorlog("Failed to get the cursor position on screen");
 		return (-1);
 	}
 	return (ft_getpos_a(x, y, buff, ft_strinstr(buff, "\33[")));
