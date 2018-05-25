@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:42:56 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 13:30:28 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:05:02 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ char		*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 	DIR			*dir;
 	t_dirent	*file;
 
-	ft_errorlog(ft_itoa(loc));
 	if (loc <= 0 || !left || (*left == '~' && !left[1]))
 		return (0);
 	if (!(dir = ft_opendirfree(ft_getdir(left))))

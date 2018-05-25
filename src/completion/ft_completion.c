@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:56:06 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 14:54:47 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 14:56:40 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int		ft_completion(t_line *line, int *val)
 		type = ft_completion_savetype(CODE_GET, 0);
 		leftpurged = (type > 0 ?
 				ft_strdup(ft_completion_saveleft(CODE_GET, 0)) : 0);
-		ft_errorlog("prev");
 	}
 	else
 	{
@@ -62,7 +61,6 @@ int		ft_completion(t_line *line, int *val)
 		left = (type > 0 ? ft_completion_start(line, val) : 0);
 		leftpurged = (type > 0 ? ft_strpurgesep(left) : 0);
 		ft_strdel(&left);
-		ft_errorlog("new");
 	}
 	if (type <= 0 || !leftpurged)
 		return (ft_completion_reset() ? -1 : -1);

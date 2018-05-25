@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 11:25:55 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 14:47:36 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 14:56:50 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,11 @@ char		*ft_completion_saveleft(int code, char *left)
 		return (save);
 	else if (code == CODE_SET)
 	{
-		ft_errorlog("CODE_SET");
 		ft_strdel(&save);
 		save = left;
 	}
 	else if (code == CODE_RESET)
 	{
-		ft_errorlog("CODE_RESET");
 		ft_strdel(&save);
 		save = 0;
 	}
