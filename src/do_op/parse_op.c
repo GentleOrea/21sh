@@ -29,6 +29,7 @@
 #define O 1
 #define B 2
 #define RES 3
+
 int		is_local(char *str)
 {
 	if (1)
