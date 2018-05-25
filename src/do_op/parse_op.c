@@ -18,19 +18,12 @@
 
 # define BIT (char *[14]){"<<", ">>", "|", "||", "&&", "&", "^", "~"}
 
-# define OPE (char *[14]){"<<", ">>", "||", "&&","**",  "|", "&", "^", "~", "+", "-", "/", "*", "%"}
 # define COMP (char *[14]){ "==", "!=", "<=", ">=", "<", ">"}
 # define ASSIGN (char *[14]){"*=", "/=", "%=", "+=", "-=", "<<=", ">>=", "&=", "^=", "|=", "="}
 
 	
 #include "../../includes/sh.h"
 
-int		is_legal(char c)
-{
-	if (!ft_isalnum(c))
-		return (0);
-	return (1);
-}
 
 #define A 0
 #define O 1
