@@ -12,14 +12,12 @@
 
 #include "../../includes/sh.h"
 
-#define A 0
-#define O 1
-#define B 2
-#define RES 3
-# define OPE (char *[16]){"<<", ">>", "||", "&&","**",  "|", "&", "^", "~", "+", "-", "/", "*", "%"}
-#define OP_CREMENT (char *[3]){"--", "++"}
+# define A 0
+# define O 1
+# define B 2
+# define RES 3
 
-int		do_op(int is_set[0][4], int *val)
+int		do_op(int *val)
 {
 	int i;
 	static int		(**f_op)(int, int) = 0;
@@ -27,12 +25,6 @@ int		do_op(int is_set[0][4], int *val)
 	if (!f_op)
 		f_op = f_opget();
 	i = -1;
-	//ft_printf("[%d %d %d]\n",is_set[0][O], is_set[0][A], is_set[0][B]);
-	//ft_printf("%d %d %d\n",is_set[0][RES], val[A], val[B]);
-	if (is_set && !is_set[0][B])
-		return(0);
-	is_set ? ft_bzero(*is_set, sizeof(is_set[0])) : 0;
-	is_set[0][RES] = 1;
 	return (f_op[val[O]](val[A], val[B]));
 }
 
@@ -43,32 +35,6 @@ int		get_value(char *str)
 	if (!(ft_occiter2(str, ft_isdigit) < 0))
 		return(ft_atoi(str));
 	return (is_local(str));
-}
-
-int		*set_op(char **op_tb, int i)
-{
-//	int		i;
-	int		val[4];
-
-	if (!ft_str_isdigit(op_tb[i]))
-		if (get_sep(op_tb[i], OP_CREMENT) < 0)
-			if (!is_local(op_tb[i + 1]))
-				exit(-ft_printf("error\n"));
-	return (NULL);
-}
-
-void	get_divmul(char **op_tb, int **tab_res)
-{
-	int		i;
-	int		val[4];
-	
-	while (op_tb[i])
-	{
-		if (*op_tb[i] == '*' || *op_tb[i] == '/')
-		{
-	//		tab_res[i / 2] = do_op(NULL, OP_CREMENT);
-		}
-	}
 }
 
 int		calc_op(char **op_tb)
@@ -95,7 +61,6 @@ int		calc_op(char **op_tb)
 			val[A] = get_value(op_tb[i]);
 		else
 			exit(-ft_printf("invalid\n"));
-		val[RES] = do_op(&is_set, val);
 	}
 	return (val[RES]);
 }

@@ -125,10 +125,10 @@ struct			s_glob
 	t_paths			*paths;
 };
 
-typedef struct s_do_op
+/*typedef struct s_do_op
 {
 	int		(*f_built[20])(int a, int b);
-}				t_do_op;
+}				t_do_op;*/
 
 typedef struct	s_line
 {

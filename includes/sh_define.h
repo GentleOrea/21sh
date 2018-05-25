@@ -80,4 +80,7 @@
 
 # define COMPLETION_FILE 1
 # define COMPLETION_COM 2
+# define OPE (char *[16]){"<<", ">>", "||", "&&","**",  "|", "&", "^", "~", "+", "-", "/", "*", "%"}
+# define OP_CREMENT (char *[3]){"--", "++"}
+
 #endif

@@ -21,6 +21,7 @@ int		ft_right_shift(int a, int b)
 {
 	return (a >> b);
 }
+
 int		ft_xor(int a, int b)
 {
 	return (a ^ b);
