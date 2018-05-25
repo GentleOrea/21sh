@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 11:46:02 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 11:46:03 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 15:05:19 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ char	*ft_getdir(char *str)
 		directory[i] = '/';
 	if (ft_isin('/', str))
 		ft_strncat(directory, str, ft_strlento_rev(str, ft_strlen(str), "/"));
-	ft_errorlog(directory);
 	return (directory);
 }
