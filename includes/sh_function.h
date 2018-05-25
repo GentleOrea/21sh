@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/21 13:39:08 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 09:56:06 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,8 @@ int			ft_completion_lastwrite(int code, int val);
 char		*ft_completion_start(t_line *line, int *val);
 int			ft_completion_startpos(char *str, int pos);
 char		*ft_completion_getfilename(char *left, int loc, int bl, int sep);
-char		ft_getdir(char *str);
+char		*ft_completion_com(char *left, int loc, int bl, int sep);
+char		*ft_getdir(char *str);
 char		*ft_straddsep(char *str, int bl, int sep);
 char		*ft_strpurgesep(char *str);
 
@@ -249,6 +250,8 @@ int			ft_setenvvar(char **env, char *cur, char *var);
 int			ft_strlento(char *str, char c);
 char		**ft_strtbdup(char **tb);
 char		*ft_getenv(char **tb, char *str);
+
+char		*ft_getenvfromfile(char *str);
 
 /*
 ** exec

@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:47:33 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/18 15:01:47 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 11:15:14 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int		ft_specialchar(t_line *line, char *str, int *val)
 	int	i;
 
 	i = 0;
-	if (!*str == '\t')
+	if (!ft_strprefix(KEY_COMPLETION, str))
 		ft_completion_reset();
 	if (ft_isin(*str, "\r\f\v"))
 		return (1);
-	else if ((i = (*str == '\t')))
+	else if ((i = ft_strprefix(KEY_COMPLETION, str)))
 		ft_completion(line, val);
 	else if ((i = ft_strprefix(KEY_SELECT_LEFT, str)))
 		ft_selected_moveleft(line, val);
@@ -90,11 +90,11 @@ int		ft_lentospecial(char *str)
 	int		j;
 	char	**specialchar;
 
-	specialchar = (char*[21]){KEY_LEFT, KEY_LEFT_SHITED, KEY_RIGHT,
+	specialchar = (char*[22]){KEY_LEFT, KEY_LEFT_SHITED, KEY_RIGHT,
 	KEY_RIGHT_SHIFTED, KEY_UP, KEY_UP_SHITED, KEY_DOWN, KEY_DOWN_SHITED,
 	KEY_SELECT_LEFT, KEY_SELECT_RIGHT, KEY_SELECT_CPY, KEY_SELECT_PASTE,
 	KEY_END, KEY_END_SHIFTED, KEY_HOME, KEY_HOME_SHIFTED, KEY_DELETE,
-	KEY_ERASE, NEWLINE, "\4", 0};
+	KEY_ERASE, NEWLINE, KEY_COMPLETION, "\4", 0};
 	i = 0;
 	while (str && str[i])
 	{

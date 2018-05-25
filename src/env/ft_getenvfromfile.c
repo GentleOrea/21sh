@@ -14,16 +14,16 @@ char	*ft_getenvfromfile(char *str)
 	ft_strdel(&file);
 	if (fd < 0)
 		return (0);
-	while (get_filetochar(fd, &line, '\v') == 1)
+	while (get_filetochar(fd, &file, '\v') == 1)
 	{
-		if (len > 0 && !ft_strncmp(str, line, len) && line[len] == '=')
+		if (len > 0 && !ft_strncmp(str, file, len) && file[len] == '=')
 		{
 			len = 0;
-			len = line;
+			str = file;
 		}
 		else
-			ft_strdel(&str);
+			ft_strdel(&file);
 	}
 	close(fd);
 	return (len > 0 ? 0 : str);
-i}
+}

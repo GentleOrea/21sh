@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 15:53:56 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 11:14:58 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@
 # define KEY_DELETE tgetstr("kD", 0)
 # define KEY_ERASE "\177"
 # define NEWLINE "\n"
+# define KEY_COMPLETION "\t"
 
 # define CODE_ENVGET '\01'
 # define CODE_ENVADD '\02'

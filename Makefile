@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/21 10:08:41 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/05/25 11:46:18 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,13 +29,25 @@ SRC_FP = \
 #		  builtin/ft_strlento.c \
 
 SRC_FP += \
-		  exec/exec.c \
-		  exec/redirect.c
+		completion/ft_completion.c \
+		completion/ft_completion_com.c \
+		completion/ft_completion_file.c \
+		completion/ft_completion_save.c \
+		completion/ft_completion_start.c \
+		completion/ft_completion_startpos.c \
+		completion/ft_completionstr.c \
+		completion/ft_completion_type.c \
+		completion/ft_getdir.c
 
 SRC_FP += \
-		  history/ft_history.c \
-		  history/ft_history_parser.c \
-		  history/ft_historymove.c 
+		  env/ft_getenvfile.c \
+		  env/ft_recoverenv.c \
+		  env/ft_envwrite.c \
+		  env/ft_getenvfromfile.c
+
+SRC_FP += \
+		  exec/exec.c \
+		  exec/redirect.c
 
 SRC_FP += \
 		  glob/dir_tour.c \
@@ -45,6 +57,12 @@ SRC_FP += \
 		  hash/btree_erase.c \
 		  hash/ft_hashcmp.c \
 		  hash/ft_hash.c
+
+SRC_FP += \
+		  history/ft_history.c \
+		  history/ft_history_parser.c \
+		  history/ft_historymove.c 
+
 SRC_FP += \
 		  initialisation/ft_initenv.c \
 		  initialisation/ft_signal.c \
@@ -58,7 +76,8 @@ SRC_FP += \
 		  misc/ft_memory.c \
 		  misc/ft_print.c \
 		  misc/ft_separator.c \
-		  misc/ft_parserpushback.c
+		  misc/ft_parserpushback.c \
+		  misc/ft_opendir.c
 
 SRC_FP += \
 		  parser/interpreter.c \
@@ -109,21 +128,6 @@ SRC_FP += \
 		  write/ft_printstr.c \
 		  write/ft_select.c \
 		  write/ft_select_reset.c
-
-SRC_FP += \
-		  env/ft_getenvfile.c \
-		  env/ft_recoverenv.c \
-		  env/ft_envwrite.c
-
-SRC_FP += \
-		completion/ft_completion.c \
-		completion/ft_completion_com.c \
-		completion/ft_completion_file.c \
-		completion/ft_completion_save.c \
-		completion/ft_completion_start.c \
-		completion/ft_completion_startpos.c \
-		completion/ft_completionstr.c \
-		completion/ft_completion_type.c
 
 #Colors
 _RED=\x1b[31m

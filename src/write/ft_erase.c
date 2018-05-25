@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 15:24:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/12 15:42:58 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 10:36:19 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int		ft_ndelete(t_line *line, int *val, int n)
 {
 	char	*str;
 
-	if (n == 0 || !(str = (val[4]) ? (line->line) : (line->eof)))
+	if (n <= 0)
+		return (0);
+	if (!(str = (val[4]) ? (line->line) : (line->eof)))
 		return (-1);
 	if ((val[9] = val[0] + ft_strlen(&str[val[0]])) == 0)
 		return (1);
