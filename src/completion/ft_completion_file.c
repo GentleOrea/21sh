@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 16:42:56 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 13:25:23 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 13:30:28 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char		*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 	DIR			*dir;
 	t_dirent	*file;
 
+	ft_errorlog(ft_itoa(loc));
 	if (loc <= 0 || !left || (*left == '~' && !left[1]))
 		return (0);
 	if (!(dir = ft_opendirfree(ft_getdir(left))))
@@ -45,10 +46,7 @@ char		*ft_completion_getfilename(char *left, int loc, int bl, int sep)
 	while (loc > 0 && (file = readdir(dir)))
 	{
 		if (file->d_name[0] != '.' && !ft_strncmp(left, file->d_name, i))
-		{
-			ft_errorlog(ft_itoa(loc));
 			loc--;
-		}
 		if (loc == 0 && ft_strlen(file->d_name) != i)
 			right = ft_strdup(&(file->d_name)[i]);
 		else if (loc == 0)

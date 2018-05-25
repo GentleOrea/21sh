@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:56:06 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 13:20:40 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/25 13:33:40 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	ft_completion_(t_line *line, int *val, char *left, int type)
 	int		re;
 	int		bq;
 
+	ft_errorlog(type == COMPLETION_FILE ? "FILE" : type == COMPLETION_COM ? "COMMANDE" : 0);
 	ft_completion_count(CODE_PUSH);
 	ft_completion_savetype(CODE_SET, type);
 	if (val[4])
