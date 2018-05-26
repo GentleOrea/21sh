@@ -6,11 +6,52 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:48:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 11:07:18 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 14:37:44 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/sh.h"
+
+void	ft_newline_active_(char c, int *sep)
+{
+		if (!sep[2] && c == '`' && sep[0] != '\'' && !sep[1])
+		{
+			sep[2] = '`';
+			sep[3] = '`';
+		}
+		else if (sep[2] && c == '`' && !sep[1] && sep[2] == sep[3])
+		{
+			sep[2] = 0;
+			sep[3] = sep[0];
+		}
+}
+
+int		ft_newline_active(char *str)
+{
+	int	sep[4];
+	int	i;
+
+	i = 0;
+	ft_bzero((void*)sep, sizeof(sep));
+	while (str[i])
+	{
+		if (!sep[0] && !sep[1] && ft_isin(str[i], "'\""))
+		{
+			sep[0] = str[i];
+			sep[3] = sep[0];
+		}
+		else if (sep[0] == str[i] && !sep[1] && sep[0] == sep[3])
+		{
+			sep[0] = 0;
+			sep[3] = sep[2];
+		}
+		else
+			ft_newline_active_(str[i], sep);
+		sep[1] = (!sep[1] && str[i] == '\\' && sep[0] != '\'');
+		i++;
+	}
+	return (!(sep[0] || sep[1] || sep[2]));
+}
 
 int		ft_read_newline(t_line *line, int *val, t_parser *pars)
 {
@@ -19,9 +60,7 @@ int		ft_read_newline(t_line *line, int *val, t_parser *pars)
 	ft_printchar(line, "\n", val);
 	if (val[4])
 	{
-		val[12] = ft_separator_active(line->line, val[0] - 1,
-				&val[10], &val[11]);
-		if (val[10] || val[11] || val[12])
+		if (!ft_newline_active(&(line->line)[val[1]]))
 			return (0);
 		if (!(tmp = count_parser(&(line->line)[val[5]])))
 			return (-1);
