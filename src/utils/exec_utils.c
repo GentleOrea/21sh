@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 14:21:32 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/15 18:42:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 11:17:13 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_getenv(char **tb, char *str)
 	if (!tb || !str)
 		return (NULL);
 	len = ft_strlen(str);
-	while (*tb && ft_strncmp(*tb, str, len) && tb[0][len] != '=')
+	while (*tb && ft_strncmp(*tb, str, len) /*&& tb[0][len] != '='*/)
 		tb++;
 	return (*tb);
 }
