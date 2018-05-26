@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 14:25:20 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 16:14:04 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@
 # define KEY_UP_SHITED "\33[1;2A"
 # define KEY_DOWN "\33[B"
 # define KEY_DOWN_SHITED "\33[1;2B"
-# define KEY_SELECT_LEFT "\33\133\61\73\61\60\104"
-# define KEY_SELECT_RIGHT "\33\133\61\73\61\60\103"
+# define KEY_SELECT_LEFT "\33\133\61\73\66\104"
+# define KEY_SELECT_RIGHT "\33\133\61\73\66\103"
 # define KEY_SELECT_CPY "\7"
 # define KEY_SELECT_PASTE "\36\170\146"
 # define KEY_END "\33[F"

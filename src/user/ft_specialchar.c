@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:47:33 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 15:04:51 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 16:43:38 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int		ft_specialchar(t_line *line, char *str, int *val)
 		ft_completion_reset();
 	if (ft_isin(*str, "\r\f\v"))
 		return (1);
-	else if ((i = ft_strprefix(KEY_COMPLETION, str)))
-		ft_completion(line, val);
 	else if ((i = ft_strprefix(KEY_SELECT_LEFT, str)))
 		ft_selected_moveleft(line, val);
 	else if ((i = ft_strprefix(KEY_SELECT_RIGHT, str)))
@@ -32,9 +30,11 @@ int		ft_specialchar(t_line *line, char *str, int *val)
 	else if ((i = ft_strprefix(KEY_SELECT_PASTE, str)))
 		ft_selected_paste(line, val);
 	else if (val[2])
+	{
 		ft_selected_reset(line, val);
-	else if ((i = ft_strprefix(KEY_UP_SHITED, str)))
-		ft_move_up(line, val);
+		ft_completion_reset();
+		i = ft_lenchar_r(str, 0);
+	}
 	else
 		return (ft_specialchar_a(line, str, val));
 	return (i);
@@ -45,7 +45,13 @@ int		ft_specialchar_b(t_line *line, char *str, int *val)
 	int	i;
 
 	i = 0;
-	if ((i = ft_strprefix(KEY_HOME, str)))
+	if ((i = ft_strprefix(KEY_RIGHT, str)))
+		ft_move_right(line, val);
+	else if ((i = ft_strprefix(KEY_LEFT_SHITED, str)))
+		ft_move_wordl(line, val);
+	else if ((i = ft_strprefix(KEY_RIGHT_SHIFTED, str)))
+		ft_move_wordr(line, val);
+	else if ((i = ft_strprefix(KEY_HOME, str)))
 		ft_move_tohome(line, val);
 	else if ((i = ft_strprefix(KEY_HOME_SHIFTED, str)))
 		ft_move_tolinel(line, val);
@@ -63,7 +69,11 @@ int		ft_specialchar_a(t_line *line, char *str, int *val)
 	int	i;
 
 	i = 0;
-	if ((i = ft_strprefix(KEY_DOWN_SHITED, str)))
+	if ((i = ft_strprefix(KEY_COMPLETION, str)))
+		ft_completion(line, val);
+	else if ((i = ft_strprefix(KEY_UP_SHITED, str)))
+		ft_move_up(line, val);
+	else if ((i = ft_strprefix(KEY_DOWN_SHITED, str)))
 		ft_move_down(line, val);
 	else if ((i = ft_strprefix(KEY_END, str)))
 		ft_move_toend(line, val);
@@ -73,12 +83,6 @@ int		ft_specialchar_a(t_line *line, char *str, int *val)
 		ft_move_tohist(line, val, -1);
 	else if ((i = ft_strprefix(KEY_LEFT, str)))
 		ft_move_left(line, val);
-	else if ((i = ft_strprefix(KEY_RIGHT, str)))
-		ft_move_right(line, val);
-	else if ((i = ft_strprefix(KEY_LEFT_SHITED, str)))
-		ft_move_wordl(line, val);
-	else if ((i = ft_strprefix(KEY_RIGHT_SHIFTED, str)))
-		ft_move_wordr(line, val);
 	else
 		return (ft_specialchar_b(line, str, val));
 	return (i);
