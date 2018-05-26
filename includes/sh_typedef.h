@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/18 12:30:27 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 18:59:14 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct	s_redi
 	char			*path;
 	int				type;
 	int				fd[2];
+	bool			tmp;
 	struct s_redi	*next;
 }				t_redi;
 
@@ -108,6 +109,7 @@ typedef struct	s_shell
 	char		**env;
 	t_com		*begin;
 	t_com		*com;
+	t_com		*redi;
 	t_sub		sub;
 }				t_shell;
 
@@ -124,11 +126,6 @@ struct			s_glob
 	int				nb_paths;
 	t_paths			*paths;
 };
-
-/*typedef struct s_do_op
-{
-	int		(*f_built[20])(int a, int b);
-}				t_do_op;*/
 
 typedef struct	s_line
 {

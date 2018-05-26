@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 15:05:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 19:02:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,13 @@ static char	*replace(char *str, char *rep, int op, int len)
 		q = 0;
 		while (op & 1 && ft_isin(str[i], QUOTES)
 			&& (ft_charchr(str[i], &str[i + 1]) >= 0) && (q = str[i]))
+		{
+			//ft_printf("[%s] => %s\n",ret ,&str[i]);
 			while (str[++i] && str[i] != q && str[i])
 					ret[++i2] = str[i];
+		}
 		//ft_printf("%s %d [%c] [%c]\n", ret, i, str[i], q);
-		while (str[i] == '\\' && ++i)
+		while (str[i] == '\\' && str[i + 1] && ++i)
 			ret[++i2] = str[i++];
 		if (str[i] && (q == str[i] || str[i] == rep[0]) && ++i)
 			rep[1] ? ret[++i2] = rep[1] : 0;
@@ -84,7 +87,7 @@ char		*ft_find_and_replace(char *str, char *rep, int op)
 	while (str[i])
 	{
 		while (str[i] == '\\' && len--)
-			i += (str[i] == '\\') * 2;
+			i += str[i + 1] ? 2 : 1;
 		while (op & 1 && (temp = skip_co(&str[i])))
 		{
 			i += temp;

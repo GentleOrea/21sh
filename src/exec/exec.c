@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 15:16:09 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 17:05:22 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int		wait_exec(t_shell *sh, char **arg)
 		ft_exit(sh);
 	if ((ind = ft_strisin_tab(arg[0], BUILT, 0)) >= 2)
 	{
-		if (sh->com->type & 4 || exec_redi(sh, sh->com->redi) < 0)
-			return (sh->com->type & 4 ? 1 : -1);
+		if ((sh->com->next && sh->com->next->type & 4)
+				|| exec_redi(sh, sh->com->redi) < 0)
+			return (sh->com->next && sh->com->next->type & 4 ? 1 : -1);
 		sh->f_built[ind](arg, &sh->env);
 		return (1);
 	}
@@ -123,14 +124,15 @@ int		exec_cli(t_shell *sh, t_com *com)
 int		sort_comm(t_shell *sh)
 {
 	char	fail[2];
-	t_com *tmp;
+		t_com *tmp;
 
 	if (!sh || !sh->com || (!sh->begin && !(sh->begin = sh->com)))
 		return (1);
-	fail[1] = sh->com->next && sh->com->next->type & 4;
 	epur_tb(sh->com, sh->com->len);
 	while (!(tmp = NULL) && sh->com)
 	{
+		fail[1] = sh->com->next && sh->com->next->type & 4;
+		//ft_printf("%s\n", *sh->com->cli);
 		ft_recoverenv(&sh->env) == -1 ? ft_errorlog(ENVFAILED) : 0;
 		if (fail[1] && (tmp = sh->com))
 		{
