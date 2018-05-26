@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 11:21:22 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/21 15:03:49 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 15:30:26 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	ft_completion_type_isdot(char *str, int *val, int i, int max)
 	}
 	if (i >= max)
 		return (0);
-	if (ft_isin(str[i], "./"))
+	if (ft_isin(str[i], "./~"))
 		return (COMPLETION_FILE);
 	return (COMPLETION_COM);
 }

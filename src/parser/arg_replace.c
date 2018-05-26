@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 13:34:04 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 15:24:55 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	assign(t_shell *sh, char **arg, int i)
 	char	*todel;
 	int		len;
 
+	(void)sh;
 	if ((*arg)[i] == '$'
 			|| ((*arg)[i] == '~' && (!i || (*arg)[i - 1] == ' ')))
 	{
@@ -25,7 +26,7 @@ void	assign(t_shell *sh, char **arg, int i)
 		len = ft_mcharchr(temp[0], " /*{\'\"");
 		len = len >= 0 ? len : ft_strlen(temp[0]);
 		todel = ft_strndup(temp[0], len);
-		if (!(temp[1] = ft_getenv(sh->env, todel)))
+		if (!(temp[1] = ft_getenv_fromroot(todel)))
 			return ;
 		ft_memdel((void**)&todel);
 		todel = ft_strndup(*arg, i);

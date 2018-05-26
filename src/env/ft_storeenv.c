@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 13:06:27 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 14:04:46 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 15:28:15 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	***ft_storeenv(char **env)
 	if (env)
 	{
 		ft_free_dblechar_tab(*save);
-		*save = ft_strtbdup(env);
+		*save = env;
 	}
 	return (save);
 }
@@ -42,7 +42,7 @@ char	*ft_getenv_fromroot(char *str)
 		return (0);
 	j = 0;
 	while (env[0][j] &&
-		(ft_strncmp(str, env[0][j], '=') || env[0][j][i] != '='))
+		(ft_strncmp(str, env[0][j], i) || env[0][j][i] != '='))
 		j++;
 	if (env[0][j])
 		return (&env[0][j][i + 1]);
@@ -51,8 +51,12 @@ char	*ft_getenv_fromroot(char *str)
 
 int		ft_recoverenv(char ***env)
 {
-	env = ft_storeenv(0);
-	if (!env || !*env)
+	char	***tmp;
+
+	tmp = ft_storeenv(0);
+	if (env && tmp)
+		*env = *tmp;
+	if (!env || !*env || !tmp)
 		return (-1);
 	return (0);
 }

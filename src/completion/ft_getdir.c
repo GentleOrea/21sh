@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 11:46:02 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 13:33:11 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 15:05:21 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static char	*ft_getdir_home(char *str)
 	res = (char*)ft_memalloc(ft_strlen(str) + i);
 	if (!res)
 		return (0);
-	ft_strcat(res, &home[5]);
-	res[i - 5] = (((i == 0 || res[i - 1] != '/') && str[1] != '/') ? ('/') : 0);
+	ft_strcat(res, home);
+	res[i] = (((i == 0 || res[i - 1] != '/') && str[1] != '/') ? ('/') : 0);
 	if (ft_isin('/', &str[1]))
 		ft_strncat(res, &str[1], ft_strlento_rev(&str[1], ft_strlen(str), "/"));
 	i = ft_strlen(res);
