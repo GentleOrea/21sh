@@ -16,9 +16,7 @@ typedef struct s_do_op
 void	free_op(t_do_op *tmp)
 {
 	ft_memdel((void**)&tmp);
-	ft_memdel((void**)&tmp->operator);
-	ft_memdel((void**)&tmp->var);
-
+	ft_memdel((void**)&tmp->content);
 }
 
 int browse_list(t_do_op *list)
@@ -37,6 +35,7 @@ int browse_list(t_do_op *list)
 		free_op(list->next->next);
 		list->next = tmp;
 	}
+	return (browse_last(list));
 }
 
 void	set_assign(t_do_op *list)
