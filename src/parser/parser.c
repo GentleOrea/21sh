@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 17:14:50 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 11:42:28 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 15:12:02 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int			hard_split(t_shell *sh, t_line *line)
 		return (0);
 	medium_split(par, tb);
 	ft_free_dblechar_tab(tb);
+	//ft_printf("ici\n");
 	split_co(sh, par);
+	//ft_printf("ici\n");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 14:26:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 15:16:09 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int		wait_exec(t_shell *sh, char **arg)
 		ft_exit(sh);
 	if ((ind = ft_strisin_tab(arg[0], BUILT, 0)) >= 2)
 	{
-		if (exec_redi(sh, sh->com->redi) < 0)
-			return (-1);
+		if (sh->com->type & 4 || exec_redi(sh, sh->com->redi) < 0)
+			return (sh->com->type & 4 ? 1 : -1);
 		sh->f_built[ind](arg, &sh->env);
 		return (1);
 	}
