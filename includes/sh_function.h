@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/25 13:04:26 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 14:01:31 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,14 @@ int			ft_setattr(void);
 int			ft_terminal_reset(t_termios *term);
 void		ft_initsig(void);
 void		ft_sig_line(int sig);
+
+/*
+** Fonction d'environnement
+*/
+
+char		***ft_storeenv(char **env);
+char		*ft_getenv_fromroot(char *str);
+int			ft_recoverenv(char ***env);
 
 /*
 ** Fonction d'historique
@@ -253,7 +261,6 @@ int			ft_strlento(char *str, char c);
 char		**ft_strtbdup(char **tb);
 char		*ft_getenv(char **tb, char *str);
 
-char		*ft_getenvfromfile(char *str);
 
 /*
 ** exec
