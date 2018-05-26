@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 14:22:10 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 14:26:19 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		wait_exec(t_shell *sh, char **arg)
 {
 	char	*tmp;
 	int		ind;
-	
+
 	if (!ft_strcmp(*arg, "exit"))
 		ft_exit(sh);
 	if ((ind = ft_strisin_tab(arg[0], BUILT, 0)) >= 2)
