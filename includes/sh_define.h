@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/25 11:14:58 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/26 14:20:29 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define M_SEP (char *[6]){"||", "&&", "|"}
 # define REDI (char *[7]){"<<", ">>", "<&",">&", "<", ">"}
 # define UNESC "0xabfnrtv\\"
-# define BUILT (char *[6]){"echo","env", "setenv", "unsetenv"}
+# define BUILT (char *[7]){"env", "echo", "cd", "setenv" ,"unsetenv", "exit"}
 # define GLOB "[*?"
 # define ENDWORD " \n|;&<>"
 # define ENDWORDVIS " \n;|&<>`'\"\\"
@@ -81,7 +81,5 @@
 
 # define COMPLETION_FILE 1
 # define COMPLETION_COM 2
-# define OPE (char *[16]){"<<", ">>", "||", "&&","**",  "|", "&", "^", "~", "+", "-", "/", "*", "%"}
-# define OP_CREMENT (char *[3]){"--", "++"}
 
 #endif

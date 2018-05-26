@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/18 11:54:19 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 13:34:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	arg_replace(t_shell *sh, char **arg)
 		return ;
 	while ((*arg)[++i])
 	{
-		comm_substitute(sh, arg, i);
 		i += skip_double(&(*arg)[i]);
+		comm_substitute(sh, arg, i);
 		assign(sh, arg, i);
 		if (!(*arg)[i])
 			return ;
@@ -85,6 +85,7 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 
 	if ((*str)[i++] != '`' || ft_charchr('`', &(*str)[i]) <= 0)
 		return ;
+	//ft_printf("{%s}\n", &(*str)[i++] );
 	com = sh->com;
 	ft_bzero(&sh->sub, sizeof(sh->sub));
 	sh->sub.is_sub = 1;

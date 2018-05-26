@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 12:10:51 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/17 13:38:53 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/26 13:19:55 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,13 @@ int		skip_double(char *str)
 	char	q;
 
 	i = 0;
-	if (!str)
+	if (!str || !*str)
 		return (0);
 	if (str[i] == '\'' && (q = str[i++]))
 	{
 		while (str[i] && str[i++] != q)
-			;
-		if (!str[i])
-			return (0);
+			if (!str[i])
+				return (0);
 	}
 	if (str[i] == '\\')
 		i += str[i + 1] ? 2 : 1;
