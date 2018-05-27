@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 09:51:54 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 15:13:25 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/27 14:59:41 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_initialisation(char **env, t_shell *sh)
 {
 	char	***check;
 
-	ft_init_terminal_data(env);
+	ft_init_terminal_data();
 	ft_initsig();
 	if (ft_setattr() == -1)
 		ft_fatal("Can't set terminal's attributes");
