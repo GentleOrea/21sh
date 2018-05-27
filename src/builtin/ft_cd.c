@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 14:42:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 16:48:30 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 14:21:53 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		ft_cd(char **a, char ***env)
 	{
 		tmp = getcwd(tmp, 256);
 		s = ft_getenv_fromroot("HOME");
-		if (!s || chdir(&s[5]) == -1)
+		if (!s || chdir(s) == -1)
 			ft_printf("21sh: cd: Can't access %s\n", s);
 		else
 		{

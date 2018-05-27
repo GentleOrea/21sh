@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 14:29:26 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:02:42 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void		ft_heredoc_purge(char *str, int size, t_parser *parser);
 int			ft_specialchar(t_line *line, char *str, int *val);
 int			ft_specialchar_a(t_line *line, char *str, int *val);
 int			ft_lentospecial(char *str);
+int			ft_lenchar_joker(char *str);
 
 /*
 ** Move on the screnn
