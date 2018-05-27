@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 15:24:55 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/27 13:31:59 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ void	comm_substitute(t_shell *sh, char **str, int i)
 
 	if ((*str)[i++] != '`' || ft_charchr('`', &(*str)[i]) <= 0)
 		return ;
-	//ft_printf("{%s}\n", &(*str)[i++] );
 	com = sh->com;
 	ft_bzero(&sh->sub, sizeof(sh->sub));
 	sh->sub.is_sub = 1;

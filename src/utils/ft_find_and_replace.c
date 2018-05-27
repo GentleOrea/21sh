@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 13:08:45 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 13:31:15 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,12 @@ int			skip_co(char *str)
 	{
 		if (ft_charchr(q, &str[i]) < 0)
 			return (0);
-		while (str[i] && str[i++] != q)
+		while (str[i] && str[i] != q)
+		{
+			i += str[i + 1]  && str[i] == '\\' ? 2 : 1;
 			if (!str[i])
 				return (0);
+		}
 	}
 	//ft_printf("{boldred}[%s %d]{reset}\n", ft_strndup(str, i),i);
 	return (i);
