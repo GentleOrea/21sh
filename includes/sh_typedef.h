@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 18:59:14 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 12:32:04 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ typedef struct	s_redi
 	char			*path;
 	int				type;
 	int				fd[2];
-	bool			tmp;
 	struct s_redi	*next;
 }				t_redi;
 
@@ -73,6 +72,7 @@ typedef struct	s_com
 	int				type;
 	t_tb			*tb;
 	t_redi			*redi;
+	bool			tmp;
 	struct s_com	*next;
 }				t_com;
 

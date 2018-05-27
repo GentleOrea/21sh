@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 17:05:22 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 12:59:30 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,6 @@ int		sort_comm(t_shell *sh)
 	while (!(tmp = NULL) && sh->com)
 	{
 		fail[1] = sh->com->next && sh->com->next->type & 4;
-		//ft_printf("%s\n", *sh->com->cli);
 		ft_recoverenv(&sh->env) == -1 ? ft_errorlog(ENVFAILED) : 0;
 		if (fail[1] && (tmp = sh->com))
 		{

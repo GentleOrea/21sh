@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 13:14:26 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 16:41:41 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 12:41:54 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void		f_point(t_shell *sh, char **argv)
 {
-	sh->fd = open("/dev/ttys002", O_RDWR);
+	sh->fd = open("/dev/ttys003", O_RDWR);
 	ft_bzero(sh, sizeof(sh));
 	if ((!argv || ft_strcmp(*argv, "-h")) &&
 		!(sh->hash_tb = (t_btree**)ft_memalloc(HASH_SIZE * sizeof(t_btree*))))

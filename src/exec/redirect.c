@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 18:55:02 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 12:59:30 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		stream(t_shell *sh, t_redi *redi)
 						O_RDWR | O_CREAT | O_APPEND, S_IRWXU)) < 0)
 			return (-ft_printf("21sh: no such file: %s\n", redi->path));
 		ft_putstr_fd(sh->here_doc, redi->fd[1]);
-		sh->here_doc += ft_strlen(sh->here_doc);
+		sh->here_doc += ft_strlen(sh->here_doc) + 1;
 		close(redi->fd[1]);
 		redi->fd[1] = -1;
 	}
@@ -47,9 +47,9 @@ int		stream(t_shell *sh, t_redi *redi)
 		| (redi->type == 1 ? O_APPEND : 0);
 	if (redi->fd[1] < 0 && (redi->fd[1] = open(redi->path, flag, right)) < 0)
 		return (-ft_printf("21sh: no such file: %s\n", redi->path));
-	if (!redi->tmp && dup2(redi->fd[1], redi->fd[0]) == -1)
+	if (!sh->com->tmp && dup2(redi->fd[1], redi->fd[0]) == -1)
 		return (-ft_printf("Failed to dup2\n"));
-	if (redi->tmp)
+	if (sh->com->tmp)
 		close(redi->fd[1]);
 	return (1);
 }
@@ -63,7 +63,7 @@ int		set_redi(t_shell *sh, t_redi *redi)
 		ft_strcpy(redi->path, "/tmp/.sh_heredoc");
 		redi->path[16] = redi->fd[0] + '0';
 	}
-	if (redi->tmp && (redi->type == 2 || redi->type == 3))
+	if (!sh->com->tmp && (redi->type == 2 || redi->type == 3))
 	{
 		if (!ft_strcmp(redi->path, "-"))
 			return (close(redi->fd[0]));
@@ -86,13 +86,14 @@ int		exec_redi(t_shell *sh, t_redi *tmp)
 			return (-1);
 		tmp = tmp->next;
 	}
-	if (!(sh->com->type & 4) && sh->com->next 
-			&& sh->com->next->type & 4)
+	if (((sh->com->type & 4 && sh->com->tmp)
+	|| !(sh->com->type & 4)) && (sh->com->next && sh->com->next->type & 4))
 	{
 		sh->com = sh->com->next;
-		sh->com->redi ? sh->com->redi->tmp = 1 : 0;
+		sh->com->tmp = 1;
+		sh->com->redi ? dprintf(sh->fd, "%s\n", sh->com->redi->path) : 0;
 		ret = exec_redi(sh, sh->com->redi);
-		sh->com->redi ? sh->com->redi->tmp = 0 : 0;
+		sh->com->tmp = 0;
 	}
 	sh->com = co;
 	return (ret);
