@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 13:31:59 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 14:15:04 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,8 @@ void	get_sub(t_shell *sh)
 	safe_dup(-1, 0, sh->sub.pipe);
 	if (dup2(sh->std[0], STDIN_FILENO) == -1
 		|| dup2(sh->std[1], STDOUT_FILENO) == -1)
-		{
-			ft_printf("STD dup error\n");
-			ft_exit(sh);
-		}
+	{
+		ft_printf("STD dup error\n");
+		ft_exit(sh);
+	}
 }

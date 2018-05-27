@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 11:46:02 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 15:05:21 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/27 14:07:27 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*ft_getdir_home(char *str)
 	return (res);
 }
 
-char	*ft_getdir(char *str)
+char		*ft_getdir(char *str)
 {
 	char	*directory;
 	char	*tmp;
