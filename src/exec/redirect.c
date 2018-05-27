@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 12:59:30 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 13:15:13 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int		stream(t_shell *sh, t_redi *redi)
 int		set_redi(t_shell *sh, t_redi *redi)
 {
 	redi->fd[1] = -1;
+	if (sh->com->tmp && !redi->type)
+		return (1);
 	if (!redi->type)
 	{
 		mallcheck(redi->path = (char*)ft_memalloc(18 * (sizeof(char))));
