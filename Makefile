@@ -6,13 +6,13 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 13:13:35 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/27 15:10:35 by ygarrot          ###   ########.fr        #
+#    Updated: 2018/05/27 15:23:38 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh 
 
-FLAGS =  -Wall -Werror -Wextra #-g3 -fsanitize=address
+FLAGS =  -Wall -Werror -Wextra
 
 SRC_FOLDER = src/
 
@@ -25,7 +25,6 @@ SRC_FP = \
 		  builtin/ft_setenv.c \
 		  builtin/ft_strtabdup.c \
 		  builtin/ft_unsetenv.c
-#		  builtin/ft_strlento.c \
 
 SRC_FP += \
 		completion/ft_completion.c \
