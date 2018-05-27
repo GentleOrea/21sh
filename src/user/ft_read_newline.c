@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 11:48:59 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/26 14:37:44 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/27 13:38:21 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		ft_newline_active(char *str)
 
 	i = 0;
 	ft_bzero((void*)sep, sizeof(sep));
-	while (str[i])
+	while (str[i] && str[i + 1])
 	{
 		if (!sep[0] && !sep[1] && ft_isin(str[i], "'\""))
 		{
@@ -93,6 +93,7 @@ int		ft_read_newline_eof(t_line *line, int *val, t_parser *pars)
 		line->parser_nb++;
 		line->eof[val[0]] = 0;
 		val[0]++;
+		pars->drop = 1;
 		val[4] = (pars->next == 0);
 	}
 	val[3] = val[0];
@@ -109,17 +110,19 @@ int		ft_read_eot(t_line *line, int *val, t_parser *parser)
 		return (ft_delete(line, val) == -1 ? -1 : 0);
 	if (val[0] == val[1] && val[4])
 		ft_exit(0);
-	else if (val[0] == val[5])
+	else if (val[0] == val[5] && val[4] == 0)
 	{
 		if (!parser)
 			return (-1);
-		val[9] = (parser->next == 0 && parser->wait == 0);
 		line->parser_nb++;
-		ft_strdel(&(parser->comm));
+		parser->drop = 2;
 		if (ft_printchar(line, "\n", val) < 0)
+		{
+			ft_errorlog("Failed to print");
 			return (-1);
-		line->eof[val[0]] = 0;
-		val[0]++;
+		}
+		val[9] = (parser->next == 0 && parser->wait == 0);
+		line->eof[val[0]++] = 0;
 		val[5] = val[0];
 		val[3] = val[0];
 		val[4] = (parser->next == 0);
