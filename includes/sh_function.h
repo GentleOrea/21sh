@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 14:50:36 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/27 14:59:20 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_recoverenv(char ***env);
 char		*ft_getenvfile(int code);
 int			ft_envwrite(char *file, char **env);
 void		ft_initenv(char ***env);
-void		ft_init_terminal_data(char **env);
+void		ft_init_terminal_data(void);
 int			ft_setattr(void);
 int			ft_terminal_reset(t_termios *term);
 void		ft_initsig(void);
