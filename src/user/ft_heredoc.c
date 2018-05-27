@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:54:57 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/27 13:59:14 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/27 14:10:17 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void		ft_heredoc_purge(char *str, int size, t_parser *parser)
 {
 	int	i;
 	int	j;
+	int	k;
 
 	i = 0;
 	j = 0;
@@ -51,9 +52,11 @@ void		ft_heredoc_purge(char *str, int size, t_parser *parser)
 			ft_heredoc_purge_(str, parser, &i, &j);
 		else if (parser->drop == 2 || parser->comm == 0)
 		{
+			k = (str[i] != 0);
 			while (str[i])
 				str[j++] = str[i++];
-			j--;
+			if (k)
+				j--;
 		}
 		parser = parser->next;
 		str[j++] = str[i++];
