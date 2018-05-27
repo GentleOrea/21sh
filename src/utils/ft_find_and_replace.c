@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 15:19:17 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:36:01 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ static char	*replace(char *str, char *rep, int op, int len)
 		while (op & 1 && ft_isin(str[i], QUOTES)
 			&& (ft_charchr(str[i], &str[i + 1]) >= 0) && (q = str[i]))
 		{
-			while (str[++i] && str[i] != q && str[i] &&
-		(((q == '\"' && str[i] == '\\') ? ++i : 0) || 1))
+
+			while (str[++i] && str[i] != q  &&
+			(((q == '\"' && str[i] == '\\') ? ++i : 0) || 1))
 				ret[++i2] = str[i];
 		}
 		while (str[i] == '\\' && str[i + 1] && ++i)
