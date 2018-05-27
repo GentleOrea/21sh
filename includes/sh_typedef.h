@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/27 12:32:04 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 13:45:22 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct	s_parser
 	char			op[3];
 	char			type;
 	int				wait;
+	int				drop;
 	struct s_parser	*next;
 }				t_parser;
 
