@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 13:31:15 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 14:54:32 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int			skip_co(char *str)
 				return (0);
 		}
 	}
-	//ft_printf("{boldred}[%s %d]{reset}\n", ft_strndup(str, i),i);
 	return (i);
 }
 
@@ -59,14 +58,12 @@ static char	*replace(char *str, char *rep, int op, int len)
 		while (op & 1 && ft_isin(str[i], QUOTES)
 			&& (ft_charchr(str[i], &str[i + 1]) >= 0) && (q = str[i]))
 		{
-			//ft_printf("[%s] => %s\n",ret ,&str[i]);
 			while (str[++i] && str[i] != q && str[i])
 			{
 				 (q == '\"' && str[i] == '\\') ? ++i : 0;
 				ret[++i2] = str[i];
 			}
 		}
-		//ft_printf("%s %d [%c] [%c]\n", ret, i, str[i], q);
 		while (str[i] == '\\' && str[i + 1] && ++i)
 			ret[++i2] = str[i++];
 		if (str[i] && (q == str[i] || str[i] == rep[0]) && ++i)
@@ -74,7 +71,6 @@ static char	*replace(char *str, char *rep, int op, int len)
 		else if (str[i])
 			ret[++i2] = str[i++];
 	}
-	//ft_printf("{boldblue}[%s]{reset}\n", ret);
 	return (ret);
 }
 
@@ -89,7 +85,6 @@ char		*ft_find_and_replace(char *str, char *rep, int op)
 	len = ft_strlen(str);
 	if (!str)
 		return (NULL);
-	//ft_printf("{boldred}[%s]{reset}\n", str);
 	while (str[i])
 	{
 		while (str[i] == '\\' && len--)
@@ -101,6 +96,5 @@ char		*ft_find_and_replace(char *str, char *rep, int op)
 		}
 		!rep[1] && str[i] && str[i++] == rep[0] ? len-- : 0;
 	}
-	//ft_printf("len {%d}\n", len);
 	return (replace(str, rep, op, len));
 }

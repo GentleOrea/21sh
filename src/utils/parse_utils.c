@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 11:39:04 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 13:31:14 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 14:54:36 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int		skip_comm(char *str)
 		return (0);
 	if (ft_isin(str[i], QUOTES) && (q = str[i++]))
 	{
-		while (str[i] && str[i] != q)
+		while (str[i] && str[i++] != q)
 		{
-			i += str[i + 1]  && str[i] == '\\' ? 2 : 1;
+			i += (str[i] == '\\' && str[i + 1]);
 			if (!str[i])
 				return (0);
 		}
