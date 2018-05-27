@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:54:57 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/27 13:58:46 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/27 13:59:14 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,4 @@ void		ft_heredoc_purge(char *str, int size, t_parser *parser)
 	}
 	while (j < size)
 		str[j++] = 0;
-	ft_errorlog(str);
-	ft_errorlog("|");
 }
