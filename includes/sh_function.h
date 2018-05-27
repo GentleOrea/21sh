@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 14:23:57 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 14:29:26 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -288,6 +288,7 @@ char		*enclosed(char *str, char c);
 ** redirections
 */
 
+void	set_redi_path(t_redi *redi);
 int			exec_pipe(t_shell *sh, char *comm, char **argv);
 void		reset_std(t_shell *sh, t_com *com, t_redi *redi);
 

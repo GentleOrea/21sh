@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/01 13:27:49 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 13:38:24 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 14:21:58 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*get_redi(char *str, t_com *com)
 		if ((i[1] = ft_strlento(&str[ind], ' ')))
 			i[1] -= (str[ind + i[1] - 1] == ' ');
 		redi->path = ft_strndup(&str[ind], i[1]);
+		set_redi_path(redi);
 		ft_strcpy(&str[i[0]], &str[ind + i[1]]);
 		add_redi(com, redi);
 	}

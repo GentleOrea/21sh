@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 14:15:58 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 14:32:48 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,6 @@ int		set_redi(t_shell *sh, t_redi *redi)
 	redi->fd[1] = -1;
 	if (sh->com->tmp && !redi->type)
 		return (1);
-	if (!redi->type)
-	{
-		mallcheck(redi->path = (char*)ft_memalloc(18 * (sizeof(char))));
-		ft_strcpy(redi->path, "/tmp/.sh_heredoc");
-		redi->path[16] = redi->fd[0] + '0';
-	}
 	if (!sh->com->tmp && (redi->type == 2 || redi->type == 3))
 	{
 		if (!ft_strcmp(redi->path, "-"))
@@ -93,7 +87,6 @@ int		exec_redi(t_shell *sh, t_redi *tmp)
 	{
 		sh->com = sh->com->next;
 		sh->com->tmp = 1;
-		sh->com->redi ? dprintf(sh->fd, "%s\n", sh->com->redi->path) : 0;
 		ret = exec_redi(sh, sh->com->redi);
 		sh->com->tmp = 0;
 	}
