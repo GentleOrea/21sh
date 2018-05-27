@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/20 11:59:55 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 14:32:48 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:21:13 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		set_redi(t_shell *sh, t_redi *redi)
 
 int		exec_redi(t_shell *sh, t_redi *tmp)
 {
-	t_com *co;
+	t_com	*co;
 	int		ret;
 
 	ret = 0;
@@ -107,7 +107,6 @@ int		exec_pipe(t_shell *sh, char *comm, char **argv)
 	father = fork();
 	if (!father)
 	{
-
 		if (sh->com->type & 4 &&
 				safe_dup(sh->com->pipe[0], STDIN_FILENO, sh->com->pipe))
 			exit(EXIT_FAILURE);

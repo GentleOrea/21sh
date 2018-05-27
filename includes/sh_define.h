@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/27 15:02:04 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:21:55 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define HISTORYFILE "~/.sh_history"
 # define ENVFILE "/tmp/.sh_env"
 
-# define HASH_SIZE 10000
+# define HASH_SIZE 1000
 # define BUFFSIZE 100
 # define ERR -1
 # define ERR_PARS1_MSG "21sh: syntax error near unexpected token '|'\n"

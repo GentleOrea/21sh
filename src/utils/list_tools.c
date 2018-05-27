@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:26:45 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/26 17:00:38 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:13:49 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		shift_com(t_shell *sh, int fail)
 {
 	if (!sh->com)
 		return ;
-	sh->com = sh->com->next ;
+	sh->com = sh->com->next;
 	sh->com && !(sh->com->type & 4) ? epur_tb(sh->com, sh->com->len) : 0;
 	while (sh->com && (sh->com->type && !(sh->com->type & (fail >= 0 ? 2 : 1))))
 	{

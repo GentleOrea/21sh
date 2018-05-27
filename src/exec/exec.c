@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 15:45:17 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 14:32:47 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:21:13 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		wait_exec(t_shell *sh, char **arg)
 	}
 	if (sh->hash_tb && (tmp = ft_get_hash(sh->hash_tb, *arg)))
 		return (exe(sh, tmp, arg));
-	if ((ind = ft_strisin_tab(arg[0], BUILT, 0)) >= 0  && ind < 3)
+	if ((ind = ft_strisin_tab(arg[0], BUILT, 0)) >= 0 && ind < 3)
 		return (exe(sh, *arg, arg));
 	if (!access(*arg, F_OK | X_OK))
 	{
@@ -122,7 +122,7 @@ int		exec_cli(t_shell *sh, t_com *com)
 int		sort_comm(t_shell *sh)
 {
 	char	fail[2];
-		t_com *tmp;
+	t_com	*tmp;
 
 	if (!sh || !sh->com || (!sh->begin && !(sh->begin = sh->com)))
 		return (1);

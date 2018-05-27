@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:55:23 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/27 14:54:32 by ygarrot          ###   ########.fr       */
+/*   Updated: 2018/05/27 15:19:17 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int			skip_co(char *str)
 			return (0);
 		while (str[i] && str[i] != q)
 		{
-			i += str[i + 1]  && str[i] == '\\' ? 2 : 1;
+			i += str[i + 1] && str[i] == '\\' ? 2 : 1;
 			if (!str[i])
 				return (0);
 		}
@@ -50,19 +50,15 @@ static char	*replace(char *str, char *rep, int op, int len)
 
 	i = 0;
 	i2 = -1;
-	if (!(ret = ft_strnew(len)))
-		return (NULL);
-	while (str[i])
+	mallcheck((ret = ft_strnew(len)));
+	while (str[i] && !(q = 0))
 	{
-		q = 0;
 		while (op & 1 && ft_isin(str[i], QUOTES)
 			&& (ft_charchr(str[i], &str[i + 1]) >= 0) && (q = str[i]))
 		{
-			while (str[++i] && str[i] != q && str[i])
-			{
-				 (q == '\"' && str[i] == '\\') ? ++i : 0;
+			while (str[++i] && str[i] != q && str[i] &&
+		(((q == '\"' && str[i] == '\\') ? ++i : 0) || 1))
 				ret[++i2] = str[i];
-			}
 		}
 		while (str[i] == '\\' && str[i + 1] && ++i)
 			ret[++i2] = str[i++];
