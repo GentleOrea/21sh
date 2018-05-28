@@ -21,9 +21,10 @@ int		wait_exec(t_shell *sh, char **arg)
 		ft_exit(sh);
 	if ((ind = ft_strisin_tab(arg[0], BUILT, 0)) >= 2)
 	{
-		if ((sh->com->next && sh->com->next->type & 4)
+		if (sh->com->type & 4  || (sh->com->next && sh->com->next->type & 4)
 				|| exec_redi(sh, sh->com->redi) < 0)
-			return (sh->com->next && sh->com->next->type & 4 ? 1 : -1);
+			return (sh->com->type & 4 
+			|| (sh->com->next && sh->com->next->type & 4) ? 1 : -1);
 		sh->f_built[ind](arg, &sh->env);
 		return (1);
 	}
