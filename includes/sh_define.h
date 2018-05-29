@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:08:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/27 15:42:57 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/29 12:58:26 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,7 @@
 
 # define COMPLETION_FILE 1
 # define COMPLETION_COM 2
+
+# define VAR_LIM "~`!@#$%^&*()-+={}[]|;'\"?></.,\\"
 
 #endif
