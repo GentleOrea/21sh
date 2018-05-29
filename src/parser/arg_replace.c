@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:41:24 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/29 11:06:39 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/05/29 11:33:59 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	assign(t_shell *sh, char **arg, int i)
 		if (!(temp[1] = ft_getenv_fromroot(todel)))
 			return ;
 		ft_memdel((void**)&todel);
-		todel = ft_strndup(*arg, i);
+		todel = (i > 0 ? ft_strndup(*arg, i) : ft_strdup(""));
 		temp[2] = *arg;
 		*arg = ft_implode(temp[1], todel
 				, &(*arg)[i + 1 + ((*arg)[i] == '$' ? len : 0)]);
@@ -43,14 +43,14 @@ void	arg_replace(t_shell *sh, char **arg)
 	int		i;
 
 	i = -1;
-	if (!*arg)
+	if (!arg || !*arg)
 		return ;
 	while ((*arg)[++i])
 	{
 		i += skip_double(&(*arg)[i]);
 		comm_substitute(sh, arg, i);
 		assign(sh, arg, i);
-		if (!(*arg)[i])
+		if (!arg[0] || !arg[0][i])
 			return ;
 	}
 }
