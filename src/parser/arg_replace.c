@@ -24,7 +24,7 @@ void	assign(t_shell *sh, char **arg, int i)
 	{
 		temp[0] = (*arg)[i] == '$' ? &(*arg)[i + 1] : "HOME";
 		len = ft_mcharchr(temp[0], " /*{\'\"");
-		len = len >= 0 ? len : ft_strlen(temp[0]);
+		len = len >= 0 ? (size_t)len : ft_strlen(temp[0]);
 		todel = ft_strndup(temp[0], len);
 		if (!(temp[1] = ft_getenv_fromroot(todel)))
 			return ;

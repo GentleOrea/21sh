@@ -14,10 +14,8 @@
 
 char	*ft_getenv(char **tb, char *str)
 {
-	int	i;
 	int	len;
 
-	i = 0;
 	if (!tb || !str)
 		return (NULL);
 	len = ft_strlen(str);

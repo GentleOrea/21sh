@@ -18,15 +18,14 @@ static int	ft_completion_(t_line *line, int *val, char *left, int type)
 	int		bl;
 	int		sep;
 	int		re;
-	int		bq;
 
 	ft_completion_count(CODE_PUSH);
 	ft_completion_savetype(CODE_SET, type);
 	if (val[4])
-		bq = ft_separator_active(&(line->line)[val[0] - (int)ft_strlen(left)],
+		ft_separator_active(&(line->line)[val[0] - (int)ft_strlen(left)],
 			(int)ft_strlen(left), &sep, &bl);
 	else
-		bq = ft_separator_active(&(line->eof)[val[0] - (int)ft_strlen(left)],
+		ft_separator_active(&(line->eof)[val[0] - (int)ft_strlen(left)],
 			(int)ft_strlen(left), &sep, &bl);
 	right = (type == COMPLETION_FILE) ? (ft_completion_getfilename(left,
 		ft_completion_count(CODE_GET), bl, sep)) : ft_completion_com(left,

@@ -32,9 +32,8 @@ int			get_hdoc(char *str, int i, t_parser *par)
 		{
 			while (str[i] == ' ')
 				i++;
-			todel = ft_strndup(&str[i],
-		(hdoc = search_op(&str[i], HD) >= 0 ||
-		(hdoc = ft_isin(str[i], NORM)) ? hdoc + 1 : ft_strlen(&str[i])));
+			todel = ft_strndup(&str[i], (hdoc = search_op(&str[i], HD) >= 0 ||
+		(hdoc = ft_isin(str[i], NORM)) ? hdoc + 1 : (int)ft_strlen(&str[i])));
 			par = push_front(par, ft_find_and_replace(todel, "\\", 1), 0);
 			ft_memdel((void**)&todel);
 		}

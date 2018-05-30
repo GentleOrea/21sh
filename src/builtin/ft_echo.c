@@ -14,11 +14,9 @@
 
 void		ft_echo(char **arg, char ***en)
 {
-	size_t	i;
 	char	**env;
 
 	env = *en;
-	i = 0;
 	if (arg && env && *arg)
 	{
 		arg++;
