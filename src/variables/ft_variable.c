@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:22:01 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/29 13:07:22 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 12:25:28 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ t_btree		**ft_variable(t_btree **val)
 	return (root);
 }
 
-int			ft_variableadd(char *name, void *data, int deep)
+int			ft_variableadd(char *name, void *data, int deep, int deported)
 {
 	t_variable	*var;
 	t_btree		**root;
 	t_btree		*pt;
 
-	if (!(var = ft_variable_create(name, data, deep)))
+	if (!(var = ft_variable_create(name, data, deep, deported)))
 		return (-1);
 	if (!(root = ft_variable(0)))
 	{
@@ -62,18 +62,4 @@ t_variable	*ft_variableget(char *name)
 	if (!var || !((t_variable*)var)->name)
 		return (0);
 	return ((t_variable*)var);
-}
-
-t_variable	ft_variableset(char *name, void *value, int deep)
-{
-	t_variable	var;
-
-	ft_bzero((void*)&var, sizeof(var));
-	var.deep = deep;
-	var.name = name;
-	if (var.deep == 1)
-		var.str = (char*)value;
-	else if (var.deep == 2)
-		var.array = (char**)value;
-	return (var);
 }

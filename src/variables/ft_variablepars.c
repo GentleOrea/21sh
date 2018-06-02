@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 13:17:26 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/29 13:04:21 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 12:25:25 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,14 @@ char	*ft_variablepars_bracket(char *str)
 	tmp = ft_variablestr(var);
 	return (tmp);
 }
+
+/*
+** Give string beginning with $ to ft_variablepars to get the
+** value of the variable
+** The string returned can latter be freed with free (2)
+** If the variable isn't set, "" is returned (default value)
+** If NULL is returned, an error occured
+*/
 
 char	*ft_variablepars(char *str)
 {
