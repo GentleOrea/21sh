@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/06 12:04:19 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/27 15:42:53 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 11:03:49 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_variable
 	char	*name;
 	char	*str;
 	char	**array;
+	int		deported;
 }				t_variable;
 
 typedef struct	s_direction
