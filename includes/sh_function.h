@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/05/29 13:07:54 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 12:29:36 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,12 +199,17 @@ DIR			*ft_opendirfree(char *str);
 */
 
 t_btree		*ft_variable(t_btree **val);
-t_variable	ft_variableset(char *name, void *value, int deep);
 int			ft_variableadd(char *name, void *data, int deep);
 t_variable	*ft_variableget(char *name);
-char	*ft_variablepars(char *str);
-size_t	ft_variablelen(t_variable *var);
-char	*ft_variablestr(t_variable *var);
+
+t_variable	*ft_variable_create(char *name, void *data, int deep, int deported);
+int			ft_variable_checkname(char *str);
+void		ft_variable_builtin(char *str);
+
+char		*ft_variablepars(char *str);
+char		*ft_variablepar_bracket(char *str);
+size_t		ft_variablelen(t_variable *var);
+char		*ft_variablestr(t_variable *var);
 
 
 /*
