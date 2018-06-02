@@ -6,7 +6,7 @@
 #    By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/11 12:06:15 by ygarrot           #+#    #+#              #
-#    Updated: 2018/05/29 11:21:34 by tcharrie         ###   ########.fr        #
+#    Updated: 2018/06/02 15:08:43 by tcharrie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -159,9 +159,8 @@ SRC += \
 	   tree/btree_apply_suffix.c \
 	   tree/btree_search_item.c \
 	   tree/btree_level_count.c \
-	   tree/btree_swapcolor.c \
-	   tree/btree_balancefrom.c \
-	   tree/btree_insert_data.c
+	   tree/btree_insert_data.c \
+	   tree/btree_remove_data.c
 
 #Colors
 

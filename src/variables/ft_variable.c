@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:22:01 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 13:27:49 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 14:05:19 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,17 @@ t_btree		**ft_variable(t_btree **val)
 	static t_btree	**root = 0;
 
 	if (!root)
-		root = val;
+		root = ft_memalloc(sizeof(t_btree*));
+	if (!root)
+		return (0);
+	if (!*root)
+		root[0]->item = (void*)ft_variable_create(ft_strdup(""), 0, 0, 0);
+	if (!*root || !((t_variable*)(root[0]->item))->name)
+	{
+		ft_variabledel((t_variable*)(root[0]->item));
+		ft_memdel((void**)&root);
+		return (0);
+	}
 	return (root);
 }
 
@@ -27,20 +37,15 @@ int			ft_variableadd(char *name, void *data, int deep, int deported)
 	t_btree		**root;
 	t_btree		*pt;
 
+	if (!(root = ft_variable(0)))
+		return (-1);
+	if (!*root)
+		return (-1);
 	if (!(var = ft_variable_create(name, data, deep, deported)))
 		return (-1);
-	if (!(root = ft_variable(0)))
-	{
-		if (!(pt = btree_create_node((void*)var, RB_BLACK)))
-		{
-			ft_memdel((void**)&var);
-			return (-1);
-		}
-		ft_variable(&pt);
-	}
 	else if (btree_insert_data(root, var, &ft_variablecmp, &ft_variabledel))
 	{
-		ft_memdel((void**)&var);
+		ft_variabledel(var);
 		return (-1);
 	}
 	return (0);
