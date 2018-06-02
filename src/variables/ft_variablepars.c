@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/12 13:17:26 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 12:25:25 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 13:33:15 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*ft_variablepars_bracket(char *str)
 	if (!str || *str != '$' || str[1] != '{')
 		return (0);
 	i = 2;
-	while (str[i] && !ft_isin(VAR_LIM, str[i]))
-		i += ft_lenchar_r(str[i]);
+	while (str[i] && !ft_isin(str[i], VAR_LIM))
+		i += ft_lenchar_r(str, i);
 	if (str[i] != '}')
 		return (0);
 	str[i] = 0;
@@ -30,7 +30,7 @@ char	*ft_variablepars_bracket(char *str)
 	str[i] = '{';
 	if (!var)
 		return ((char*)ft_memalloc(1));
-	tmp = ft_variablestr(var);
+	tmp = ft_variablestr(*var);
 	return (tmp);
 }
 
@@ -54,48 +54,53 @@ char	*ft_variablepars(char *str)
 	if (str[1] == '{')
 		return (ft_variablepars_bracket(str));
 	i = 1;
-	while (str[i] && !ft_isin(VAR_LIM, str[i]))
+	while (str[i] && !ft_isin(str[i], VAR_LIM))
 		i += ft_lenchar_r(str, i);
 	c = str[i];
 	str[i] = 0;
 	var = ft_variableget(&str[1]);
 	str[i] = c;
 	if (!var)
-		return ((char*)ft_memalloc(1));
-	tmp = ft_variablestr(var);
+	{
+		tmp = ft_getenv_fromroot(str);
+		if (!tmp)
+			return ((char*)ft_memalloc(1));
+		return (ft_strdup(tmp));
+	}
+	tmp = ft_variablestr(*var);
 	return (tmp);
 }
 
-size_t	ft_variablelen(t_variable *var)
+size_t	ft_variablelen(t_variable var)
 {
 	int			i;
 	size_t		len;
 
-	if (!var || var->deep < 1 || var->deep > 2)
+	if (var.deep < 1 || var.deep > 2)
 		return (0);
-	if (var->deep == 1)
-		return (ft_strlen(var->str));
-	if (!(var->array))
+	if (var.deep == 1)
+		return (ft_strlen(var.str));
+	if (!(var.array))
 		return (0);
 	i = 0;
 	len = 0;
-	while (var->array[i])
-		len += ft_strlen(var->array[i]) + 1;
+	while (var.array[i])
+		len += ft_strlen(var.array[i]) + 1;
 	if (i > 0)
 		len -= 1;
 	return (len);
 }
 
-char	*ft_variablestr(t_variable *var)
+char	*ft_variablestr(t_variable var)
 {
 	char	*value;
 	size_t	len;
 	int		i;
 
-	if (!var || var->deep < 1 || var->deep > 2)
+	if (var.deep < 1 || var.deep > 2)
 		return (0);
-	if (var->deep == 1)
-		return (ft_strdup(var->name));
+	if (var.deep == 1)
+		return (ft_strdup(var.name));
 	if (!(len = ft_variablelen(var)))
 		return (ft_strdup(" "));
 	if (!(value = (char*)malloc(len)))
@@ -103,12 +108,12 @@ char	*ft_variablestr(t_variable *var)
 	value[0] = 0;
 	len = 0;
 	i = 0;
-	while (var->array[i])
+	while (var.array[i])
 	{
-		ft_strcat(&value[len], var->array[i]);
+		ft_strcat(&value[len], var.array[i]);
 		len += ft_strlen(&value[len]);
 		i++;
-		if (var->array[i])
+		if (var.array[i])
 			value[len++] = ' ';
 	}
 	return (value);

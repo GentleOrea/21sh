@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:28:08 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 12:25:27 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 13:30:24 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ t_variable	*ft_variable_create(char *name, void *data, int deep, int deported)
 
 void		ft_variable_builtin(char *str)
 {
-	char		*setenv[4];
+	char		**setenv;
 	int			i;
 	char		***env;
 	int			deported;
 
-	i = ft_strlento('=', str);
+	i = ft_strlento(str, '=');
 	if (!str[i] || i == 0)
 		return ;
 	deported = 0;
@@ -53,8 +53,8 @@ void		ft_variable_builtin(char *str)
 		if ((env = ft_storeenv(0)))
 		{
 			deported = 1;
-			setenv = {"setenv", str, &str[i + 1], 0};
-			ft_setenv(arg, env);
+			setenv = (char*[4]){"setenv", str, &str[i + 1], 0};
+			ft_setenv(setenv, env);
 		}
 	}
 	ft_variableadd(str, (void*)&str[i + 1], 1, deported);
@@ -74,4 +74,19 @@ int			ft_variable_checkname(char *str)
 			return (0);
 	}
 	return (1);
+}
+
+void		ft_variabledel(void *var)
+{
+	t_variable	*v;
+
+	if (!var)
+		return ;
+	v = (t_variable*)var;
+	ft_strdel(&(v->name));
+	ft_strdel(&(v->str));
+	ft_free_dblechar_tab(v->array);
+	v->array = 0;
+	free(v);
+	v = 0;
 }

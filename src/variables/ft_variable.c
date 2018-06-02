@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:22:01 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 12:25:28 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/02 13:27:49 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_variableadd(char *name, void *data, int deep, int deported)
 		}
 		ft_variable(&pt);
 	}
-	else if (btree_insert_data(root, var, &ft_variablecmp))
+	else if (btree_insert_data(root, var, &ft_variablecmp, &ft_variabledel))
 	{
 		ft_memdel((void**)&var);
 		return (-1);
@@ -59,7 +59,7 @@ t_variable	*ft_variableget(char *name)
 	ft_bzero((void*)&v, sizeof(v));
 	v.name = name;
 	var = btree_search_item(*root, (void*)&v, &ft_variablecmp);
-	if (!var || !((t_variable*)var)->name)
+	if (!var)
 		return (0);
 	return ((t_variable*)var);
 }

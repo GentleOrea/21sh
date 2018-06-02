@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_remove_data.c                                :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/08 14:55:48 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 13:39:46 by tcharrie         ###   ########.fr       */
+/*   Created: 2018/06/02 13:17:26 by tcharrie          #+#    #+#             */
+/*   Updated: 2018/06/02 13:36:11 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "sh.h"
 
-void	btree_remove_data(t_btree **root, void *data, int (*cmpf)(void*, void*))
+void	ft_unset(char **arg, char ***env)
 {
-	(void)root;
-	(void)data;
+
+
 }
