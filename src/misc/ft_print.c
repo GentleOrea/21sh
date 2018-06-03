@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 12:48:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/03 16:46:57 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:53:05 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,7 @@ size_t	ft_strlen_vis(char *str)
 	while (str[j])
 	{
 		i++;
-		if ((str[j] & '\x80') == 0)
-			j++;
-		else
-		{
-			j++;
-			while ((str[j] & '\xc0') == '\x80')
-				j++;
-		}
+		j += ft_lenchar_r(str, j);
 	}
 	return (i);
 }
