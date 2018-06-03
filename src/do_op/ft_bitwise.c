@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sh_include.h                                       :+:      :+:    :+:   */
+/*   ft_bitwise.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/06 12:06:28 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/03 16:54:45 by ygarrot          ###   ########.fr       */
+/*   Created: 2018/05/16 13:53:22 by ygarrot           #+#    #+#             */
+/*   Updated: 2018/05/18 14:34:11 by ygarrot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SH_INCLUDE_H
-# define SH_INCLUDE_H
+#include "sh.h"
 
-# include "../libft/includes/libft.h"
-# include "ft_printf.h"
-# include "do_op.h"
-# include <term.h>
-# include <sys/stat.h>
-# include <sys/wait.h>
-# include <signal.h>
-# include <dirent.h>
+int		ft_left_shift(int a, int b)
+{
+	return (a << b);
+}
 
-#endif
+int		ft_right_shift(int a, int b)
+{
+	return (a >> b);
+}
+
+int		ft_xor(int a, int b)
+{
+	return (a ^ b);
+}
+
+int		ft_bitneg(int a, int b)
+{
+	return(~a);
+}
