@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 12:48:50 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/17 10:54:23 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:46:57 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,28 @@ char	*ft_init_aff(int *val)
 int		writechar(int c)
 {
 	return (write(STDOUT_FILENO, &c, 1));
+}
+
+size_t	ft_strlen_vis(char *str)
+{
+	size_t	i;
+	size_t	j;
+
+	if (!str ||! !*str)
+		return (0);
+	i = 0;
+	j = 0;
+	while (str[j])
+	{
+		i++;
+		if ((str[j] & '\x80') == 0)
+			j++;
+		else
+		{
+			j++;
+			while ((str[j] & '\xc0') == '\x80')
+				j++;
+		}
+	}
+	return (i);
 }
