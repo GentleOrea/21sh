@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/02 13:17:26 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 15:23:10 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 15:45:16 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_unset(char **arg, char ***env)
 
 	if (!arg || !env || !*env || !*arg)
 		return ;
-	if (!(root = ft_variable(0)))
+	if (!(root = ft_variable()))
 		return ;
 	ft_bzero((void*)&cmp, sizeof(t_variable));
 	if (!(cmp.name = arg[1]))
@@ -36,5 +36,4 @@ void	ft_unset(char **arg, char ***env)
 		ft_unsetenv(unsetenv, env);
 	}
 	btree_remove_data(root, (void*)&cmp, ft_variablecmp, ft_variabledel);
-
 }

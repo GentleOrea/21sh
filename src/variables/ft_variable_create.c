@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:28:08 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 13:30:24 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 15:15:03 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void		ft_variable_builtin(char *str)
 			ft_setenv(setenv, env);
 		}
 	}
-	ft_variableadd(str, (void*)&str[i + 1], 1, deported);
+	ft_variableadd(ft_strdup(str), (void*)ft_strdup(&str[i + 1]), 1, deported);
 	str[i] = '=';
 }
 

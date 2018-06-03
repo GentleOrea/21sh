@@ -6,13 +6,13 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 15:22:01 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 14:05:19 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 15:39:56 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-t_btree		**ft_variable(t_btree **val)
+t_btree		**ft_variable(void)
 {
 	static t_btree	**root = 0;
 
@@ -20,14 +20,6 @@ t_btree		**ft_variable(t_btree **val)
 		root = ft_memalloc(sizeof(t_btree*));
 	if (!root)
 		return (0);
-	if (!*root)
-		root[0]->item = (void*)ft_variable_create(ft_strdup(""), 0, 0, 0);
-	if (!*root || !((t_variable*)(root[0]->item))->name)
-	{
-		ft_variabledel((t_variable*)(root[0]->item));
-		ft_memdel((void**)&root);
-		return (0);
-	}
 	return (root);
 }
 
@@ -35,12 +27,20 @@ int			ft_variableadd(char *name, void *data, int deep, int deported)
 {
 	t_variable	*var;
 	t_btree		**root;
-	t_btree		*pt;
 
-	if (!(root = ft_variable(0)))
+	if (!(root = ft_variable()))
 		return (-1);
 	if (!*root)
-		return (-1);
+	{
+		if (!(*root = ft_memalloc(sizeof(t_btree))))
+			return (-1);
+		if (!(var = ft_variable_create(name, data, deep, deported)))
+			ft_memdel((void**)root);
+		if (!var)
+			return (-1);
+		root[0]->item = var;
+		return (root[0] && root[0]->item ? 0 : -1);
+	}
 	if (!(var = ft_variable_create(name, data, deep, deported)))
 		return (-1);
 	else if (btree_insert_data(root, var, &ft_variablecmp, &ft_variabledel))
@@ -59,7 +59,7 @@ t_variable	*ft_variableget(char *name)
 
 	if (!name)
 		return (0);
-	if (!(root = ft_variable(0)))
+	if (!(root = ft_variable()))
 		return (0);
 	ft_bzero((void*)&v, sizeof(v));
 	v.name = name;

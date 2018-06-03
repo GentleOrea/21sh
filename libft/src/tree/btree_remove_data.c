@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/08 14:55:48 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/06/02 15:10:37 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:12:28 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static void	btree_remove_data_mid(t_btree **root, t_btree *trade,
 	else if (root[0]->parent)
 		root[0]->parent->left = trade;
 	root[0]->left->parent = trade;
+	trade->left = root[0]->left;
 	trade->parent = root[0]->parent;
 	del(root[0]->item);
 	free(root[0]);
@@ -56,19 +57,23 @@ static void	btree_remove_data_harsh(t_btree **root, void (*del)(void*))
 static void	btree_remove_data_easy(t_btree **root, void (*del)(void*))
 {
 	t_btree	*trade;
+	t_btree	*tmp;
 
+	tmp = root[0];
 	if (!root[0]->left)
 		trade = root[0]->right;
 	else
 		trade = root[0]->left;
+	if (!root[0])
+		printf("LA AUSSI\n");
 	if (root[0]->parent && root[0]->parent->left == root[0])
 		root[0]->parent->left = trade;
 	else if (root[0]->parent)
 		root[0]->parent->right = trade;
 	if (trade)
-		trade->parent = root[0]->parent;
-	del(root[0]->item);
-	free(root[0]);
+		trade->parent = tmp->parent;
+	del(tmp->item);
+	free(tmp);
 	root[0] = trade;
 }
 
@@ -79,7 +84,7 @@ void		btree_remove_data(t_btree **root, void *data,
 
 	if (!root || !*root)
 		return ;
-	val = cmpf(root[0]->item, data);
+	val = cmpf(data, root[0]->item);
 	if (val < 0)
 		btree_remove_data(&(root[0]->left), data, cmpf, del);
 	else if (val > 0)
