@@ -6,7 +6,7 @@
 /*   By: tcharrie <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/11 12:56:06 by tcharrie          #+#    #+#             */
-/*   Updated: 2018/05/27 14:06:19 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:41:03 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_completion_(t_line *line, int *val, char *left, int type)
 	if (!right)
 		return (ft_completion_reset() ? -1 : -1);
 	re = (ft_printstr(line, right, val) < 0) ? (-1) : (0);
-	ft_completion_lastwrite(CODE_SET, re ? 0 : ft_strlen(right));
+	ft_completion_lastwrite(CODE_SET, re ? 0 : ft_strlen_vis(right));
 	ft_strdel(&right);
 	return (re);
 }

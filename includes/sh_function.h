@@ -6,7 +6,7 @@
 /*   By: ygarrot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 19:03:40 by ygarrot           #+#    #+#             */
-/*   Updated: 2018/06/03 15:39:34 by tcharrie         ###   ########.fr       */
+/*   Updated: 2018/06/03 16:44:05 by tcharrie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int			ft_lennline(char *str, int line, int col);
 
 int			ft_realloc_line(t_line *line, int *val, int newsize);
 int			ft_insert_noalloc(char *src, char *str, int size);
+size_t		ft_strlen_vis(char *str);
 
 /*
 ** Fonction de suppression
