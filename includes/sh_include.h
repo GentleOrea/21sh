@@ -15,7 +15,6 @@
 
 # include "../libft/includes/libft.h"
 # include "ft_printf.h"
-# include "do_op.h"
 # include <term.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
