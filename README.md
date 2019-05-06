@@ -7,7 +7,7 @@ Analyse sémantique
 Génération d'un Arbre de Syntaxe Abstraite (Abstract Syntax Tree, AST) 
 Evaluation d'un AST 
 
-Les pré-requis du minishell.
+Il s’agit ici d’écrire un shell UNIX le plus stable et le plus complet possible.
 
 ◦ Affichage d’un prompt.
 
