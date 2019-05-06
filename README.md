@@ -9,13 +9,13 @@ Evaluation d'un AST
 
 Les pré-requis du minishell.
 
-◦ Affichage d’un prompt.
-  ◦ Exécution de commandes avec leurs paramètres et gestion du PATH.
-  ◦ Gestion des erreurs, sans utiliser errno, et de la valeur de retour des commandes
-  ◦ Gestion correcte des espaces et des tabulations.
-  • Les pré-requis du 21sh.
-   ◦ Édition complète de la ligne de commande
-  ◦ Les opérateurs de redirection et d’aggrégation :
+ Affichage d’un prompt.
+   Exécution de commandes avec leurs paramètres et gestion du PATH.
+  Gestion des erreurs, sans utiliser errno, et de la valeur de retour des commandes
+   Gestion correcte des espaces et des tabulations.
+   Les pré-requis du 21sh.
+    Édition complète de la ligne de commande
+   Les opérateurs de redirection et d’aggrégation :
     — >
     — >>
     — <
